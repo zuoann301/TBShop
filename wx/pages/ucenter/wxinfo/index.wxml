@@ -1,0 +1,50 @@
+<view class="container">
+  <view class="a-section a-popular">
+      <view class="h">
+        <text class="txt"> 小程序商城开发人员 </text>
+      </view>
+
+      <view class="b">
+        <view class="item">
+           <image src='https://x3.1766179.com/cpjl.jpg' background-size="cover" class="img" size="cover"></image>
+           <view class="right">
+              <text class="name">何建民</text>
+              <text class="desc">擅长产品设计，产品策划，用户研究，需求分析，交互设计，15年产品开发经验</text>
+              <text class="price">产品经理、软件测试</text>
+           </view>
+        </view>
+
+        <view class="item">
+           <image src='https://x3.1766179.com/qd.jpg' background-size="cover" class="img" size="cover"></image>
+           <view class="right">
+              <text class="name">林里</text>
+              <text class="price">前端开发，UI设计</text>
+              <text class="desc">精通HTML5，Javascript，CSS；熟练使用React，Redux, React-router, ECharts,Vue等常见前端开发框架、库和工具；12年前端开发经历</text>
+              
+           </view>
+        </view>
+
+        <view class="item">
+           <image src='https://x3.1766179.com/hd.jpg' background-size="cover" class="img" size="cover"></image>
+           <view class="right">
+              <text class="name">物华天宝</text>
+              <text class="price">后端开发,前端开发</text>
+              <text class="desc">熟悉.NET框架和主流数据库技术；熟悉微服务，分布式架构技术，有高并发海量数据分析处理经验</text>
+              
+           </view>
+        </view>
+
+      </view>
+
+  </view>
+
+  <view class="a-section phone_line">
+     <button bindtap='callme'><icon class='iconfont iconweixin'></icon> 
+     微信：17796350280
+     </button>
+     <button bindtap='GoIndex'>
+     <icon class="iconfont iconshouye"></icon>
+     返回首页</button>
+  </view>
+
+</view>

@@ -1,0 +1,39 @@
+<view class="userinfo">
+  <image class="userinfo-avatar" src="{{userInfo.avatarUrl||'/static/images/weixin.png'}}" background-size="cover"></image>
+  <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+</view>
+
+<view class="separate"></view>
+
+<view>
+  <view>
+    <view class="login-title">关联手机号</view>
+    <!-- <form bindsubmit="bindLoginMobilecode">-->
+     
+      <form bindsubmit="bindGetPassCode">
+        <view class="login">
+          <view class="first-line">
+            <input type="digit" name="mobile" bindinput="bindInputMobile" placeholder="输入手机号" value="{{mobile}}"  />
+          </view>
+          <view class="second-line">
+            <input type="digit"   name="code" value="{{code}}"  bindinput="bindInputCode" placeholder="四位验证码"/>
+            <button bindtap="countDownPassCode" disabled="{{disableGetMobileCode}}">{{getCodeButtonText}}</button>
+          </view>
+        </view>
+      </form>
+    <view class="third-line">
+      <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" >提交</button>
+      <!--disabled="{{disableSubmitMobileCode}}"-->
+    </view>
+
+    <view class="line">
+    </view>
+    <view class="login-title2">已绑定手机号码</view>
+    <view class="third-line">
+      <button bindtap='quickLogin'>
+      <icon class="iconfont iconweixin"></icon>
+      微信帐号登录</button>
+    </view>
+    
+  </view>
+</view>

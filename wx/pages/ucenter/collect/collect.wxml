@@ -1,0 +1,15 @@
+<view class="container">
+  <view class="tips">
+    长按删除
+  </view>
+  <view class="collect-list">
+    <view class="item" bindtap="openGoods"  bindtouchstart="touchStart" bindtouchend="touchEnd" wx:for="{{collectList}}" wx:key="{{item.Id}}" data-index="{{index}}" data-id="{{item.Id}}"  data-proid="{{item.ProductID}}">
+      <image class="img" src="{{FileHost+item.ImageUrl}}"></image>
+      <view class="info">
+        <view class="name">{{item.ProductName}}</view>
+        <view class="subtitle">{{item.Summary}}</view>
+        <view class="price">￥{{item.Price}}</view>
+      </view>
+    </view>
+  </view>
+</view>

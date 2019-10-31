@@ -1,0 +1,19 @@
+<view class="container">
+
+<view class="order-bottom" wx:for="{{orderList}}" wx:key="{{item.Id}}">
+  <navigator url="/pages/ucenter/secinfo/index?latitude={{item.GPS_Y}}&longitude={{item.GPS_X}}">
+    <view class="pay-fee">
+        <view class="label">
+          <image src='{{item.UserIcon}}'></image>
+        </view>
+        <text class="txt">{{item.UserName}}</text>
+        <view class="loc">
+          <icon class="iconfont icondingwei"></icon>
+        </view>
+        <text class="txt2">登录时间：{{item.CreateDate}}</text>
+    </view>
+  </navigator>
+  
+</view>
+
+</view>

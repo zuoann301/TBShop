@@ -1,0 +1,55 @@
+
+
+.order-bottom{
+    margin-top: 20rpx;
+    padding-left: 31.25rpx;
+    height: auto;
+    overflow: hidden;
+    background: #fff;
+    border-top:1rpx solid #ebebeb;
+    border-bottom:1rpx solid #ebebeb;
+}
+
+.order-bottom .pay-fee{
+    height: 81rpx;
+    line-height: 81rpx;
+    padding-top:20rpx;
+}
+
+.order-bottom .pay-fee .label{
+    width:10%;
+    height:50rpx;
+    color: #b4282d;
+    float:left;
+}
+.order-bottom .pay-fee .label image{
+  width:50rpx;
+  height:50rpx;
+}
+
+.order-bottom .pay-fee .txt{ 
+    width:80%;
+    color: #b4282d;
+    float:left;
+    text-align:left;
+    height:50rpx;
+    line-height:50rpx;
+}
+
+.order-bottom .pay-fee .loc{
+    width:10%;
+    height:50rpx;
+    color: #b4282d;
+    float:left;
+}
+
+.order-bottom .pay-fee .txt2{ 
+    width:100%; 
+    float:left;
+    text-align:left;
+    height:50rpx;
+    line-height:50rpx;
+    margin-top:15rpx;
+}
+ 
+ 

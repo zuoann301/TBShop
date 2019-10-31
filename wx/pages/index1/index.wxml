@@ -1,0 +1,99 @@
+
+<!--index.wxml-->
+<view class="container">
+  <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
+    <swiper-item wx:for="{{banner}}" >    
+        <image src="{{item}}" background-size="cover"></image>
+    </swiper-item>
+  </swiper>
+ 
+
+<view class="a-section a-topic" >
+  <view class="a-section a-brand">
+    <view class="h">     
+        <text class="txt">睡冬宝项目合作信用实情披露</text>     
+    </view>
+    <view class="b">
+
+
+      <view class="item">
+          <view class="wrap">
+          <!-- <image class="img" src="http://x2.1766179.com/png/10_8.jpg" mode="aspectFill"></image>-->
+            <view class="mt">
+               2018年8月31日，我司与广东睡冬宝生态家居股份有限公司签订合作协议，由我司，以技术、数据资源、团队资源占股30%，睡冬宝方投资50万，占股70%，成立“广东睡冬宝家纺家饰连锁有限公司”
+            </view>
+
+            <view class="mt">
+9月3日，我司团队一行三人，进驻睡冬宝惠州总部，按照协议约定入职睡冬宝，正式展开工作
+            </view>
+
+            <view class="mt">
+              9月3日至9月30日，团队一行三个，天天加班，完成“睡冬宝H5版本运营系统”、“PC端招商网站”、“睡冬宝商品管理系统”，为正式展开业务铺垫基础
+            </view>
+
+            <view class="mt">
+              在睡冬宝总部工作期间，我们了解到如下情况：
+            </view>
+
+            <view class="mt no_indent">
+              1、睡冬宝工业园区的员工存在工资发放拖欠问题，在与睡冬宝董事长游秀洪先生的的一次谈话中了解到，才发放到六月份
+            </view>
+
+            <view class="mt no_indent">
+              2、睡冬宝董事长游秀洪先生涉及两宗诉讼中案件与一宗执行中案件，涉案金额高达500万
+
+            </view>
+
+            <view class="mt no_indent">              
+3、在与睡冬宝董事长游秀洪先生的一次谈话中了解到，法院对睡冬宝账户已实施执行监管，随时能划走款项
+            </view>
+
+            <view class="mt">
+              9月30日，我司按照计划，在获得游秀洪先生同意的情况下，赴深圳市场展开业务方面工作
+            </view>
+
+            <view class="mt">
+              10月8日将业务启动情况以微信交流的方式与睡冬宝方交流互动
+            </view>
+            <view class="mt">
+              10月10日，工资表提交，未获批准，多次交涉后，获暂借工资1万元
+            </view>
+            <view class="mt">
+              10月16日，游秀洪先生合作态度急转直下
+            </view>
+
+            <view class="mt">
+              10月17日，委托本项目鉴证人刘总与游秀洪先生交流，获悉，游秀洪先生要终止合作
+            </view>
+
+            <view class="mt">
+              10月19日，我方、游秀洪先生、鉴证人刘总，就是否继续合作进行了商议，商议结果：游秀洪先生给出工作要求，我方按要求执行工作，游秀洪先生承诺10月22日发放九月份工资，之后的工资在次月15日前发放
+            </view>
+
+            <view class="mt">
+              10月22日，申请发放工资，没有结果
+            </view>
+
+            <view class="mt">
+              10月23日，申请暂借工资1万元，获得发放
+            </view>
+
+            <view class="mt">
+              10月26日，申请发放九月份工资的余额部份，获游秀洪先生口头承诺
+            </view>
+
+          </view>        
+      </view>
+
+
+
+
+
+    </view>
+  </view>
+  </view>
+ 
+
+  
+
+</view>

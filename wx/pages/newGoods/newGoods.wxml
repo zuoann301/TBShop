@@ -1,0 +1,39 @@
+<view class="container">
+  <view class="brand-info">
+    <view class="name">
+      <image class="img" src="{{bannerInfo.img_url}}" background-size="cover"></image>
+      <view class="info-box">
+        <view class="info">
+          <text class="txt">{{bannerInfo.name}}</text>
+          <text class="line"></text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="sort">
+    <view class="sort-box">
+      <view class="item {{currentSortType == 'default' ? 'active' : ''}}"  bindtap="openSortFilter" id="defaultSort">
+        <text class="txt">综合</text>
+      </view>
+      <view class="item by-price {{currentSortType == 'price' ? 'active' : ''}} {{currentSortOrder == 'asc'  ? 'asc' : 'desc'}}" bindtap="openSortFilter" id="priceSort">
+        <text class="txt">价格</text>
+      </view>
+      <view class="item {{currentSortType == 'hit' ? 'active' : ''}}"  bindtap="openSortFilter" id="hit">
+        <text class="txt">热度</text>
+      </view>
+       
+    </view>
+     
+  </view>
+  <view class="cate-item">
+    <view class="b">
+      <block wx:for="{{goodsList}}" wx:for-index="iindex" wx:for-item="iitem" wx:key="unique">
+        <navigator class="item {{iindex % 2 == 0 ? 'item-b' : '' }}" url="../goods/goods?id={{iitem.Id}}">
+          <image mode="aspectFit" class="img" src="{{FileHost+iitem.ImageUrl}}" background-size="cover"></image>
+          <text class="name">{{iitem.ProductName}}</text>
+          <text class="price">￥{{iitem.Price}}</text>
+        </navigator>
+      </block>
+    </view>
+  </view>
+</view>

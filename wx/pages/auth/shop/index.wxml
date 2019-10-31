@@ -1,0 +1,45 @@
+<view class="container">
+  <view class="box">
+
+   <view class="item">
+    <view class="item_l">手机</view>
+    <view class="item_r">
+      <input maxlength="11" placeholder="" />
+    </view>
+   </view>
+
+   <view class="item">
+    <view class="item_l">商家名称</view>
+    <view class="item_r">
+      <input maxlength="11" placeholder="" />
+    </view>
+   </view>
+
+   <view class="item">
+    <view class="item_l">详细地址</view>
+    <view class="item_r">
+      <input maxlength="11" placeholder="" />
+    </view>
+   </view>
+
+   <view class="item">
+    <view class="item_l">营业执照</view>
+    <view class="item_r"> 
+      <button bindtap='UPLOAD_FILE'><icon class="iconfont iconshangchuan"></icon> {{btn_text}} </button>
+    </view>
+   </view>
+
+   <view class="item">
+    <view class="item_l">商家门面</view>
+    <view class="item_r"> 
+      <button bindtap='UPLOAD_FILE2'><icon class="iconfont iconshangchuan"></icon> {{btn_text2}} </button>
+    </view>
+   </view>
+
+   <view class="item1">
+     <button><icon class="iconfont iconweixinzhifu"></icon>   支付99元 ，开通商家账户</button>
+   </view>
+
+  </view>
+
+</view>

@@ -1,0 +1,28 @@
+<view class="container">
+    <view class="brand-info">
+        <view class="name">
+            <image class="img" src="{{FileHost+brand.ImageUrl}}" background-size="cover"></image>
+            <view class="info-box">
+                <view class="info">
+                    <text class="txt">{{brand.Title}}</text>
+                    <text class="line"></text>
+                </view>
+            </view>
+        </view>
+        <view class="desc">
+            {{brand.Remark}}
+        </view>
+    </view>
+
+    <view class="cate-item">
+        <view class="b">
+            <block wx:for="{{goodsList}}" wx:for-index="iindex" wx:for-item="iitem">
+            <navigator class="item {{iindex % 2 == 0 ? 'item-b' : ''}}" url="../goods/goods?id={{iitem.Id}}">
+                <image class="img" src="{{FileHost+iitem.ImageUrl}}" background-size="cover"></image>
+                <text class="name">{{iitem.ProductName}}</text>
+                <text class="price">￥{{iitem.Price}}</text>
+            </navigator>
+            </block>
+        </view>
+    </view>
+</view>

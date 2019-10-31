@@ -1,0 +1,36 @@
+<view class="container">
+    <view class="orders">
+        <navigator url="../orderDetail/orderDetail?id={{item.Id}}" class="order" wx:for="{{orderList}}" wx:key="{{item.id}}">
+            <view class="h">
+                <view class="l">订单编号：{{item.OrderCode}}</view>
+                <view class="r">{{item.STName}}</view>
+            </view>
+            <view class="goods" wx:for="{{item.OrderItem}}" wx:key="{{gitem.Id}}" wx:for-item="gitem">
+                <view class="img">
+                    <image src="{{FileHost+ gitem.ImageUrl}}"></image>
+                </view>
+                <view class="info">
+                    <text class="name">{{gitem.ProductName}}</text>
+                    <text class="number">共{{gitem.ItemNum}}件商品</text> 
+                </view>
+                <view class="status"></view>
+            </view>
+            <view class="b">
+                <view class="l">订单总额：￥{{item.Total}}</view>
+                <view class="r">
+                    <button class="btn" data-total='{{item.Total}}' data-order-id="{{item.Id}}" catchtap="payOrder" wx:if="{{item.ST==0}}">去付款</button>
+                </view>
+            </view>
+        </navigator>
+    </view>
+
+    <view wx:if="{{orderList.length>6}}" class="loadmore">
+      <block wx:if="{{nomore}}">
+        <text>{{nomoreText}}</text>
+      </block>
+      <block wx:else>
+        <text class="iconfont icon-loading loading" space="nbsp"></text>
+        <text> {{loadmoreText}}</text>
+      </block>
+    </view>
+</view>

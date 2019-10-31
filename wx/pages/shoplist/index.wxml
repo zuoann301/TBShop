@@ -1,0 +1,34 @@
+<view class="container">
+
+<view class="a-section a-popular" wx:if="{{loc_err}}">
+    <view class="h">
+      <view>
+          <text class="txt">最近的便利店</text>
+      </view>
+    </view>
+    <view class="b">
+      <view class="item" wx:for="{{shoplist}}" wx:for-index="index" wx:for-item="item" wx:key="{{item.ID}}">
+        <navigator url="/pages/start/index?id={{item.ID}}">
+          <image mode="aspectFill" class="img" src="{{item.ShopUrl}}" background-size="cover"></image>
+          <view class="right">
+            <view class="text">
+              <view class="name">{{item.ShopName}}
+              <text class="price">距您{{item.Distance}}  </text>
+              </view>
+              <view class="desc"><icon class="iconfont icondingwei"></icon>{{item.ShopAddress}}</view>
+              <view class="desc"> 
+                <icon class="iconfont icon76"></icon>{{item.ShopTel}}
+              </view>
+              
+            </view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+  </view>
+
+  <view wx:else class="a-section a-popular">
+    <button class="btn" bindtap='chooseLoc' >选择您的位置</button>
+  </view>
+
+</view>

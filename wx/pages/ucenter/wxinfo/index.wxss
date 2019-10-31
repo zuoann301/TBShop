@@ -1,0 +1,104 @@
+.a-section {
+  width: 750rpx;
+  height: auto;
+  overflow: hidden;
+  background: #fff;
+  color: #333;
+  margin-top: 20rpx;
+}
+.a-section .h {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  height: 60rpx;
+}
+.a-section .h .txt {
+  padding-right: 30rpx;
+  background-size: 16.656rpx 27rpx;
+  display: inline-block;
+  height: 36rpx;
+  font-size: 33rpx;
+  line-height: 36rpx;
+}
+
+.a-popular {
+  width: 750rpx;
+  height: auto;
+  overflow: hidden;
+}
+
+.a-popular .b .item {
+  border-top: 1px solid #d9d9d9;
+  margin: 0 20rpx;
+  height: auto;
+  width: 100%;
+  float:left;
+  padding-top:20rpx;
+  padding-bottom:20rpx;
+}
+
+.a-popular .b .img {
+  margin-top: 12rpx;
+  margin-right: 12rpx;
+  float: left;
+  width:200rpx;
+  height: 200rpx;
+}
+
+.a-popular .b .right {
+  float: left;
+  height: auto;
+  width: 67%; 
+  flex-flow: row nowrap;
+  padding-top:10rpx;
+}
+
+.a-popular .b .text {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  height: auto;
+  width:100%;
+}
+
+.a-popular .b .name {
+  width: 100%;
+  display: block;
+  color: #333;
+  line-height: 50rpx;
+  font-size: 30rpx;
+}
+
+.a-popular .b .price {
+  width:100%;
+  display: block;
+  color: #b4282d; 
+  line-height: 50rpx;
+  font-size: 25rpx;
+}
+
+.a-popular .b .desc {
+  width: 100%;
+  display: block;
+  color: #999;
+  line-height:35rpx;
+  font-size: 25rpx;
+}
+
+.phone_line{
+  border-bottom:1rpx solid #dedede;
+  margin-bottom:20rpx;
+}
+.phone_line button{
+   margin-top: 30rpx;
+    height: 101rpx;
+    width: 100%;
+    line-height: 101rpx;
+    text-align: center;
+    background: #b4282d;
+    color: #fff;
+    font-size: 30rpx;
+}
