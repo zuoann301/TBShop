@@ -1,0 +1,41 @@
+﻿using Ace.AutoMapper;
+using Ace.Entity.Wiki;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+
+namespace Ace.Application.Wiki
+{
+    public class Users_RoleInputBase: ValidationModel
+    {  
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string RoleName { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public int ST { get; set; }
+
+        
+
+        
+
+    }
+
+
+    [MapToType(typeof(Users_Role))]
+    public class AddUsers_RoleInput : Users_RoleInputBase
+    { 
+    }
+
+    [MapToType(typeof(Users_Role))]
+    public class UpdateUsers_RoleInput : Users_RoleInputBase
+    {
+        [RequiredAttribute(ErrorMessage = "{0}不能为空")]
+        public int ID { get; set; }
+    }
+}

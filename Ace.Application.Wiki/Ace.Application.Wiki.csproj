@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="IUsers_RoleService--------.cs.bak" />
+    <None Remove="Models\Users_RoleDto.cs.bak" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Models\Users_RoleDto.cs.bak" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ace.Application\Ace.Application.csproj" />
+    <ProjectReference Include="..\Ace.AutoMapper\Ace.AutoMapper.csproj" />
+    <ProjectReference Include="..\Ace.Data\Ace.Data.csproj" />
+    <ProjectReference Include="..\Ace.Entity.Wiki\Ace.Entity.Wiki.csproj" />
+    <ProjectReference Include="..\Ace.Entity\Ace.Entity.csproj" />
+    <ProjectReference Include="..\Ace.Web\Ace.Web.csproj" />
+    <ProjectReference Include="..\Ace\Ace.csproj" />
+  </ItemGroup>
+
+</Project>

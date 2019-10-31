@@ -1,0 +1,92 @@
+﻿using Ace.Application;
+using Ace.Data;
+using Ace.Entity.Wiki;
+using Ace.Exceptions;
+using Ace.IdStrategy;
+using Chloe;
+using Chloe.MySql;
+using Chloe.SqlServer;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Ace.Application.Wiki
+{
+    public interface IUsers_RoleService : IAppService
+    {
+        List<Users_Role> GetList(string keyword = "");
+        void Add(AddUsers_RoleInput input);
+        void Update(UpdateUsers_RoleInput input);
+        void Delete(int ID);
+
+        Users_Role GetModel(int ID);
+
+        PagedData<Users_Role> GetPageData(Pagination page, string keyword);
+    }
+
+    public class Users_RoleService : AppServiceBase<Users_Role>, IUsers_RoleService
+    {
+        public Users_RoleService(IDbContext dbContext, IServiceProvider services) : base(dbContext, services)
+        {
+        }
+
+        public List<Users_Role> GetList(string keyword = "")
+        {
+            var q = this.Query;
+
+           
+
+            if (keyword.IsNotNullOrEmpty())
+            {
+                q = q.Where(a => a.RoleName.Contains(keyword));
+            }
+
+            var ret = q.ToList();
+            return ret;
+        }
+        public void Add(AddUsers_RoleInput input)
+        {
+            this.InsertFromDto(input);
+        }
+        public void Update(UpdateUsers_RoleInput input)
+        {
+            this.UpdateFromDto(input);
+        }
+
+        public Users_Role GetModel(int ID)
+        {
+            return  this.Query.Where(a => a.ID == ID).FirstOrDefault();
+        }
+
+        public void Delete(int ID)
+        {
+            this.DbContext.Delete<Users_Role>(a => a.ID == ID);
+        }
+
+
+        public PagedData<Users_Role> GetPageData(Pagination page,string keyword="")
+        {
+            var q = this.DbContext.Query<Users_Role>();
+
+            
+            if (keyword.IsNotNullOrEmpty())
+            {
+                q = q.Where(a => a.RoleName.Contains(keyword));
+            }
+
+
+
+            PagedData<Users_Role> pagedData = q.TakePageData(page);
+            
+            return pagedData;
+        }
+
+         
+
+
+
+    }
+
+}
