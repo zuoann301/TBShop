@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Extensions\DataReaderExtension.cs" />
+    <Compile Remove="Extensions\DbConnectionExtension.cs" />
+    <Compile Remove="Extensions\SqlConnectionExtension.cs" />
+    <Compile Remove="Extensions\WebResponseExtension.cs" />
+    <Compile Remove="Helpers\BinaryFormatterHelper.cs" />
+    <Compile Remove="Helpers\HttpHelper.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Helpers\BinaryFormatterHelper.cs.bak" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Linq.Queryable" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.TypeExtensions" Version="4.5.1" />
+  </ItemGroup>
+
+</Project>
