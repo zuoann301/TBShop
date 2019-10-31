@@ -13,3 +13,6 @@ QQ群：577406104
 
 
 ![image](https://github.com/zuoann301/TBShop/blob/master/wxcode.jpg)
+
+
+![img](https://github.com/zuoann301/TBShop/blob/master/wxcode.jpg)
