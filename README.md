@@ -10,3 +10,6 @@ PC端： 商家管理 商品管理 订单管理 用户管理
 微信：zuoann2016
 
 QQ群：577406104
+
+
+![image](https://github.com/zuoann301/TBShop/blob/master/wxcode.jpg)
