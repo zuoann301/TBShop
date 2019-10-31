@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@Html.Partial("Index_js")
+
+<div style="max-width:1000px;">
+    <div class="topPanel">
+        <div class="toolbar">
+            <a class="a-btn-refresh" onclick="$ace.reload()"></a>
+            <button class="a-btn-edit" data-bind="click:edit,disable:!dataTable.selectedModel()">修改</button>
+            <button class="a-btn-add" data-bind="click:add">添加</button>
+            <button class="a-btn-delete" data-bind="click:del,disable:!dataTable.selectedModel()">删除</button>
+        </div>
+        <div class="search">
+            <table class="form-table" style="width:400px;">
+                <tr>
+                    <td>
+                        <input type="text" class="a-control" placeholder="请输入要查询关键字" style="width: 200px;" data-bind="value:searchModel().keyword">
+                    </td>
+                    <td>
+                        <button type="button" class="a-btn-search" data-bind="click:search"></button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div>
+        <table class="table table-hover" data-bind="with:dataTable">
+            <thead>
+                <tr>
+                    <th style="width:30px;"></th>
+                    <th style="width:200px;">Id</th>
+                    <th>标题</th>
+                    <th>标签</th>
+                    <th>摘要</th>
+                    <th>创建时间</th>
+                    <th>更新时间</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach:models">
+                <tr data-bind="click:$parent.selectRow">
+                    <td data-bind="text:$parent.getOrdinal($index())"></td>
+                    <td data-bind="text:Id"></td>
+                    <td>
+                        <a href="#" target="_blank" data-bind="text:Title,attr:{href:'@Url.Content("~/Wiki/Document/Document?id=")' + Id()}"></a>
+                    </td>
+                    <td data-bind="text:Tag"></td>
+                    <td data-bind="text:Summary"></td>
+                    <td data-bind="dateString:CreationTime"></td>
+                    <td data-bind="dateString:UpdationTime"></td>
+                </tr>
+            </tbody>
+            @Html.Partial("_tfoot")
+        </table>
+    </div>
+</div>

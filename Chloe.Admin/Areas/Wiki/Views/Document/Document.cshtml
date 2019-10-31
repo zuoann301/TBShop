@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Document";
+}
+@this.Partial("Document_js")
+@this.RefStyle("~/Content/editormd/css/editormd.min.css")
+@this.RefScript("~/Content/editormd/editormd.js")
+
+<br />
+标题：<input class="a-control" type="text" style="width:500px;" data-bind="value:Title" />
+<br />
+<br />
+标签：<input class="a-control" type="text" style="width:500px;" data-bind="value:Tag" />
+<br />
+<br />
+摘要：<textarea class="a-control" style="width:500px;height:110px;" data-bind="value:Summary"></textarea>&nbsp;&nbsp;<input class="a-btn" type="button" value="保存" data-bind="value:Id()?'更新':'添加',click:save" />&nbsp;&nbsp;<input class="a-btn" type="button" value="添加新内容" data-bind="click:newContent,visible:Id()" />
+<br />
+<br />
+<div id="doc-editormd">
+    <textarea style="display:none;">@{ this.Write(this.ViewBag.Doc.MarkdownCode); }</textarea>
+</div>

@@ -1,0 +1,123 @@
+﻿<script>
+
+    var _vm;
+    $(function () {
+        var vm = new PageViewModel();
+        _vm = vm;
+        vmExtend.call(vm);
+        ko.applyBindings(vm);
+        vm.init();
+    });
+
+    function PageViewModel() {
+        var me = this;
+        ViewModel.call(me);
+        vmExtend.call(me);
+
+        me.url = "/Wiki/Users_Permission/Models";
+        me.deleteUrl = "/Wiki/Users_Permission/Delete";
+        me.dataTable = new DataTable(me);
+        me.dialog = new FormDialog(me);
+
+        me.orderChanged = _ob(false);
+
+        me.menuGroups = _oba(@this.RawSerialize(ViewBag.MenuGroups));
+
+        me.saveOrder = function () {
+            var $trs = $("#main_body tr");
+            var dic = {};
+            for (var i = 0; i < $trs.length; i++) {
+                var $tr = $($trs[i]);
+                var id = $tr[0].id;
+                var sortCode = i + 1;
+                dic[id] = sortCode;
+            }
+            var data = { data: JSON.stringify(dic) };
+            $ace.post("/Wiki/Users_Permission/UpdateOrder", data, function (result) {
+                $ace.msg(result.Msg);
+                me.dataTable.reload();
+            });
+        }
+    }
+    function vmExtend() {
+        var me = this;
+
+        me.loadData = function () {
+            var data = me.getSearchModel();
+            $ace.get(me.url, data, function (result) {
+                me.dataTable.setData(result.Data);
+                me.bindSortable();
+                me.orderChanged(false);
+            });
+        }
+        me.reloadMenuGroups = function () {
+            $ace.get("/Wiki/Users_Permission/MenuGroups", {}, function (result) {
+                me.menuGroups(result.Data);
+            });
+        }
+
+        me.bindSortable = function () {
+            bindSortable(document.getElementById('main_body'), function () {
+                me.orderChanged(true);
+            });
+        }
+    }
+
+    function getTypeName(type) {
+        var types = { 1: "权限菜单", 2: "公共菜单", 3: "权限项", 4: "节点组" };
+        return types[type];
+    }
+
+    function FormDialog(vm) {
+        var me = this;
+        Dialog.call(me);
+
+        me.onOpen = function () {
+            var model = me.editModel();
+            if (model) {
+                var dataModel = model.Data;
+                var bindModel = $ko.toJS(dataModel);
+                bindModel.Type = bindModel.Type.toString();//转成 string，不然绑定不上radio
+                me.model(bindModel);
+            }
+            else {
+                me.editModel(null);
+                me.model({ Type:"1"});
+            }
+        }
+
+        me.onSave = function () {
+            if (!$('#form1').formValid()) {
+                return false;
+            }
+
+            var model = me.model();
+
+            if (me.editModel()) {
+
+                if (model.Id == model.ParentId) {
+                    $ace.alert("上级节点不能为节点自身");
+                    return;
+                }
+
+                $ace.post("/Wiki/Users_Permission/Update", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.dataTable.reload();
+                    vm.reloadMenuGroups();;
+                }
+               );
+            }
+            else {
+                $ace.post("/Wiki/Users_Permission/Add", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.loadData();
+                    vm.reloadMenuGroups();
+                }
+             );
+            }
+        }
+    }
+
+</script>

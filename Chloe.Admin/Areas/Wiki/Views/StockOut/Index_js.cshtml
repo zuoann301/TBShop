@@ -1,0 +1,98 @@
+﻿<script>
+
+    var _users = @this.RawSerialize(this.ViewBag.Users);
+    
+
+    var _vm;
+    $(function () {
+        var vm = new PageViewModel();
+        _vm = vm;
+        ko.applyBindings(vm);
+        vm.init();
+
+        
+    });
+
+   
+
+    function PageViewModel() {
+        var me = this;
+        ViewModel.call(me);
+        vmExtend.call(me);
+
+        me.url = "/Wiki/StockOut/GetModels";
+        me.deleteUrl = "/Wiki/StockOut/Delete";
+        me.dialog = new FormDialog(me);
+
+
+        var arr = new Array();
+        $(_users).each(function (index, element) {
+            var ijs = {};
+            ijs.id = element.id;
+            ijs.text = element.text;
+            ijs.upId = "0";
+            arr.push(ijs)
+        });
+
+        $("#FromUserID").Hselect({ data: arr, height: "29px", border: "#ccc solid 1px" });
+        $("#ToUserID").Hselect({ data: arr, height: "29px", border: "#ccc solid 1px" });
+        $("#AuthUserID").Hselect({ data: arr, height: "29px", border: "#ccc solid 1px" });
+       
+     }
+    function vmExtend() {
+        var me = this;
+    }
+
+    function FormDialog(vm) {
+        var me = this;
+        Dialog.call(me);
+
+        me.posts = _oba([]);
+
+        me.onOpen = function () {
+            var model = me.editModel();
+            if (model) {
+                var dataModel = model.Data;
+                var bindModel = $ko.toJS(model);
+                me.model(bindModel);
+
+                
+            }
+            else {
+                me.model({});
+                
+            }
+        }
+
+        me.onSave = function () {
+            if (!$('#form1').formValid()) {
+                return false;
+            }
+
+            var model = me.model();
+
+           
+
+           
+            if (me.editModel()) {
+                $ace.post("/Wiki/StockOut/Update", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.dataTable.reload();
+                }
+                );
+            }
+            else {
+                $ace.post("/Wiki/StockOut/Add", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.loadData();
+                }
+                );
+            }
+        }
+    }
+
+     
+
+</script>

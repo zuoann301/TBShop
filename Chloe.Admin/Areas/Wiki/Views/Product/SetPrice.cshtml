@@ -1,0 +1,82 @@
+﻿@{
+    ViewData["Title"] = "Edit";
+    
+}
+ 
+
+<style type="text/css">
+    #picker { 
+        line-height:20px;
+        vertical-align: middle;
+        margin: 0 0px 0 0;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+         
+            <fieldset>
+                <div id="legend" class="">
+                    <legend class="">调价</legend>
+                </div>
+                 
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">批发价</span>
+                        <input type="text" class="form-control" value="" id="PerBatchPrice" placeholder="输入倍率" name="PerBatchPrice"  />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">零售价</span>
+                        <input type="text" class="form-control" value="" id="PerPrice" name="PerPrice"   placeholder="输入倍率"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">代金券抵扣率</span>
+                        <input type="text" class="form-control" value="" id="PerDiscount" name="PerDiscount"    placeholder="输入代金券抵扣率"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">分销比例</span>
+                        <input type="text" class="form-control" value="" id="PerSharePercent" name="PerSharePercent"   placeholder="输入分销比例"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input id="btn_set" type="submit" value="提交" class="btn btn-primary" />
+                </div>
+            </fieldset>
+       
+    </div>
+</div>
+<script>
+    $(function () { 
+
+        $("#btn_set").click(function () { 
+
+            var s1 = $("#PerBatchPrice").val();
+            var s2 = $("#PerPrice").val();
+            var s3 = $("#PerDiscount").val();
+            var s4 = $("#PerSharePercent").val();
+
+            var data = { "PerBatchPrice": s1, "PerPrice": s2, "PerDiscount": s3, "PerSharePercent": s4 };
+
+
+            $ace.post("/Wiki/Product/SetPrice", data, function (result) {
+                $ace.msg(result.Msg);
+                
+            });
+
+
+        });
+
+    })
+</script>
+
+

@@ -1,0 +1,161 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html style="overflow: hidden;">
+<head>
+    <title>宅享优快</title>
+    <link href="~/Content/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/css/framework-theme.css" rel="stylesheet" />
+    <script src="~/Content/jquery/jquery-1.11.1.min.js"></script>
+    <script src="~/Content/bootstrap/bootstrap.min.js"></script>
+    <script src="~/Content/layer/layer.js"></script>
+    <script src="~/Content/jquery/jquery.cookie.js"></script>
+    <script src="~/Content/js/ace.js"></script>
+    <script src="~/Content/js/framework-clientdata.js"></script>
+</head>
+<body style="overflow: hidden;">
+    <div id="ajax-loader" style="cursor: progress; position: fixed; top: -50%; left: -50%; width: 200%; height: 200%; background: #fff; z-index: 10000; overflow: hidden;">
+        <img src="~/Content/img/ajax-loader.gif" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; margin: auto;" />
+    </div>
+    <div id="theme-wrapper">
+        <header class="navbar" id="header-navbar">
+            <div class="container" style="padding-right: 0px;">
+                <a href="#" id="logo" class="navbar-brand">宅享优快</a>
+                <div class="clearfix">
+                    <div class="nav-no-collapse navbar-left pull-left hidden-sm hidden-xs">
+                        <ul class="nav navbar-nav pull-left">
+                            <li>
+                                <a class="btn" id="make-small-nav"><i class="fa fa-bars"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="nav-no-collapse pull-right" id="header-nav">
+                        <ul class="nav navbar-nav pull-right">
+                            @*<li class="mobile-search">
+                                    <a class="btn">
+                                        <i class="fa fa-search"></i>
+                                    </a>
+                                    <div class="drowdown-search">
+                                        <form role="search">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Search...">
+                                                <i class="fa fa-search nav-search-icon"></i>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </li>
+                                <li class="dropdown hidden-xs">
+                                    <a class="btn dropdown-toggle" data-toggle="dropdown">
+                                        <i class="fa fa-tasks"></i>
+                                        <span class="count">5</span>
+                                    </a>
+                                </li>
+                                <li class="dropdown hidden-xs">
+                                    <a class="btn dropdown-toggle" data-toggle="dropdown">
+                                        <i class="fa fa-bell"></i>
+                                        <span class="count">8</span>
+                                    </a>
+                                </li>
+
+                                <li class="dropdown hidden-xs">
+                                    <a class="btn dropdown-toggle" data-toggle="dropdown">
+                                        <i class="fa fa-envelope-o"></i>
+                                        <span class="count">16</span>
+                                    </a>
+                                </li>*@
+                            <li class="dropdown profile-dropdown">
+                                <a href="#" class="dropdown" data-toggle="dropdown">
+                                    <img src="~/Content/img/samples/chloe258.png" alt="" />
+                                    <span class="hidden-xs">@this.ViewBag.CurrentSession.Name</span>
+                                </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><a class="menuItem" data-id="userInfo" href="@Url.Content("~/Account/Index")"><i class="fa fa-user"></i>个人信息</a></li>
+                                    <li><a href="javascript:void();"><i class="fa fa-inbox"></i>我的信箱</a></li>
+                                    <li><a href="javascript:void();" onclick="layer.msg('浏览器缓存清除成功');"><i class="fa fa-trash-o"></i>清空缓存</a></li>
+                                    <li><a href="javascript:void();"><i class="fa fa-paint-brush"></i>皮肤设置</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="@Url.Content("~/Account/Logout")"><i class="ace-icon fa fa-power-off"></i>安全退出</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div id="page-wrapper" class="container">
+            <div class="row">
+                <div id="nav-col">
+                    <section id="col-left" class="col-left-nano">
+                        <div id="col-left-inner" class="col-left-nano-content">
+                            <div id="user-left-box" class="clearfix hidden-sm hidden-xs dropdown profile2-dropdown">
+                                @*<img alt="" src="~/Content/img/samples/scarlet-159.png" />*@
+                                @*<div class="user-box">
+                                        <span class="name">@this.ViewBag.CurrentSession.Name</span>
+                                        <span class="status">
+                                            <i class="fa fa-circle"></i>在线
+                                        </span>
+                                    </div>*@
+                            </div>
+                            <div class="collapse navbar-collapse navbar-ex1-collapse" id="sidebar-nav">
+                                <ul class="nav nav-pills nav-stacked">
+                                    @*<li class="common">
+                                            <a class="menuItem" data-id="6e5b779e849e459f957f3abef2a277e61" href="/WikiManage/WikiDocument/Index?" data-index="1">
+                                                <i class="fa fa-star-o"></i>
+                                                <span>联系人</span>
+                                            </a>
+                                        </li>*@
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div id="content-wrapper">
+                    <div class="content-tabs">
+                        <button class="roll-nav roll-left tabLeft">
+                            <i class="fa fa-backward"></i>
+                        </button>
+                        <nav class="page-tabs menuTabs">
+                            <div class="page-tabs-content" style="margin-left: 0px;">
+                                @*<a href="javascript:;" class="menuTab active" data-id="http://www.52chloe.com/">欢迎首页</a>*@
+                                <a href="javascript:;" class="menuTab active" data-id="@this.Href("~/Home/Default")">欢迎首页</a>
+                                @*<a href="javascript:;" class="menuTab" data-id="/Home/About" style="padding-right: 15px;">平台介绍</a>*@
+                            </div>
+                        </nav>
+                        <button class="roll-nav roll-right tabRight">
+                            <i class="fa fa-forward" style="margin-left: 3px;"></i>
+                        </button>
+                        <div class="dropdown btn-group roll-nav roll-right">
+                            <button class="dropdown tabClose" data-toggle="dropdown">
+                                页签操作<i class="fa fa-caret-down" style="padding-left: 3px;"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a class="tabReload" href="javascript:void(0);">刷新当前</a></li>
+                                <li><a class="tabCloseCurrent" href="javascript:void(0);">关闭当前</a></li>
+                                <li><a class="tabCloseAll" href="javascript:void(0);">全部关闭</a></li>
+                                <li><a class="tabCloseOther" href="javascript:void(0);">除此之外全部关闭</a></li>
+                            </ul>
+                        </div>
+                        <button class="roll-nav roll-right fullscreen"><i class="fa fa-arrows-alt"></i></button>
+                    </div>
+                    <div class="content-iframe" style="background-color: #f9f9f9; overflow: hidden;">
+                        <div class="mainContent" id="content-main" style="margin: 10px; margin-bottom: 0px; padding: 0;">
+                            @*<iframe class="Ace_iframe" style="width:100%;height:100%;" src="http://www.52chloe.com/" frameborder="0" data-id="http://www.52chloe.com/"></iframe>*@
+                            <iframe class="Ace_iframe" style="width:100%;height:100%;" src="@this.Href("~/Home/Default")" frameborder="0" data-id="@this.Href("~/Home/Default")"></iframe>
+                            @*<iframe class="Ace_iframe" width="100%" height="100%" src="/Home/About" frameborder="0" data-id="/Home/About"></iframe>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="loadingPage" style="display: none;">
+        <div class="loading-shade"></div>
+        <div class="loading-content" onclick="$.loading(false)">数据加载中，请稍后…</div>
+    </div>
+    @this.RefScript("~/Content/js/index.js")
+    @this.RefScript("~/Content/js/indextab.js")
+    @this.RefScript("~/Content/loading/pace.min.js")
+</body>
+</html>

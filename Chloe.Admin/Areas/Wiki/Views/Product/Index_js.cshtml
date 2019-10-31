@@ -1,0 +1,184 @@
+﻿<script>
+    var _sorts = @this.RawSerialize(this.ViewBag.SortList);
+    var _brands = @this.RawSerialize(this.ViewBag.BrandList);
+    var _shops =@this.RawSerialize(this.ViewBag.ShopList); 
+    var _sorts2 = new Array();
+    var _file_domain = "@ViewBag.FileDomain";
+    var uploader;
+
+    
+
+    $(_sorts).each(function (i, item) {
+        if (item.Pid == "0") {
+            _sorts2.push({ "Id": item.Id, "Title": item.Title, "Pid": item.Pid, "SortCode": item.SortCode, "ProCount": item.ProCount });
+
+            $(_sorts).each(function (ii, item2) {
+                if (item2.Pid == item.Id) {
+                    _sorts2.push({ "Id": item2.Id, "Title": "     |-----" + item2.Title, "Pid": item2.Pid, "SortCode": item2.SortCode, "ProCount": item2.ProCount });
+                }
+            });
+        }
+    });
+
+
+
+
+    var _vm;
+    $(function () {
+        var vm = new PageViewModel();
+        _vm = vm;
+        ko.applyBindings(vm);
+        vm.init();
+
+    });
+ 
+
+    function PageViewModel()
+    {
+        var me = this;
+        ViewModel.call(me);
+        vmExtend.call(me);
+
+        me.url = "/Wiki/Product/Models";
+        me.deleteUrl = "/Wiki/Product/Delete";
+
+        
+        me.dialog = new FormDialog(me);
+
+        //批量上传
+        me.batchAdd = function () {
+            window.location.href = "/Wiki/Product/BatchAdd";
+        }
+
+        //批量上传
+        me.SetPrice = function () {
+            window.location.href = "/Wiki/Product/SetPrice";
+        }
+    }
+    function vmExtend() {
+        var me = this;
+    }
+
+
+    function FormDialog(vm) {
+        var me = this;
+        Dialog.call(me);
+
+        me.onOpen = function () {
+
+            if (!uploader) {
+                uploader = WebUploader.create({
+                    auto: true,
+                    swf: '/Content/webuploader/Uploader.swf',
+                    server: '/Wiki/Product/FileSave',
+                    pick: '#picker',
+                    resize: false
+                });
+
+                uploader.on('uploadSuccess', function (file, response) {
+                    //$('#' + file.id).find('.progress').fadeOut();
+                    var s = $("#ImageList").val();
+                    var arr = new Array();
+                    var l = 0;
+                    if (s) {
+                        arr = s.split(';');
+                        l = arr.length;
+                    }
+
+                    if (response.st == "1") {
+                        arr[l] = response.msg;
+
+                        $("#ImageUrl").val(response.msg);
+                        $("#thelist").append("<img class='img_thum' src='" + _file_domain + response.msg + "' />");
+                        $("#ImageList").val(arr.join(";"));
+
+                        $(".img_thum").click(function () {
+                            $("#ImageUrl").val($(this).attr("src").replace(_file_domain, ""));
+                            $(".img_thum").removeClass("img_red");
+                            $(this).addClass("img_red");
+                        });
+                    } else {
+                        $ace.alert(response.msg);
+                    }
+
+
+                });
+            }
+
+            var model = me.editModel();
+            if (model) {
+                var bindModel = $ko.toJS(model);
+                me.model(bindModel);
+                editor.html('');
+                editor.insertHtml(bindModel.Contents);
+                //console.log(bindModel);
+                $("#ImageList").val(bindModel.ImageList);
+                $("#ImageUrl").val(bindModel.ImageUrl);
+
+                $("#thelist").empty();
+                if (bindModel.ImageUrl != "") {
+                    var s = $("#ImageList").val();
+                    var s1 = $("#ImageUrl").val();
+
+                    var arr = s.split(';');
+                    $(arr).each(function (i, item) {
+                        if (item != "") {
+                            if (s1 == item) {
+                                $("#thelist").append("<img class='img_thum img_red' src='" + _file_domain + item + "' />");
+                            }
+                            else {
+                                $("#thelist").append("<img class='img_thum' src='" + _file_domain + item + "' />");
+                            }
+                        }
+                    });
+                    $(".img_thum").click(function () {
+                        $(".img_thum").removeClass("img_red");
+                        $(this).addClass("img_red");
+                        $("#ImageUrl").val($(this).attr("src").replace(_file_domain, ""));
+                    });
+                }
+            }
+            else
+            {
+                $("#ImageList").val("");
+                $("#ImageUrl").val("");
+                $("#thelist").empty();  
+                me.model({ IsEnabled: true });
+            }
+        }
+
+        me.onSave = function () {
+            if (!$('#form1').formValid()) {
+                return false;
+            }
+
+            var model = me.model();
+
+            if (me.editModel()) {
+                model.ImageUrl = $("#ImageUrl").val();
+                model.ImageList = $("#ImageList").val();
+                model.Contents = editor.html();
+                $ace.post("/Wiki/Product/Update", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    //vm.dataTable.reload();
+                    setTimeout(function () { window.location.reload(); }, 1000);
+                }
+                );
+            }
+            else {
+                model.ImageUrl = $("#ImageUrl").val();
+                model.ImageList = $("#ImageList").val();
+                model.Contents = editor.html();
+                $ace.post("/Wiki/Product/Add", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    //vm.loadData();
+                    setTimeout(function () { window.location.reload(); }, 1000);
+                }
+                );
+            }
+        }
+    }
+
+</script>

@@ -1,0 +1,55 @@
+﻿<script type="text/javascript">
+
+    var _vm;
+    $(function () {
+        var vm = new PageViewModel();
+        _vm = vm;
+        ko.applyBindings(vm);
+        vm.init();
+    });
+
+    function PageViewModel() {
+        var me = this;
+        ViewModel.call(me);
+        vmExtend.call(me);
+
+        me.user = _ob(@this.Raw(this.Serialize(this.ViewBag.UserInfo.User)));
+        me.passwordModel = _ob({});
+
+        me.saveUserInfo = function () {
+            if (!$('#userInfo').formValid()) {
+                return false;
+            }
+
+            var model = me.user();
+            $ace.post("@this.Href("~/Account/ModifyInfo")", model, function (result) {
+                $ace.msg(result.Msg);
+            }
+           );
+        }
+
+        me.changePassword = function () {
+            if (!$('#changePasswordForm').formValid()) {
+                return false;
+            }
+
+            var model = me.passwordModel();
+
+            if (!model.NewPassword || model.NewPassword != model.NewPasswordConfirm) {
+                $ace.alert("新密码与确认密码不相等");
+                return;
+            }
+
+            var params = { oldPassword: model.OldPassword, newPassword: model.NewPassword };
+            $ace.post("@this.Href("~/Account/ChangePassword")", params, function (result) {
+                $ace.msg(result.Msg);
+                me.passwordModel({});
+            }
+           );
+        }
+    }
+    function vmExtend() {
+        var me = this;
+    }
+
+</script>

@@ -1,0 +1,103 @@
+﻿@{
+    ViewData["Title"] = "Edit"; 
+    Ace.Entity.Wiki.Brand BrandModle = ViewBag.BrandModle as Ace.Entity.Wiki.Brand;
+}
+ 
+@this.RefStyle("~/Content/webuploader/webuploader.css")
+@this.RefScript("~/Content/webuploader/webuploader.js")
+<style type="text/css">
+    #picker { 
+        line-height:20px;
+        vertical-align: middle;
+        margin: 0 0px 0 0;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <form class="form-horizontal col-md-12" method="post" action="/Wiki/Brand/Edit"> 
+            <fieldset>
+                <div id="legend" class="">
+                    <legend class="">品牌编辑</legend>
+                </div>
+
+                <input type="hidden" class="form-control" value="@BrandModle.Id" id="Id" name="Id">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">品牌名称</span>
+                        <input type="text" class="form-control" value="@BrandModle.Title" id="Title" name="Title" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon2">是否置顶</span>
+                        <select class="form-control" id="IsTop" name="IsTop">
+                            @if (BrandModle.IsTop == 0)
+                            {
+                                <option selected value="0">否</option>
+                                <option value="1">是</option>
+                            }
+                            else
+                            {
+                                <option  value="0">否</option>
+                                <option value="1" selected>是</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">图片</span>
+                        <input id="ImageUrl" name="ImageUrl" value="@BrandModle.ImageUrl" type="text" class="form-control"  style="height: 59px;" />
+                        <span class="input-group-addon" id="picker">选择文件</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">品牌介绍</span>
+                        <input type="text" class="form-control" value="@BrandModle.Remark" id="Remark" name="Remark" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="提交" class="btn btn-primary" />
+                </div>
+
+            </fieldset>
+        </form>
+
+    </div>
+
+
+
+</div>
+<script>
+    
+
+    var uploader = WebUploader.create({
+        auto: true,
+        swf: '/Content/webuploader/Uploader.swf',
+        server: '/KindEditor/SaveFiles',
+        pick: '#picker',
+        resize: false
+    });
+
+    uploader.on('uploadSuccess', function (file, response) {
+        var json = jQuery.parseJSON(response._raw);
+        if (response.error == '0')
+        {            
+            $("#ImageUrl").val(response.url);
+            
+        }
+        else
+        {
+            var msg = "上传失败，文件数据无法正确解析";
+            $ace.alert(msg);
+        }
+    });
+</script>
+
+

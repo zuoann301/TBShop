@@ -1,0 +1,76 @@
+﻿<script>
+    var _docEditor;
+    var _vm;
+    $(function () {
+        var vm = new PageViewModel();
+        _vm = vm;
+        ko.applyBindings(vm);
+        vm.init();
+
+        _docEditor = editormd("doc-editormd", {
+            width: "90%",
+            height: 1000,
+            syncScrolling: "single",
+            codeFold: true,
+            //htmlDecode: true,
+            path: "/Content/editormd/lib/",
+            saveHTMLToTextarea: true
+        });
+    });
+
+    function PageViewModel() {
+        var me = this;
+        ViewModel.call(me);
+        vmExtend.call(me);
+
+        me.Id = _ob(@this.Raw("'" + ViewBag.Doc.Id + "'"));
+        me.Title = _ob(@Html.Raw("'" + ViewBag.Doc.Title + "'"));
+        me.Tag = _ob(@this.Raw("'" + ViewBag.Doc.Tag + "'"));
+        me.Summary = _ob(@this.Raw("'" + ViewBag.Doc.Summary + "'"));
+
+        me.save = function () {
+            if (!me.Title()) {
+                $ace.alert("标题不能为空");
+                return;
+            }
+
+            var markdownCode = _docEditor.getMarkdown();
+            var html = _docEditor.getHTML();
+
+            var param = {};
+            param.Title = me.Title();
+            param.Tag = me.Tag();
+            param.Summary = me.Summary();
+
+            param.MarkdownCode = markdownCode;
+            param.HtmlContent = html;
+
+            if (me.Id()) {
+                param.Id = me.Id();
+                $ace.post("/Wiki/Document/Update", param, function (result) {
+                    $ace.msg("更新成功");
+                }
+                );
+            }
+            else {
+                $ace.post("/Wiki/Document/Add", param, function (result) {
+                    $ace.alert("添加成功", function () {
+                        window.location.href = window.location.pathname + "?id=" + result.Data;
+                    });
+                }
+              );
+            }
+        }
+
+        me.newContent = function () {
+            window.location.href = window.location.pathname;
+        }
+    }
+    function vmExtend() {
+        var me = this;
+
+        me.init = function () {
+        }
+    }
+
+</script>

@@ -1,0 +1,28 @@
+﻿<script>
+     var _sorts = @this.RawSerialize(this.ViewBag.ListSort);
+    var _vm;
+    $(function () {
+        var vm = new PageViewModel();
+        _vm = vm;
+        ko.applyBindings(vm);
+        vm.init();
+    });
+
+    function PageViewModel() {
+        var me = this;
+        ViewModel.call(me);
+        vmExtend.call(me);
+
+        me.url = "/Wiki/News/GetModels";
+        me.deleteUrl = "/Wiki/News/Delete";
+
+        me.add = function () {
+            window.location.href ="/Wiki/News/Add";
+        }
+        me.edit = function () {
+            window.location.href="/Wiki/News/Edit" + "?Id=" + me.dataTable.selectedModel().Id();
+        }
+    }
+    function vmExtend() {
+        var me = this;
+    }</script>

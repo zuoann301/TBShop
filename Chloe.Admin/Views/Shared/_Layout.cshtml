@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    @this.RefScript("~/Content/jquery/jquery-1.11.1.min.js")
+    @*@Html.RefScript("~/Content/js/framework-ui.js")*@
+
+    @this.RefStyle("~/Content/jquery-ui/jquery-ui.min.css")
+    @this.RefScript("~/Content/jquery-ui/jquery-ui.min.js")
+
+    @this.RefStyle("~/Content/bootstrap/bootstrap.min.css")
+    @this.RefScript("~/Content/bootstrap/bootstrap.min.js")
+
+    @this.RefStyle("~/Content/font-awesome/font-awesome.min.css")
+    @*@Html.RefStyle("~/Content/css/framework-theme.css")*@
+    @*@this.RefStyle("~/Content/css/framework-ui.css")*@
+    @this.RefStyle("~/Content/css/style.css")
+
+    @this.RefScript("~/Content/knockout/knockout-3.4.2.js")
+    @*@this.RefScript("~/Content/knockout/knockout-3.4.2.debug.js")*@
+    @*@this.RefScript("~/Content/knockout/knockout-latest.js")*@
+    @this.RefScript("~/Content/knockout/knockout.mapping-latest.js")
+    @this.RefScript("~/Content/js/kohelper.js")
+
+    @this.RefScript("~/Content/validate/jquery.validate.min.js")
+    @*@this.RefScript("~/Content/datepicker/WdatePicker.js")*@
+    @this.RefScript("~/Content/My97DatePicker/WdatePicker.js")
+
+    @this.RefStyle("~/Content/layer/layer.css")
+    @this.RefScript("~/Content/layer/layer.js")
+    @this.RefScript("~/Content/js/ace.js")
+
+    <script>
+        $(function () {
+            $(".modal-dialog").draggable({
+                handle: ".modal-header"
+            });
+        });
+    </script>
+</head>
+<body>
+    @RenderBody()
+    @Html.AntiForgeryToken()
+</body>
+</html>

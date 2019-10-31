@@ -1,0 +1,24 @@
+﻿<script>
+     var _sorts = @this.RawSerialize(this.ViewBag.ListSort);
+    var _vm;
+    $(function () {
+        var vm = new PageViewModel();
+        _vm = vm;
+        ko.applyBindings(vm);
+        vm.init();
+    });
+
+    function PageViewModel() {
+        var me = this;
+        ViewModel.call(me);
+        vmExtend.call(me);
+
+        me.url = "/Wiki/Link/GetModels";
+        me.deleteUrl = "/Wiki/Link/Delete";
+
+         
+    }
+    function vmExtend() {
+        var me = this;
+    }
+</script>

@@ -1,0 +1,68 @@
+﻿<script>
+
+    var _orgs = @this.RawSerialize(this.ViewBag.Orgs);
+
+    var _vm;
+    $(function () {
+        var vm = new PageViewModel();
+        _vm = vm;
+        vmExtend.call(vm);
+        ko.applyBindings(vm);
+        vm.init();
+    });
+
+    function PageViewModel() {
+        var me = this;
+        ViewModel.call(me);
+        vmExtend.call(me);
+
+        me.url = "/Adm/Post/Models";
+        me.deleteUrl = "/Adm/Post/Delete";
+        me.dataTable = new DataTable(me);
+        me.dialog = new FormDialog(me);
+    }
+    function vmExtend() {
+        var me = this;
+    }
+
+    function FormDialog(vm) {
+        var me = this;
+        Dialog.call(me);
+
+        me.onOpen = function () {
+            var model = me.editModel();
+            if (model) {
+                var bindModel = $ko.toJS(model);
+                me.model(bindModel);
+            }
+            else {
+                me.model({ IsEnabled: true });
+            }
+        }
+
+        me.onSave = function () {
+            if (!$('#form1').formValid()) {
+                return false;
+            }
+
+            var model = me.model();
+
+            if (me.editModel()) {
+                $ace.post("/Adm/Post/Update", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.dataTable.reload();
+                }
+               );
+            }
+            else {
+                $ace.post("/Adm/Post/Add", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.loadData();
+                 }
+             );
+            }
+        }
+    }
+</script>

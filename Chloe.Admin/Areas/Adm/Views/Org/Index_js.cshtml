@@ -1,0 +1,166 @@
+﻿<script>
+
+    var _orgTypes = @this.RawSerialize(this.ViewBag.OrgTypes);
+
+    var _vm;
+    $(function () {
+        var vm = new PageViewModel();
+        _vm = vm;
+        vmExtend.call(vm);
+        ko.applyBindings(vm);
+        vm.init();
+    });
+
+    function PageViewModel() {
+        var me = this;
+        ViewModel.call(me);
+        vmExtend.call(me);
+
+        me.url = "/Adm/Org/Models";
+        me.deleteUrl = "/Adm/Org/Delete";
+        me.dataTable = new DataTable(me);
+        me.dialog = new FormDialog(me);
+        me.permissionDialog = new PermissionDialog(me);
+
+        me.assignPermission = function () {
+            me.permissionDialog.open(me.dataTable.selectedModel().Data, "分配权限 [" + me.dataTable.selectedModel().Data.Name() + "]" );
+        }
+     }
+    function vmExtend() {
+        var me = this;
+    }
+
+    function FormDialog(vm) {
+        var me = this;
+        Dialog.call(me);
+
+        me.orgs = _oba([]);
+
+        me.onOpen = function () {
+            var model = me.editModel();
+            if (model) {
+                var dataModel = model.Data;
+                var bindModel = $ko.toJS(dataModel);
+                me.model(bindModel);
+                me.orgs([]);
+                me.loadOrgs(bindModel.OrgType, function () {
+                    $("#ParentId").val(dataModel.ParentId());
+                    $("#ParentId").change();
+                });
+            }
+            else {
+                me.model({});
+            }
+        }
+
+        me.onSave = function () {
+            if (!$('#form1').formValid()) {
+                return false;
+            }
+
+            var model = me.model();
+
+            if (me.editModel()) {
+                $ace.post("/Adm/Org/Update", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.dataTable.reload();
+                }
+               );
+            }
+            else {
+                $ace.post("/Adm/Org/Add", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.loadData();
+                 }
+             );
+            }
+        }
+
+        me.onOrgTypeChange = function () {
+            me.orgs([]);
+            me.loadOrgs(me.model().OrgType);
+        }
+
+        me.loadOrgs = function (orgType,onLoaded) {
+            var data = { orgType: orgType};
+             $ace.get("/Adm/Org/GetParentOrgs", data, function (result) {
+                 me.orgs(result.Data);
+                 if (onLoaded)
+                     onLoaded(result.Data);
+            })
+        }
+    }
+
+    function PermissionDialog(vm) {
+        var me = this;
+        Dialog.call(me);
+
+        me.onOpen = function () {
+            var model = me.editModel();
+            var id = model.Id();
+            $("#permissionTree").html(null);
+            $("#permissionTree").treeview({
+                height: 444,
+                showcheck: true,
+                url: "/Adm/Org/GetPermissionTree",
+                param: { id: id },
+                cbiconpath: "/Content/wdtree/images/icons/"
+            });
+        }
+
+        me.onSave = function () {
+            var permissionIdArr = $("#permissionTree").getCheckedNodes();
+
+            var id = me.editModel().Id();
+            var data = { id: id };
+            data.permissions = JSON.stringify(permissionIdArr);
+            $ace.post("/Adm/Org/SetPermission", data, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                 }
+             );
+        }
+    }
+
+    function expandChildren(ele) {
+
+        $ele = $(ele);
+
+        var $tr = $ele.parent().parent();
+        var id = $tr.attr("id");
+
+        var selector = "tr[parent-id='" + id + "']";
+        var $children = $tr.siblings(selector);
+
+        if ($ele.hasClass("glyphicon-triangle-bottom")) {
+            $children.hide();
+            $ele.removeClass("glyphicon-triangle-bottom");
+            $ele.addClass("glyphicon-triangle-right");
+        }
+        else {
+            $children.show();
+            $ele.removeClass("glyphicon-triangle-right");
+            $ele.addClass("glyphicon-triangle-bottom");
+        }
+
+        for (var i = 0; i < $children.length; i++) {
+            var $child = $($children[i]);
+
+            var $iconNodes = $child.find(".glyphicon");
+            if ($iconNodes.length > 0) {
+                expandChildren($iconNodes[0]);
+            }
+        }
+    }
+    function appendRetract(level) {
+        var s = "";
+        for (var i = 0; i < level * 4; i++) {
+            s += "&nbsp;";
+        }
+        return s;
+    }
+
+
+</script>

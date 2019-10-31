@@ -1,0 +1,228 @@
+﻿@{
+    Layout = null;
+    ViewBag.Title = "Index";
+}
+<html>
+<head>
+    <title>Index</title>
+    <script type="text/javascript" src="/Content/jquery/jquery-1.11.1.min.js"></script>
+
+    <link rel="stylesheet" href="/Content/jquery-ui/jquery-ui.min.css">
+    <script type="text/javascript" src="/Content/jquery-ui/jquery-ui.min.js"></script>
+
+    <link rel="stylesheet" href="/Content/bootstrap/bootstrap.min.css">
+    <script type="text/javascript" src="/Content/bootstrap/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/Content/font-awesome/font-awesome.min.css">
+    <link rel="stylesheet" href="/Content/css/style.css">
+    <script type="text/javascript" src="/Content/validate/jquery.validate.min.js"></script>
+
+    <script type="text/javascript" src="/Content/knockout/knockout-3.4.2.js"></script>
+    <script type="text/javascript" src="/Content/js/kohelper.js"></script>
+
+    <link rel="stylesheet" href="/Content/layer/layer.css">
+    <script type="text/javascript" src="/Content/layer/layer.js"></script>
+    <script type="text/javascript" src="/Content/js/ace.js"></script>
+    @this.RefStyle("~/Content/webuploader/webuploader.css")
+    @this.RefScript("~/Content/webuploader/webuploader.js")
+
+    <style type="text/css">
+        #picker {
+            display: inline-block; 
+            vertical-align: middle;
+            margin: 0 12px 0 0;
+        }
+
+        .webuploader-pick {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            background: #00b7ee;
+            padding: 4px 12px;
+            color: #fff;
+            text-align: center;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-left: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+
+
+    
+
+    <div style="width:100%;">
+
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <div class="search">
+                    <table class="form-table" style="width:800px;">
+                        <tr>
+                            <td style="width:200px;">
+                                <select class="a-control" id="ShopID" name="ShopID" onchange="Sel()">
+                                    <option value="0">--选择商家--</option>
+                                </select>
+                            </td>
+                            <td  style="width:200px;">
+                                <div id="uploader" class="wu-example" style="z-index:99999;">
+                                    <!--用来存放文件信息-->
+                                    <div id="thelist" class="uploader-list"></div>
+                                    <div class="btns">
+                                        <div id="picker">选择产品数据文件</div>
+                                    </div>
+                                </div>
+                            </td>
+                             
+                            <td><button id="ctlBtn" class="btn btn-default" onclick="window.location.href = '/Wiki/Product/BatchAdd2';">导入规格数据</button></td>
+                            <td><button id="ctlBtn" class="btn btn-default" onclick="window.location.href = '/Wiki/Product/Index';">返回商品列表</button>  </td>
+                        </tr>
+                    </table>
+                </div>
+
+                
+            </div>
+        </div>
+         
+
+        <div>
+            <table class="table table-hover"  style="font-size:14px;">
+                <thead>
+                    <tr>
+                        <th style="width:200px;">编号</th>
+                        <th>产品分类</th>
+                        <th>产品名称</th>
+                        <th>产品编码</th>
+                        <th>零售价</th>
+
+                        <th>成本价</th>
+                        <th>批发价</th>
+                        <th>分销比例</th>
+
+                        <th>首图</th>
+                        <th>规格</th>
+                        <th>折扣</th>
+                        <th>备注</th>
+                        <th>录入时间</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach:records">
+                    <tr>
+                        <td data-bind="text:Id"></td>
+                        <td data-bind="text:ProSortID"></td>
+                        <td data-bind="text:ProductName"></td>
+                        <td data-bind="text:ProductCode"></td>
+                        <td data-bind="text:Price"></td>
+
+                        <td data-bind="text:BasePrice"></td>
+                        <td data-bind="text:BatchPrice"></td>
+                        <td data-bind="text:SharePercent"></td>
+
+                        <td data-bind="text:ImageUrl"></td>
+                        <td data-bind="text:ProSize"></td>
+                        <td data-bind="text:Discount"></td>
+                        <td data-bind="text:Summary"></td>
+                        <td data-bind="dateString:CreateDate"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+   
+    <script type="text/javascript">
+        var ShopID = 0;
+        var _shops =@this.RawSerialize(this.ViewBag.ShopList); 
+
+        var options = {
+            title: "Knockout",
+            headers: [
+                { displayText: "Id", value: "Id", width: "auto" },
+                { displayText: "ProSortID", value: "ProSortID", width: "auto" },
+                { displayText: "ProductName", value: "ProductName", width: "auto" },
+                { displayText: "ProductCode", value: "ProductCode", width: "auto" },
+
+                { displayText: "Price", value: "Price", width: "auto" },
+
+                { displayText: "BasePrice", value: "BasePrice", width: "auto" },
+                { displayText: "BatchPrice", value: "BatchPrice", width: "auto" },
+                { displayText: "SharePercent", value: "SharePercent", width: "auto" },
+
+
+                { displayText: "ImageUrl", value: "ImageUrl", width: "auto" },
+                
+                { displayText: "ProSize", value: "ProSize", width: "auto" },
+                { displayText: "Discount", value: "Discount", width: "auto" },
+                { displayText: "Summary", value: "Summary", width: "auto" },
+                { displayText: "CreateDate", value: "CreateDate", width: "auto" }                
+            ],
+            defaultOrderBy:"CreateDate"
+        };
+
+        var uploader = WebUploader.create({
+            auto: true,
+            swf: '/Content/webuploader/Uploader.swf',
+            server: '/Wiki/Product/xlsFileSave?ShopID=@ViewBag.ShopID',
+            pick: '#picker',
+            resize: false
+        });
+
+        uploader.on('uploadSuccess', function (file, response)
+        {            
+            var json = jQuery.parseJSON(response._raw);
+            if (response.st == '0')
+            {
+                var msg = "上传失败，文件数据无法正确解析";
+                parent.$ace.alert(msg);
+            }
+            else
+            {
+                var obj = jQuery.parseJSON(json.msg);
+                Init(obj);
+                parent.$ace.alert(obj.length + "数据导入成功");
+            }
+        });
+
+       
+
+
+
+
+
+        $(document).ready(function () {
+
+            jQuery(_shops).each(function (i, item) {
+                jQuery("#ShopID").append("<option value='" + item.ShopID + "'>" + item.ShopName+"</option>");
+            });
+            jQuery("#ShopID").val("@ViewBag.ShopID");
+        });
+        function Init(data) {
+            function ViewModel(options) {
+                var me = this;
+                me.headers = ko.observableArray(options.headers);
+                me.records = ko.observableArray(data);
+            };
+
+            var viewModel = new ViewModel(options);
+            ko.applyBindings(viewModel);
+        }
+
+
+        function Sel()
+        { 
+            window.location.href = "/Wiki/Product/BatchAdd?ShopID=" + jQuery("#ShopID").val();
+        }
+
+    </script>
+
+
+
+
+
+</body>
+</html>
+
+
+

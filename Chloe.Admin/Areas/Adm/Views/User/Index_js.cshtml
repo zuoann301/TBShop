@@ -1,0 +1,316 @@
+﻿<script>
+
+    var _orgs = @this.RawSerialize(this.ViewBag.Orgs);
+    var _roles = @this.RawSerialize(this.ViewBag.Roles);
+
+    var _vm;
+    $(function () {
+        var vm = new PageViewModel();
+        _vm = vm;
+        ko.applyBindings(vm);
+        vm.init();
+
+        $('#Orgs').select2({
+            placeholder: '-请选择-',
+            //data: [{ id: 1, text: "A北京" }, { id: 2, text: "B上海" }, { id: 3, text: "C广州" }],
+            data: _orgs,
+            allowClear: true,//显示清除按钮
+        });
+
+        $('#Orgs').change(function () {
+            var selected = $('#Orgs').select2('data');
+            var orgIds = $ace.selectIds(selected);
+
+            var postIds = $('#Orgs').data("init-posts");
+            $('#Orgs').data("init-posts", null);
+            if (!postIds) {
+                var currentPosts = $('#Posts').select2('data');
+                postIds = $ace.selectIds(currentPosts);
+            }
+
+            var orgsString = orgIds.join(",");
+            $ace.get("/Adm/Post/GetModelsByOrgId", { orgs: orgsString }, function (result) {
+                bindPosts(result.Data, true, postIds);
+            });
+        });
+
+        bindPosts([],false,[]);
+        $('#Roles').select2({
+            placeholder: '-请选择-',
+            data: _roles,
+            allowClear: true,//显示清除按钮
+        });
+    });
+
+    function bindPosts(data, rebind,selectedValues) {
+        var $ele = $('#Posts');
+        if (rebind) {
+            $ele.select2("destroy");
+            $ele.empty();
+        }
+        $ele.select2({
+            placeholder: '-请选择-',
+            data: data,
+            allowClear: true,//显示清除按钮
+        });
+
+        if (selectedValues) {
+            $ele.val(selectedValues);
+            $ele.trigger('change');
+        }
+    }
+
+    function PageViewModel() {
+        var me = this;
+        ViewModel.call(me);
+        vmExtend.call(me);
+
+        me.url = "/Adm/User/Models";
+        me.deleteUrl = "/Adm/User/Delete";
+        me.dialog = new FormDialog(me);
+        me.revisePasswordDialog = new RevisePasswordDialog();
+        me.permissionDialog = new PermissionDialog(me);
+
+        me.openRevisePasswordDialog = function () {
+            me.revisePasswordDialog.open(me.dataTable.selectedModel());
+        }
+        me.assignPermission = function () {
+            me.permissionDialog.open(me.dataTable.selectedModel(), "分配权限 [" + me.dataTable.selectedModel().Name() + "]" );
+        }
+
+        me.changeEnable = function () {
+            var model = this;
+            if (model.State() == 1)
+                me.changeState.call(model, 2);
+            else
+                me.changeState.call(model, 1);
+        }
+        me.changeState = function (newState) {
+            var model = this;
+            var url = "/Adm/User/ChangeState";
+            var name = model.Name();
+            var data = { id: model.Id(), newState: newState };
+            //console.log(data);
+            var poster = function () {
+                $ace.post(url, data , function () {
+                    me.dataTable.reload();
+                });
+            }
+
+            if (newState == 1) {
+                $ace.confirm("确认要启用账户[" + name + "]？", function () {
+                    poster();
+                });
+            }
+            else if (newState == 2) {
+                    $ace.confirm("确认要禁用账户[" + name + "]？", function () {
+                        poster();
+                    });
+            }
+            else if (newState == 3) {
+                $ace.confirm("注销后不可恢复，确认要注销账户[" + name + "]？", function () {
+                    poster();
+                });
+            }
+        }
+     }
+    function vmExtend() {
+        var me = this;
+    }
+
+    function FormDialog(vm) {
+        var me = this;
+        Dialog.call(me);
+
+        me.posts = _oba([]);
+
+        me.onOpen = function () {
+            var model = me.editModel();
+            if (model) {
+                var dataModel = model.Data;
+                var bindModel = $ko.toJS(model);
+                me.model(bindModel);
+
+                $('#Roles').setValue($ace.selectIds(bindModel.Roles));
+
+                $('#Orgs').data("init-posts", $ace.selectIds(bindModel.Posts));
+                $('#Orgs').setValue($ace.selectFields(bindModel.UserOrgs,"OrgId"));
+            }
+            else {
+                me.model({});
+                $('#Orgs').data("init-posts", null);
+                $('#Posts').setValue([]);
+                $('#Orgs').setValue([]);
+                $('#Roles').setValue([]);
+            }
+        }
+
+        me.onSave = function () {
+            if (!$('#form1').formValid()) {
+                return false;
+            }
+
+            var model = me.model();
+
+            delete model.Orgs;
+            delete model.Posts;
+            delete model.Roles;
+
+            var selectedRoles = $('#Roles').select2('data');
+            var roleIds = $ace.selectIds(selectedRoles).join(",");
+            model.Roles = roleIds;
+
+            var selectedOrgs = $('#Orgs').select2('data');
+            var orgIds = $ace.selectIds(selectedOrgs).join(",");
+            model.Orgs = orgIds;
+
+            var selectedPosts = $('#Posts').select2('data');
+            var postIds = $ace.selectIds(selectedPosts).join(",");
+            model.Posts = postIds;
+            //console.log(model);
+            //return;
+            if (me.editModel()) {
+                $ace.post("/Adm/User/Update", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.dataTable.reload();
+                }
+                );
+            }
+            else {
+                $ace.post("/Adm/User/Add", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.loadData();
+                }
+                );
+            }
+        }
+    }
+
+    function PermissionDialog(vm) {
+        var me = this;
+        Dialog.call(me);
+
+        me.onOpen = function () {
+            var model = me.editModel();
+            var id = model.Id();
+            $("#permissionTree").html(null);
+            $("#permissionTree").treeview({
+                height: 444,
+                showcheck: true,
+                url: "/Adm/User/GetPermissionTree",
+                param: { id: id },
+                cbiconpath: "/Content/wdtree/images/icons/"
+            });
+        }
+
+        me.onSave = function () {
+            var permissionIdArr = $("#permissionTree").getCheckedNodes();
+
+            var id = me.editModel().Id();
+            var data = { id: id };
+            data.permissions = JSON.stringify(permissionIdArr);
+            $ace.post("/Adm/User/SetPermission", data, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                 }
+             );
+        }
+    }
+
+    function RevisePasswordDialog() {
+        var me = this;
+        Dialog.call(me);
+        me.title("重置密码");
+
+        me.onOpen = function () {
+            var model = me.editModel();
+            if (!model) {
+                throw new Error();
+            }
+
+            var bindModel = $ko.toJS(model);
+            var m = {};
+            m.Id = bindModel.Id;
+            m.AccountName = bindModel.AccountName;
+            m.Name = bindModel.Name;
+
+            me.model(m);
+        }
+        me.onSave = function () {
+            if (!$('#RevisePasswordForm').formValid()) {
+                return false;
+            }
+
+            var model = me.model();
+            var pwd = model.Password;
+            var data = { userId: model.Id, newPassword: pwd };
+            $ace.post("/Adm/User/RevisePassword", data, function (result) {
+                $ace.msg(result.Msg);
+                me.close();
+            }
+           );
+        }
+    }
+
+    function getStateName(state) {
+        var dic = { 1: "正常", 2: "禁用", 3: "已注销" };
+        return dic[state];
+    }
+    function getStateClass(state) {
+        var dic = { 1: "a-span-success-s", 2: "a-span-danger-s", 3: "a-span-info-s" };
+        return dic[state];
+    }
+    function appendNames(items) {
+        return $ace.selectTexts($ko.toJS(items)).join(",");
+    }
+    function appendOrgNames(user) {
+        var userOrgs = $ko.toJS(user.UserOrgs);
+        //console.log(userOrgs);
+        var html = "";
+        var c = "";
+        for (var i = 0; i < userOrgs.length; i++) {
+            var userOrg = userOrgs[i];
+            html += c;
+
+            var className = userOrg.DisablePermission == true ? "fa fa-toggle-off" : "fa fa-toggle-on";
+            var title = userOrg.DisablePermission == true ? "点击启用用户部门权限" : "点击禁用用户部门权限";
+
+            html += userOrg.Org.Name + "&nbsp;&nbsp;" + '<i' + ' user_name="' + user.Name() + '"' + ' user_id="' + user.Id() + '"' + ' org_id="' + userOrg.Org.Id + '"' + 'class="' + className + '" style="display:inline-block;color:#5cb85c;font-size:17px;" title="' + title + '" onclick="changeUserOrgPermission(this)"></i>';
+            c = "<br/>";
+        }
+
+        return html;
+        return $ace.selectTexts().join("<br/>");
+    }
+    function changeUserOrgPermission(ele) {
+        var $ele = $(ele);
+        var userId = $ele.attr("user_id");
+        var orgId = $ele.attr("org_id");
+        var userName = $ele.attr("user_name");
+        var disabled = $ele.hasClass("fa-toggle-off");
+        var s = disabled == true ? "启用" : "禁用";
+        var msg = "确定要" + s + "用户[" + userName + "]的部门权限？";
+
+        var changeView = function () {
+            if (disabled) {
+                $ele.removeClass("fa-toggle-off").addClass("fa-toggle-on");
+                $ele.attr("title", "点击禁用用户部门权限");
+            }
+            else {
+                $ele.removeClass("fa-toggle-on").addClass("fa-toggle-off");
+                $ele.attr("title", "点击启用用户部门权限");
+            }
+        }
+
+        $ace.confirm(msg, function () {
+            var data = { userId: userId, orgId: orgId, newState: !disabled };
+            //changeView();
+            $ace.post("/Adm/User/ChangeUserOrgPermissionState", data, function () {
+                changeView();
+            });
+        });
+    }
+
+</script>

@@ -1,0 +1,267 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<link href="~/Content/css/framework-theme.css" rel="stylesheet" />
+<link href="~/Content/select2/select2.min.css" rel="stylesheet" />
+<script src="~/Content/select2/select2.min.js"></script>
+<script charset="utf-8" src="/Content/kindeditor/kindeditor-all-min.js"></script>
+<script charset="utf-8" src="/Content/kindeditor/lang/zh-CN.js"></script>
+<script type="text/javascript">
+    var editor;
+    KindEditor.ready(function (K) {
+        editor = K.create('#Contents', {
+            uploadJson: '/KindEditor/SaveFiles',
+            fileManagerJson: '/KindEditor/FileManager',
+            allowFileManager: true
+        });
+    });
+</script>
+@this.RefStyle("~/Content/webuploader/webuploader.css")
+@this.RefScript("~/Content/webuploader/webuploader.js")
+@Html.Partial("Index_js")
+<style type="text/css">
+        /*
+    .img_thum {max-width:100px;}*/
+</style>
+<style type="text/css">
+    #picker {
+        display: inline-block;
+        line-height: 10px;
+        vertical-align: middle;
+        margin: 0 12px 0 0;
+    }
+
+    .img_thum {
+        width: 100px;
+        margin-right: 5px;
+    }
+
+    .img_red {
+        border: 1px solid #ff6a00;
+    }
+
+    #thelist {
+        overflow-y: hidden;
+        overflow-x: scroll;
+    }
+</style>
+<div style="width:100%;">
+    <div class="topPanel">
+        <div class="toolbar">
+            <a class="a-btn-refresh" onclick="$ace.reload()"></a>
+            <button class="a-btn-edit" data-bind="click:edit,disable:!dataTable.selectedModel()">修改</button>
+            <button class="a-btn-add" data-bind="click:add">添加</button>
+
+            <button class="a-btn-add" data-bind="click:batchAdd">数据导入</button>
+            <button class="a-btn-info" data-bind="click:SetPrice">设置价格</button>
+            <button class="a-btn-delete" data-bind="click:del,disable:!dataTable.selectedModel()">删除</button>
+        </div>
+        <div class="search">
+            <table class="form-table" style="width:600px;">
+                <tr>
+                    <td style="width:100px;">
+                        <select class="a-control" id="ShopID" name="ShopID" data-bind="options:_shops,optionsText:'ShopName',optionsValue:'ShopID',optionsCaption:'--选择分类--',value:searchModel().ShopID">
+                            <option value="0">--选择商家--</option>
+                        </select>
+                    </td>
+                    <td style="width:100px;">
+                        <select class="a-control" id="SortID" name="SortID" data-bind="options:_sorts2,optionsText:'Title',optionsValue:'Id',optionsCaption:'--选择分类--',value:searchModel().SortID">
+                            <option value="0">--选择分类--</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" class="a-control" placeholder="请输入要查询关键字" style="width: 200px;" data-bind="value:searchModel().keyword">
+                    </td>
+                    <td>
+                        <button type="button" class="a-btn-search" data-bind="click:search"></button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div>
+        <table class="table table-hover" data-bind="with:dataTable">
+            <thead>
+                <tr>
+                    <th style="width:20px;"></th>
+                    <th>产品名称</th>
+                    <th>产品编号</th>
+                    <th>产品分类</th>
+                    <th>规格</th>
+                    <th>成本价</th>
+                    <th>批发价</th>
+                    <th>零售价</th>
+                    <th>分销比例</th>
+                    <th>置顶</th>
+                    <th>推荐</th>
+
+
+                </tr>
+            </thead>
+            <tbody data-bind="foreach:models">
+                <tr data-bind="click:$parent.selectRow">
+                    <td data-bind="text:$parent.getOrdinal($index())"></td>
+                    <td data-bind="text:ProductName"></td>
+                    <td>
+                        <a data-bind="text:ProductCode,attr:{href:'@Url.Content("~/Wiki/Product/Size?ProductCode=")' + ProductCode()}"></a>
+                    </td>
+                    <td data-bind="text:$ace.findName(_sorts,ProSortID(),'Id','Title')"></td>
+                    <td data-bind="text:ProSize"></td>
+                    <td data-bind="text:BasePrice"></td>
+                    <td data-bind="text:BatchPrice"></td>
+                    <td data-bind="text:Price"></td>
+                    <td data-bind="text:SharePercent"></td>
+                    <td><span data-bind="text:IsTop()?'是':'否',attr:{class:IsTop()?'a-span-success-s':'a-span-danger-s'}"></span></td>
+                    <td><span data-bind="text:IsHot()?'是':'否',attr:{class:IsHot()?'a-span-success-s':'a-span-danger-s'}"></span></td>
+
+                </tr>
+            </tbody>
+            @Html.Partial("_tfoot")
+        </table>
+    </div>
+</div>
+
+<dialogbox data-bind="with:dialog" style="width:80%;">
+    <form id="form1">
+        <!------------------------------------------------------------------------------------->
+        <div class="content-tabs">
+            <nav class="page-tabs menuTabs">
+                <div class="page-tabs-content" style="margin-left: 0px;">
+                    <a href="javascript:;" class="menuTab active">基本信息</a>
+                    <a href="javascript:;" class="menuTab">详细内容</a>
+                </div>
+            </nav>
+        </div>
+        <!------------------------------------------------------------------------------------->
+        <div class="pro_tab">
+            <table class="form-table">
+                <tbody>
+                    <tr>
+                        <td class="form-title">产品编号</td>
+                        <td class="form-value">
+                            <input name="ProductCode" type="text" class="a-control required" placeholder="请输入产品编号" data-bind="value:model().ProductCode" />
+                        </td>
+                    </tr>
+                     
+
+                </tbody>
+            </table>
+            <table class="form-table">
+                <tbody>
+
+                    <tr>
+                        <td class="form-title">产品名称</td>
+                        <td class="form-value"><input name="ProductName" type="text" class="a-control required" placeholder="请输入产品名称" data-bind="value:model().ProductName" /></td>
+                        <td class="form-title">点击量</td>
+                        <td class="form-value"><input name="Hit" type="text" class="a-control required" placeholder="点击量" data-bind="value:model().Hit" /></td>
+                    </tr>
+
+                    <tr>
+                        <td class="form-title">品牌</td>
+                        <td class="form-value">
+                            <select name="BrandID" id="BrandID" type="text" class="a-control required" data-bind="options:_brands,optionsText:'Title',optionsValue:'Id',optionsCaption:'--选择分类--',value:model().BrandID"></select>
+                        </td>
+                        <td class="form-title">规格</td>
+                        <td class="form-value">
+                            <input name="ProSize" id="ProSize" type="text" class="a-control required" placeholder="请输入规格" data-bind="value:model().ProSize" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="form-title">产品分类</td>
+                        <td class="form-value">
+                            <select name="ProSortID" id="ProSortID" type="text" class="a-control required" data-bind="options:_sorts2,optionsText:'Title',optionsValue:'Id',optionsCaption:'--选择分类--',value:model().ProSortID"></select>
+                        </td>
+                        <td class="form-title">成本价</td>
+                        <td class="form-value">
+                            <input name="BasePrice" id="BasePrice" type="text" class="a-control required" placeholder="请输入成本价" data-bind="value:model().BasePrice" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form-title">零售价</td>
+                        <td class="form-value">
+                            <input name="Price" id="Price" type="text" class="a-control required" placeholder="请输入零售价" data-bind="value:model().Price" />
+                        </td>
+                        <td class="form-title">批发价</td>
+                        <td class="form-value">
+                            <input name="BatchPrice" id="BatchPrice" type="text" class="a-control required" placeholder="请输入批发价" data-bind="value:model().BatchPrice" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form-title">分销比例</td>
+                        <td class="form-value">
+                            <input name="SharePercent" id="SharePercent" type="text" class="a-control required" placeholder="请输入分销比例" data-bind="value:model().SharePercent" />
+                        </td>
+                        <td class="form-title">折扣</td>
+                        <td class="form-value">
+                            <input name="Discount" id="Discount" type="text" class="a-control required" placeholder="请输入折扣" data-bind="value:model().Discount" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form-title">置顶</td>
+                        <td class="form-value">
+                            <input id="IsTop1" class="a-radio" name="TopType" type="radio" value="1" data-bind="typedChecked:model().IsTop,dataType:'int'"><label for="IsTop1">是</label>
+                            <input id="IsTop0" class="a-radio" name="TopType" type="radio" value="0" data-bind="typedChecked:model().IsTop,dataType:'int'"><label for="IsTop0">否</label>
+                        </td>
+                        <td class="form-title">推荐</td>
+                        <td class="form-value">
+                            <input id="IsHot1" class="a-radio" name="HotType" type="radio" value="1" data-bind="typedChecked:model().IsHot,dataType:'int'"><label for="IsHot1">是</label>
+                            <input id="IsHot0" class="a-radio" name="HotType" type="radio" value="0" data-bind="typedChecked:model().IsHot,dataType:'int'"><label for="IsHot0">否</label>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <table class="form-table">
+                <tbody>
+                    <tr>
+                        <td class="form-title">备注</td>
+                        <td class="form-value">
+                            <input name="Summary" id="Summary" type="text" class="a-control required" placeholder="请输入备注" data-bind="value:model().Summary" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form-title">图片</td>
+                        <td class="form-value">
+                            <div id="uploader" class="wu-example" style="z-index:99999;">
+                                <div class="btns">
+                                    <div id="picker">选择文件</div>
+                                </div>
+                                <div id="thelist" class="uploader-list"></div>
+                            </div>
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input name="ImageUrl" id="ImageUrl" type="text" class="a-control required" data-bind="value:model().ImageUrl" /></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input id="ImageList" name="ImageList" type="text" class="a-control required" data-bind="value:model().ImageList" /></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pro_tab" style="display:none;">
+            <textarea id="Contents" name="Contents" style="width:100%;height:300px;" data-bind="value:model().Contents">
+            </textarea>
+        </div>
+    </form>
+</dialogbox>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery(".menuTab").click(function () {
+            var i = jQuery(this).index();
+
+            jQuery(".menuTab").removeClass("active");
+            jQuery(this).addClass("active");
+
+            jQuery(".pro_tab").hide();
+            jQuery(".pro_tab").eq(i).show();
+        });
+    });
+    
+</script>

@@ -1,0 +1,31 @@
+﻿<script>
+
+    var _vm;
+    $(function () {
+        var vm = new PageViewModel();
+        _vm = vm;
+        ko.applyBindings(vm);
+        vm.init();
+    });
+
+    function PageViewModel() {
+        var me = this;
+        ViewModel.call(me);
+        vmExtend.call(me);
+
+        me.url = "/Wiki/Document/GetModels";
+        me.deleteUrl = "/Wiki/Document/Delete";
+
+        me.add = function () {
+            window.open("/Wiki/Document/Document");
+        }
+        me.edit = function () {
+            window.open("/Wiki/Document/Document" + "?id=" + me.dataTable.selectedModel().Id());
+        }
+    }
+    function vmExtend() {
+        var me = this;
+    }
+
+</script>
+

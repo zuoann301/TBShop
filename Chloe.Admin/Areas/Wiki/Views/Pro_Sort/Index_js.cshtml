@@ -1,0 +1,164 @@
+﻿<script>
+
+    var _orgs = @this.RawSerialize(this.ViewBag.Orgs);
+    var _sorts = @this.RawSerialize(this.ViewBag.SortList);
+    var _file_domain = "@ViewBag.FileDomain";
+    var uploader;
+
+    var _vm;
+    $(function () {
+        var vm = new PageViewModel();
+        _vm = vm;
+        vmExtend.call(vm);
+        ko.applyBindings(vm);
+        vm.init();
+    });
+
+    function PageViewModel() {
+        var me = this;
+        ViewModel.call(me);
+        vmExtend.call(me);
+
+        
+
+        me.url = "/Wiki/Pro_Sort/Models?Pid=@ViewBag.Pid";
+        me.deleteUrl = "/Wiki/Pro_Sort/Delete";
+        me.dataTable = new DataTable(me);
+        me.dialog = new FormDialog(me);
+
+        
+         
+        
+
+    }
+    function vmExtend() {
+        var me = this;
+    }
+
+    function FormDialog(vm) {
+        var me = this;
+        Dialog.call(me);
+
+        me.onOpen = function ()
+        {
+            if (!uploader) {
+                uploader = WebUploader.create({
+                    auto: true,
+                    swf: '/Content/webuploader/Uploader.swf',
+                    server: '/Wiki/Product/FileSave',
+                    pick: '#picker',
+                    resize: false
+                });
+
+                uploader.on('uploadSuccess', function (file, response) {
+                    if (response.st == "1") {
+                        $("#ImageUrl").val(response.msg);
+                        $("#thelist").append("<img class='img_thum' src='" + _file_domain + response.msg + "' />");
+
+                    } else {
+                        $ace.alert(response.msg);
+                    }
+                });
+            }
+
+
+            var model = me.editModel();
+            if (model)
+            {
+                var bindModel = $ko.toJS(model);
+                me.model(bindModel);
+
+                var arr = new Array();
+                $(_sorts).each(function (index, element) {
+                    var ijs = {};
+                    ijs.id = element.Id
+                    ijs.text = element.Title
+                    ijs.upId = element.Pid
+                    arr.push(ijs)
+                });
+
+                var ijs = {};
+                ijs.id = "0";
+                ijs.text = "--选择分类--";
+                ijs.upId = "";
+                arr.push(ijs);
+
+                console.log(model.Pid());
+                $("#Pid").Hselect({
+                    data: arr,
+                    def_value: model.Pid(),
+                    height: "29px",
+                    border: "#ccc solid 1px",
+                });
+
+
+                $("#ImageUrl").val(bindModel.ImageUrl)
+                $("#thelist").empty();
+                if (bindModel.ImageUrl != "") {
+                    var s1 = $("#ImageUrl").val();
+                    $("#thelist").append("<img class='img_thum img_red' src='" + _file_domain + s1 + "' />");
+                }
+            }
+            else
+            {
+                var arr = new Array();
+                $(_sorts).each(function (index, element) {
+                    var ijs = {};
+                    ijs.id = element.Id
+                    ijs.text = element.Title
+                    ijs.upId = element.Pid
+                    arr.push(ijs)
+                });
+                var ijs = {};
+                ijs.id = "0";
+                ijs.text = "--选择分类--";
+                ijs.upId = "";
+                arr.push(ijs);
+
+                $("#Pid").Hselect({
+                    data: arr,
+                    def_value: "0",
+                    height: "29px",
+                    border: "#ccc solid 1px",
+                });
+
+                $("#ImageUrl").val("");
+                $("#thelist").empty();
+                me.model({ IsEnabled: true });
+            }
+        }
+
+        me.onSave = function () {
+            if (!$('#form1').formValid()) {
+                return false;
+            }
+
+            var model = me.model();
+
+            if (me.editModel())
+            {
+                model.ImageUrl = $("#ImageUrl").val();
+                model.Pid = $("#Pid").val();
+                $ace.post("/Wiki/Pro_Sort/Update", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.dataTable.reload();
+                    setTimeout(function () { window.location.reload(); }, 1000);
+                }
+               );
+            }
+            else
+            {
+                model.Pid = $("#Pid").val();
+                model.ImageUrl = $("#ImageUrl").val();
+                $ace.post("/Wiki/Pro_Sort/Add", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.loadData();
+                    setTimeout(function () { window.location.reload(); }, 1000);
+                 }
+             );
+            }
+        }
+    }
+</script>

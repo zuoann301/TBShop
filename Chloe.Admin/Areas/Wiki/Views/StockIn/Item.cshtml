@@ -1,0 +1,113 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@Html.Partial("Item_js")
+<div style="width:100%;">
+    <div class="topPanel">
+        <div class="toolbar">
+            <a class="a-btn-refresh" onclick="$ace.reload()"></a>
+            <button class="a-btn-edit" data-bind="click:edit,disable:!dataTable.selectedModel()">修改</button>
+            <button class="a-btn-add" data-bind="click:add">添加</button>
+            <button class="a-btn-delete" data-bind="click:del,disable:!dataTable.selectedModel()">删除</button>
+        </div>
+        <div class="search">
+            <table class="form-table" style="width:400px;">
+                <tr>
+
+                    <td>
+                        <input type="text" class="a-control" placeholder="请输入要查询关键字" style="width: 200px;" data-bind="value:searchModel().keyword">
+                    </td>
+                    <td>
+                        <button type="button" class="a-btn-search" data-bind="click:search"></button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div>
+        <table class="table table-hover" data-bind="with:dataTable">
+            <thead>
+                <tr>
+                    <th style="width:30px;"></th>
+                    <th style="width:200px;">Id</th>
+                    <th>产品编码</th>
+                    <th>产品名称</th>
+                    <th>规格</th>
+                    <th>数量</th>
+
+                    <th>价格</th>
+                    <th>小计</th>
+                    <th>备注</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach:models">
+                <tr data-bind="click:$parent.selectRow">
+                    <td data-bind="text:$parent.getOrdinal($index())"></td>
+                    <td data-bind="text:Id"></td>
+                    <td data-bind="text:ProductCode"></td>
+                    <td data-bind="text:ProductName"></td>
+                    <td data-bind="text:ProSize">
+                    <td data-bind="text:Quantity"></td>
+                    <td data-bind="text:Price"></td>
+                    <td data-bind="text:SubTotal"></td>
+                    <td data-bind="text:Remark"></td>
+                </tr>
+            </tbody>
+            @Html.Partial("_tfoot")
+        </table>
+    </div>
+</div>
+
+<dialogbox data-bind="with:dialog">
+    <form id="form1">
+        <table class="form-table">
+            <tr>
+                <td class="form-title">入库单号</td>
+                <td class="form-value">
+                    <input name="StockCode" type="text" class="a-control required" placeholder="请输入入库单号" data-bind="value:model().StockCode" />
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title">产品编码</td>
+                <td class="form-value">
+                    <input name="ProductCode" type="text" class="a-control required" placeholder="请输入合计" data-bind="value:model().ProductCode" />
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title">产品名称</td>
+                <td class="form-value">
+                    <input name="ProductName" id="ProductName" type="text" class="a-control required" data-bind="value:model().ProductName"/>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="form-title">规格</td>
+                <td class="form-value">
+                    <input name="ProSize" id="ProSize" type="text" class="a-control required" data-bind="value:model().ProSize" />
+                </td>
+            </tr>
+
+            <tr>
+                <td class="form-title">数量</td>
+                <td class="form-value">
+                    <input name="Quantity" id="Quantity" type="text" class="a-control required" data-bind="value:model().Quantity" />
+                </td>
+            </tr>
+
+            <tr>
+                <td class="form-title">价格</td>
+                <td class="form-value">
+                    <input name="Price" id="Price" type="text"   class="a-control required" data-bind="value:model().Price" />
+                </td>
+            </tr>
+
+            <tr>
+                <td class="form-title">备注</td>
+                <td class="form-value">
+                    <input name="Remark" id="Remark" type="text"  class="a-control required" data-bind="value:model().Remark" />
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</dialogbox>

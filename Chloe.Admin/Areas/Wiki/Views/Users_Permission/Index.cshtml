@@ -1,0 +1,129 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<script src="~/Content/Sortable/Sortable.js"></script>
+<script src="~/Content/js/tree-datatable.js"></script>
+@this.Partial("Index_js")
+
+<div style="max-width:1200px;">
+    <div class="topPanel">
+        <div class="toolbar">
+            <a class="a-btn-refresh" onclick="$ace.reload()"></a>
+            <button class="a-btn-edit" data-bind="click:edit,disable:!dataTable.selectedModel()">修改</button>
+            <button class="a-btn-add" data-bind="click:add">添加</button>
+            <button class="a-btn-delete" data-bind="click:del,disable:!dataTable.selectedModel()">删除</button>
+            <button class="a-btn-primary" data-bind="click:saveOrder,disable:!orderChanged()">保存排序</button>
+        </div>
+        <div class="search">
+            <table class="form-table" style="width:400px;">
+                <tr>
+                    <td>
+                        <input id="tt" type="text" class="a-control" placeholder="请输入要查询关键字" style="width: 200px;" data-bind="value:searchModel().keyword">
+                    </td>
+                    <td>
+                        <button type="button" class="a-btn-search" data-bind="click:search"></button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div>
+        <table class="table table-hover" data-bind="with:dataTable">
+            <thead>
+                <tr>
+                    <th style="width:50px;"></th>
+                    <th>名称 <button onclick="holdAll(this,'main_body')" class="a-btn-link" style="font-weight:100;font-size:12px;">折叠</button></th>
+                    <th>类型</th>
+                    <th>权限码</th>
+                    <th>连接</th>
+                    <th>图标</th>
+                    <th>排序</th>
+                    <th>介绍</th>
+                </tr>
+            </thead>
+            <tbody id="main_body" data-bind="foreach:models">
+                <tr data-bind="click:$parent.selectRow, attr: { id: $data.Id, 'parent-id': $data.ParentId, level:Level}">
+                    <td><i class="fa fa-arrows-alt drag-ele" style="cursor:move; color:#ccc;"></i> <span data-bind="text:$parent.getOrdinal($index())"></span></td>
+                    <td>
+                        <span data-bind="html:appendRetract($data.Level())"></span>
+                        <!-- ko if: $data.HasChildren -->
+                        <div onclick="expandChildren(this);" style="left:0px;cursor:pointer;" class="glyphicon glyphicon-triangle-bottom" data-bind=""></div>
+                        <!-- /ko -->
+                        <!-- ko if: !$data.HasChildren() -->
+                        <div style="width:12px;height:12px;display:inline-block;"></div>
+                        <!-- /ko -->
+                        <span data-bind="text:$data.Data.Name">></span>
+                    </td>
+                    <td data-bind="text:getTypeName($data.Data.Type())"></td>
+                    <td data-bind="text:$data.Data.Code"></td>
+                    <td data-bind="text:$data.Data.Url"></td>
+                    <td><i style="color:#337ab7;" data-bind="class:$data.Data.Icon"></i> <span data-bind="text:$data.Data.Icon"></span></td>
+                    <td data-bind="text:$data.Data.SortCode"></td>
+                    <td data-bind="text:$data.Data.Description"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<dialogbox data-bind="with:dialog">
+    <form id="form1">
+        <table class="form-table">
+            <tr>
+                <td class="form-title">名称</td>
+                <td class="form-value">
+                    <input name="Name" type="text" class="a-control required" placeholder="请输入名称" data-bind="value:model().Name" />
+                </td>
+                <td class="form-title">上级</td>
+                <td class="form-value">
+                    <select name="ParentId" class="a-control" data-bind="options:$root.menuGroups,optionsText:'Name',optionsValue:'Id', optionsCaption:'无',value:model().ParentId"></select>
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title">权限码</td>
+                <td class="form-value">
+                    <input name="Code" type="text" class="a-control" data-bind="value:model().Code" />
+                </td>
+                <td class="form-title">连接</td>
+                <td class="form-value">
+                    <input name="Url" type="text" class="a-control" data-bind="value:model().Url" />
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title">图标</td>
+                <td class="form-value">
+                    <div class="input-group">
+                        <input name="Icon" type="text" class="a-control" data-bind="value:model().Icon">
+                        <span class="input-group-btn">
+                            <button type="button" class="a-btn-primary" style="margin-left:-1px;"><i class="fa fa-ellipsis-h"></i></button>
+                        </span>
+                    </div>
+                </td>
+                <td class="form-title">排序</td>
+                <td class="form-value">
+                    <input name="SortCode" type="text" class="a-control" placeholder="请输入排列序号" data-bind="value:model().SortCode" />
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title">类型</td>
+                <td class="form-value" colspan="3" style="">
+                    <input id="PermissionMenu" class="a-radio" name="Type" type="radio" value="1" data-bind="checked:model().Type"><label for="PermissionMenu" title="授权可见的菜单">权限菜单</label>
+
+                    <input id="PublicMenu" class="a-radio" name="Type" type="radio" value="2" data-bind="checked:model().Type"><label for="PublicMenu" title="登录即可见的菜单">公共菜单</label>
+
+                    <input id="PermissionItem" class="a-radio" name="Type" type="radio" value="3" data-bind="checked:model().Type"><label for="PermissionItem" title="受权限保护的操作">权限项</label>
+
+                    <input id="MenuGroup" class="a-radio" name="Type" type="radio" value="4" data-bind="checked:model().Type"><label for="MenuGroup" title="节点分组">节点组</label>
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title" valign="top" style="padding-top: 5px;">
+                    介绍
+                </td>
+                <td class="form-value" colspan="3">
+                    <textarea name="Description" class="a-control" style="" data-bind="value:model().Description"></textarea>
+                </td>
+            </tr>
+        </table>
+    </form>
+</dialogbox>

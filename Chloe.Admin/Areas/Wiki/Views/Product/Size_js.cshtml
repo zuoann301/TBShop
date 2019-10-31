@@ -1,0 +1,90 @@
+﻿<script>
+
+     
+    
+    var _file_domain = "@ViewBag.FileDomain";
+    var _vm;
+    $(function () {
+        var vm = new PageViewModel();
+        _vm = vm;
+        vmExtend.call(vm);
+        ko.applyBindings(vm);
+        vm.init();
+    });
+
+    function PageViewModel() {
+        var me = this;
+        ViewModel.call(me);
+        vmExtend.call(me);
+
+        
+
+        me.url = "/Wiki/Product/GetSizeList?ProductCode=@ViewBag.ProductCode";
+        me.deleteUrl = "/Wiki/Product/DeleteSize";
+        me.dataTable = new DataTable(me);
+        me.dialog = new FormDialog(me);
+
+        
+        //批量上传
+        me.batchAdd = function () {
+            window.location.href = "/Wiki/Product/BatchAdd2";
+        }
+
+    }
+    function vmExtend() {
+        var me = this;
+    }
+
+    
+    function FormDialog(vm) {
+        var me = this;
+        Dialog.call(me);
+
+        me.onOpen = function ()
+        {   
+            var model = me.editModel();
+            if (model)
+            {
+                var bindModel = $ko.toJS(model);
+                me.model(bindModel);
+                 
+                
+
+            }
+            else
+            {                           
+                me.model({ ProductCode: "@ViewBag.ProductCode" });
+                
+            }
+        }
+
+        me.onSave = function () {
+            if (!$('#form1').formValid()) {
+                return false;
+            }
+
+            var model = me.model();
+            
+            if (me.editModel())
+            {
+                
+                $ace.post("/Wiki/Product/UpdateSize", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.dataTable.reload();
+                }
+               );
+            }
+            else
+            { 
+                
+                $ace.post("/Wiki/Product/AddSize", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.loadData();
+                 }
+             );
+            }
+        }
+    }
+</script>

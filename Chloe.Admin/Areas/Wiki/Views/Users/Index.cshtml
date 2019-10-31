@@ -1,0 +1,144 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+@this.Partial("Index_js")
+<style type="text/css">
+
+.img_thum{width:100px;margin-right:5px;}
+.img_red{border:1px solid #ff6a00;}
+</style>
+<div style="max-width:1000px;">
+    <div class="topPanel">
+        <div class="toolbar">
+            <a class="a-btn-refresh" onclick="$ace.reload()"></a>
+            <button class="a-btn-edit" data-bind="click:edit,disable:!dataTable.selectedModel()">修改</button>
+            <button class="a-btn-add" data-bind="click:add">添加</button>
+            <button class="a-btn-delete" data-bind="click:del,disable:!dataTable.selectedModel()">删除</button>
+            <button class="a-btn-edit" data-bind="click:openRevisePasswordDialog,disable:!dataTable.selectedModel()">重置密码</button>
+        </div>
+        <div class="search">
+            <table class="form-table" style="width:400px;">
+                <tr>
+                    <td>
+                        <input type="text" class="a-control" placeholder="请输入要查询关键字" style="width: 200px;" data-bind="value:searchModel().keyword">
+                    </td>
+                    <td>
+                        <button type="button" class="a-btn-search" data-bind="click:search"></button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <div>
+        <table class="table table-hover" data-bind="with:dataTable">
+            <thead>
+                <tr>
+                    <th style="width:20px;"></th>
+                    <th>编号</th>
+                    <th>手机号码</th>
+                    <th>姓名</th>
+                    <th>邮箱</th>
+                    <th>角色</th>
+                    <th>店铺</th>
+                    <th>注册时间</th>
+                    <th>登陆时间</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach:models">
+                <tr data-bind="click:$parent.selectRow">
+                    <td data-bind="text:$parent.getOrdinal($index())"></td>
+                    <td data-bind="text:Id"></td>
+                    <td data-bind="text:Mobile"></td>
+                    <td data-bind="text:UserName"></td>
+                    <td data-bind="text:Email"></td>
+                    <td data-bind="text:$ace.findName(_roles,RoleID(),'ID','RoleName')"></td>
+                    <td data-bind="text:$ace.findName(_shops,ShopID(),'ShopID','ShopName')"></td>
+                    <td data-bind="dateString:CreateDate"></td>
+                    <td data-bind="dateString:LastLoginDate"></td>
+                </tr>
+            </tbody>
+            @this.Partial("_tfoot")
+        </table>
+    </div>
+</div>
+<dialogbox data-bind="with:dialog">
+    <form id="form1">
+        <table class="form-table">
+            <tr>
+                <td class="form-title">手机号码</td>
+                <td class="form-value">
+                    <input name="Mobile" id="Mobile" type="text" class="a-control required" placeholder="" data-bind="value:model().Mobile" />
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title">密码</td>
+                <td class="form-value">
+                    <input name="UserPass" id="UserPass" type="text" class="a-control required" placeholder="" data-bind="value:model().UserPass" />
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title">姓名</td>
+                <td class="form-value">
+                    <input name="UserName" id="UserName" type="text" class="a-control required" placeholder="" data-bind="value:model().UserName" />
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title">邮箱</td>
+                <td class="form-value">
+                    <input name="Email" id="Email" type="text" class="a-control required" data-bind="value:model().Email" />
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title">角色</td>
+                <td class="form-value">
+                    <input name="RoleID" id="RoleID" type="text" class="a-control required" placeholder="" data-bind="value:model().RoleID" />
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title">店铺</td>
+                <td class="form-value">
+                    <select class="a-control" name="ShopID" id="ShopID" data-bind="options:_shops,optionsText:'ShopName',optionsValue:'ShopID',optionsCaption:'--选择店铺--',value:model().ShopID">
+                        <option value="0">--选择分类--</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="form-title">隶属</td>
+                <td class="form-value">
+                    <input name="FromID" id="FromID" type="text" class="a-control required" placeholder="" data-bind="value:model().FromID" />
+                </td>
+            </tr>
+
+        </table>
+    </form>
+</dialogbox>
+
+
+<dialogbox data-bind="with:revisePasswordDialog" style="width:500px">
+    <form id="RevisePasswordForm">
+        <table class="form">
+            <tr>
+                <td class="form-title">用户名</td>
+                <td class="form-value">
+                    <input name="Mobile" disabled type="text" class="a-control" data-bind="value:model().Mobile" />
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title">姓名</td>
+                <td class="form-value">
+                    <input name="UserName" disabled type="text" class="a-control" data-bind="value:model().UserName" />
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title">密码</td>
+                <td class="form-value">
+                    <input name="UserPass" type="password" class="a-control" placeholder="请输入新密码" data-bind="value:model().UserPass" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</dialogbox>

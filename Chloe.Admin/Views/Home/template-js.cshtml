@@ -1,0 +1,82 @@
+﻿<script type="text/javascript">
+
+    var _vm;
+    $(function () {
+        var vm = new ViewModel();
+        _vm = vm;
+        ko.applyBindings(vm);
+        vm.Init();
+    });
+
+    function ViewModel() {
+        var me = this;
+        ViewModelBase.call(me);
+        vmExtend.call(me);
+
+        me.DeleteUrl = "@this.Href("~/SystemManage/xx/Delete")";
+        me.Dialog = new Dialog(me);
+    }
+    function vmExtend() {
+        var me = this;
+
+        me.Init = function () {
+            me.LoadModels();
+        }
+
+        me.LoadModels = function (page) {
+            return;
+            me.DataTable.SelectedModel(null);
+            var params = me.SearchModel();
+            params.page = page || 1;
+            $ace.get("@this.Href("~/SystemManage/xx/GetModels")", params, function (result) {
+                me.DataTable.SetPagedData(result.Data);
+            }
+          );
+        }
+    }
+
+    function Dialog() {
+        var me = this;
+        DialogBase.call(me);
+        me.Title(null);
+
+        me.OnOpen = function () {
+            var model = me.EditModel();
+            me.Model({});
+            if (model) {
+                var bindModel = $ko.toJS(model);
+                me.Model(bindModel);
+            }
+            else {
+
+            }
+        }
+        me.OnSave = function () {
+            if (!$('#form1').formValid()) {
+                return false;
+            }
+
+            var model = me.Model();
+
+            if (me.EditModel()) {
+                $ace.post("@this.Href("~/SystemManage/xx/Update")", model, function (result) {
+                    $ace.alert(result.Msg, function () {
+                        me.Close();
+                        vm.LoadModels();
+                    });
+                }
+               );
+            }
+            else {
+                $ace.post("@this.Href("~/SystemManage/xx/Add")", model, function (result) {
+                    $ace.alert(result.Msg, function () {
+                        me.Close();
+                        vm.LoadModels();
+                    });
+                }
+             );
+            }
+        }
+    }
+
+</script>

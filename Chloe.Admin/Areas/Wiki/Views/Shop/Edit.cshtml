@@ -1,0 +1,194 @@
+﻿@{
+    ViewData["Title"] = "Edit";
+    List<Ace.Entity.Wiki.Sort> ListSort = ViewBag.ListSort as List<Ace.Entity.Wiki.Sort>;
+    Ace.Entity.Wiki.Shop ShopModle = ViewBag.ShopModle as Ace.Entity.Wiki.Shop;
+    List<Ace.Entity.Wiki.District> ListDistrict = ViewBag.ListDistrict as List<Ace.Entity.Wiki.District>;
+    List<Ace.Entity.Wiki.District> ListDistrict2 = ViewBag.ListDistrict2 as List<Ace.Entity.Wiki.District>;
+    List<Ace.Entity.Wiki.District> ListDistrict3 = ViewBag.ListDistrict3 as List<Ace.Entity.Wiki.District>;
+
+}
+
+<div class="container">
+    <div class="row">
+        <form class="form-horizontal col-md-12" method="post" action="/Wiki/Shop/Edit"> 
+            <fieldset>
+                <div id="legend" class="">
+                    <legend class="">店铺编辑</legend>
+                </div>
+
+                <input type="hidden" class="form-control" value="@ShopModle.ID" id="ID" name="ID">
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">店铺标题</span>
+                        <input type="text" class="form-control" value="@ShopModle.ShopName" id="ShopName" name="ShopName" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon2">品牌名称</span>
+                        <select class="form-control" id="BrandID" name="BrandID">
+                            @foreach (var item in ListSort)
+                            {
+                                if (ShopModle.BrandID == item.Id)
+                                {
+                                    <option selected value="@item.Id">@item.Title</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Id">@item.Title</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">店铺电话</span>
+                        <input type="text" class="form-control" value="@ShopModle.ShopTel" id="ShopTel" name="ShopTel" aria-describedby="basic-addon3">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">所在区域</span>
+                        <select type="text" class="form-control" id="ProvinceID" name="ProvinceID" style="width:30%">
+                            @foreach (var item in ListDistrict)
+                            {
+                                if (ShopModle.ProvinceID == item.ID)
+                                {
+                                <option value="@item.ID" selected>@item.Name</option>
+                                }
+                                else
+                                { 
+                                <option value="@item.ID">@item.Name</option>
+                                }
+                            }
+                        </select>
+                        <select type="text" class="form-control" id="CityID" name="CityID" style="width:30%">
+                            @foreach (var item in ListDistrict2)
+                            {
+                                if (ShopModle.CityID == item.ID)
+                                {
+                                    <option value="@item.ID" selected>@item.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.ID">@item.Name</option>
+                                }
+                            }
+                        </select>
+                        <select type="text" class="form-control" id="PartID" name="PartID" style="width:40%">
+                            @foreach (var item in ListDistrict3)
+                            {
+                                if (ShopModle.PartID == item.ID)
+                                {
+                                    <option value="@item.ID" selected>@item.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.ID">@item.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">店铺地址</span>
+                        <input type="text" class="form-control" value="@ShopModle.ShopAddress" id="ShopAddress" name="ShopAddress" aria-describedby="basic-addon3">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">经度</span>
+                        <input type="text" class="form-control" value="@ShopModle.GPS_X" id="GPS_X" name="GPS_X" aria-describedby="basic-addon3">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">纬度</span>
+                        <input type="text" class="form-control" value="@ShopModle.GPS_Y" id="GPS_Y" name="GPS_Y" aria-describedby="basic-addon3">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">店铺域名</span>
+                        <input type="text" class="form-control" value="@ShopModle.ShopUrl" id="ShopUrl" name="ShopUrl" aria-describedby="basic-addon3">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">简介</span>
+                        <input type="text" class="form-control" value="@ShopModle.Summary" id="Summary" name="Summary" aria-describedby="basic-addon3">
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="form-group">
+                    <input type="submit" value="提交" class="btn btn-primary" />
+                </div>
+
+            </fieldset>
+        </form>
+
+    </div>
+
+
+
+</div>
+ 
+
+<script type="text/javascript">
+     $(function () {
+
+         $("#ProvinceID").change(function () {
+             var s = $("#ProvinceID").val();
+             GetChildDistrict(s,"CityID","@ShopModle.CityID");
+         });
+
+         $("#CityID").change(function () {
+             var s = $("#CityID").val();
+             GetChildDistrict(s, "PartID","@ShopModle.PartID");
+         });
+
+     })
+
+     function GetChildDistrict(pid,obj,defVal)
+     {
+         $ace.get("/Wiki/District/GetList", { Pid: pid }, function (result) {
+             bindPosts(obj, result.Data, true, defVal);
+         });
+     }
+
+     function bindPosts(obj,data, rebind, selectedValues) {
+         var $ele = $('#' + obj);
+         if (rebind) {
+             $ele.empty();
+         }
+         if (data) {
+             var s = "";
+             jQuery(data).each(function (i, item) {
+                 s += "<option value='" + item["ID"] + "'>" + item["Name"] + "</option>";
+             });
+             $ele.html(s);
+         }
+
+         if (selectedValues) {
+             $ele.val(selectedValues);
+         }
+     }
+
+</script>

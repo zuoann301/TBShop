@@ -1,0 +1,103 @@
+﻿<script>
+
+    var _vm;
+    $(function () {
+        var vm = new PageViewModel();
+        _vm = vm;
+        vmExtend.call(vm);
+        ko.applyBindings(vm);
+        vm.init();
+    });
+
+    function PageViewModel() {
+        var me = this;
+        ViewModel.call(me);
+        vmExtend.call(me);
+
+        me.url = "/Adm/Role/Models";
+        me.deleteUrl = "/Adm/Role/Delete";
+        me.dataTable = new DataTable(me);
+        me.dialog = new FormDialog(me);
+        me.permissionDialog = new PermissionDialog(me);
+
+        me.assignPermission = function () {
+            me.permissionDialog.open(me.dataTable.selectedModel(), "分配权限 [" + me.dataTable.selectedModel().Name() + "]" );
+        }
+     }
+    function vmExtend() {
+        var me = this;
+    }
+
+    function FormDialog(vm) {
+        var me = this;
+        Dialog.call(me);
+
+        me.onOpen = function () {
+            var model = me.editModel();
+            if (model) {
+                var bindModel = $ko.toJS(model);
+                me.model(bindModel);
+            }
+            else {
+                me.model({ IsEnabled: true });
+            }
+        }
+
+        me.onSave = function () {
+            if (!$('#form1').formValid()) {
+                return false;
+            }
+
+            var model = me.model();
+
+            if (me.editModel()) {
+                $ace.post("/Adm/Role/Update", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.dataTable.reload();
+                }
+               );
+            }
+            else {
+                $ace.post("/Adm/Role/Add", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.loadData();
+                 }
+             );
+            }
+        }
+    }
+
+    function PermissionDialog(vm) {
+        var me = this;
+        Dialog.call(me);
+
+        me.onOpen = function () {
+            var model = me.editModel();
+            var id = model.Id();
+            $("#permissionTree").html(null);
+            $("#permissionTree").treeview({
+                height: 444,
+                showcheck: true,
+                url: "/Adm/Role/GetPermissionTree",
+                param: { id: id },
+                cbiconpath: "/Content/wdtree/images/icons/"
+            });
+        }
+
+        me.onSave = function () {
+            var permissionIdArr = $("#permissionTree").getCheckedNodes();
+
+            var id = me.editModel().Id();
+            var data = { id: id };
+            data.permissions = JSON.stringify(permissionIdArr);
+            $ace.post("/Adm/Role/SetPermission", data, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                 }
+             );
+        }
+    }
+
+</script>

@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+@this.RefStyle("~/Content/wdtree/tree.css")
+@this.RefScript("~/Content/wdtree/tree.js")
+@this.Partial("Index_js")
+
+<div style="max-width:1000px;">
+    <div class="topPanel">
+        <div class="toolbar">
+            <a class="a-btn-refresh" onclick="$ace.reload()"></a>
+            <button class="a-btn-edit" data-bind="click:edit,disable:!dataTable.selectedModel()">修改</button>
+            <button class="a-btn-add" data-bind="click:add">添加</button>
+            <button class="a-btn-delete" data-bind="click:del,disable:!dataTable.selectedModel()">删除</button>
+            <button class="a-btn-primary fa fa-eye" data-bind="click:assignPermission,attr:{disabled:!dataTable.selectedModel()}">权限设置</button>
+        </div>
+        <div class="search">
+            <table class="form-table" style="width:400px;">
+                <tr>
+                    <td>
+                        <input type="text" class="a-control" placeholder="请输入要查询关键字" style="width: 200px;" data-bind="value:searchModel().keyword">
+                    </td>
+                    <td>
+                        <button type="button" class="a-btn-search" data-bind="click:search"></button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <div>
+        <table class="table table-hover" data-bind="with:dataTable">
+            <thead>
+                <tr>
+                    <th style="width:20px;"></th>
+                    <th>名称</th>
+                    <th>性质</th>
+                    <th>负责人</th>
+                    <th>负责人电话</th>
+                    <th>创建时间</th>
+                    <th>介绍</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach:models">
+                <tr data-bind="click:$parent.selectRow, attr: { id: $data.Id, 'parent-id': $data.ParentId }">
+                    <td data-bind="text:$parent.getOrdinal($index())"></td>
+                    <td>
+                        <!-- ko if: $data.HasChildren -->
+                        <div onclick="expandChildren(this);" style="left:0px;cursor:pointer;" class="glyphicon glyphicon-triangle-bottom" data-bind=""></div>
+                        <!-- /ko -->
+                        <!-- ko if: !$data.HasChildren() -->
+                        <div style="width:12px;height:12px;display:inline-block;"></div>
+                        <!-- /ko -->
+                        <span data-bind="html:appendRetract($data.Level())"></span>
+                        <span data-bind="text:$data.Data.Name">></span>
+                    </td>
+                    <td data-bind="text:$ace.findName(_orgTypes,$data.Data.OrgType())"></td>
+                    <td data-bind="text:'--'"></td>
+                    <td data-bind="text:'--'"></td>
+                    <td data-bind="dateString:$data.Data.CreationTime"></td>
+                    <td data-bind="text:$data.Data.Description"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<dialogbox data-bind="with:dialog">
+    <form id="form1">
+        <table class="form-table">
+            <tr>
+                <td class="form-title">名称</td>
+                <td class="form-value">
+                    <input name="Name" type="text" class="a-control required" placeholder="请输入名称" data-bind="value:model().Name" />
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title">组织性质</td>
+                <td class="form-value">
+                    <select name="OrgType" class="a-control" data-bind="options:_orgTypes,optionsText:'Name',optionsValue:'Id', value:model().OrgType,event:{change:onOrgTypeChange}"></select>
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title">上级</td>
+                <td class="form-value">
+                    <select id="ParentId" name="ParentId" class="a-control" data-bind="options:orgs,optionsText:'Name',optionsValue:'Id', optionsCaption:'-请选择-',value:model().ParentId"></select>
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title" valign="top" style="padding-top: 5px;">
+                    介绍
+                </td>
+                <td class="form-value">
+                    <textarea name="Description" class="a-control" style="" data-bind="value:model().Description"></textarea>
+                </td>
+            </tr>
+        </table>
+    </form>
+</dialogbox>
+
+<dialogbox data-bind="with:permissionDialog">
+    <form id="form-permission">
+        <div id="permissionTree"></div>
+    </form>
+</dialogbox>

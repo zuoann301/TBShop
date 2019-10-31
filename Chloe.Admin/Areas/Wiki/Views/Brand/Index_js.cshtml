@@ -1,0 +1,30 @@
+﻿<script>
+    var _sorts = [{ "Id": 0, "Title": "否" }, { "Id": 1,"Title":"是"}];
+    var _vm;
+    $(function () {
+        var vm = new PageViewModel();
+        _vm = vm;
+        ko.applyBindings(vm);
+        vm.init();
+    });
+
+    function PageViewModel() {
+        var me = this;
+        ViewModel.call(me);
+        vmExtend.call(me);
+
+        me.url = "/Wiki/Brand/GetModels";
+        me.deleteUrl = "/Wiki/Brand/Delete";
+
+        me.add = function () {
+            window.location.href = "/Wiki/Brand/Add";
+        }
+        me.edit = function () {
+            window.location.href = "/Wiki/Brand/Edit" + "?Id=" + me.dataTable.selectedModel().Id();
+        }
+         
+    }
+    function vmExtend() {
+        var me = this;
+    }
+</script>

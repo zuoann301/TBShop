@@ -1,0 +1,187 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<link href="~/Content/wdtree/tree.css" rel="stylesheet" />
+<script src="~/Content/wdtree/tree.js"></script>
+<link href="~/Content/select2/select2.min.css" rel="stylesheet" />
+<script src="~/Content/select2/select2.min.js"></script>
+@this.Partial("Index_js")
+
+<div style="max-width:1000px;">
+    <div class="topPanel">
+        <div class="toolbar">
+            <a class="a-btn-refresh" onclick="$ace.reload()"></a>
+            <button class="a-btn-edit" data-bind="click:edit,disable:!dataTable.selectedModel()">修改</button>
+            <button class="a-btn-add" data-bind="click:add">添加</button>
+            <button class="a-btn-edit" data-bind="click:openRevisePasswordDialog,disable:!dataTable.selectedModel()">重置密码</button>
+            <button class="a-btn-primary fa fa-eye" data-bind="click:assignPermission,disable:!dataTable.selectedModel()">权限设置</button>
+        </div>
+        <div class="search">
+            <table class="form-table" style="width:400px;">
+                <tr>
+                    <td>
+                        <input id="txt_keyword" type="text" class="a-control" placeholder="请输入要查询关键字" style="width: 200px;" data-bind="value:searchModel().keyword">
+                    </td>
+                    <td>
+                        <button type="button" class="a-btn-search" data-bind="click:search"></button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <div>
+        <table class="table table-hover" data-bind="with:dataTable">
+            <thead>
+                <tr>
+                    <th style="width:20px;"></th>
+                    <th>用户名</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>手机</th>
+                    <th>邮箱</th>
+                    <th>角色</th>
+                    <th>部门</th>
+                    <th>岗位</th>
+                    <th>创建时间</th>
+                    <th>状态</th>
+                    <th>备注</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach:models">
+                <tr data-bind="click:$parent.selectRow">
+                    <td data-bind="text:$parent.getOrdinal($index())"></td>
+                    <td data-bind="text:AccountName"></td>
+                    <td data-bind="text:Name"></td>
+                    <td data-bind="text:(Gender()==1&&'男')||(Gender()==2&&'女')||''"></td>
+                    <td data-bind="text:MobilePhone"></td>
+                    <td data-bind="text:Email"></td>
+                    <td data-bind="text:appendNames(Roles)"></td>
+                    <td data-bind="html:appendOrgNames($data)"></td>
+                    <td data-bind="text:appendNames(Posts)"></td>
+                    <td data-bind="dateString:CreationTime"></td>
+                    <td><span data-bind="text:getStateName(State()),attr:{class:getStateClass(State())}"></span></td>
+                    <td data-bind="text:Description"></td>
+                    <td>
+                        <button class="a-btn-link" data-bind="click:$root.changeEnable.bind($data), disable:State()==3, text:State()==2?'启用':'禁用'">禁用</button>
+                        <button class="a-btn-link" data-bind="click:$root.changeState.bind($data,3), disable:State()==3">注销</button>
+                    </td>
+                </tr>
+            </tbody>
+            @this.Partial("_tfoot")
+        </table>
+    </div>
+</div>
+<dialogbox data-bind="with:dialog">
+    <form id="form1">
+        <table class="form-table">
+            <tr>
+                <td class="form-title">用户名</td>
+                <td class="form-value">
+                    <input name="AccountName" type="text" class="a-control" placeholder="设置后将不可更改" data-bind="value:model().AccountName,disable:(editModel()&&editModel().AccountName())" />
+                </td>
+                <td class="form-title">密码</td>
+                <td class="form-value">
+                    <input name="Password" type="password" class="a-control" placeholder="请输入密码" data-bind="value:editModel()?'******':model().Password,disable:editModel()" />
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title">手机</td>
+                <td class="form-value">
+                    <input name="MobilePhone" type="text" class="a-control" data-bind="value:model().MobilePhone" />
+                </td>
+                <td class="form-title">邮箱</td>
+                <td class="form-value">
+                    <input name="Email" type="text" class="a-control" data-bind="value:model().Email" />
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title">姓名</td>
+                <td class="form-value">
+                    <input name="Name" type="text" class="a-control" placeholder="请输入姓名" data-bind="value:model().Name" />
+                </td>
+                <td class="form-title">性别</td>
+                <td class="form-value">
+                    <select name="Gender" class="a-control" data-bind="value:model().Gender">
+                        <option value="">-请选择-</option>
+                        <option value="1">男</option>
+                        <option value="2">女</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="form-title">微信</td>
+                <td class="form-value">
+                    <input name="WeChat" type="text" class="a-control" data-bind="value:model().WeChat" />
+                </td>
+                <td class="form-title">生日</td>
+                <td class="form-value">
+                    <input name="Birthday" type="text" class="a-control Wdate" data-bind="dateString:model().Birthday" />
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title">组织</td>
+                <td class="form-value" colspan="3">
+                    <select id="Orgs" name="Orgs" multiple="multiple" data-bind=""></select>
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title">岗位</td>
+                <td class="form-value" colspan="3">
+                    <select id="Posts" name="Posts" multiple="multiple" data-bind=""></select>
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title">角色</td>
+                <td class="form-value" colspan="3">
+                    <select id="Roles" name="Roles" multiple="multiple" data-bind=""></select>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="form-title" valign="top" style="padding-top: 5px;">
+                    备注
+                </td>
+                <td class="form-value" colspan="3">
+                    <textarea name="Description" class="a-control" data-bind="value:model().Description"></textarea>
+                </td>
+            </tr>
+        </table>
+    </form>
+</dialogbox>
+
+<dialogbox data-bind="with:permissionDialog">
+    <form id="form-permission">
+        <div id="permissionTree"></div>
+    </form>
+</dialogbox>
+
+<dialogbox data-bind="with:revisePasswordDialog" style="width:500px">
+    <form id="RevisePasswordForm">
+        <table class="form">
+            <tr>
+                <td class="form-title">用户名</td>
+                <td class="form-value">
+                    <input name="AccountName" disabled type="text" class="a-control" data-bind="value:model().AccountName" />
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title">姓名</td>
+                <td class="form-value">
+                    <input name="Name" disabled type="text" class="a-control" data-bind="value:model().Name" />
+                </td>
+            </tr>
+            <tr>
+                <td class="form-title">密码</td>
+                <td class="form-value">
+                    <input name="Password" type="password" class="a-control" placeholder="请输入新密码" data-bind="value:model().Password" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</dialogbox>

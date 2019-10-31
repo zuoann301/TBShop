@@ -1,0 +1,83 @@
+﻿<script>
+     
+    var _vm;
+    $(function () {
+        var vm = new PageViewModel();
+        _vm = vm;
+        ko.applyBindings(vm);
+        vm.init();
+
+
+    });
+
+
+
+    function PageViewModel() {
+        var me = this;
+        ViewModel.call(me);
+        vmExtend.call(me);
+
+        me.url = "/Wiki/StockOut/GetItemModels?StockCode=@ViewBag.StockCode";
+        me.deleteUrl = "/Wiki/StockOut/DeleteItem";
+        me.dialog = new FormDialog(me);
+
+         
+
+     }
+    function vmExtend() {
+        var me = this;
+    }
+
+    function FormDialog(vm) {
+        var me = this;
+        Dialog.call(me);
+
+        me.posts = _oba([]);
+
+        me.onOpen = function () {
+            var model = me.editModel();
+            if (model) {
+                var dataModel = model.Data;
+                var bindModel = $ko.toJS(model);
+                me.model(bindModel);
+
+
+            }
+            else {
+                me.model({});
+
+            }
+        }
+
+        me.onSave = function () {
+            if (!$('#form1').formValid()) {
+                return false;
+            }
+
+            var model = me.model();
+
+
+
+
+            if (me.editModel()) {
+                $ace.post("/Wiki/StockOut/UpdateItem", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.dataTable.reload();
+                }
+                );
+            }
+            else {
+                $ace.post("/Wiki/StockOut/AddItem", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.loadData();
+                }
+                );
+            }
+        }
+    }
+
+
+
+</script>

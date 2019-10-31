@@ -1,0 +1,172 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+@this.Partial("template-js")
+<script type="text/javascript">
+
+</script>
+<div class="topPanel">
+    <div class="toolbar">
+        <div class="btn-group">
+            <a class="btn btn-primary" onclick="$ace.reload()"><span class="glyphicon glyphicon-refresh"></span></a>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-primary" data-bind="click:Edit,attr:{disabled:!DataTable.SelectedModel()}"><i class="fa fa-pencil-square-o"></i>修改</button>
+            <button class="btn btn-primary" data-bind="click:Delete,attr:{disabled:!DataTable.SelectedModel()}"><i class="fa fa-trash-o"></i>删除</button>
+            <button class="btn btn-primary" data-bind="click:Add"><i class="fa fa-plus"></i>添加</button>
+        </div>
+    </div>
+    <div class="search">
+        <table>
+            <tr>
+                <td>
+                    <div class="input-group">
+                        <input id="txt_keyword" type="text" class="form-control" placeholder="关键字" style="width: 200px;" data-bind="value:SearchModel().keyword">
+                        <span class="input-group-btn">
+                            <button id="btn_search" type="button" class="btn  btn-primary" data-bind="click:Search"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table table-hover" data-bind="with:DataTable">
+        <thead>
+            <tr>
+                <th style="width:20px;"></th>
+                <th>账户</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>手机</th>
+                <th>部门</th>
+                <th>岗位</th>
+                <th>创建时间</th>
+                <th>状态</th>
+                <th>备注</th>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach:Models">
+            <tr onclick="$ace.selectRow(this);" data-bind="click:$parent.SelectRow">
+                <td data-bind="text:$parent.GetOrdinal($index())"></td>
+                <td data-bind="text:UserName"></td>
+                <td data-bind="text:RealName"></td>
+                <td data-bind="text:Gender"></td>
+                <td data-bind="text:MobilePhone"></td>
+                <td data-bind="text:$ace.getOptionTextByValue(departmentList,DepartmentId(),'Id','Name')"></td>
+                <td data-bind="text:$ace.getOptionTextByValue(dutyList,DutyId(),'Id','Name')"></td>
+                <td data-bind="dateString:CreationTime"></td>
+                <td data-bind="text:IsEnabled()?'启用':'禁用'"></td>
+                <td data-bind="text:Description"></td>
+            </tr>
+        </tbody>
+        @this.Partial("_tfoot")
+    </table>
+</div>
+
+<dialogbox data-bind="with:Dialog">
+    <form id="form1">
+        <div style="margin-top: 10px; margin-left: 10px; margin-right: 10px;">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#">基本信息</a></li>
+            </ul>
+            <div style="padding-top: 20px; margin-right: 30px;">
+                <table class="form">
+                    <tr>
+                        <th class="formTitle">账户</th>
+                        <td class="formValue">
+                            <input id="UserName" name="UserName" type="text" class="form-control required" placeholder="请输入账户" data-bind="value:Model().UserName" />
+                        </td>
+                        <th class="formTitle">密码</th>
+                        <td class="formValue">
+                            <input id="Password" name="Password" type="password" class="form-control required" placeholder="请输入密码" data-bind="value:EditModel()?'******':Model().Password,attr:{disabled:EditModel()}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle">部门</th>
+                        <td class="formValue">
+                            <select id="DepartmentId" name="DepartmentId" class="form-control required" data-bind="value:Model().DepartmentId,event:{change:function(){ OnDepartmentChange();}}">
+                                <option value="">==请选择==</option>
+                                @foreach (var item in this.ViewBag.DepartmentList)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                        </td>
+                        <th class="formTitle">岗位</th>
+                        <td class="formValue">
+                            <select id="DutyId" name="DutyId" class="form-control" data-bind="options:DepartmentDutyList,optionsText:'Name',optionsValue:'Id', optionsCaption:'==请选择=='"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle">角色</th>
+                        <td class="formValue">
+                            <select id="RoleId" name="RoleId" class="form-control" data-bind="value:Model().RoleId">
+                                <option value="">==请选择==</option>
+                            </select>
+                        </td>
+                        <th class="formTitle">角色aa</th>
+                        <td class="formValue"></td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle">姓名</th>
+                        <td class="formValue">
+                            <input id="RealName" name="RealName" type="text" class="form-control required" placeholder="请输入姓名" data-bind="value:Model().RealName" />
+                        </td>
+                        <th class="formTitle">性别</th>
+                        <td class="formValue">
+                            <select id="Gender" name="Gender" class="form-control required" data-bind="value:Model().Gender">
+                                <option value="1">男</option>
+                                <option value="2">女</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle">手机</th>
+                        <td class="formValue">
+                            <input id="MobilePhone" name="MobilePhone" type="text" class="form-control" data-bind="value:Model().MobilePhone" />
+                        </td>
+                        <th class="formTitle">生日</th>
+                        <td class="formValue">
+                            <input id="Birthday" name="Birthday" type="text" class="form-control input-wdatepicker Wdate" data-bind="dateString:Model().Birthday" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle">微信</th>
+                        <td class="formValue">
+                            <input id="WeChat" name="WeChat" type="text" class="form-control" data-bind="value:Model().WeChat" />
+                        </td>
+                        <th class="formTitle">邮箱</th>
+                        <td class="formValue">
+                            <input id="Email" name="Email" type="text" class="form-control" data-bind="value:Model().Email" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle">类型</th>
+                        <td class="formValue">
+                            <select id="IsAdministrator" name="IsAdministrator" class="form-control" data-bind="value:Model().IsAdministrator">
+                                <option value="false">普通用户</option>
+                                <option value="true">系统管理员</option>
+                            </select>
+                        </td>
+                        <th class="formTitle">是否启用</th>
+                        <td class="formValue">
+                            <label><input type="radio" name="IsEnabled" value="true" data-bind="typedChecked:Model().IsEnabled,dataType:'bool'" />是</label>
+                            <label><input type="radio" name="IsEnabled" value="false" data-bind="typedChecked:Model().IsEnabled,dataType:'bool'" />否</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="formTitle" valign="top" style="padding-top: 5px;">
+                            备注
+                        </th>
+                        <td class="formValue" colspan="3">
+                            <textarea id="Description" name="Description" class="form-control" style="height: 60px;" data-bind="value:Model().Description"></textarea>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </form>
+</dialogbox>

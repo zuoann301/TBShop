@@ -1,0 +1,105 @@
+﻿@{
+    ViewData["Title"] = "Edit";
+    List<Ace.Entity.Wiki.Sort> ListSort = ViewBag.ListSort as List<Ace.Entity.Wiki.Sort>;
+    Ace.Entity.Wiki.Link LinkModle = ViewBag.LinkModle as Ace.Entity.Wiki.Link;
+}
+ 
+@this.RefStyle("~/Content/webuploader/webuploader.css")
+@this.RefScript("~/Content/webuploader/webuploader.js")
+<style type="text/css">
+    #picker { 
+        line-height:20px;
+        vertical-align: middle;
+        margin: 0 0px 0 0;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <form class="form-horizontal col-md-12" method="post" action="/Wiki/Link/Edit"> 
+            <fieldset>
+                <div id="legend" class="">
+                    <legend class="">链接编辑</legend>
+                </div>
+
+                <input type="hidden" class="form-control" value="@LinkModle.Id" id="Id" name="Id">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">新闻标题</span>
+                        <input type="text" class="form-control" value="@LinkModle.Title" id="Title" name="Title" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon2">新闻分类</span>
+                        <select class="form-control" id="SortID" name="SortID">
+                            @foreach (var item in ListSort)
+                            {
+                                if (LinkModle.SortID == item.Id)
+                                {
+                                    <option selected value="@item.Id">@item.Title</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Id">@item.Title</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">图片</span>
+                        <input id="ImageUrl" name="ImageUrl" value="@LinkModle.ImageUrl" type="text" class="form-control"  style="height: 59px;" />
+                        <span class="input-group-addon" id="picker">选择文件</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon3">链接地址</span>
+                        <input type="text" class="form-control" value="@LinkModle.LinkUrl" id="LinkUrl" name="LinkUrl" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="提交" class="btn btn-primary" />
+                </div>
+
+            </fieldset>
+        </form>
+
+    </div>
+
+
+
+</div>
+<script>
+    
+
+    var uploader = WebUploader.create({
+        auto: true,
+        swf: '/Content/webuploader/Uploader.swf',
+        server: '/KindEditor/SaveFiles',
+        pick: '#picker',
+        resize: false
+    });
+
+    uploader.on('uploadSuccess', function (file, response) {
+        var json = jQuery.parseJSON(response._raw);
+        if (response.error == '0')
+        {            
+            $("#ImageUrl").val(response.url);
+            
+        }
+        else
+        {
+            var msg = "上传失败，文件数据无法正确解析";
+            $ace.alert(msg);
+        }
+    });
+</script>
+
+

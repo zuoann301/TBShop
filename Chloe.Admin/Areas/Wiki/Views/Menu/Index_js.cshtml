@@ -1,0 +1,115 @@
+﻿<script>
+
+    var _vm;
+    $(function () {
+        var vm = new PageViewModel();
+        _vm = vm;
+        vmExtend.call(vm);
+        ko.applyBindings(vm);
+        vm.init();
+    });
+
+    function PageViewModel() {
+        var me = this;
+        ViewModel.call(me);
+        vmExtend.call(me);
+
+        me.url = "/Wiki/Menu/GetModels";
+        me.deleteUrl = "/Wiki/Menu/Delete";
+        me.dataTable = new DataTable(me);
+        me.dialog = new FormDialog(me);
+
+        me.rootMenuItems = _oba(@this.RawSerialize( ViewBag.RootMenuItems));
+        me.documents = _oba(@this.RawSerialize(ViewBag.Documents));
+    }
+    function vmExtend() {
+        var me = this;
+    }
+
+    function FormDialog(vm) {
+        var me = this;
+        Dialog.call(me);
+
+        me.onOpen = function () {
+            var model = me.editModel();
+            if (model) {
+                var dataModel = model.Data;
+                var bindModel = $ko.toJS(dataModel);
+                me.model(bindModel);
+            }
+            else {
+                me.editModel(null);
+                me.model({ IsEnabled: true });
+            }
+        }
+
+        me.onSave = function () {
+            if (!$('#form1').formValid()) {
+                return false;
+            }
+
+            var model = me.model();
+
+            if (me.editModel()) {
+                $ace.post("/Wiki/Menu/Update", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.dataTable.reload();
+                }
+               );
+            }
+            else {
+                $ace.post("/Wiki/Menu/Add", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.loadData();
+                    if (!result.Data.ParentId) {
+                        vm.rootMenuItems.push(result.Data);
+                    }
+                }
+             );
+            }
+        }
+    }
+
+
+    function expandChildren(ele) {
+
+        $ele = $(ele);
+
+        var $tr = $ele.parent().parent();
+        var id = $tr.attr("id");
+
+        var selector = "tr[parent-id='" + id + "']";
+        var $children = $tr.siblings(selector);
+
+        if ($ele.hasClass("glyphicon-triangle-bottom")) {
+            $children.hide();
+            $ele.removeClass("glyphicon-triangle-bottom");
+            $ele.addClass("glyphicon-triangle-right");
+        }
+        else {
+            $children.show();
+            $ele.removeClass("glyphicon-triangle-right");
+            $ele.addClass("glyphicon-triangle-bottom");
+        }
+
+        for (var i = 0; i < $children.length; i++) {
+            var $child = $($children[i]);
+
+            var $iconNodes = $child.find(".glyphicon");
+            if ($iconNodes.length > 0) {
+                expandChildren($iconNodes[0]);
+            }
+        }
+    }
+    function appendRetract(level) {
+        var s = "";
+        for (var i = 0; i < level * 4; i++) {
+            s += "&nbsp;";
+        }
+        return s;
+    }
+
+</script>
+

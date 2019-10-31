@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@this.Partial("Index_js")
+
+<style>
+    .form-title {
+        font-weight: bold;
+    }
+</style>
+
+<div class="wrapper">
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#basicInfo" data-toggle="tab">基本信息</a></li>
+        <li><a href="#modifyPassword" data-toggle="tab">密码修改</a></li>
+    </ul>
+    <div class="tab-content" style="padding-top: 5px;">
+        <div id="basicInfo" class="tab-pane active" style="padding: 15px;">
+            <form id="userInfo" style="text-align:left;">
+                <table style="margin-left:10px;width:260px;" class="form-table">
+                    <tbody>
+                        <tr>
+                            <td style="width:50px;" class="form-title">用户名</td>
+                            <td style="max-width:200px;" class="form-value"><input type="text" class="a-control" data-bind="value:user().AccountName,disable:user().AccountName" /></td>
+                        </tr>
+                        <tr>
+                            <td class="form-title">姓名</td>
+                            <td class="form-value"><input name="Name" type="text" class="a-control" placeholder="请输入姓名" data-bind="value:user().Name" /></td>
+                        </tr>
+                        <tr>
+                            <td class="form-title">性别</td>
+                            <td class="form-value">
+                                <select name="Gender" class="a-control" data-bind="value:user().Gender">
+                                    <option value="">-请选择-</option>
+                                    <option value="1">男</option>
+                                    <option value="2">女</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="form-title">生日</td>
+                            <td class="form-value">
+                                <input type="text" class="a-control Wdate" data-bind="dateString:user().Birthday" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="form-title">介绍</td>
+                            <td class="form-value">
+                                <textarea class="a-control" style="height: 60px;" data-bind="value:user().Description"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:right;padding-top:15px;padding-right:8px;" colspan="2"><button class="a-btn-primary" data-bind="click:saveUserInfo">确认修改</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+        <div id="modifyPassword" class="tab-pane" style="padding: 15px;">
+            <form id="changePasswordForm">
+                <table style="margin-left:10px;width:260px;" class="form-table">
+                    <tbody>
+                        <tr>
+                            <td style="width:80px;" class="form-title">用户名</td>
+                            <td style="max-width:200px;" class="form-value">
+                                <input type="text" class="a-control" disabled="disabled" data-bind="value:user().AccountName" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="form-title">旧密码</td>
+                            <td class="form-value">
+                                <input type="password" class="a-control required" data-bind="value:passwordModel().OldPassword" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="form-title">新密码</td>
+                            <td class="form-value">
+                                <input type="password" class="a-control required" data-bind="value:passwordModel().NewPassword" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="form-title">确认新密码</td>
+                            <td class="form-value">
+                                <input type="password" class="a-control required" data-bind="value:passwordModel().NewPasswordConfirm" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:right;padding-top:15px;padding-right:8px;" colspan="2"><button class="a-btn-primary" data-bind="click:changePassword">确认修改</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
