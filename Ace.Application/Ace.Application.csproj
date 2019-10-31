@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ace.Data\Ace.Data.csproj" />
+    <ProjectReference Include="..\Ace.Entity\Ace.Entity.csproj" />
+    <ProjectReference Include="..\Ace\Ace.csproj" />
+    <ProjectReference Include="..\DotNetEx\DotNetEx.csproj" />
+  </ItemGroup>
+
+</Project>
