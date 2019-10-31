@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Chloe.Extension" Version="3.0.0" />
+    <PackageReference Include="Chloe.MySql" Version="3.0.2" />
+    <PackageReference Include="Chloe.Oracle" Version="3.0.3" />
+    <PackageReference Include="Chloe.PostgreSQL" Version="3.0.2" />
+    <PackageReference Include="Chloe.SQLite" Version="3.0.2" />
+    <PackageReference Include="Chloe.SqlServer" Version="3.0.1" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="2.1.0" />
+    <PackageReference Include="MySqlConnector" Version="0.26.5" />
+    <PackageReference Include="Npgsql" Version="4.0.2" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="2.12.0-beta3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Ace.AutoMapper\Ace.AutoMapper.csproj" />
+    <ProjectReference Include="..\Ace\Ace.csproj" />
+    <ProjectReference Include="..\DotNetEx\DotNetEx.csproj" />
+  </ItemGroup>
+
+</Project>
