@@ -1,8 +1,6 @@
-const root = '/platform/api/';
-//const API_BASE_URL = 'http://localhost:8080' + root;
+﻿const root = '/platform/api/';
 const API_BASE_URL = 'http://fly2you.cn' + root;
-//const API_URL = 'http://localhost:62021';//api.zhaixiangyoukuai.com
-const API_URL = 'https://api.zhaixiangyoukuai.com';
+const API_URL = 'https://api.a.com';
 
 module.exports = {
   FileHost: API_URL,
