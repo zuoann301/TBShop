@@ -64,11 +64,7 @@ namespace Ace.Entity.Wiki
 
         public int PartID { get; set; }
 
-
-        /// <summary>
-        /// 营业执照
-        /// </summary>
-        public string LicenseUrl { get; set; }
+ 
 
         /// <summary>
         /// 商家状态  0未支付 1审核中 2正常
