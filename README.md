@@ -11,6 +11,11 @@ PC端： 商家管理 商品管理 订单管理 用户管理
 QQ群：577406104
 
 
+多商户小程序商城
+![image](https://github.com/zuoann301/TBShop/blob/master/qrcode.png)
 
+
+
+便利店外卖小程序
 ![image](https://github.com/zuoann301/TBShop/blob/master/wxcode.jpg)
 
