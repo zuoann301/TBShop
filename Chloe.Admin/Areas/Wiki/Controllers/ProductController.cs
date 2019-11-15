@@ -326,17 +326,17 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
                         modle.Price = worksheet.Cells[row, 6].Value != DBNull.Value ? Convert.ToDecimal(worksheet.Cells[row, 6].Value) : 0;
                         modle.BasePrice = worksheet.Cells[row, 7].Value != DBNull.Value ? Convert.ToDecimal(worksheet.Cells[row, 7].Value) : 0;
                         modle.BatchPrice = worksheet.Cells[row, 8].Value != DBNull.Value ? Convert.ToDecimal(worksheet.Cells[row, 8].Value) : 0;
-                        modle.Discount = worksheet.Cells[row, 9].Value != DBNull.Value ? Convert.ToDecimal(worksheet.Cells[row, 9].Value) : 0;
-                        modle.SharePercent = worksheet.Cells[row, 10].Value != DBNull.Value ? Convert.ToDecimal(worksheet.Cells[row, 10].Value) : 0;
-                        modle.ImageUrl= worksheet.Cells[row, 11].Value.ToString();
-                        modle.ImageList = worksheet.Cells[row, 12].Value.ToString();
-                        modle.Summary= worksheet.Cells[row, 13].Value.ToString();
-                        modle.Contents = worksheet.Cells[row, 14].Value.ToString();
-                        if(!string.IsNullOrEmpty(worksheet.Cells[row, 15].Value.ToString()))
+                        
+                        modle.SharePercent = worksheet.Cells[row, 9].Value != DBNull.Value ? Convert.ToDecimal(worksheet.Cells[row, 10].Value) : 0;
+                        modle.ImageUrl= worksheet.Cells[row, 10].Value.ToString();
+                        modle.ImageList = worksheet.Cells[row, 11].Value.ToString();
+                        modle.Summary= worksheet.Cells[row, 12].Value.ToString();
+                        modle.Contents = worksheet.Cells[row, 13].Value.ToString();
+                        if(!string.IsNullOrEmpty(worksheet.Cells[row, 14].Value.ToString()))
                         {
-                            if(worksheet.Cells[row, 15].Value.ToString() != "暂无")
+                            if(worksheet.Cells[row, 14].Value.ToString() != "暂无")
                             {
-                                modle.BrandID = brandService.GetBrandID(worksheet.Cells[row, 15].Value.ToString());
+                                modle.BrandID = brandService.GetBrandID(worksheet.Cells[row, 14].Value.ToString());
                             }
                             else
                             {
@@ -427,10 +427,10 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
         }
 
         [HttpPost]
-        public ActionResult SetPrice(decimal PerBatchPrice,decimal PerPrice,decimal PerDiscount,decimal PerSharePercent)
+        public ActionResult SetPrice(decimal PerBatchPrice,decimal PerPrice,decimal PerSharePercent)
         {
             IProductService productService = this.CreateService<IProductService>();
-            productService.SetPrice(PerBatchPrice, PerPrice, PerDiscount, PerSharePercent);
+            productService.SetPrice(PerBatchPrice, PerPrice, PerSharePercent);
             return this.SuccessMsg();
         }
 

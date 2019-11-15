@@ -94,8 +94,6 @@
                     <th>分销比例</th>
                     <th>置顶</th>
                     <th>推荐</th>
-
-
                 </tr>
             </thead>
             <tbody data-bind="foreach:models">
@@ -134,68 +132,60 @@
         </div>
         <!------------------------------------------------------------------------------------->
         <div class="pro_tab">
-            <table class="form-table">
-                <tbody>
-                    <tr>
-                        <td class="form-title">产品编号</td>
-                        <td class="form-value">
-                            <input name="ProductCode" type="text" class="a-control required" placeholder="请输入产品编号" data-bind="value:model().ProductCode" />
-                        </td>
-                    </tr>
-                     
-
-                </tbody>
-            </table>
+            
             <table class="form-table">
                 <tbody>
 
                     <tr>
                         <td class="form-title">产品名称</td>
                         <td class="form-value"><input name="ProductName" type="text" class="a-control required" placeholder="请输入产品名称" data-bind="value:model().ProductName" /></td>
-                        <td class="form-title">点击量</td>
-                        <td class="form-value"><input name="Hit" type="text" class="a-control required" placeholder="点击量" data-bind="value:model().Hit" /></td>
+                        <td class="form-title">产品编号</td>
+                        <td class="form-value"><input name="ProductCode" type="text" class="a-control required" placeholder="请输入产品编号" data-bind="value:model().ProductCode" /></td>
                     </tr>
-
                     <tr>
-                        <td class="form-title">品牌</td>
-                        <td class="form-value">
-                            <select name="BrandID" id="BrandID" type="text" class="a-control required" data-bind="options:_brands,optionsText:'Title',optionsValue:'Id',optionsCaption:'--选择分类--',value:model().BrandID"></select>
-                        </td>
-                        <td class="form-title">规格</td>
-                        <td class="form-value">
-                            <input name="ProSize" id="ProSize" type="text" class="a-control required" placeholder="请输入规格" data-bind="value:model().ProSize" />
-                        </td>
-                    </tr>
-
-                    <tr>
+                        
                         <td class="form-title">产品分类</td>
                         <td class="form-value">
                             <select name="ProSortID" id="ProSortID" type="text" class="a-control required" data-bind="options:_sorts2,optionsText:'Title',optionsValue:'Id',optionsCaption:'--选择分类--',value:model().ProSortID"></select>
                         </td>
+                        <td class="form-title">商家</td>
+                        <td class="form-value">
+                            <select class="a-control" name="ShopID" data-bind="options:_shops,optionsText:'ShopName',optionsValue:'ShopID',optionsCaption:'--选择--',value:model().ShopID"></select>
+                        </td>
+                    </tr>
+                    
+
+                    <tr>
+                        <td class="form-title">点击量</td>
+                        <td class="form-value">
+                            <input name="Hit" type="text" class="a-control required" placeholder="点击量" data-bind="value:model().Hit" />
+                        </td>
+                        <td class="form-title">规格</td>
+                        <td class="form-value">
+                            <input name="ProSize" id="ProSize" type="text" class="a-control required" placeholder="请输入规格" data-bind="value:model().ProSize" />
+                            <input name="BrandID" type="hidden" class="a-control required" placeholder="" data-bind="value:model().BrandID" />
+                        </td>
+                    </tr>
+                    <tr>
                         <td class="form-title">成本价</td>
                         <td class="form-value">
                             <input name="BasePrice" id="BasePrice" type="text" class="a-control required" placeholder="请输入成本价" data-bind="value:model().BasePrice" />
                         </td>
-                    </tr>
-                    <tr>
                         <td class="form-title">零售价</td>
                         <td class="form-value">
                             <input name="Price" id="Price" type="text" class="a-control required" placeholder="请输入零售价" data-bind="value:model().Price" />
                         </td>
+
+                    </tr>
+                    <tr>
                         <td class="form-title">批发价</td>
                         <td class="form-value">
                             <input name="BatchPrice" id="BatchPrice" type="text" class="a-control required" placeholder="请输入批发价" data-bind="value:model().BatchPrice" />
                         </td>
-                    </tr>
-                    <tr>
                         <td class="form-title">分销比例</td>
                         <td class="form-value">
                             <input name="SharePercent" id="SharePercent" type="text" class="a-control required" placeholder="请输入分销比例" data-bind="value:model().SharePercent" />
-                        </td>
-                        <td class="form-title">折扣</td>
-                        <td class="form-value">
-                            <input name="Discount" id="Discount" type="text" class="a-control required" placeholder="请输入折扣" data-bind="value:model().Discount" />
-                        </td>
+                        </td>                         
                     </tr>
                     <tr>
                         <td class="form-title">置顶</td>
@@ -215,9 +205,9 @@
             <table class="form-table">
                 <tbody>
                     <tr>
-                        <td class="form-title">备注</td>
+                        <td class="form-title">简介</td>
                         <td class="form-value">
-                            <input name="Summary" id="Summary" type="text" class="a-control required" placeholder="请输入备注" data-bind="value:model().Summary" />
+                            <input name="Summary" id="Summary" type="text" class="a-control required" placeholder="请输入简介" data-bind="value:model().Summary" />
                         </td>
                     </tr>
                     <tr>
@@ -229,8 +219,6 @@
                                 </div>
                                 <div id="thelist" class="uploader-list"></div>
                             </div>
-
-
                         </td>
                     </tr>
                     <tr>

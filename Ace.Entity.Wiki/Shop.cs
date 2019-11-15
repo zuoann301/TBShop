@@ -63,14 +63,7 @@ namespace Ace.Entity.Wiki
         public int CityID { get; set; }
 
         public int PartID { get; set; }
-
- 
-
-        /// <summary>
-        /// 商家状态  0未支付 1审核中 2正常
-        /// </summary>
-        public int ST { get; set; }
-
+         
     }
 
     public class ShopSample

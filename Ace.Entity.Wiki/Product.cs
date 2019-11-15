@@ -57,7 +57,7 @@ namespace Ace.Entity.Wiki
         public string ImageList { get; set; }
 
 
-        public decimal Discount { get; set; }
+        
 
 
         /// <summary>

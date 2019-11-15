@@ -63,8 +63,7 @@ namespace Ace.Application.Wiki
         /// </summary>
         public string ProSize { get; set; }
 
-
-        public decimal Discount { get; set; }
+        
 
         /// <summary>
         /// 

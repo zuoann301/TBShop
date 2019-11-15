@@ -62,7 +62,7 @@ namespace Ace.Application.Wiki
 
         PagedData<Product> GetShopProductPageList(Pagination page, int ShopID, string ProSortID, string keyword, int OrderType = 0);
 
-        bool SetPrice(decimal PerBatchPrice, decimal PerPrice, decimal PerDiscount, decimal PerSharePercent);
+        bool SetPrice(decimal PerBatchPrice, decimal PerPrice,   decimal PerSharePercent);
 
         void UpDateHit(string Id, int Hit = 1);
     }
@@ -416,7 +416,7 @@ namespace Ace.Application.Wiki
 
 
 
-        public bool SetPrice(decimal PerBatchPrice, decimal PerPrice, decimal PerDiscount, decimal PerSharePercent)
+        public bool SetPrice(decimal PerBatchPrice, decimal PerPrice,   decimal PerSharePercent)
         {
             bool v = false;
 
@@ -441,10 +441,7 @@ namespace Ace.Application.Wiki
                             context.Session.ExecuteNonQuery("update `Product_Size` set `Price`=BasePrice*" + PerPrice);
                         }
 
-                        if (PerDiscount > 0)
-                        {
-                            context.Session.ExecuteNonQuery("update `Product` set `Discount`=" + PerDiscount);
-                        }
+                        
 
                         if (PerSharePercent > 0)
                         {
@@ -480,11 +477,7 @@ namespace Ace.Application.Wiki
                             context.Session.ExecuteNonQuery("update Product set Price=BasePrice*" + PerPrice);
                             context.Session.ExecuteNonQuery("update Product_Size set Price=BasePrice*" + PerPrice);
                         }
-
-                        if (PerDiscount > 0)
-                        {
-                            context.Session.ExecuteNonQuery("update Product set Discount=" + PerDiscount);
-                        }
+ 
 
                         if (PerSharePercent > 0)
                         {
