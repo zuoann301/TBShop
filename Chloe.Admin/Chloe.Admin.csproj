@@ -6,26 +6,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="weblog\**" />
     <Compile Remove="wwwroot\fl\20190214\**" />
-    <Compile Remove="wwwroot\upload\27\**" />
-    <Compile Remove="wwwroot\upload\28\**" />
-    <Compile Remove="wwwroot\upload\29\**" />
-    <Compile Remove="wwwroot\upload\image\**" />
+    <Compile Remove="wwwroot\upload\**" />
+    <Compile Remove="xls\**" />
+    <Content Remove="weblog\**" />
     <Content Remove="wwwroot\fl\20190214\**" />
-    <Content Remove="wwwroot\upload\27\**" />
-    <Content Remove="wwwroot\upload\28\**" />
-    <Content Remove="wwwroot\upload\29\**" />
-    <Content Remove="wwwroot\upload\image\**" />
+    <Content Remove="wwwroot\upload\**" />
+    <Content Remove="xls\**" />
+    <EmbeddedResource Remove="weblog\**" />
     <EmbeddedResource Remove="wwwroot\fl\20190214\**" />
-    <EmbeddedResource Remove="wwwroot\upload\27\**" />
-    <EmbeddedResource Remove="wwwroot\upload\28\**" />
-    <EmbeddedResource Remove="wwwroot\upload\29\**" />
-    <EmbeddedResource Remove="wwwroot\upload\image\**" />
+    <EmbeddedResource Remove="wwwroot\upload\**" />
+    <EmbeddedResource Remove="xls\**" />
+    <None Remove="weblog\**" />
     <None Remove="wwwroot\fl\20190214\**" />
-    <None Remove="wwwroot\upload\27\**" />
-    <None Remove="wwwroot\upload\28\**" />
-    <None Remove="wwwroot\upload\29\**" />
-    <None Remove="wwwroot\upload\image\**" />
+    <None Remove="wwwroot\upload\**" />
+    <None Remove="xls\**" />
   </ItemGroup>
 
 
@@ -58,12 +54,6 @@
     <ProjectReference Include="..\Ace\Ace.csproj" />
     <ProjectReference Include="..\DotNetEx\DotNetEx.csproj" />
     <ProjectReference Include="..\Senparc.Weixin.MP.CoreSample.CommonService\Senparc.Weixin.MP.CoreSample.CommonService.csproj" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="weblog\" />
-    <Folder Include="wwwroot\upload\" />
   </ItemGroup>
 
 </Project>
