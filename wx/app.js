@@ -1,4 +1,4 @@
-﻿const api = require('/config/api.js');
+const api = require('/config/api.js');
 App({
     onLaunch: function () 
     {
@@ -52,8 +52,6 @@ App({
         token: '',
         userCoupon: 'NO_USE_COUPON',//默认不适用优惠券
         courseCouponCode: {},//购买课程的时候优惠券信息
-      appid: 'wx8f03db28dd80b455',
-        appsecret: '9b81590ef87e78b2e0575e986bac5da0',
         ShopID:0,
         GPS_X:0,
         GPS_Y:0,
@@ -114,25 +112,23 @@ App({
     wx.login({
       timeout: 10000,
       success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if (res.code) {
-          var d = that.globalData;//这里存储了appid、secret、token串 
-
-          //var wx_url = 'https://api.weixin.qq.com/sns/jscode2session?appid=' + d.appid + '&secret=' + d.appsecret + '&js_code=' + res.code + '&grant_type=authorization_code';
-          var wx_url=api.GetOpenID;
+          var d = that.globalData;          
+          var wx_url = api.JsCode2Json;
           wx.request({
             url: wx_url,
-            data: { appid: d.appid, secret: d.appsecret, jscode: res.code },
+            data: { jscode: res.code },
             method: 'GET',
             header: {
               'content-type': 'application/json'
             },
             success: function (res) {
-              wx.setStorageSync('wx', res.data.Data)
+              wx.setStorageSync('wx', res.data.Data);
+              //wx.setStorageSync('IsDebug', res.data.Data.P2PData);
+               
             },
-            fail: function (res) 
-            {
-              wx.setStorageSync('wx',"")
+            fail: function (res) {
+              wx.setStorageSync('wx', "");
             }
           });
         }

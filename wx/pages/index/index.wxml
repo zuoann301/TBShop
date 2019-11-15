@@ -2,7 +2,7 @@
 <!--index.wxml-->
 <view class="container">
   <swiper class="banner" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
-    <swiper-item wx:for="{{banner}}" wx:key="{{item.id}}">
+    <swiper-item wx:for="{{banner}}" wx:key="unique">
       <navigator url="{{item.LinkUrl}}">
         <image src="{{item.ImageUrl}}" background-size="cover"></image>
       </navigator>
@@ -11,7 +11,7 @@
   
 <view class="a-section a-topic" wx:if="{{channel.length > 0}}">
   <view class="m-menu">
-    <navigator  class="item" url="{{item.url}}" wx:for="{{channel}}" wx:key="{{item.id}}">
+    <navigator  class="item" url="{{item.url}}" wx:for="{{channel}}" wx:key="unique">
      <icon class="iconfont {{item.Icon}}"></icon>
       <text>{{item.Title}}</text>
     </navigator>
@@ -26,10 +26,10 @@
       </navigator>
     </view>
     <view class="b">
-      <view class="item2 item-1" wx:for="{{brand}}" wx:key="item.id">
+      <view class="item2 item-1" wx:for="{{brand}}" wx:key="unique">
         <navigator url="/pages/brandDetail/brandDetail?id={{item.Id}}">
           <view class="wrap">
-            <image class="img" src="{{FileHost+item.ImageUrl}}" mode="aspectFill"></image>
+            <image class="img" src="{{item.ImageUrl}}" mode="aspectFill"></image>
             <view class="mt">
               <text class="brand">{{item.Title}}</text>
               <text class="price">{{item.Remark}}</text>
@@ -52,7 +52,7 @@
     </view>
     <view class="b">
       <scroll-view scroll-x="true" class="list">
-        <view class="item" wx:for="{{topics}}" wx:for-index="index" wx:for-item="item" wx:key="{{item.id}}">
+        <view class="item" wx:for="{{topics}}" wx:for-index="index" wx:for-item="item" wx:key="unique">
           <navigator url="../topicDetail/topicDetail?id={{item.Id}}">
             <image class="img" src="{{FileHost+item.ImageUrl}}" background-size="cover"></image>
             <view class="np">
@@ -74,7 +74,7 @@
       </view>
     </view>
     <view class="b">
-      <view class="item" wx:for="{{newGoods}}" wx:for-index="index" wx:for-item="item" wx:key="{{item.id}}">
+      <view class="item" wx:for="{{newGoods}}" wx:for-index="index" wx:for-item="item" wx:key="unique">
         <navigator url="../goods/goods?id={{item.Id}}">
           <image class="img" mode="aspectFit" src="{{FileHost+item.ImageUrl}}" background-size="cover"></image>
           <text class="name">{{item.ProductName}}</text>
@@ -93,7 +93,7 @@
       </view>
     </view>
     <view class="b">
-      <view class="item" wx:for="{{hotGoods}}" wx:for-index="index" wx:for-item="item" wx:key="{{item.id}}">
+      <view class="item" wx:for="{{hotGoods}}" wx:for-index="index" wx:for-item="item" wx:key="unique">
         <navigator url="/pages/goods/goods?id={{item.Id}}">
           <image class="img" mode="aspectFit" src="{{FileHost+item.ImageUrl}}" background-size="cover"></image>
           <view class="right">
@@ -108,14 +108,14 @@
     </view>
   </view>
 
-  <view class="good-grid" wx:for="{{floorGoods}}" wx:key="{{item.id}}">
+  <view class="good-grid" wx:for="{{floorGoods}}" wx:key="unique">
     <view class="h">
       <view>
         <text>{{item.name}}</text>
       </view>
     </view>
     <view class="b">
-      <block wx:for="{{item.goodsList}}" wx:for-index="iindex" wx:for-item="iitem" wx:key="{{iitem.id}}">
+      <block wx:for="{{item.goodsList}}" wx:for-index="iindex" wx:for-item="iitem" wx:key="unique">
         <view class="item {{iindex % 2 == 0 ? '' : 'item-b'}}">
           <navigator url="../goods/goods?id={{iitem.id}}" class="a">
             <image class="img" src="{{iitem.list_pic_url}}" background-size="cover"></image>
@@ -135,4 +135,4 @@
 
 </view>
 
-<audio  src="{{mp3_url}}" id="myAudio" ></audio>
+ 

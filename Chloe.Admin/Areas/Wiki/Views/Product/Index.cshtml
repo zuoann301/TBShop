@@ -156,14 +156,13 @@
                     
 
                     <tr>
-                        <td class="form-title">点击量</td>
+                        <td class="form-title">品牌</td>
                         <td class="form-value">
-                            <input name="Hit" type="text" class="a-control required" placeholder="点击量" data-bind="value:model().Hit" />
+                            <select class="a-control" name="BrandID" data-bind="options:_brands,optionsText:'Title',optionsValue:'Id',optionsCaption:'--选择--',value:model().BrandID"></select>
                         </td>
                         <td class="form-title">规格</td>
                         <td class="form-value">
-                            <input name="ProSize" id="ProSize" type="text" class="a-control required" placeholder="请输入规格" data-bind="value:model().ProSize" />
-                            <input name="BrandID" type="hidden" class="a-control required" placeholder="" data-bind="value:model().BrandID" />
+                            <input name="ProSize" id="ProSize" type="text" class="a-control required" placeholder="请输入规格" data-bind="value:model().ProSize" /> 
                         </td>
                     </tr>
                     <tr>

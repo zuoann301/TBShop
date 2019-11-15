@@ -49,11 +49,14 @@ namespace Chloe.Admin.Controllers
         /// <param name="jscode"></param>
         /// <returns></returns>
         [HttpGet]
-        public ActionResult JsCode2Json(string appid, string secret, string jscode)
+        public ActionResult JsCode2Json(string jscode)
         {
-            //JsonResultData jd = new JsonResultData();
-            JsCode2JsonResult data = Senparc.Weixin.WxOpen.AdvancedAPIs.Sns.SnsApi.JsCode2Json(appid, secret, jscode);
-             
+            string appid = Globals.Configuration["AppSettings:WxOpenAppId"].ToString();
+            string secret = Globals.Configuration["AppSettings:WxOpenAppSecret"].ToString();
+
+            var data = Senparc.Weixin.WxOpen.AdvancedAPIs.Sns.SnsApi.JsCode2Json(appid, secret, jscode);
+            //string IsDebug = Globals.Configuration["AppSettings:IsDebug"].ToString();
+            //data.P2PData = IsDebug;
             return this.SuccessData(data);
         }
 

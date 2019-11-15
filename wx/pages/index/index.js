@@ -14,8 +14,7 @@ Page({
     floorGoods: [],
     banner: [],
     channel: [],
-    FileHost:'',
-    mp3_url:''
+    FileHost:''
   },
   onShareAppMessage: function () {
     return {
@@ -33,7 +32,7 @@ Page({
     let that = this;
     var data = new Object();
     var shopid = app.globalData.ShopID;
-    util.request(api.IndexUrlNewGoods, { Num: 4, IsTop: 1, ShopID:shopid},'GET').then(function (res) 
+    util.request(api.IndexUrlNewGoods, { Num: 4, IsTop: 1, ShopID:0},'GET').then(function (res) 
     {
       if (res.Status === 100) 
       {
@@ -41,21 +40,21 @@ Page({
         that.setData(data);
       }
     });
-    util.request(api.IndexUrlHotGoods, { Num: 4, IsHot: 1, ShopID: shopid},'GET').then(function (res) {
+    util.request(api.IndexUrlHotGoods, { Num: 4, IsHot: 1, ShopID: 0},'GET').then(function (res) {
       if (res.Status === 100) 
       {
         data.hotGoods = res.Data;
         that.setData(data);
       }
     });
-    util.request(api.IndexUrlTopic, { ShopID:shopid, Num:4, SortID: 2, IsValid:1},'GET').then(function (res) {
+    util.request(api.IndexUrlTopic, { ShopID:0, Num:4, SortID: 2, IsValid:1},'GET').then(function (res) {
       if (res.Status === 100) 
       {
         data.topics = res.Data
         that.setData(data);
       }
     });
-    util.request(api.IndexUrlBrand, {ShopID:shopid, IsTop:1},'GET').then(function (res) {
+    util.request(api.IndexUrlBrand, {ShopID:0, IsTop:1},'GET').then(function (res) {
       if (res.Status === 100) 
       {
         data.brand = res.Data;
@@ -71,7 +70,7 @@ Page({
     });
     */
     
-    util.request(api.IndexUrlBanner, {ShopID:shopid, SortID:4},"GET").then(function (res) 
+    util.request(api.IndexUrlBanner, {ShopID:0, SortID:4},"GET").then(function (res) 
     {
       console.log(res);
       if (res.Status == 100) 
@@ -99,11 +98,7 @@ Page({
   onShow: function () {
     // 页面显示
     //shop.setPageTitle();//显示商家名称
-    wx.startAccelerometer({ interval: 'normal' });
-    var audioCtx = wx.createAudioContext('myAudio');
-    wx.onAccelerometerChange(function (res) {
-      shop.shake(res, audioCtx);
-    })
+     
   },
   onHide: function () {
     // 页面隐藏
