@@ -112,7 +112,7 @@ Page({
       return;
     }
     var shopid = app.globalData.ShopID;
-    var pd = {ShopID:shopid, ProSortID: that.data.id, Page: that.data.page, PageSize: that.data.size, OrderType:0};
+    var pd = {ShopID:0, ProSortID: that.data.id, Page: that.data.page, PageSize: that.data.size, OrderType:0};
     util.request(api.ProductPageList,pd,'GET')
       .then(function (res) {
         that.setData({

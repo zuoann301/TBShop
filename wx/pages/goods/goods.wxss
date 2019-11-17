@@ -1,14 +1,15 @@
 .container{
     /* margin-bottom: 100rpx; */
 }
+
 .goodsimgs{
-  width: 750rpx;
-  height: 750rpx;
+  width: 100vw;
+  height: 417rpx;
 }
 
 .goodsimgs image{
-  width: 750rpx;
-  height: 750rpx;
+  width: 100vw;
+  height: 417rpx;
 }
 
 .service-policy{

@@ -24,6 +24,11 @@
     <None Remove="xls\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Areas\Wiki\Views\Pro_Sort\Index.cshtml" />
+    <None Include="Areas\Wiki\Views\Pro_Sort\Index_js.cshtml" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="aliyun-net-sdk-core" Version="1.2.2" />

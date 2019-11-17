@@ -1,7 +1,7 @@
 <scroll-view class="container" style="height: {{winHeight}}rpx" scroll-y="true">
   <view  >
     <swiper class="goodsimgs" indicator-dots="true" autoplay="true" interval="3000" duration="1000">
-      <swiper-item wx:for="{{gallery}}" wx:key="{{item}}">
+      <swiper-item wx:for="{{gallery}}" wx:key="unique">
         <image mode='aspectFit' src="{{FileHost+item}}" background-size="cover"></image>
       </swiper-item>
     </swiper>
@@ -54,7 +54,7 @@
             {{comment.data.content}}
           </view>
           <view class="imgs" wx:if="{{comment.data.pic_list.length > 0}}">
-            <image class="img" wx:for="{{comment.data.pic_list}}" wx:key="{{item.id}}" src="{{item.pic_url}}"></image>
+            <image class="img" wx:for="{{comment.data.pic_list}}" wx:key="unique" src="{{item.pic_url}}"></image>
           </view>
           <!-- <view class="spec">白色 2件</view> -->
         </view>
@@ -63,7 +63,7 @@
     <view class="goods-attr">
       <view class="t">商品参数</view>
       <view class="l">
-        <view class="item" wx:for="{{attribute}}" wx:key="{{item.name}}">
+        <view class="item" wx:for="{{attribute}}" wx:key="unique">
           <text class="left">{{item.name}}</text>
           <text class="right">{{item.value}}</text>
         </view>
@@ -82,7 +82,7 @@
         <text class="title">常见问题</text>
       </view>
       <view class="b">
-        <view class="item" wx:for="{{issueList}}" wx:key="{{item.Id}}">
+        <view class="item" wx:for="{{issueList}}" wx:key="unique">
           <view class="question-box">
             <text class="spot"></text>
             <text class="question">{{item.Title}}</text>
@@ -100,7 +100,7 @@
         <text class="title">大家都在看</text>
       </view>
       <view class="b">
-        <view class="item" wx:for="{{relatedGoods}}" wx:key="{{item.id}}">
+        <view class="item" wx:for="{{relatedGoods}}" wx:key="unique">
           <navigator url="/pages/goods/goods?id={{item.Id}}">
             <image class="img" src="{{FileHost+item.ImageUrl}}" background-size="cover"></image>
             <text class="name">{{item.ProductName}}</text>
@@ -124,7 +124,7 @@
       </view>
     </view>
     <view class="spec-con">
-      <view class="spec-item {{item.checked==true?'sel_bg':''}}" bindtap='selectSize' wx:for="{{specificationList}}" wx:key="{{item.Id}}">
+      <view class="spec-item {{item.checked==true?'sel_bg':''}}" bindtap='selectSize' wx:for="{{specificationList}}" wx:key="unique">
         <view class="name " data-sizeid='{{item.Id}}' data-price='{{item.Price}}'>{{item.ProSize}}</view>
       </view>
 

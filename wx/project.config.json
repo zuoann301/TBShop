@@ -9,7 +9,7 @@
 		"autoAudits": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.3.0",
+	"libVersion": "2.9.3",
 	"appid": "wx38a246dead9063a5",
 	"projectname": "TBshop",
 	"simulatorType": "wechat",

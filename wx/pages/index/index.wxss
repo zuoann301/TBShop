@@ -1,9 +1,9 @@
 .banner {
-  width: 750rpx;
+  width: 100vw;
   height: 417rpx;
 }
 .banner image {
-  width: 100%;
+  width: 100vw;
   height: 417rpx;
 }
 

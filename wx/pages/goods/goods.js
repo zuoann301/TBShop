@@ -37,7 +37,7 @@ Page({
       uid=that.data.userInfo.Id;
     }
      
-    util.request(api.GoodsDetail, { id: that.data.id, hit: 1, userid: uid }).then(function (res) {
+    util.request(api.ProductInfo, { id: that.data.id, hit: 1, userid: uid }).then(function (res) {
       if (res.Status === 100) {
         /*
         that.setData({
@@ -313,10 +313,22 @@ Page({
   },
   closeAttrOrCollect: function () {
     let that = this;
-      
+    var userid = '';
+    if (that.data.userInfo != null) 
+    {
+      userid = that.data.userInfo.Id;
+    }
+    else {
+      util.showErrorToast('请登录后再收藏');
+      setTimeout(function () {
+        wx.navigateTo({ url: '/pages/auth/mobile/mobile' });
+      }, 1500);
+      return;
+    }
+
       if (that.data.userHasCollect == 1) 
       {
-        var userid = that.data.userInfo.Id;
+        
         util.request(api.CollectAdd, { UserID: userid, ProductID: that.data.id }, "GET")
           .then(function (res) 
           {
@@ -334,7 +346,7 @@ Page({
       } 
       else 
       {
-        var userid = that.data.userInfo.Id;
+        
         util.request(api.CollectAdd, { UserID: userid, ProductID: that.data.id }, "GET")
           .then(function (res) 
           {
@@ -424,83 +436,66 @@ Page({
    */
   addToCart: function () {
     var that = this;
-    if (this.data.openAttr == false) 
+     
+    var userid='';
+    if(that.data.userInfo!=null)
     {
-      //打开规格选择窗口
-      this.setData({
-        openAttr: !this.data.openAttr,
-        collectBackImage: "/static/images/detail_back.png"
-      });
-    } 
-    else 
-    {
-
-      //提示选择完整规格
-      if (this.data.sizeid=='') 
-      {
-        util.showErrorToast('请选择完整规格');
-        return;
-      }
-      
-      var userid='';
-      if(that.data.userInfo!=null)
-      {
-        userid = that.data.userInfo.Id;
-      }
-      else
-      {
-        util.showErrorToast('请登录后再购买');
-        setTimeout(function(){
-          wx.navigateTo({url: '/pages/auth/mobile/mobile'});
-        },1500);
-        return;
-      }
-      var shopid= app.globalData.ShopID;
-      var pd = {ShopID:shopid, UserID: userid, ProductID: that.data.id, ProSizeID: that.data.sizeid, ItemNum: that.data.number};
-      //添加到购物车
-      util.request(api.SetCart,pd, 'GET')
-        .then(function (res) {
-          let _res = res;
-          if (_res.Status == 100) 
-          { 
-            that.setData({ cartGoodsCount: _res.Data});
-            that.setData({openAttr: !that.data.openAttr});
-            that.setData({ sizeid:''});
-            let sizeList = that.data.specificationList.map(v => {
-              v.checked = false;
-              return v;
-            });
-            that.setData({ specificationList: sizeList });
-            
-            wx.showModal({
-              title: '添加成功',
-              content: '是否立即进入购物车',
-              success(res1) {
-                if (res1.confirm) 
-                { 
-                  wx.reLaunch({
-                    url: '/pages/cart/cart',
-                  })
-                }
-                else if (res1.cancel) 
-                {
-                  //wx.navigateTo({ url: '/pages/index/index' });
-                }
-              }
-            })
-
-          } 
-          else 
-          {
-            wx.showToast({
-              image: '/static/images/icon_error.png',
-              title: _res.Data,
-              mask: true
-            });
-          }
-
-        });
+      userid = that.data.userInfo.Id;
     }
+    else
+    {
+      util.showErrorToast('请登录后再购买');
+      setTimeout(function(){
+        wx.navigateTo({url: '/pages/auth/mobile/mobile'});
+      },1500);
+      return;
+    }
+    var shopid= app.globalData.ShopID;
+    var pd = {ShopID:shopid, UserID: userid, ProductID: that.data.id, ProSizeID:'', ItemNum: that.data.number};
+    //添加到购物车
+    util.request(api.SetCart,pd, 'GET')
+      .then(function (res) {
+        let _res = res;
+        if (_res.Status == 100) 
+        { 
+          that.setData({ cartGoodsCount: _res.Data});
+          that.setData({openAttr: !that.data.openAttr});
+          that.setData({ sizeid:''});
+          let sizeList = that.data.specificationList.map(v => {
+            v.checked = false;
+            return v;
+          });
+          that.setData({ specificationList: sizeList });
+          
+          wx.showModal({
+            title: '添加成功',
+            content: '是否立即进入购物车',
+            success(res1) {
+              if (res1.confirm) 
+              { 
+                wx.reLaunch({
+                  url: '/pages/cart/cart',
+                })
+              }
+              else if (res1.cancel) 
+              {
+                //wx.navigateTo({ url: '/pages/index/index' });
+              }
+            }
+          })
+
+        } 
+        else 
+        {
+          wx.showToast({
+            image: '/static/images/icon_error.png',
+            title: _res.Data,
+            mask: true
+          });
+        }
+
+      });
+    
 
   },
   cutNumber: function () {
