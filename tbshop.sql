@@ -1,8 +1,8 @@
-﻿-- --------------------------------------------------------
+-- --------------------------------------------------------
 -- 主机:                           127.0.0.1
--- 服务器版本:                        10.3.11-MariaDB - mariadb.org binary distribution
--- 服务器操作系统:                      Win64
--- HeidiSQL 版本:                  9.4.0.5125
+-- 服务器版本:                        10.4.6-MariaDB - mariadb.org binary distribution
+-- 服务器OS:                        Win64
+-- HeidiSQL 版本:                  10.2.0.5599
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -12,11 +12,11 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- 导出 tbshop 的数据库结构
+-- Dumping database structure for tbshop
 CREATE DATABASE IF NOT EXISTS `tbshop` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `tbshop`;
 
--- 导出  表 tbshop.brand 结构
+-- Dumping structure for table tbshop.brand
 DROP TABLE IF EXISTS `brand`;
 CREATE TABLE IF NOT EXISTS `brand` (
   `Id` varchar(50) NOT NULL,
@@ -28,16 +28,16 @@ CREATE TABLE IF NOT EXISTS `brand` (
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.brand 的数据：~3 rows (大约)
+-- Dumping data for table tbshop.brand: ~3 rows (大约)
 DELETE FROM `brand`;
 /*!40000 ALTER TABLE `brand` DISABLE KEYS */;
 INSERT INTO `brand` (`Id`, `Title`, `ImageUrl`, `Remark`, `IsTop`, `ShopID`) VALUES
-	('1097770391990046720', 'CK', '/upload/image/20190312/1410047957.jpg', '全球购个护美妆日,正品低价,品类齐全,退换无忧,品质购物上天猫,让您足不出户,畅想一站式购物的乐趣!', 1, 1),
-	('1105736913995829248', 'hd', '/upload/image/20190313/901155772.jpg', '海淘 全球美妆 美丽计划从西班牙PB美妆启航,美之所向,心之所往;', 1, 0),
-	('1105737122641481728', 'jr', '/upload/image/20190313/321624119.jpg', 'the face shop、opi、skin food、雅诗兰黛、兰蔻、倩碧等进口化妆品代购... 星野家美饰美妆全球购', 1, 0);
+	('1097770391990046720', 'CK', '/fl/20200102/845880043.png', '全球购个护美妆日,正品低价,品类齐全,退换无忧,品质购物上天猫,让您足不出户,畅想一站式购物的乐趣!', 1, 1),
+	('1105736913995829248', 'hd111', '/fl/20200102/1815641596.png', '海淘 全球美妆 美丽计划从西班牙PB美妆启航,美之所向,心之所往;', 1, 1),
+	('1105737122641481728', 'test', '/fl/20200102/1550549564.png', 'the face shop、opi、skin food、雅诗兰黛、兰蔻、倩碧等进口化妆品代购... 星野家美饰美妆全球购', 1, 1);
 /*!40000 ALTER TABLE `brand` ENABLE KEYS */;
 
--- 导出  表 tbshop.cart 结构
+-- Dumping structure for table tbshop.cart
 DROP TABLE IF EXISTS `cart`;
 CREATE TABLE IF NOT EXISTS `cart` (
   `Id` varchar(50) NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `cart` (
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.cart 的数据：~3 rows (大约)
+-- Dumping data for table tbshop.cart: ~3 rows (大约)
 DELETE FROM `cart`;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
 INSERT INTO `cart` (`Id`, `ProductID`, `ProSizeID`, `ItemNum`, `Price`, `CreateID`, `CreateDate`, `ST`, `ShopID`) VALUES
@@ -61,7 +61,7 @@ INSERT INTO `cart` (`Id`, `ProductID`, `ProSizeID`, `ItemNum`, `Price`, `CreateI
 	('f78b5018baaaaa4c21e1dc80c6737140', '1044505654636711937', '1044526076916797441', 1, 2.90, '1106567884764745728', '2019-03-15 22:49:29', 1, 0);
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 
--- 导出  表 tbshop.comment 结构
+-- Dumping structure for table tbshop.comment
 DROP TABLE IF EXISTS `comment`;
 CREATE TABLE IF NOT EXISTS `comment` (
   `Id` varchar(50) DEFAULT NULL,
@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `ShopID` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 正在导出表  tbshop.comment 的数据：~4 rows (大约)
+-- Dumping data for table tbshop.comment: ~4 rows (大约)
 DELETE FROM `comment`;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
 INSERT INTO `comment` (`Id`, `Summary`, `Fid`, `UserID`, `CreateDate`, `ShopID`) VALUES
@@ -82,7 +82,7 @@ INSERT INTO `comment` (`Id`, `Summary`, `Fid`, `UserID`, `CreateDate`, `ShopID`)
 	('1106569609118617600', '非常期待', '1039058274776911872', NULL, '2019-03-15 22:55:28', 0);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 
--- 导出  表 tbshop.district 结构
+-- Dumping structure for table tbshop.district
 DROP TABLE IF EXISTS `district`;
 CREATE TABLE IF NOT EXISTS `district` (
   `ID` int(11) NOT NULL DEFAULT 0,
@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `district` (
   `Pid` int(11) DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.district 的数据：45,049 rows
+-- Dumping data for table tbshop.district: 45,049 rows
 DELETE FROM `district`;
 /*!40000 ALTER TABLE `district` DISABLE KEYS */;
 INSERT INTO `district` (`ID`, `Name`, `Level`, `Pid`) VALUES
@@ -45147,11 +45147,10 @@ INSERT INTO `district` (`ID`, `Name`, `Level`, `Pid`) VALUES
 	(45581, '茶山竹海街道', 0, 883);
 /*!40000 ALTER TABLE `district` ENABLE KEYS */;
 
--- 导出  函数 tbshop.f_distance 结构
+-- Dumping structure for function tbshop.f_distance
 DROP FUNCTION IF EXISTS `f_distance`;
 DELIMITER //
-CREATE DEFINER=`root`@`localhost` FUNCTION `f_distance`(  
-    origLng DECIMAL(10,6), -- 目的地经度 
+CREATE DEFINER=`root`@`localhost` FUNCTION `f_distance`(origLng DECIMAL(10,6), -- 目的地经度 
     origLat DECIMAL(10,6), -- 目的地纬度  
     longitude DECIMAL(10,6), -- 当前所在地点经度  
     latitude DECIMAL(10,6) -- 当前所在地点纬度  
@@ -45168,7 +45167,7 @@ BEGIN
  END//
 DELIMITER ;
 
--- 导出  表 tbshop.link 结构
+-- Dumping structure for table tbshop.link
 DROP TABLE IF EXISTS `link`;
 CREATE TABLE IF NOT EXISTS `link` (
   `Id` varchar(50) NOT NULL,
@@ -45180,11 +45179,11 @@ CREATE TABLE IF NOT EXISTS `link` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.link 的数据：7 rows
+-- Dumping data for table tbshop.link: 7 rows
 DELETE FROM `link`;
 /*!40000 ALTER TABLE `link` DISABLE KEYS */;
 INSERT INTO `link` (`Id`, `SortID`, `Title`, `ImageUrl`, `LinkUrl`, `ShopID`) VALUES
-	('1078999522597801984', 4, '4', 'http://x3.1766179.com/upload/image/20190312/1915501284.jpg', 'www.baidu.com', 1),
+	('1078999522597801984', 4, '4', '/fl/20200102/1207992467.png', 'www.baidu.com', 1),
 	('1078999247875084288', 4, '3', 'http://x3.1766179.com/upload/image/20190312/554585024.jpg', 'www.baidu.com', 1),
 	('1039684404068356096', 8, 'banner1', 'http://x3.1766179.com/upload/image/20190312/764424657.jpg', 'www.baidu.com', 0),
 	('1039685225178861568', 8, 'banner2', 'http://x3.1766179.com/upload/image/20190312/44721422.jpg', NULL, 0),
@@ -45193,7 +45192,7 @@ INSERT INTO `link` (`Id`, `SortID`, `Title`, `ImageUrl`, `LinkUrl`, `ShopID`) VA
 	('1078999173644292096', 4, '1', 'http://x3.1766179.com/upload/image/20190312/927453658.jpg', NULL, 1);
 /*!40000 ALTER TABLE `link` ENABLE KEYS */;
 
--- 导出  表 tbshop.news 结构
+-- Dumping structure for table tbshop.news
 DROP TABLE IF EXISTS `news`;
 CREATE TABLE IF NOT EXISTS `news` (
   `Id` varchar(50) NOT NULL,
@@ -45210,20 +45209,20 @@ CREATE TABLE IF NOT EXISTS `news` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.news 的数据：7 rows
+-- Dumping data for table tbshop.news: 7 rows
 DELETE FROM `news`;
 /*!40000 ALTER TABLE `news` DISABLE KEYS */;
 INSERT INTO `news` (`Id`, `Title`, `SortID`, `ImageUrl`, `LinkUrl`, `Summary`, `Contents`, `CreateID`, `CreateDate`, `IsValid`, `ShopID`) VALUES
 	('1039058274776911872', '来了！火爆全网的故宫文创周边！还有这些好看得移不开眼的原创设计好物', 2, '/upload/image/20190221/1709984078.jpg', 'wwwwwwwwwww', '钱包、丝巾、名片夹，把故宫文化带回家', '<img src="https://yanxuan.nosdn.127.net/15486738772472769.jpeg" /><img src="https://yanxuan.nosdn.127.net/15486738774742770.jpeg" /><img src="https://yanxuan.nosdn.127.net/15486738782152771.jpeg" /><img src="https://yanxuan.nosdn.127.net/15483185044805482.jpeg" /><img src="https://yanxuan.nosdn.127.net/15483185045245483.jpeg" /><img src="https://yanxuan.nosdn.127.net/15483185045835484.jpeg" />', '975247111765495808', '2019-02-21 14:14:00', 1, 1),
-	('1100326863676510208', '售后保修', 9, NULL, NULL, '根据三包条例，手机从购买日期计算， 1.在7天之内如果出现性能性故障，可以进行退机、换机 、维修。 2.在第8日至第15日内出现性能性故障可以换机、维修。 3.机器购买超过15天在一年之内，机器出现性能性故障整机包修一年。 4.若没有购机发票，可以按照出厂日期包修15个月。', '<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">根据三包条例，手机从购买日期计算，</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">1.在7天之内如果出现性能性故障，可以进行退机、换机 、维修。</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">2.在第8日至第15日内出现性能性故障可以换机、维修。</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">3.机器购买超过15天在一年之内，机器出现性能性故障整机包修一年。</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">4.若没有购机发票，可以按照出厂日期包修15个月。</span><br />\r\n<br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">包修范围：属下列情况之一的移动电话机商品，不实行三包，但可以实行合理的收费修理：</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">1.超过三包有效期的；</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">2.无三包凭证及有效发货票的，但能够证明该移动电话机商品在三包有效期内的除外；</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">3.三包凭证上的内容与商品实物标识不符或者涂改的；</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">4.未按产品使用说明书要求使用、维护、保养而造成损坏的；</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">5.非承担三包的修理者拆动造成损坏的；</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">6.因不可抗力造成损坏的；</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">7.由于使用者使用不当（如坠落、挤压、进液等）而造成损坏的机器；</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">8.使用非三星原厂配件，而导致手机发生故障的。</span>', '975247111765495808', '2019-02-26 17:41:33', 1, 0),
+	('1100326863676510208', '售后保修', 9, NULL, NULL, '根据三包条例，手机从购买日期计算， 1.在7天之内如果出现性能性故障，可以进行退机、换机 、维修。 2.在第8日至第15日内出现性能性故障可以换机、维修。 3.机器购买超过15天在一年之内，机器出现性能性故障整机包修一年。 4.若没有购机发票，可以按照出厂日期包修15个月。', '<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">根据三包条例，手机从购买日期计算，</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">1.在7天之内如果出现性能性故障，可以进行退机、换机 、维修。</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">2.在第8日至第15日内出现性能性故障可以换机、维修。</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">3.机器购买超过15天在一年之内，机器出现性能性故障整机包修一年。</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">4.若没有购机发票，可以按照出厂日期包修15个月。</span><br />\r\n<br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">包修范围：属下列情况之一的移动电话机商品，不实行三包，但可以实行合理的收费修理：</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">1.超过三包有效期的；</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">2.无三包凭证及有效发货票的，但能够证明该移动电话机商品在三包有效期内的除外；</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">3.三包凭证上的内容与商品实物标识不符或者涂改的；</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">4.未按产品使用说明书要求使用、维护、保养而造成损坏的；</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">5.非承担三包的修理者拆动造成损坏的；</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">6.因不可抗力造成损坏的；</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">7.由于使用者使用不当（如坠落、挤压、进液等）而造成损坏的机器；</span><br />\r\n<span style="color:#333333;font-family:&quot;font-size:16px;background-color:#FFFFFF;">8.使用非三星原厂配件，而导致手机发生故障的。</span>', '975247111765495808', '2019-02-26 17:41:33', 1, 1),
 	('1039058715032031232', ' 带着20封情书和60件年度好物，严选向你告白啦！ 养生壶/加湿器/爆款美食，年度好物集结', 2, '/upload/image/20190221/27190142.jpg', 'uuuuuuuuuuuu', '养生壶/加湿器/爆款美食，年度好物集结', '<img  src="https://yanxuan.nosdn.127.net/15494639441905839.jpeg" />\r\n<img  src="https://yanxuan.nosdn.127.net/15494639443975840.jpeg" />\r\n<img  src="https://yanxuan.nosdn.127.net/15494639445915841.jpeg" />\r\n<img  src="https://yanxuan.nosdn.127.net/15494639446545842.jpeg" /> \r\n', '975247111765495808', '2019-02-21 14:15:25', 1, 1),
-	('1100327243634315264', '七天无理由退货', 9, NULL, NULL, '1、七天无理由退货是从物流签收之日起开始计算。退换货需要买家在交易页面申请。  2、“7天无理由退换货”指用户（下称“卖家”）使用淘宝提供的技术支持及服务向其买家提供的特别售后服务，允许买家按本规则及淘宝网其他公示规则的规定对其已购特定商品进行退换货。具体为，以签收日后的第二天零时起计算时间，满168小时为7天），若因买家主观原因不愿完成本次交易，卖家有义务向买家提供退换货服务；若卖家未履行其义务，则买家有权按照本规则向淘宝发起对该卖家的投诉，并申请“7天无理由退换货”赔付。', '1、七天无理由退货是从物流签收之日起开始计算。退换货需要买家在交易页面申请。<br />\r\n<br />\r\n2、“7天无理由退换货”指用户（下称“卖家”）使用淘宝提供的技术支持及服务向其买家提供的特别售后服务，允许买家按本规则及淘宝网其他公示规则的规定对其已购特定商品进行退换货。具体为，以签收日后的第二天零时起计算时间，满168小时为7天），若因买家主观原因不愿完成本次交易，卖家有义务向买家提供退换货服务；若卖家未履行其义务，则买家有权按照本规则向淘宝发起对该卖家的投诉，并申请“7天无理由退换货”赔付。<br />', '975247111765495808', '2019-02-26 17:41:10', 1, 0),
-	('1106166602866495488', '商品使用有问题，该如何处理？', 10, NULL, NULL, '您好，为了更好的解决您的问题，建议您优先查看“商品使用说明”；若使用无误且属于商品原因，建议您在售后申请的时效内尽快提交售后申请，会有专业的工作人员为您审核处理。', '您好，为了更好的解决您的问题，建议您优先查看“商品使用说明”；若使用无误且属于商品原因，建议您在售后申请的时效内尽快提交售后申请，会有专业的工作人员为您审核处理。', '975247111765495808', '2019-03-14 20:16:02', 1, 0),
-	('1106166847432167424', '办理退换货时需要将商品寄回到哪里？', 10, NULL, NULL, '售后返修退换货地址，您申请返修退换货服务单，审核通过后会将地址短信通知您。', '售后返修退换货地址，您申请返修退换货服务单，审核通过后会将地址短信通知您。', '975247111765495808', '2019-03-14 20:15:55', 1, 0),
-	('1106182540147953664', '物流状况 2019-03-14 21:17', 12, '', '17796350288', 'wwwww', '', '1103642850672906240', '2019-03-14 21:17:24', 0, 0);
+	('1100327243634315264', '七天无理由退货', 9, NULL, NULL, '1、七天无理由退货是从物流签收之日起开始计算。退换货需要买家在交易页面申请。  2、“7天无理由退换货”指用户（下称“卖家”）使用淘宝提供的技术支持及服务向其买家提供的特别售后服务，允许买家按本规则及淘宝网其他公示规则的规定对其已购特定商品进行退换货。具体为，以签收日后的第二天零时起计算时间，满168小时为7天），若因买家主观原因不愿完成本次交易，卖家有义务向买家提供退换货服务；若卖家未履行其义务，则买家有权按照本规则向淘宝发起对该卖家的投诉，并申请“7天无理由退换货”赔付。', '1、七天无理由退货是从物流签收之日起开始计算。退换货需要买家在交易页面申请。<br />\r\n<br />\r\n2、“7天无理由退换货”指用户（下称“卖家”）使用淘宝提供的技术支持及服务向其买家提供的特别售后服务，允许买家按本规则及淘宝网其他公示规则的规定对其已购特定商品进行退换货。具体为，以签收日后的第二天零时起计算时间，满168小时为7天），若因买家主观原因不愿完成本次交易，卖家有义务向买家提供退换货服务；若卖家未履行其义务，则买家有权按照本规则向淘宝发起对该卖家的投诉，并申请“7天无理由退换货”赔付。<br />', '975247111765495808', '2019-02-26 17:41:10', 1, 1),
+	('1106166602866495488', '商品使用有问题，该如何处理？1', 10, '/fl/20200102/1999044026.png', NULL, '您好，为了更好的解决您的问题，建议您优先查看“商品使用说明”；若使用无误且属于商品原因，建议您在售后申请的时效内尽快提交售后申请，会有专业的工作人员为您审核处理。', '您好，为了更好的解决您的问题，建议您优先查看“商品使用说明”；若使用无误且属于商品原因，建议您在售后申请的时效内尽快提交售后申请，会有专业的工作人员为您审核处理。', '975247111765495808', '2020-01-02 20:35:16', 0, 1),
+	('1106166847432167424', '办理退换货时需要将商品寄回到哪里？', 10, NULL, NULL, '售后返修退换货地址，您申请返修退换货服务单，审核通过后会将地址短信通知您。', '售后返修退换货地址，您申请返修退换货服务单，审核通过后会将地址短信通知您。', '975247111765495808', '2019-03-14 20:15:55', 1, 1),
+	('1106182540147953664', '物流状况 2019-03-14 21:17', 12, '', '17796350280', 'wwwww', '', '1103642850672906240', '2019-03-14 21:17:24', 0, 1);
 /*!40000 ALTER TABLE `news` ENABLE KEYS */;
 
--- 导出  表 tbshop.product 结构
+-- Dumping structure for table tbshop.product
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE IF NOT EXISTS `product` (
   `Id` varchar(50) NOT NULL DEFAULT '',
@@ -45250,174 +45249,14 @@ CREATE TABLE IF NOT EXISTS `product` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.product 的数据：161 rows
+-- Dumping data for table tbshop.product: 0 rows
 DELETE FROM `product`;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
 INSERT INTO `product` (`Id`, `ProSortID`, `ProductName`, `ProductCode`, `Price`, `BasePrice`, `BatchPrice`, `ImageUrl`, `ImageList`, `ProSize`, `Summary`, `Discount`, `CreateID`, `CreateDate`, `SharePercent`, `IsTop`, `IsHot`, `BrandID`, `Contents`, `Hit`, `ShopID`) VALUES
-	('1044505654393442304', '1034422941099626496', '亚马逊硅胶运动健身时尚杯', 'A001', 1.48, 14.80, 1.48, '/Upload/28/A002/A002_1.png', '/Upload/28/A002/A002_02.png;/Upload/28/A002/A002_03.png;/Upload/28/A002/A002_04.png;/Upload/28/A002/A002_05.png;/Upload/28/A002/A002_06.png;/Upload/28/A002/A002_07.png;/Upload/28/A002/A002_08.png;/Upload/28/A002/A002_09.png;/Upload/28/A002/A002_10.png;/Upload/28/A002/A002_11.png;/Upload/28/A002/A002_12.png;/Upload/28/A002/A002_13.png;/Upload/28/A002/A002_14.png;/Upload/28/A002/A002_15.png;/Upload/28/A002/A002_16.png;/Upload/28/A002/A002_17.png;/Upload/28/A002/A002_18.png;/Upload/28/A002/A002_19.png;/Upload/28/A002/A002_20.png;/Upload/28/A002/A002_21.png', '262*65mm', '产品说明', 0.10, '975247111765495808', '2018-09-25 19:17:30', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654494105600', '1039868529085648896', '高硼硅玻璃罐子', 'A002', 1.00, 10.00, 1.00, '/Upload/28/A003/A003_01.png', '/Upload/28/A003/A003_02.png;/Upload/28/A003/A003_03.png;/Upload/28/A003/A003_04.png;/Upload/28/A003/A003_05.png;/Upload/28/A003/A003_06.png;/Upload/28/A003/A003_07.png;/Upload/28/A003/A003_08.png;/Upload/28/A003/A003_09.png;/Upload/28/A003/A003_10.png;/Upload/28/A003/A003_11.png;/Upload/28/A003/A003_12.png', '450ML口径85*高100mm', '产品说明', 0.10, '975247111765495808', '2018-09-25 19:11:55', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654494105601', '1034422941099626496', '硅胶折叠水瓶', 'A003', 1.58, 15.80, 1.58, '/Upload/28/A006/A006_1.png', '/Upload/28/A006/A006_2.png;/Upload/28/A006/A006_3.png;/Upload/28/A006/A006_4.png;/Upload/28/A006/A006_5.png;/Upload/28/A006/A006_6.png;/Upload/28/A006/A006_7.png;/Upload/28/A006/A006_8.png;/Upload/28/A006/A006_9.png;/Upload/28/A006/A006_10.png;/Upload/28/A006/A006_11.png;/Upload/28/A006/A006_12.png;/Upload/28/A006/A006_13.png;/Upload/28/A006/A006_14.png;/Upload/28/A006/A006_15.png;/Upload/28/A006/A006_16.png;/Upload/28/A006/A006_17.png;/Upload/28/A006/A006_18.png', '46.0 cm * 28.0 cm * 35.0 cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654498299904', '1034422941099626496', '韩版时尚棒棒杯', 'A004', 1.40, 14.00, 1.40, '/Upload/28/A007/A007_1.png', '/Upload/28/A007/A007_2.png;/Upload/28/A007/A007_3.png;/Upload/28/A007/A007_4.png;/Upload/28/A007/A007_5.png;/Upload/28/A007/A007_6.png;/Upload/28/A007/A007_7.png;/Upload/28/A007/A007_8.png;/Upload/28/A007/A007_9.png;/Upload/28/A007/A007_10.png;/Upload/28/A007/A007_11.png', '420ML', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654502494208', '1034422941099626496', '糖果色简约塑料漱口杯\n', 'A005', 0.07, 0.65, 0.07, '/Upload/28/A008/A008_1.png', '/Upload/28/A008/A008_2.png;/Upload/28/A008/A008_3.png;/Upload/28/A008/A008_4.png;/Upload/28/A008/A008_5.png;/Upload/28/A008/A008_6.png', '直径9cm  底部直径6.5cm  产品高度 12.5cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654502494209', '1044483683848949760', '时尚户外便携牙刷杯', 'A006', 0.47, 4.70, 0.47, '/Upload/28/A009/A009_1.png', '/Upload/28/A009/A009_2.png;/Upload/28/A009/A009_3.png;/Upload/28/A009/A009_4.png;/Upload/28/A009/A009_5.png;/Upload/28/A009/A009_6.png;/Upload/28/A009/A009_7.png;/Upload/28/A009/A009_8.png;/Upload/28/A009/A009_9.png;/Upload/28/A009/A009_10.png;/Upload/28/A009/A009_11.png', '60*196mm', '产品说明', 0.10, '975247111765495808', '2018-09-25 19:31:38', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654506688512', '1034422941099626496', '情侣洗漱杯', 'A007', 10.50, 105.00, 10.50, '/Upload/28/A010/A010_1.png', '/Upload/28/A010/A010_2.png;/Upload/28/A010/A010_3.png;/Upload/28/A010/A010_4.png;/Upload/28/A010/A010_5.png;/Upload/28/A010/A010_6.png;/Upload/28/A010/A010_7.png', '直径:8cm高:11cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 1, 1),
-	('1044505654506688513', '1034422941099626496', '平衡游戏杯', 'A008', 0.50, 5.00, 0.50, '/Upload/28/A011/A011_1.png', '/Upload/28/A011/A011_2.png;/Upload/28/A011/A011_3.png', '301ml', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654506688514', '1034422941099626496', '创意塑料洗漱牙刷杯', 'A009', 0.20, 2.00, 0.20, '/Upload/28/A012/A012_1.png', '/Upload/28/A012/A012_2.png;/Upload/28/A012/A012_3.png;/Upload/28/A012/A012_4.png', '10.5*7.5*6cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654510882816', '1034422941099626496', '天然环保麦香杯', 'A010', 0.50, 5.00, 0.50, '/Upload/28/A013/A013_1.png', '/Upload/28/A013/A013_2.png;/Upload/28/A013/A013_3.png;/Upload/28/A013/A013_4.png;/Upload/28/A013/A013_5.png;/Upload/28/A013/A013_6.png', '直径5.7cm杯盖直径6.5cm高度17cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654510882817', '1034422941099626496', '耐热玻璃双层杯', 'A011', 0.80, 8.00, 0.80, '/Upload/28/A014/A014_1.png', '/Upload/28/A014/A014_2.png;/Upload/28/A014/A014_3.png;/Upload/28/A014/A014_4.png;/Upload/28/A014/A014_5.png;/Upload/28/A014/A014_6.png;/Upload/28/A014/A014_7.png;/Upload/28/A014/A014_8.png', '250ml', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654515077120', '1034422941099626496', '渐变太空杯', 'A015', 0.80, 8.00, 0.80, '/Upload/28/A018/A018_1.png', '/Upload/28/A018/A018_2.png;/Upload/28/A018/A018_3.png;/Upload/28/A018/A018_4.png;/Upload/28/A018/A018_5.png;/Upload/28/A018/A018_6.png;/Upload/28/A018/A018_7.png;/Upload/28/A018/A018_8.png', '601-700ml', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654515077121', '1034422941099626496', '玻璃双层杯 ', 'A016', 2.20, 22.00, 2.20, '/Upload/28/A019/A019_1.png', '/Upload/28/A019/A019_2.png;/Upload/28/A019/A019_3.png;/Upload/28/A019/A019_4.png;/Upload/28/A019/A019_5.png;/Upload/28/A019/A019_6.png;/Upload/28/A019/A019_7.png', '220mmx66mm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654519271424', '1034422941099626496', '三层多功能健身水杯', 'A017', 1.00, 10.00, 1.00, '/Upload/28/A020/A020_1.png', '/Upload/28/A020/A020_1.png', '500ml', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654519271425', '1034422941099626496', '便携防漏运动水壶', 'A018', 0.95, 9.50, 0.95, '/Upload/28/A021/A021_1.png', '/Upload/28/A021/A021_2.png;/Upload/28/A021/A021_3.png;/Upload/28/A021/A021_4.png;', '650ML', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654523465728', '1039868614750113792', '日式田园草编织收纳篮', 'A019', 2.50, 25.00, 2.50, '/Upload/28/A022/A022_1.png', '/Upload/28/A022/A022_2.png;/Upload/28/A022/A022_3.png;/Upload/28/A022/A022_4.png;', '33*24*7', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654523465729', '1039868614750113792', '越南藤编水果收纳盘', 'A020', 6.00, 60.00, 6.00, '/Upload/28/A025/A025_1.png', '/Upload/28/A025/A025_2.png;/Upload/28/A025/A025_3.png;/Upload/28/A025/A025_4.png;', '27*10', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654523465730', '1039868787521884160', '越南藤编纸巾筒', 'A021', 5.50, 55.00, 5.50, '/Upload/28/A028/A028_1.png', '/Upload/28/A028/A028_2.png;/Upload/28/A028/A028_3.png;/Upload/28/A028/A028_4.png;/Upload/28/A028/A028_5.png', '15*14', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654527660032', '1039868899493023744', '28客厅柚木创意水果盘', 'A022', 5.50, 55.00, 5.50, '/Upload/28/A029/A029_1.png', '/Upload/28/A029/A029_2.png;/Upload/28/A029/A029_3.png;/Upload/28/A029/A029_4.png;/Upload/28/A029/A029_5.png;/Upload/28/A029/A029_6.png;', '31*23*12cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654527660033', '1039868614750113792', '越南草编收纳篮', 'A023', 3.00, 30.00, 3.00, '/Upload/28/A030/A030_1.png', '/Upload/28/A030/A030_2.png;/Upload/28/A030/A030_3.png;/Upload/28/A030/A030_4.png', '41*30*36', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654527660034', '1039868787521884160', '高档家用木质纸抽盒', 'A024', 11.00, 110.00, 11.00, '/Upload/28/A031/A031_1.png', '/Upload/28/A031/A031_2.png;/Upload/28/A031/A031_3.png;/Upload/28/A031/A031_4.png', '25*25*16cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654531854336', '1039868899493023744', '复古手工竹编托盘', 'A025', 4.20, 42.00, 4.20, '/Upload/28/A032/A032_1.png', '/Upload/28/A032/A032_2.png;/Upload/28/A032/A032_3.png;/Upload/28/A032/A032_4.png', '30*40', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654531854337', '1039868614750113792', '越南草编脏衣篓', 'A026', 4.00, 40.00, 4.00, '/Upload/28/A033/A033_1.png', '/Upload/28/A033/A033_2.png;/Upload/28/A033/A033_3.png;/Upload/28/A033/A033_4.png;/Upload/28/A033/A033_5.png;/Upload/28/A033/A033_6.png;/Upload/28/A033/A033_7.png;', '24*19*21', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654536048640', '1039868899493023744', '手工藤编茶盘', 'A027', 6.50, 65.00, 6.50, '/Upload/28/A038/A038_1.png', '/Upload/28/A038/A038_2.png;/Upload/28/A038/A038_3.png;/Upload/28/A038/A038_4.png;/Upload/28/A038/A038_5.png;/Upload/28/A038/A038_6.png;', '31*21*3', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654536048641', '1039868962139148288', '原木色实木花瓶', 'A028', 9.50, 95.00, 9.50, '/Upload/28/A039/A039_1.png', '/Upload/28/A039/A039_2.png;/Upload/28/A039/A039_3.png;/Upload/28/A039/A039_4.png;/Upload/28/A039/A039_5.png;/Upload/28/A039/A039_6.png;', '31*14.5cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654540242944', '1039868614750113792', '实木储物盒', 'A029', 7.90, 79.00, 7.90, '/Upload/28/A040/A040_1.png', '/Upload/28/A040/A040_2.png;/Upload/28/A040/A040_3.png;/Upload/28/A040/A040_4.png;/Upload/28/A040/A040_5.png;/Upload/28/A040/A040_6.png;/Upload/28/A040/A040_7.png;', '32*10*7', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654540242945', '1039868614750113792', '创意木质原生态储物盒', 'A030', 2.00, 20.00, 2.00, '/Upload/28/A041/A041_1.png', '/Upload/28/A040/A040_2.png;/Upload/28/A040/A040_3.png;/Upload/28/A040/A040_4.png;/Upload/28/A040/A040_5.png;/Upload/28/A040/A040_6.png;/Upload/28/A040/A040_7.png;', '直径4.6高7.8底部6.5cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654540242946', '1039868787521884160', '木质多功能收纳纸巾盒', 'A031', 8.00, 80.00, 8.00, '/Upload/28/A042/A042_1.png', '/Upload/28/A041/A041_2.png;/Upload/28/A041/A041_3.png;/Upload/28/A041/A041_4.png;/Upload/28/A041/A041_5.png;/Upload/28/A041/A041_6.png', '20*13.5*9', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654544437248', '1039868614750113792', '泰国木制茶叶盒', 'A032', 2.50, 25.00, 2.50, '/Upload/28/A043/A043_1.png', '/Upload/28/A042/A042_2.png;/Upload/28/A042/A042_3.png;/Upload/28/A042/A042_4.png', '12*12', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654544437249', '1039869108402917376', '泰国进口 烟缸4英寸', 'A033', 1.10, 11.00, 1.10, '/Upload/28/A044/A044_1.png', '/Upload/28/A043/A043_2.png;/Upload/28/A043/A043_3.png;/Upload/28/A043/A043_4.png;/Upload/28/A043/A043_5.png;', '直径10cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654544437250', '1044483250208247808', '芒果木茶具', 'A034', 7.50, 75.00, 7.50, '/Upload/28/A045/A045_1.png', '/Upload/28/A044/A044_2.png;/Upload/28/A044/A044_3.png;/Upload/28/A044/A044_4.png;', '盒:35*12*5碗:直径10*4.5', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654548631552', '1039869164170383360', '木质创意牙签盒', 'A035', 1.20, 12.00, 1.20, '/Upload/28/A046/A046_1.png', '/Upload/28/A045/A045_2.png;/Upload/28/A045/A045_3.png;/Upload/28/A045/A045_4.png', '8*7.5cm', '实木牙签筒自动蘑菇按压式简约牙签盒餐厅客厅创意家用牙签罐可爱', 0.10, '975247111765495808', '2019-02-19 14:24:00', 0.10, 0, 1, '0', ' ', 1, 1),
-	('1044505654548631553', '1039869418005467136', '大象竹编台灯', 'A036', 16.50, 165.00, 16.50, '/Upload/28/A047/A047_1.png', '/Upload/28/A046/A046_2.png;/Upload/28/A046/A046_3.png;/Upload/28/A046/A046_4.png;/Upload/28/A046/A046_5.png', '31*10*30cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654548631554', '1039868614750113792', '柚木笔筒', 'A037', 1.80, 18.00, 1.80, '/Upload/28/A048/A048_1.png', '/Upload/28/A047/A047_2.png;/Upload/28/A047/A047_3.png;/Upload/28/A047/A047_4.png;/Upload/28/A047/A047_5.png;/Upload/28/A047/A047_6.png;/Upload/28/A047/A047_7.png;/Upload/28/A047/A047_8.png;', '10*10cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654552825856', '1039869418005467136', '泰国进口柚木大象创意台灯', 'A038', 16.00, 160.00, 16.00, '/Upload/28/A049/A049_1.png', '/Upload/28/A048/A048_2.png;/Upload/28/A048/A048_3.png;/Upload/28/A048/A048_4.png;/Upload/28/A048/A048_5.png;/Upload/28/A048/A048_6.png', '18*37cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654552825857', '1044483250208247808', '泰国进口工艺茶盘 竹编三件套', 'A040', 8.50, 85.00, 8.50, '/Upload/28/A051/A051_1.png', '/Upload/28/A050/A050_2.png;/Upload/28/A050/A050_3.png;/Upload/28/A050/A050_4.png;/Upload/28/A050/A050_5.png;/Upload/28/A050/A050_6.png;/Upload/28/A050/A050_7.png;/Upload/28/A050/A050_8.png;', '小:26*19cm中:26*26cm大:50*30cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654557020160', '1039868614750113792', '进口木质家居茶叶罐', 'A041', 2.00, 20.00, 2.00, '/Upload/28/A052/A052_1.png', '/Upload/28/A051/A051_2.png;/Upload/28/A051/A051_3.png;/Upload/28/A051/A051_4.png;/Upload/28/A051/A051_5.png;', '15*15cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654557020161', '1039869418005467136', '浪漫椰壳烛台', 'A042', 2.50, 25.00, 2.50, '/Upload/28/A053/A053_1.png', '/Upload/28/A052/A052_2.png;/Upload/28/A052/A052_3.png;/Upload/28/A052/A052_4.png;/Upload/28/A052/A052_5.png;', '直径11cm*8', '产品说明', 0.10, '975247111765495808', '2018-09-25 19:33:13', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654561214464', '1039869418005467136', '马到成功床头台灯', 'A043', 21.50, 215.00, 21.50, '/Upload/28/A054/A054_1.png', '/Upload/28/A053/A053_2.png;/Upload/28/A053/A053_3.png;/Upload/28/A053/A053_4.png;/Upload/28/A053/A053_5.png;/Upload/28/A053/A053_6.png;/Upload/28/A053/A053_1.png;/Upload/28/A053/A053_7.png;', '30*44cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654561214465', '1039868614750113792', '泰国进口工艺品茶叶盒', 'A044', 2.90, 29.00, 2.90, '/Upload/28/A055/A055_1.png', '/Upload/28/A054/A054_2.png;/Upload/28/A054/A054_3.png;/Upload/28/A054/A054_4.png;/Upload/28/A054/A054_5.png;/Upload/28/A054/A054_6.png;/Upload/28/A054/A054_7.png;', '13*11', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654561214466', '1039869418005467136', '竹编台灯卧室床头灯', 'A045', 16.00, 160.00, 16.00, '/Upload/28/A056/A056_1.png', '/Upload/28/A055/A055_2.png;/Upload/28/A055/A055_3.png;/Upload/28/A055/A055_4.png;/Upload/28/A055/A055_5.png;/Upload/28/A055/A055_6.png;/Upload/28/A055/A055_7.png;', '24*45', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654565408768', '1039868614750113792', '柚木立体雕花收纳盒', 'A046', 7.00, 70.00, 7.00, '/Upload/28/A057/A057_1.png', '/Upload/28/A056/A056_2.png;/Upload/28/A056/A056_3.png;/Upload/28/A056/A056_4.png;/Upload/28/A056/A056_5.png;/Upload/28/A056/A056_6.png;/Upload/28/A056/A056_7.png;/Upload/28/A056/A056_8.png;', '12*10*9', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654569603072', '1039868614750113792', '泰国进口工艺品 首饰盒', 'A047', 2.90, 29.00, 2.90, '/Upload/28/A058/A058_1.png', '/Upload/28/A057/A057_2.png;/Upload/28/A057/A057_3.png;/Upload/28/A057/A057_4.png;/Upload/28/A057/A057_5.png', '12*7', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654569603073', '1039868787521884160', '越南红木纸巾盒鸡翅木镶贝印花纸巾盒', 'A048', 1.60, 16.00, 1.60, '/Upload/28/A059/A059_1.png', '/Upload/28/A058/A058_2.png;/Upload/28/A058/A058_3.png;/Upload/28/A058/A058_4.png;/Upload/28/A058/A058_5.png;/Upload/28/A058/A058_6.png', '22.4*11.3*8', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654573797376', '1039868614750113792', '五谷杂粮密封罐', 'A049', 0.52, 5.20, 0.52, '/Upload/28/A060/A060_1.png', '/Upload/28/A059/A059_2.png;/Upload/28/A059/A059_3.png;/Upload/28/A059/A059_4.png;/Upload/28/A059/A059_5.png', '14.5*10.5*12.5CM', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654573797377', '1044483361164365824', '加厚塑料抽屉式鞋盒', 'A050', 0.38, 3.80, 0.38, '/Upload/28/A061/A061_1.png', '/Upload/28/A060/A060_2.png;/Upload/28/A060/A060_3.png;/Upload/28/A060/A060_4.png;/Upload/28/A060/A060_5.png;/Upload/28/A060/A060_6.png;/Upload/28/A060/A060_7.png;/Upload/28/A060/A060_8.png;/Upload/28/A060/A060_9.png;', '33*23*13', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654577991680', '1039869475119304704', '七彩精油香薰机', 'A051', 2.95, 29.50, 2.95, '/Upload/29/A062/A062_1.png', '/Upload/28/A061/A061_2.png;/Upload/28/A061/A061_3.png;/Upload/28/A061/A061_4.png;/Upload/28/A061/A061_5.png;/Upload/28/A061/A061_6.png;/Upload/28/A061/A061_7.png;/Upload/28/A061/A061_8.png;/Upload/28/A061/A061_9.png;/Upload/28/A061/A061_10.png', '70x70x125mm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654577991681', '1039869475119304704', '静音喷雾车用夜灯USB空气净化器', 'A052', 3.00, 30.00, 3.00, '/Upload/29/A063/A063_1.png', '/Upload/29/A062/A062_2.png;/Upload/28/A062/A062_3.png;/Upload/29/A062/A062_4.png;/Upload/28/A062/A062_5.png;/Upload/29/A062/A062_6.png;/Upload/28/A062/A062_7.png;/Upload/29/A062/A062_8.png', ' 6.8*6.8*14.5cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654582185984', '1039869727788371968', '强力除螨吸尘器', 'A053', 11.78, 117.81, 11.78, '/Upload/29/A064/A064_1.png', '/Upload/29/A063/A063_2.png;/Upload/29/A063/A063_3.png;/Upload/29/A063/A063_4.png;/Upload/29/A063/A063_5.png;/Upload/29/A063/A063_6.png;/Upload/29/A063/A063_7.png;/Upload/29/A063/A063_8.png;/Upload/29/A063/A063_9.png;/Upload/29/A063/A063_10.png;/Upload/29/A063/A063_11.png;/Upload/29/A063/A063_12.png;/Upload/29/A063/A063_13.png;/Upload/29/A063/A063_14.png;/Upload/29/A063/A063_15.png', '350*240*140', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654582185985', '1044485227524788224', '五级厨房家用净水器', 'A054', 3.00, 30.00, 3.00, '/Upload/28/A065/A065_1.png', '/Upload/29/A064/A064_2.png;/Upload/29/A064/A064_3.png;/Upload/29/A064/A064_4.png;/Upload/29/A064/A064_5.png;/Upload/29/A064/A064_6.png;/Upload/29/A064/A064_7.png;/Upload/29/A064/A064_8.png;/Upload/29/A064/A064_9.png;/Upload/29/A064/A064_10.png;/Upload/29/A064/A064_11.png;/Upload/29/A064/A064_12.png;/Upload/29/A064/A064_13.png;/Upload/29/A064/A064_14.png', '410*100*335', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654586380288', '1039869475119304704', '柠檬加湿器', 'A056', 4.10, 41.00, 4.10, '/Upload/28/A067/A067_1.png', '/Upload/28/A067/A067_2.png;/Upload/28/A067/A067_3.png;/Upload/28/A067/A067_4.png;/Upload/28/A067/A067_5.png;/Upload/28/A067/A067_6.png;/Upload/28/A067/A067_7.png;/Upload/28/A067/A067_8.png;/Upload/28/A067/A067_9.png;/Upload/28/A067/A067_10.png;/Upload/28/A067/A067_11.png;/Upload/28/A067/A067_12.png;/Upload/28/A067/A067_13.png;/Upload/28/A067/A067_14.png;/Upload/28/A067/A067_15.png;/Upload/28/A067/A067_16.png;/Upload/28/A067/A067_17.png;', '8*8*11.2cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654586380289', '1044552221720711168', '无油玻璃光波炉', 'A057', 8.50, 85.00, 8.50, '/Upload/28/A068/A068_4.png', '/Upload/28/A068/A068_2.png;/Upload/28/A068/A068_3.png;/Upload/28/A068/A068_4.png;/Upload/28/A068/A068_5.png;/Upload/28/A068/A068_6.png;/Upload/28/A068/A068_7.png;/Upload/28/A068/A068_8.png;/Upload/28/A068/A068_9.png;/Upload/28/A068/A068_10.png;/Upload/28/A068/A068_11.png;/Upload/28/A068/A068_12.png;/Upload/28/A068/A068_13.png;/Upload/28/A068/A068_14.png;/Upload/28/A068/A068_15.png;/Upload/28/A068/A068_16.png;/Upload/28/A068/A068_17.png;/Upload/28/A068/A068_18.png;/Upload/28/A068/A068_19.png;/Upload/28/A068/A068_20.png;/Upload/28/A068/A068_21.png;/Upload/28/A068/A068_22.png;/Upload/28/A068/A068_23.png;/Upload/28/A068/A068_24.png;/Upload/28/A068/A068_25.png', '37.0 cm * 33.0 cm * 32.0 cm', '家用多功能光波炉电炸锅无油玻璃空气炸锅12L空气炉礼品', 0.10, '975247111765495808', '2019-02-26 17:23:39', 0.10, 1, 0, '1097770391990046720', '<p>\n	<img src="http://x3.1766179.com/Upload/28/A068/A068_2.png" border="0" alt="" /> <img src="http://x3.1766179.com/Upload/28/A068/A068_3.png" border="0" alt="" /> <img src="http://x3.1766179.com/Upload/28/A068/A068_4.png" border="0" alt="" /> \n</p>', 4, 1),
-	('1044505654590574592', '1039869881530585088', '迷你电动榨汁机', 'A058', 3.50, 35.00, 3.50, '/Upload/28/A069/A069_1.png', '/Upload/28/A069/A069_2.png;/Upload/28/A069/A069_3.png;/Upload/28/A069/A069_4.png;/Upload/28/A069/A069_5.png;/Upload/28/A069/A069_6.png;/Upload/28/A069/A069_7.png;/Upload/28/A069/A069_8.png;/Upload/28/A069/A069_9.png', '400mL及以下', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654590574593', '1044485798604443648', '家用食物蔬菜宠物肉食药材风干机', 'A059', 13.50, 135.00, 13.50, '/Upload/29/A070/A070_1.png', '/Upload/28/A070/A070_2.png;/Upload/28/A070/A070_3.png;/Upload/28/A070/A070_4.png;/Upload/28/A070/A070_5.png', '280*280*320mm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654590574594', '1034422941099626496', 'supreme保温杯', 'A060', 1.50, 15.00, 1.50, '/Upload/28/A098/A098_1.png', '/Upload/28/A098/A098_2.png;/Upload/28/A098/A098_3.png;/Upload/28/A098/A098_4.png;/Upload/28/A098/A098_5.png;/Upload/28/A098/A098_6.png;/Upload/28/A098/A098_7.png;/Upload/28/A098/A098_8.png;/Upload/28/A098/A098_9.png;/Upload/28/A098/A098_10.png;/Upload/28/A098/A098_11.png;/Upload/28/A098/A098_12.png;/Upload/28/A098/A098_13.png;/Upload/28/A098/A098_14.png;/Upload/28/A098/A098_15.png;/Upload/28/A098/A098_16.png', '350ml', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654590574595', '1034422941099626496', '艾可思卡通兔子保温杯', 'A061', 2.04, 20.40, 2.04, '/Upload/28/A102/A102_1.png', '/Upload/28/A102/A102_2.png;/Upload/28/A102/A102_3.png;/Upload/28/A102/A102_4.png;/Upload/28/A102/A102_5.png;/Upload/28/A102/A102_6.png;/Upload/28/A102/A102_7.png;/Upload/28/A102/A102_8.png;/Upload/28/A102/A102_9.png;/Upload/28/A102/A102_10.png;/Upload/28/A102/A102_11.png;/Upload/28/A102/A102_12.png;/Upload/28/A102/A102_13.png', '8*8*14.4cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654590574596', '1039869727788371968', '充电二合一推杆式吸尘器', 'A062', 10.00, 100.00, 10.00, '/Upload/29/A101/A101_1.png', '/Upload/29/A101/A101_2.png;/Upload/29/A101/A101_3.png;/Upload/29/A101/A101_4.png;/Upload/29/A101/A101_5.png;/Upload/29/A101/A101_6.png;/Upload/29/A101/A101_7.png;/Upload/29/A101/A101_8.png;/Upload/29/A101/A101_9.png;/Upload/29/A101/A101_10.png;/Upload/29/A101/A101_11.png;/Upload/29/A101/A101_12.png;/Upload/29/A101/A101_13.png;/Upload/29/A101/A101_14.png;/Upload/29/A101/A101_15.png;/Upload/29/A101/A101_16.png;/Upload/29/A101/A101_17.png;/Upload/29/A101/A101_18.png;/Upload/29/A101/A101_19.png;/Upload/29/A101/A101_20.png;/Upload/29/A101/A101_21.png;/Upload/29/A101/A101_22.png;/Upload/29/A101/A101_23.png;/Upload/29/A101/A101_24.png;/Upload/29/A101/A101_25.png;/Upload/29/A101/A101_26.png;/Upload/29/A101/A101_27.png;/Upload/29/A101/A101_28.png;/Upload/29/A101/A101_29.png;/Upload/29/A101/A101_30.png;/Upload/29/A101/A101_31.png;/Upload/29/A101/A101_32.png;/Upload/29/A101/A101_33.png;/Upload/29/A101/A101_34.png', '202*282*1188mm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654594768896', '1039868614750113792', '爆款eva加厚双层脏衣篓', 'A063', 1.85, 18.50, 1.85, '/Upload/28/A100/A100_1.png', '/Upload/28/A100/A100_2.png;/Upload/28/A100/A100_3.png;/Upload/28/A100/A100_4.png;/Upload/28/A100/A100_5.png;/Upload/28/A100/A100_6.png;/Upload/28/A100/A100_7.png;/Upload/28/A100/A100_8.png;/Upload/28/A100/A100_9.png;/Upload/28/A100/A100_10.png;/Upload/28/A100/A100_11.png;/Upload/28/A100/A100_12.png;/Upload/28/A100/A100_13.png;/Upload/28/A100/A100_14.png;/Upload/28/A100/A100_15.png;/Upload/28/A100/A100_16.png;/Upload/28/A100/A100_17.png;/Upload/28/A100/A100_18.png;/Upload/28/A100/A100_19.png;/Upload/28/A100/A100_20.png;/Upload/28/A100/A100_21.png;/Upload/28/A100/A100_22.png;/Upload/28/A100/A100_23.png;/Upload/28/A100/A100_24.png;/Upload/28/A100/A100_25.png;/Upload/28/A100/A100_26.png;/Upload/28/A100/A100_27.png;/Upload/28/A100/A100_28.png;/Upload/28/A100/A100_29.png;/Upload/28/A100/A100_30.png;/Upload/28/A100/A100_31.png', '35*45cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654594768897', '1044483562247688192', '扬格黑色磨砂日式密胺仿瓷餐具', 'A064', 0.99, 9.86, 0.99, '/Upload/28/A097/A097_1.png', '/Upload/28/A097/A097_2.png;/Upload/28/A097/A097_3.png;/Upload/28/A097/A097_4.png;/Upload/28/A097/A097_5.png;/Upload/28/A097/A097_6.png;/Upload/28/A097/A097_7.png;/Upload/28/A097/A097_8.png;/Upload/28/A097/A097_9.png;/Upload/28/A097/A097_10.png;/Upload/28/A097/A097_11.png;/Upload/28/A097/A097_12.png;/Upload/28/A097/A097_13.png;/Upload/28/A097/A097_14.png;/Upload/28/A097/A097_15.png;/Upload/28/A097/A097_16.png;/Upload/28/A097/A097_17.png', '8寸螺纹碗20*20*7.5cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654598963200', '1044483562247688192', '扬格日式汤碗仿瓷泡面碗', 'A065', 1.96, 19.60, 1.96, '/Upload/28/A103/A103_1.png', '/Upload/28/A103/A103_2.png;/Upload/28/A103/A103_3.png;/Upload/28/A103/A103_4.png;/Upload/28/A103/A103_5.png;/Upload/28/A103/A103_6.png;/Upload/28/A103/A103_7.png;/Upload/28/A103/A103_8.png;/Upload/28/A103/A103_9.png;/Upload/28/A103/A103_10.png;/Upload/28/A103/A103_11.png;/Upload/28/A103/A103_12.png;/Upload/28/A103/A103_13.png;/Upload/28/A103/A103_14.png;/Upload/28/A103/A103_15.png;/Upload/28/A103/A103_16.png;/Upload/28/A103/A103_17.png;/Upload/28/A103/A103_18.png;/Upload/28/A103/A103_19.png', '18*11cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654598963201', '1039868614750113792', '合金把手布艺收纳桶', 'A066', 2.69, 26.90, 2.69, '/Upload/28/A104/A104_1.png', '/Upload/28/A104/A104_2.png;/Upload/28/A104/A104_3.png;/Upload/28/A104/A104_4.png;/Upload/28/A104/A104_5.png;/Upload/28/A104/A104_6.png;/Upload/28/A104/A104_7.png;/Upload/28/A104/A104_8.png', '32*28*49cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654598963202', '1039868614750113792', '棉麻收纳桶', 'A067', 1.35, 13.50, 1.35, '/Upload/28/A105/A105_1.png', '/Upload/28/A105/A105_2.png;/Upload/28/A105/A105_3.png;/Upload/28/A105/A105_4.png;/Upload/28/A105/A105_5.png;/Upload/28/A105/A105_6.png;/Upload/28/A105/A105_7.png;/Upload/28/A105/A105_8.png', '30*35cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654603157504', '1034422941099626496', '创意高硼硅双层玻璃杯', 'A068', 0.75, 7.50, 0.75, '/Upload/28/A106/A106_1.png', '/Upload/28/A106/A106_2.png;/Upload/28/A106/A106_3.png;/Upload/28/A106/A106_4.png;/Upload/28/A106/A106_5.png;/Upload/28/A106/A106_6.png;/Upload/28/A106/A106_7.png;/Upload/28/A106/A106_8.png;/Upload/28/A106/A106_9.png;/Upload/28/A106/A106_10.png;/Upload/28/A106/A106_11.png;/Upload/28/A106/A106_12.png;/Upload/28/A106/A106_13.png;/Upload/28/A106/A106_14.png;/Upload/28/A106/A106_15.png;/Upload/28/A106/A106_16.png;/Upload/28/A106/A106_17.png;/Upload/28/A106/A106_18.png', '7.8*16cm360ml', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654603157505', '1034422941099626496', '艾可思闪电狐香槟金玻璃杯', 'A069', 1.10, 11.00, 1.10, '/Upload/28/A107/A107_1.png', '/Upload/28/A107/A107_2.png;/Upload/28/A107/A107_3.png;/Upload/28/A107/A107_4.png;/Upload/28/A107/A107_5.png;/Upload/28/A107/A107_6.png;/Upload/28/A107/A107_7.png;/Upload/28/A107/A107_8.png', '300ml', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654607351808', '1044483611702726656', '全自动双层雨伞', 'A070', 2.70, 27.00, 2.70, '/Upload/28/A108/A108_1.png', '/Upload/28/A108/A108_2.png;/Upload/28/A108/A108_3.png;/Upload/28/A108/A108_4.png;/Upload/28/A108/A108_5.png;/Upload/28/A108/A108_6.png;/Upload/28/A108/A108_7.png;/Upload/28/A108/A108_8.png;/Upload/28/A108/A108_9.png;/Upload/28/A108/A108_10.png;/Upload/28/A108/A108_11.png;/Upload/28/A108/A108_12.png;/Upload/28/A108/A108_13.png;/Upload/28/A108/A108_14.png;/Upload/28/A108/A108_15.png;/Upload/28/A108/A108_16.png;/Upload/28/A108/A108_17.png;/Upload/28/A108/A108_18.png;/Upload/28/A108/A108_19.png;/Upload/28/A108/A108_20.png', '撑开62cm收伞30cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654607351809', '1044483611702726656', '清新条纹小猫三折伞', 'A071', 2.00, 20.00, 2.00, '/Upload/28/A109/A109_1.png', '/Upload/28/A109/A109_2.png;/Upload/28/A109/A109_3.png;/Upload/28/A109/A109_4.png;/Upload/28/A109/A109_5.png;/Upload/28/A109/A109_6.png;/Upload/28/A109/A109_7.png;/Upload/28/A109/A109_8.png;/Upload/28/A109/A109_9.png;/Upload/28/A109/A109_10.png;/Upload/28/A109/A109_11.png;/Upload/28/A109/A109_12.png;/Upload/28/A109/A109_13.png;/Upload/28/A109/A109_14.png;/Upload/28/A109/A109_15.png;/Upload/28/A109/A109_16.png;/Upload/28/A109/A109_17.png;/Upload/28/A109/A109_18.png', '96*55cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654607351810', '1044483611702726656', '2018新款全自动晴雨伞', 'A072', 2.30, 23.00, 2.30, '/Upload/28/A110/A110_1.png', '/Upload/28/A110/A110_2.png;/Upload/28/A110/A110_3.png;/Upload/28/A110/A110_4.png;/Upload/28/A110/A110_5.png;/Upload/28/A110/A110_6.png;/Upload/28/A110/A110_7.png;/Upload/28/A110/A110_8.png;/Upload/28/A110/A110_9.png;/Upload/28/A110/A110_10.png;/Upload/28/A110/A110_11.png;/Upload/28/A110/A110_12.png;/Upload/28/A110/A110_13.png;/Upload/28/A110/A110_14.png;/Upload/28/A110/A110_15.png;/Upload/28/A110/A110_16.png;/Upload/28/A110/A110_17.png;/Upload/28/A110/A110_18.png;/Upload/28/A110/A110_19.png;/Upload/28/A110/A110_20.png;/Upload/28/A110/A110_21.png;/Upload/28/A110/A110_22.png', '撑开:66*100cm收伞:33cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654611546112', '1034422941099626496', '创意木纹盖广告杯', 'A073', 1.13, 11.27, 1.13, '/Upload/28/A111/A111_1.png', '/Upload/28/A111/A111_2.png;/Upload/28/A111/A111_3.png;/Upload/28/A111/A111_4.png;/Upload/28/A111/A111_5.png;/Upload/28/A111/A111_6.png;/Upload/28/A111/A111_7.png;/Upload/28/A111/A111_8.png;/Upload/28/A111/A111_9.png;/Upload/28/A111/A111_10.png;/Upload/28/A111/A111_11.png;/Upload/28/A111/A111_12.png;/Upload/28/A111/A111_13.png;/Upload/28/A111/A111_14.png;/Upload/28/A111/A111_15.png;/Upload/28/A111/A111_16.png;/Upload/28/A111/A111_17.png;/Upload/28/A111/A111_18.png;/Upload/28/A111/A111_19.png;/Upload/28/A111/A111_20.png;/Upload/28/A111/A111_21.png;/Upload/28/A111/A111_22.png;/Upload/28/A111/A111_23.png;/Upload/28/A111/A111_24.png', '400ml', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654611546113', '1034422941099626496', '陶瓷杯子带盖镜面马克杯', 'A074', 0.66, 6.57, 0.66, '/Upload/28/A112/A112_1.png', '/Upload/28/A112/A112_2.png;/Upload/28/A112/A112_3.png;/Upload/28/A112/A112_4.png;/Upload/28/A112/A112_5.png;/Upload/28/A112/A112_6.png;/Upload/28/A112/A112_7.png;/Upload/28/A112/A112_8.png;/Upload/28/A112/A112_9.png;/Upload/28/A112/A112_10.png;/Upload/28/A112/A112_11.png;/Upload/28/A112/A112_12.png;/Upload/28/A112/A112_13.png;/Upload/28/A112/A112_14.png', '15*8cm320ml', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654611546114', '1034422941099626496', '大理石纹马克杯', 'A075', 1.75, 17.50, 1.75, '/Upload/28/A113/A113_1.png', '/Upload/28/A113/A113_2.png;/Upload/28/A113/A113_3.png;/Upload/28/A113/A113_4.png;/Upload/28/A113/A113_5.png;/Upload/28/A113/A113_6.png;/Upload/28/A113/A113_7.png;/Upload/28/A113/A113_8.png;/Upload/28/A113/A113_9.png;/Upload/28/A113/A113_10.png;/Upload/28/A113/A113_11.png;/Upload/28/A113/A113_12.png;/Upload/28/A113/A113_13.png;/Upload/28/A113/A113_14.png;/Upload/28/A113/A113_15.png', '8.8*8.9cm400ml', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654615740416', '1034422941099626496', '陶瓷杯子带盖镜面马克杯', 'A076', 0.73, 7.30, 0.73, '/Upload/28/A114/A114_1.png', '/Upload/28/A114/A114_2.png;/Upload/28/A114/A114_3.png;/Upload/28/A114/A114_4.png;/Upload/28/A114/A114_5.png;/Upload/28/A114/A114_6.png;/Upload/28/A114/A114_7.png;/Upload/28/A114/A114_8.png;/Upload/28/A114/A114_9.png;/Upload/28/A114/A114_10.png;/Upload/28/A114/A114_11.png;/Upload/28/A114/A114_12.png;/Upload/28/A114/A114_13.png;/Upload/28/A114/A114_14.png;/Upload/28/A114/A114_15.png;/Upload/28/A114/A114_16.png', '15*8cm320ml', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654615740417', '1034422941099626496', '创意咖啡杯子', 'A077', 1.40, 14.00, 1.40, '/Upload/28/A115/A115_1.png', '/Upload/28/A115/A115_2.png;/Upload/28/A115/A115_3.png;/Upload/28/A115/A115_4.png;/Upload/28/A115/A115_5.png;/Upload/28/A115/A115_6.png;/Upload/28/A115/A115_7.png;/Upload/28/A115/A115_8.png;/Upload/28/A115/A115_9.png;/Upload/28/A115/A115_10.png;/Upload/28/A115/A115_11.png', '8*10.5cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654619934720', '1034422941099626496', '卡通陶瓷杯创意马克杯', 'A078', 0.77, 7.74, 0.77, '/Upload/28/A116/A116_1.png', '/Upload/28/A116/A116_2.png;/Upload/28/A116/A116_3.png;/Upload/28/A116/A116_4.png;/Upload/28/A116/A116_5.png;/Upload/28/A116/A116_6.png;/Upload/28/A116/A116_7.png;/Upload/28/A116/A116_8.png;/Upload/28/A116/A116_9.png;/Upload/28/A116/A116_10.png;/Upload/28/A116/A116_11.png;/Upload/28/A116/A116_12.png;/Upload/28/A116/A116_13.png;/Upload/28/A116/A116_14.png;/Upload/28/A116/A116_15.png;/Upload/28/A116/A116_16.png;/Upload/28/A116/A116_17.png;/Upload/28/A116/A116_18.png;/Upload/28/A116/A116_19.png;/Upload/28/A116/A116_20.png', '11.7*8cm350ml', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654619934721', '1044483562247688192', '全镀钛304不锈钢刀叉勺套装', 'A079', 0.13, 1.30, 0.13, '/Upload/28/A117/A117_1.png', '/Upload/28/A117/A117_2.png;/Upload/28/A117/A117_3.png;/Upload/28/A117/A117_4.png;/Upload/28/A117/A117_5.png;/Upload/28/A117/A117_6.png;/Upload/28/A117/A117_7.png;/Upload/28/A117/A117_8.png;/Upload/28/A117/A117_9.png;/Upload/28/A117/A117_10.png;/Upload/28/A117/A117_11.png;/Upload/28/A117/A117_12.png;/Upload/28/A117/A117_13.png;/Upload/28/A117/A117_14.png', '14.8*2cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654624129024', '1105302282423111680', '创意个性硅胶冰块模具', 'A080', 0.00, 0.01, 0.00, '/Upload/28/A118/A118_1.png', '/Upload/28/A118/A118_2.png;/Upload/28/A118/A118_3.png;/Upload/28/A118/A118_4.png;/Upload/28/A118/A118_5.png;/Upload/28/A118/A118_6.png;/Upload/28/A118/A118_7.png;/Upload/28/A118/A118_8.png;/Upload/28/A118/A118_9.png;/Upload/28/A118/A118_10.png;/Upload/28/A118/A118_11.png;/Upload/28/A118/A118_12.png;/Upload/28/A118/A118_13.png;/Upload/28/A118/A118_14.png;/Upload/28/A118/A118_15.png;/Upload/28/A118/A118_16.png;/Upload/28/A118/A118_17.png', '11.7*29.7格子：2.7*2.7*2.7cm', '冰盒套装做冰自制大冰格冰模冰块盒冻冰块模具家用带盖模型制冰盒', 0.10, '975247111765495808', '2019-03-12 11:26:11', 0.10, 1, 1, '1097770391990046720', NULL, 1, 1),
-	('1044505654624129025', '1034422941099626496', '欧式时尚马克杯', 'A081', 1.00, 10.00, 1.00, '/Upload/28/A119/A119_1.png', '/Upload/28/A119/A119_2.png;/Upload/28/A119/A119_3.png;/Upload/28/A119/A119_4.png;/Upload/28/A119/A119_5.png;/Upload/28/A119/A119_6.png;/Upload/28/A119/A119_7.png;/Upload/28/A119/A119_8.png;/Upload/28/A119/A119_9.png;/Upload/28/A119/A119_10.png;/Upload/28/A119/A119_11.png;/Upload/28/A119/A119_12.png;/Upload/28/A119/A119_13.png;/Upload/28/A119/A119_14.png;/Upload/28/A119/A119_15.png', '8*10cm400ml', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654624129026', '1034422941099626496', '趴趴狗马克杯', 'A082', 1.20, 12.00, 1.20, '/Upload/28/A120/A120_1.png', '/Upload/28/A120/A120_2.png;/Upload/28/A120/A120_3.png;/Upload/28/A120/A120_4.png;/Upload/28/A120/A120_5.png;/Upload/28/A120/A120_6.png;/Upload/28/A120/A120_7.png;/Upload/28/A120/A120_8.png;/Upload/28/A120/A120_9.png;/Upload/28/A120/A120_10.png;/Upload/28/A120/A120_11.png;/Upload/28/A120/A120_12.png;/Upload/28/A120/A120_13.png;/Upload/28/A120/A120_14.png', '8*9cm400ml', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654628323328', '1034422941099626496', '创意猫咪和鱼群马克杯', 'A083', 1.30, 13.00, 1.30, '/Upload/28/A121/A121_1.png', '/Upload/28/A121/A121_2.png;/Upload/28/A121/A121_3.png;/Upload/28/A121/A121_4.png;/Upload/28/A121/A121_5.png;/Upload/28/A121/A121_6.png;/Upload/28/A121/A121_7.png;/Upload/28/A121/A121_8.png;/Upload/28/A121/A121_9.png;/Upload/28/A121/A121_10.png;/Upload/28/A121/A121_11.png;/Upload/28/A121/A121_12.png;/Upload/28/A121/A121_13.png;/Upload/28/A121/A121_14.png', '7.7*10.5cm450ml', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654628323329', '1034422941099626496', '简约色釉马克杯', 'A084', 1.30, 13.00, 1.30, '/Upload/28/A122/A122_1.png', '/Upload/28/A122/A122_2.png;/Upload/28/A122/A122_3.png;/Upload/28/A122/A122_4.png;/Upload/28/A122/A122_5.png;/Upload/28/A122/A122_6.png;/Upload/28/A122/A122_7.png;/Upload/28/A122/A122_8.png;/Upload/28/A122/A122_9.png;/Upload/28/A122/A122_10.png;/Upload/28/A122/A122_11.png;/Upload/28/A122/A122_12.png;/Upload/28/A122/A122_13.png;/Upload/28/A122/A122_14.png', '13.5*8.5cm500ml', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654632517632', '1044483683848949760', '加固浴室挂钩', 'A085', 0.18, 1.80, 0.18, '/Upload/28/A123/A123_1.png', '/Upload/28/A123/A123_2.png;/Upload/28/A123/A123_3.png;/Upload/28/A123/A123_4.png;/Upload/28/A123/A123_5.png;/Upload/28/A123/A123_6.png;/Upload/28/A123/A123_7.png;/Upload/28/A123/A123_8.png;/Upload/28/A123/A123_9.png;/Upload/28/A123/A123_10.png;/Upload/28/A123/A123_11.png;/Upload/28/A123/A123_12.png;/Upload/28/A123/A123_13.png;/Upload/28/A123/A123_14.png;/Upload/28/A123/A123_15.png;/Upload/28/A123/A123_16.png;/Upload/28/A123/A123_17.png;/Upload/28/A123/A123_18.png', '32*32*0.8mm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654632517633', '1039868614750113792', '塑料储物柜子', 'A086', 6.90, 69.00, 6.90, '/Upload/28/A124/A124_1.png', '/Upload/28/A124/A124_2.png;/Upload/28/A124/A124_3.png;/Upload/28/A124/A124_4.png;/Upload/28/A124/A124_5.png;/Upload/28/A124/A124_6.png;/Upload/28/A124/A124_7.png;/Upload/28/A124/A124_8.png;/Upload/28/A124/A124_9.png;/Upload/28/A124/A124_10.png;/Upload/28/A124/A124_11.png;/Upload/28/A124/A124_12.png;/Upload/28/A124/A124_13.png;/Upload/28/A124/A124_14.png;/Upload/28/A124/A124_15.png;/Upload/28/A124/A124_16.png;/Upload/28/A124/A124_17.png;/Upload/28/A124/A124_18.png;/Upload/28/A124/A124_19.png;/Upload/28/A124/A124_20.png;/Upload/28/A124/A124_21.png;/Upload/28/A124/A124_22.png;/Upload/28/A124/A124_23.png;/Upload/28/A124/A124_24.png', '38*32*52cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654636711936', '1034422941099626496', '小麦秸秆杯子', 'A087', 0.08, 0.82, 0.08, '/Upload/28/A125/A125_1.png', '/Upload/28/A125/A125_2.png;/Upload/28/A125/A125_3.png;/Upload/28/A125/A125_4.png;/Upload/28/A125/A125_5.png;/Upload/28/A125/A125_6.png;/Upload/28/A125/A125_7.png;/Upload/28/A125/A125_8.png;/Upload/28/A125/A125_9.png;/Upload/28/A125/A125_10.png', '300-400ml', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654636711937', '1044552984312287232', '2018新款无线户外迷你低音炮', 'A088', 2.90, 29.00, 2.90, '/Upload/28/A071/A071_1.png', '/Upload/28/A071/A071_2.png;/Upload/28/A071/A071_3.png;/Upload/28/A071/A071_4.png;/Upload/28/A071/A071_5.png;/Upload/28/A071/A071_6.png;/Upload/28/A071/A071_7.png;/Upload/28/A071/A071_8.png;/Upload/28/A071/A071_9.png;/Upload/28/A071/A071_10.png;/Upload/28/A071/A071_11.png;/Upload/28/A071/A071_12.png;/Upload/28/A071/A071_13.png;/Upload/28/A071/A071_14.png;/Upload/28/A071/A071_15.png;/Upload/28/A071/A071_16.png;/Upload/28/A071/A071_17.png;/Upload/28/A071/A071_18.png;/Upload/28/A071/A071_19.png;/Upload/28/A071/A071_20.png;/Upload/28/A071/A071_21.png', '85*37', '无线蓝牙音箱超重低音炮钢炮家用迷你小型手机户外车载大音量便携式微信收钱提示音响3d环绕', 0.10, '975247111765495808', '2019-02-20 19:01:17', 0.10, 1, 0, '1097770391990046720', ' ', 11, 1),
-	('1044505654636711938', '1044552984312287232', '2018新款无线蓝牙便携布艺防水双振膜低音炮', 'A089', 11.31, 113.05, 11.31, '/fl/20190214/1426926887.png', '/Upload/28/A072/A072_2.png;/Upload/28/A072/A072_3.png;/Upload/28/A072/A072_4.png;/Upload/28/A072/A072_5.png;/Upload/28/A072/A072_6.png;/Upload/28/A072/A072_7.png;/Upload/28/A072/A072_8.png;/Upload/28/A072/A072_9.png;/Upload/28/A072/A072_10.png;/Upload/28/A072/A072_11.png;/Upload/28/A072/A072_12.png;/Upload/28/A072/A072_13.png;/Upload/28/A072/A072_14.png;/Upload/28/A072/A072_15.png;/Upload/28/A072/A072_16.png;/Upload/28/A072/A072_17.png;/Upload/28/A072/A072_18.png;/Upload/28/A072/A072_19.png;/Upload/28/A072/A072_20.png;/Upload/28/A072/A072_21.png;/Upload/28/A072/A072_21.png', '17.6 cm * 6.7 cm * 6.8 cm', '蓝牙音箱无线户外音响金属超重低音炮大功率双声道立体声便携式插卡家用电脑音响', 0.10, '975247111765495808', '2019-02-20 19:01:11', 0.10, 1, 0, '1097770391990046720', ' ', 11, 1),
-	('1044505654640906240', '1044483747375878144', '纤语蓝牙APP健康秤脂肪秤', 'A090', 4.30, 43.00, 4.30, '/Upload/28/A073/A073_1.png', '/Upload/28/A073/A073_2.png;/Upload/28/A073/A073_3.png;/Upload/28/A073/A073_4.png;/Upload/28/A073/A073_5.png;/Upload/28/A073/A073_6.png;/Upload/28/A073/A073_7.png;/Upload/28/A073/A073_8.png;/Upload/28/A073/A073_9.png;/Upload/28/A073/A073_10.png;/Upload/28/A073/A073_11.png;/Upload/28/A073/A073_12.png;/Upload/28/A073/A073_13.png;/Upload/28/A073/A073_14.png;/Upload/28/A073/A073_15.png;/Upload/28/A073/A073_16.png;/Upload/28/A073/A073_17.png;/Upload/28/A073/A073_18.png;/Upload/28/A073/A073_19.png;/Upload/28/A073/A073_20.png', '290*260mm', '纤语智能秤家用电子称脂肪秤高端体质秤健康连接APP体重秤', 0.10, '975247111765495808', '2019-02-19 14:21:34', 0.10, 0, 1, '0', ' ', 4, 1),
-	('1044505654640906241', '1039869418005467136', '猫咪硅胶七彩变色小夜灯', 'A091', 2.80, 28.00, 2.80, '/Upload/28/A074/A074_1.png', '/Upload/28/A074/A074_2.png;/Upload/28/A074/A074_3.png;/Upload/28/A074/A074_4.png;/Upload/28/A074/A074_5.png;/Upload/28/A074/A074_6.png;/Upload/28/A074/A074_7.png;/Upload/28/A074/A074_8.png;/Upload/28/A074/A074_9.png;/Upload/28/A074/A074_10.png;/Upload/28/A074/A074_11.png;/Upload/28/A074/A074_12.png', '120*120*100（mm）', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654645100544', '1039869418005467136', '3d打印月球灯触摸月亮灯', 'A092', 6.80, 68.00, 6.80, '/Upload/28/A075/A075_1.png', '/Upload/28/A075/A075_2.png;/Upload/28/A075/A075_3.png;/Upload/28/A075/A075_4.png;/Upload/28/A075/A075_5.png;/Upload/28/A075/A075_6.png;/Upload/28/A075/A075_7.png;/Upload/28/A075/A075_8.png;/Upload/28/A075/A075_9.png;/Upload/28/A075/A075_10.png;/Upload/28/A075/A075_11.png;/Upload/28/A075/A075_12.png;/Upload/28/A075/A075_13.png;/Upload/28/A075/A075_14.png;/Upload/28/A075/A075_15.png;/Upload/28/A075/A075_16.png;/Upload/28/A075/A075_17.png;/Upload/28/A075/A075_18.png', '15cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654645100545', '1039869418005467136', 'led台灯充电小台灯', 'A093', 3.50, 35.00, 3.50, '/Upload/28/A076/A076_1.png', '/Upload/28/A076/A076_2.png;/Upload/28/A076/A076_3.png;/Upload/28/A076/A076_4.png;/Upload/28/A076/A076_5.png;/Upload/28/A076/A076_6.png;/Upload/28/A076/A076_7.png;/Upload/28/A076/A076_8.png;/Upload/28/A076/A076_9.png;/Upload/28/A076/A076_10.png;/Upload/28/A076/A076_11.png;/Upload/28/A076/A076_12.png', ' 140*140*430mm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654645100546', '1039869418005467136', '硅胶爱心猫咪小夜灯', 'A094', 3.60, 36.00, 3.60, '/Upload/28/A077/A077_1.png', '/Upload/28/A077/A077_2.png;/Upload/28/A077/A077_3.png;/Upload/28/A077/A077_4.png;/Upload/28/A077/A077_5.png;/Upload/28/A077/A077_6.png;/Upload/28/A077/A077_7.png;/Upload/28/A077/A077_8.png;/Upload/28/A077/A077_9.png;/Upload/28/A077/A077_10.png;/Upload/28/A077/A077_11.png', '124*127*135mm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654649294848', '1039869418005467136', 'led学生护眼灯', 'A095', 3.71, 37.10, 3.71, '/Upload/28/A078/A078_1.png', '/Upload/28/A078/A078_2.png;/Upload/28/A078/A078_3.png;/Upload/28/A078/A078_4.png;/Upload/28/A078/A078_5.png;/Upload/28/A078/A078_6.png;/Upload/28/A078/A078_7.png;/Upload/28/A078/A078_8.png;/Upload/28/A078/A078_9.png;/Upload/28/A078/A078_10.png;/Upload/28/A078/A078_11.png;/Upload/28/A078/A078_12.png;/Upload/28/A078/A078_13.png;/Upload/28/A078/A078_14.png;/Upload/28/A078/A078_15.png;/Upload/28/A078/A078_16.png;/Upload/28/A078/A078_17.png', '15.2 cm * 15.2 cm * 37.5 cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654649294849', '1039869418005467136', 'USB充电拍拍灯', 'A096', 2.67, 26.67, 2.67, '/Upload/28/A079/A079_1.png', '/Upload/28/A079/A079_2.png;/Upload/28/A079/A079_3.png;/Upload/28/A079/A079_4.png;/Upload/28/A079/A079_5.png;/Upload/28/A079/A079_6.png;/Upload/28/A079/A079_7.png;/Upload/28/A079/A079_8.png', '默认', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654649294850', '1039869418005467136', '创意护眼LED台灯', 'A097', 3.13, 31.25, 3.13, '/Upload/28/A080/A080_1.png', '/Upload/28/A080/A080_2.png;/Upload/28/A080/A080_3.png;/Upload/28/A080/A080_4.png;/Upload/28/A080/A080_5.png;/Upload/28/A080/A080_6.png;/Upload/28/A080/A080_7.png;/Upload/28/A080/A080_8.png;/Upload/28/A080/A080_9.png;/Upload/28/A080/A080_10.png;/Upload/28/A080/A080_11.png;/Upload/28/A080/A080_12.png;/Upload/28/A080/A080_13.png;/Upload/28/A080/A080_14.png;/Upload/28/A080/A080_15.png;/Upload/28/A080/A080_16.png;/Upload/28/A080/A080_17.png;/Upload/28/A080/A080_18.png;/Upload/28/A080/A080_19.png;/Upload/28/A080/A080_20.png;/Upload/28/A080/A080_21.png;/Upload/28/A080/A080_21.png;/Upload/28/A080/A080_22.png;/Upload/28/A080/A080_23.png;/Upload/28/A080/A080_24.png', '13.3*47.5cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654653489152', '1039869418005467136', 'led充电蓝牙音响灯', 'A098', 5.88, 58.75, 5.88, '/Upload/28/A081/A081_1.png', '/Upload/28/A081/A081_2.png;/Upload/28/A081/A081_3.png;/Upload/28/A081/A081_4.png;/Upload/28/A081/A081_5.png;/Upload/28/A081/A081_6.png;/Upload/28/A081/A081_7.png;/Upload/28/A081/A081_8.png;/Upload/28/A081/A081_9.png;/Upload/28/A081/A081_10.png;/Upload/28/A081/A081_11.png;/Upload/28/A081/A081_12.png;/Upload/28/A081/A081_13.png;/Upload/28/A081/A081_14.png;/Upload/28/A081/A081_15.png', '默认', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654653489153', '1039869418005467136', '喜上梢智能玄关装饰灯', 'A099', 29.90, 299.00, 29.90, '/Upload/28/A082/A082_1.png', '/Upload/28/A082/A082_2.png;/Upload/28/A082/A082_3.png;/Upload/28/A082/A082_4.png;/Upload/28/A082/A082_5.png;/Upload/28/A082/A082_6.png;/Upload/28/A082/A082_7.png;/Upload/28/A082/A082_8.png;/Upload/28/A082/A082_9.png;/Upload/28/A082/A082_10.png;/Upload/28/A082/A082_11.png;/Upload/28/A082/A082_12.png;/Upload/28/A082/A082_13.png;/Upload/28/A082/A082_14.png;/Upload/28/A082/A082_15.png;/Upload/28/A082/A082_16.png;/Upload/28/A082/A082_17.png;/Upload/28/A082/A082_18.png;/Upload/28/A082/A082_19.png;/Upload/28/A082/A082_20.png;/Upload/28/A082/A082_21.png;/Upload/28/A082/A082_21.png;/Upload/28/A082/A082_22.png;/Upload/28/A082/A082_23.png;/Upload/28/A082/A082_24.png', '300*180*180mm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654657683456', '1039869418005467136', '创意折叠伸缩灯笼灯', 'A100', 5.40, 54.00, 5.40, '/Upload/28/A083/A083_1.png', '/Upload/28/A083/A083_2.png;/Upload/28/A083/A083_3.png;/Upload/28/A083/A083_4.png;/Upload/28/A083/A083_5.png;/Upload/28/A083/A083_6.png;/Upload/28/A083/A083_7.png;/Upload/28/A083/A083_8.png;/Upload/28/A083/A083_9.png;/Upload/28/A083/A083_10.png;/Upload/28/A083/A083_11.png;/Upload/28/A083/A083_12.png;/Upload/28/A083/A083_13.png;/Upload/28/A083/A083_14.png;/Upload/28/A083/A083_15.png;/Upload/28/A083/A083_16.png;/Upload/28/A083/A083_17.png;/Upload/28/A083/A083_18.png', '台灯状态: 142x37x194mm\n灯笼夜灯状态: 142x120x248mm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654657683457', '1044483836127350784', '不锈钢压蒜器', 'A101', 0.39, 3.90, 0.39, '/fl/20190308/552684808.jpg', '/fl/20190308/552684808.jpg', '200*60*148mm', '产品说明', 0.10, '975247111765495808', '2019-03-08 13:50:58', 0.10, 0, 0, '1097770391990046720', NULL, 0, 1),
-	('1044505654657683458', '1044483956013142016', '不锈钢充电式毛球修剪器', 'A102', 1.00, 10.00, 1.00, '/Upload/28/A085/A085_1.png', '/Upload/28/A085/A085_2.png;/Upload/28/A085/A085_3.png;/Upload/28/A085/A085_4.png;/Upload/28/A085/A085_5.png;/Upload/28/A085/A085_6.png;/Upload/28/A085/A085_7.png;/Upload/28/A085/A085_8.png;/Upload/28/A085/A085_9.png;/Upload/28/A085/A085_10.png;/Upload/28/A085/A085_11.png', '默认', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654661877760', '1034422941099626496', '小麦秸秆环保健康麦香杯', 'A103', 0.50, 5.00, 0.50, '/Upload/28/A086/A086_1.png', '/Upload/28/A086/A086_2.png;/Upload/28/A086/A086_3.png;/Upload/28/A086/A086_4.png;/Upload/28/A086/A086_5.png;/Upload/28/A086/A086_6.png;/Upload/28/A086/A086_7.png;/Upload/28/A086/A086_8.png;/Upload/28/A086/A086_9.png;/Upload/28/A086/A086_10.png;/Upload/28/A086/A086_11.png;/Upload/28/A086/A086_12.png;/Upload/28/A086/A086_13.png;/Upload/28/A086/A086_14.png;/Upload/28/A086/A086_15.png', '401-500ml', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654661877761', '1039869475119304704', '智能空气加湿器', 'A104', 9.00, 90.00, 9.00, '/Upload/28/A087/A087_1.png', '/Upload/28/A087/A087_2.png;/Upload/28/A087/A087_3.png;/Upload/28/A087/A087_4.png;/Upload/28/A087/A087_5.png;/Upload/28/A087/A087_6.png;/Upload/28/A087/A087_7.png;/Upload/28/A087/A087_8.png', '225*225*480mm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654661877762', '1044485227524788224', '优质家用水龙头净水器', 'A105', 2.59, 25.90, 2.59, '/Upload/28/A088/A088_1.png', '/Upload/28/A088/A088_2.png;/Upload/28/A088/A088_3.png;/Upload/28/A088/A088_4.png;/Upload/28/A088/A088_5.png;/Upload/28/A088/A088_6.png;/Upload/28/A088/A088_7.png;/Upload/28/A088/A088_8.png;/Upload/28/A088/A088_9.png;/Upload/28/A088/A088_10.png;/Upload/28/A088/A088_11.png;/Upload/28/A088/A088_12.png', '10*5*2.5*5.3*3.4cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654666072064', '1039869543704563712', '正邦乐食品级304不锈钢电水壶', 'A106', 2.41, 24.08, 2.41, '/Upload/28/A089/A089_1.png', '/Upload/28/A089/A089_2.png;/Upload/28/A089/A089_3.png;/Upload/28/A089/A089_4.png;/Upload/28/A089/A089_5.png;/Upload/28/A089/A089_6.png;/Upload/28/A089/A089_7.png;/Upload/28/A089/A089_8.png;/Upload/28/A089/A089_9.png;/Upload/28/A089/A089_10.png;/Upload/28/A089/A089_11.png;/Upload/28/A089/A089_12.png;/Upload/28/A089/A089_13.png;/Upload/28/A089/A089_14.png;/Upload/28/A089/A089_15.png;/Upload/28/A089/A089_16.png', '160*230mm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654666072065', '1044486012039991296', '煲汤煮粥陶瓷电炖锅', 'A107', 2.60, 26.00, 2.60, '/Upload/28/A090/A090_1.png', '/Upload/28/A090/A090_2.png;/Upload/28/A090/A090_3.png;/Upload/28/A090/A090_4.png', '26.6*26.6*21', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654670266368', '1044486012039991296', '网红薄饼机', 'A108', 3.20, 32.00, 3.20, '/Upload/28/A091/A091_1.png', '/Upload/28/A091/A091_2.png;/Upload/28/A091/A091_3.png;/Upload/28/A091/A091_4.png;/Upload/28/A091/A091_5.png;/Upload/28/A091/A091_6.png;/Upload/28/A091/A091_7.png;/Upload/28/A091/A091_8.png;/Upload/28/A091/A091_9.png;/Upload/28/A091/A091_10.png;/Upload/28/A091/A091_11.png;/Upload/28/A091/A091_12.png', '200mm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654670266369', '1044486012039991296', '蒙得科顺家用绞肉机', 'A109', 5.99, 59.90, 5.99, '/Upload/28/A092/A092_1.png', '/Upload/28/A092/A092_2.png;/Upload/28/A092/A092_3.png;/Upload/28/A092/A092_4.png;/Upload/28/A092/A092_5.png;/Upload/28/A092/A092_6.png;/Upload/28/A092/A092_7.png;/Upload/28/A092/A092_8.png;/Upload/28/A092/A092_9.png;/Upload/28/A092/A092_10.png;/Upload/28/A092/A092_11.png;/Upload/28/A092/A092_12.png;/Upload/28/A092/A092_13.png;/Upload/28/A092/A092_14.png;/Upload/28/A092/A092_15.png;/Upload/28/A092/A092_16.png;/Upload/28/A092/A092_17.png;/Upload/28/A092/A092_18.png', '250*160*190mm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654670266370', '1044486012039991296', '利仁LR-280A电饼铛煎烤机', 'A110', 10.90, 109.00, 10.90, '/Upload/28/A093/A093_1.png', '/Upload/28/A093/A093_2.png;/Upload/28/A093/A093_3.png;/Upload/28/A093/A093_4.png;/Upload/28/A093/A093_5.png;/Upload/28/A093/A093_6.png;/Upload/28/A093/A093_7.png;/Upload/28/A093/A093_8.png;/Upload/28/A093/A093_9.png;/Upload/28/A093/A093_10.png;/Upload/28/A093/A093_11.png;/Upload/28/A093/A093_12.png;/Upload/28/A093/A093_13.png;/Upload/28/A093/A093_14.png;/Upload/28/A093/A093_15.png;/Upload/28/A093/A093_16.png;/Upload/28/A093/A093_17.png;/Upload/28/A093/A093_18.png;/Upload/28/A093/A093_19.png;/Upload/28/A093/A093_20.png', '334*286*122mm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654674460672', '1044486012039991296', '利仁SK-J3201涮烤一体多用电火锅', 'A111', 29.90, 299.00, 29.90, '/Upload/28/A094/A094_1.png', '/Upload/28/A094/A094_2.png;/Upload/28/A094/A094_3.png;/Upload/28/A094/A094_4.png;/Upload/28/A094/A094_5.png;/Upload/28/A094/A094_6.png;/Upload/28/A094/A094_7.png;/Upload/28/A094/A094_8.png;/Upload/28/A094/A094_9.png;/Upload/28/A094/A094_10.png;/Upload/28/A094/A094_11.png;/Upload/28/A094/A094_12.png;/Upload/28/A094/A094_13.png;/Upload/28/A094/A094_14.png;/Upload/28/A094/A094_15.png;/Upload/28/A094/A094_16.png;/Upload/28/A094/A094_17.png', '381*335*134mm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654674460673', '1044486012039991296', '利仁电饼铛双面加热新款烤栗机', 'A112', 29.90, 299.00, 29.90, '/Upload/28/A095/A095_1.png', '/Upload/28/A095/A095_2.png;/Upload/28/A095/A095_3.png;/Upload/28/A095/A095_4.png;/Upload/28/A095/A095_5.png;/Upload/28/A095/A095_6.png;/Upload/28/A095/A095_7.png;/Upload/28/A095/A095_8.png;/Upload/28/A095/A095_9.png;/Upload/28/A095/A095_10.png;/Upload/28/A095/A095_11.png;/Upload/28/A095/A095_12.png;/Upload/28/A095/A095_13.png;/Upload/28/A095/A095_14.png;/Upload/28/A095/A095_15.png;/Upload/28/A095/A095_16.png;/Upload/28/A095/A095_17.png', '385*370*140MM', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654674460674', '1034422941099626496', '科客keke旅行可折叠水壶', 'A113', 9.90, 99.00, 9.90, '/Upload/28/A126/A126_1.png', '/Upload/28/A126/A126_2.png;/Upload/28/A126/A126_3.png;/Upload/28/A126/A126_4.png;/Upload/28/A126/A126_5.png;/Upload/28/A126/A126_6.png;/Upload/28/A126/A126_7.png;/Upload/28/A126/A126_8.png;/Upload/28/A126/A126_9.png;/Upload/28/A126/A126_10.png;/Upload/28/A126/A126_11.png;/Upload/28/A126/A126_12.png;/Upload/28/A126/A126_13.png;/Upload/28/A126/A126_14.png;/Upload/28/A126/A126_15.png;/Upload/28/A126/A126_16.png;/Upload/28/A126/A126_17.png;/Upload/28/A126/A126_18.png;/Upload/28/A126/A126_19.png;/Upload/28/A126/A126_20.png;/Upload/28/A126/A126_21.png;/Upload/28/A126/A126_22.png;/Upload/28/A126/A126_23.png;/Upload/28/A126/A126_24.png;/Upload/28/A126/A126_25.png;/Upload/28/A126/A126_26.png', '145mm*130*200mm 500ml', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654678654976', '1044486119070240768', '大功率家用电吹风筒', 'A114', 2.60, 26.00, 2.60, '/Upload/28/A127/A127_1.png', '/Upload/28/A127/A127_2.png;/Upload/28/A127/A127_3.png;/Upload/28/A127/A127_4.png;/Upload/28/A127/A127_5.png;/Upload/28/A127/A127_6.png;/Upload/28/A127/A127_7.png;/Upload/28/A127/A127_8.png;/Upload/28/A127/A127_9.png;/Upload/28/A127/A127_10.png;/Upload/28/A127/A127_11.png;/Upload/28/A127/A127_12.png', '23.5*22.5*10cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654678654977', '1044486167787081728', '颈椎按摩器', 'A115', 9.28, 92.80, 9.28, '/Upload/28/A128/A128_1.png', '/Upload/28/A128/A128_2.png;/Upload/28/A128/A128_3.png;/Upload/28/A128/A128_4.png;/Upload/28/A128/A128_5.png;/Upload/28/A128/A128_6.png;/Upload/28/A128/A128_7.png;/Upload/28/A128/A128_8.png;/Upload/28/A128/A128_9.png;/Upload/28/A128/A128_10.png;/Upload/28/A128/A128_11.png;/Upload/28/A128/A128_12.png;/Upload/28/A128/A128_13.png;/Upload/28/A128/A128_14.png;/Upload/28/A128/A128_15.png;/Upload/28/A128/A128_16.png;/Upload/28/A128/A128_17.png;/Upload/28/A128/A128_18.png;/Upload/28/A128/A128_19.png;/Upload/28/A128/A128_20.png;/Upload/28/A128/A128_21.png', '34.0 cm * 28.0 cm * 12.0 cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654678654978', '1044486012039991296', '4G生活 LJY-210C电磁炉', 'A116', 14.50, 145.00, 14.50, '/Upload/28/A129/A129_1.png', '/Upload/28/A129/A129_2.png;/Upload/28/A129/A129_3.png;/Upload/28/A129/A129_4.png;/Upload/28/A129/A129_5.png;/Upload/28/A129/A129_6.png;/Upload/28/A129/A129_7.png;/Upload/28/A129/A129_8.png;/Upload/28/A129/A129_9.png;/Upload/28/A129/A129_10.png;/Upload/28/A129/A129_11.png;/Upload/28/A129/A129_12.png;/Upload/28/A129/A129_13.png;/Upload/28/A129/A129_14.png', '370*310*58mm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654678654979', '1044484331470458880', '塑料防滑衣架', 'A117', 0.08, 0.80, 0.08, '/Upload/28/A130/A130_1.png', '/Upload/28/A130/A130_2.png;/Upload/28/A130/A130_3.png;/Upload/28/A130/A130_4.png;/Upload/28/A130/A130_5.png;/Upload/28/A130/A130_6.png;/Upload/28/A130/A130_7.png;/Upload/28/A130/A130_8.png;/Upload/28/A130/A130_9.png;/Upload/28/A130/A130_10.png;/Upload/28/A130/A130_11.png;/Upload/28/A130/A130_12.png;/Upload/28/A130/A130_13.png;/Upload/28/A130/A130_14.png', '42*22CM', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654682849280', '1039869418005467136', '3D小夜灯', 'A118', 2.55, 25.50, 2.55, '/Upload/28/A132/A132_1.png', '/Upload/28/A132/A132_2.png;/Upload/28/A132/A132_3.png;/Upload/28/A132/A132_4.png;/Upload/28/A132/A132_5.png;/Upload/28/A132/A132_6.png;/Upload/28/A132/A132_7.png;/Upload/28/A132/A132_8.png;/Upload/28/A132/A132_9.png;/Upload/28/A132/A132_10.png;/Upload/28/A132/A132_11.png;/Upload/28/A132/A132_12.png;/Upload/28/A132/A132_13.png;/Upload/28/A132/A132_14.png;/Upload/28/A132/A132_15.png;/Upload/28/A132/A132_16.png;/Upload/28/A132/A132_17.png;/Upload/28/A132/A132_18.png;/Upload/28/A132/A132_19.png', '默认', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654682849281', '1044486232794599424', '车载迷你小冰箱', 'A119', 16.50, 165.00, 16.50, '/Upload/28/A133/A133_1.png', '/Upload/28/A133/A133_2.png;/Upload/28/A133/A133_3.png;/Upload/28/A133/A133_4.png;/Upload/28/A133/A133_5.png;/Upload/28/A133/A133_6.png;/Upload/28/A133/A133_7.png;/Upload/28/A133/A133_8.png;/Upload/28/A133/A133_9.png;/Upload/28/A133/A133_10.png;/Upload/28/A133/A133_11.png;/Upload/28/A133/A133_12.png;/Upload/28/A133/A133_13.png;/Upload/28/A133/A133_14.png', '60*42*61cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654687043584', '1044484408209444864', '会跑的闹钟', 'A120', 2.60, 26.00, 2.60, '/Upload/28/A134/A134_1.png', '/Upload/28/A134/A134_2.png;/Upload/28/A134/A134_3.png;/Upload/28/A134/A134_4.png;/Upload/28/A134/A134_5.png;/Upload/28/A134/A134_6.png;/Upload/28/A134/A134_7.png;/Upload/28/A134/A134_8.png;/Upload/28/A134/A134_9.png;/Upload/28/A134/A134_10.png;/Upload/28/A134/A134_11.png;/Upload/28/A134/A134_12.png;/Upload/28/A134/A134_13.png;/Upload/28/A134/A134_14.png', '13*8.5*8.5cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654687043585', '1044483683848949760', '鞋面防水喷雾剂', 'A121', 2.90, 29.00, 2.90, '/Upload/28/A135/A135_1.png', '/Upload/28/A135/A135_2.png;/Upload/28/A135/A135_3.png;/Upload/28/A135/A135_4.png;/Upload/28/A135/A135_5.png;/Upload/28/A135/A135_6.png;/Upload/28/A135/A135_7.png;/Upload/28/A135/A135_8.png;/Upload/28/A135/A135_9.png;/Upload/28/A135/A135_10.png;/Upload/28/A135/A135_11.png;/Upload/28/A135/A135_12.png;/Upload/28/A135/A135_13.png', '0.3kg', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654687043586', '1044484467877613568', 'usb充电指尖陀螺打火机', 'A122', 0.00, 0.01, 0.00, '/Upload/28/A136/A136_1.png', '/Upload/28/A136/A136_2.png;/Upload/28/A136/A136_3.png;/Upload/28/A136/A136_4.png;/Upload/28/A136/A136_5.png;/Upload/28/A136/A136_6.png;/Upload/28/A136/A136_7.png;/Upload/28/A136/A136_8.png;/Upload/28/A136/A136_9.png;/Upload/28/A136/A136_10.png;/Upload/28/A136/A136_11.png;/Upload/28/A136/A136_12.png;/Upload/28/A136/A136_13.png;/Upload/28/A136/A136_14.png', '80*32*14MM', '产品说明', 0.10, '975247111765495808', '2019-03-12 11:07:08', 0.10, 0, 0, NULL, NULL, 0, 1),
-	('1044505654691237888', '1044483683848949760', '纳米海绵魔力擦', 'A123', 0.02, 0.15, 0.02, '/Upload/28/A137/A137_1.png', '/Upload/28/A137/A137_2.png;/Upload/28/A137/A137_3.png;/Upload/28/A137/A137_4.png;/Upload/28/A137/A137_5.png;/Upload/28/A137/A137_6.png;/Upload/28/A137/A137_7.png;/Upload/28/A137/A137_8.png;/Upload/28/A137/A137_9.png;/Upload/28/A137/A137_10.png;/Upload/28/A137/A137_11.png;/Upload/28/A137/A137_12.png', '10*6*2cm白色', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654691237889', '1044484533883375616', '海绵对折式挤水家用拖把', 'A124', 1.85, 18.50, 1.85, '/Upload/28/A138/A138_1.png', '/Upload/28/A138/A138_2.png;/Upload/28/A138/A138_3.png;/Upload/28/A138/A138_4.png;/Upload/28/A138/A138_5.png;/Upload/28/A138/A138_6.png;/Upload/28/A138/A138_7.png;/Upload/28/A138/A138_8.png;/Upload/28/A138/A138_9.png;/Upload/28/A138/A138_10.png;/Upload/28/A138/A138_11.png;/Upload/28/A138/A138_12.png;/Upload/28/A138/A138_13.png', '113cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654695432192', '1034448928805883904', '睡冬宝蚕宝暖肤被加厚冬被', 'A125', 19.90, 199.00, 19.90, '/Upload/28/A139/A139_1.png', '/Upload/28/A139/A139_2.png;/Upload/28/A139/A139_3.png;/Upload/28/A139/A139_4.png;/Upload/28/A139/A139_5.png;/Upload/28/A139/A139_6.png;/Upload/28/A139/A139_7.png;/Upload/28/A139/A139_8.png;/Upload/28/A139/A139_9.png;/Upload/28/A139/A139_10.png;/Upload/28/A139/A139_11.png;/Upload/28/A139/A139_12.png;/Upload/28/A139/A139_13.png;/Upload/28/A139/A139_14.png;/Upload/28/A139/A139_15.png;/Upload/28/A139/A139_16.png;/Upload/28/A139/A139_17.png;/Upload/28/A139/A139_18.png;/Upload/28/A139/A139_19.png', '200*230', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654695432193', '1036548643571765248', '睡冬宝颈椎枕头', 'A126', 2.20, 22.00, 2.20, '/Upload/28/A140/A140_1.png', '/Upload/28/A140/A140_2.png;/Upload/28/A140/A140_3.png;/Upload/28/A140/A140_4.png;/Upload/28/A140/A140_5.png;/Upload/28/A140/A140_6.png;/Upload/28/A140/A140_7.png;/Upload/28/A140/A140_8.png;/Upload/28/A140/A140_9.png;/Upload/28/A140/A140_10.png;/Upload/28/A140/A140_11.png;/Upload/28/A140/A140_12.png;/Upload/28/A140/A140_13.png;/Upload/28/A140/A140_14.png;/Upload/28/A140/A140_15.png;/Upload/28/A140/A140_16.png;/Upload/28/A140/A140_17.png;/Upload/28/A140/A140_18.png;/Upload/28/A140/A140_19.png;/Upload/28/A140/A140_20.png;/Upload/28/A140/A140_21.png;/Upload/28/A140/A140_22.png;/Upload/28/A140/A140_23.png;/Upload/28/A140/A140_24.png', ' 10.1-15cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654695432194', '1036548643571765248', '睡冬宝商超记忆枕', 'A127', 5.90, 59.00, 5.90, '/Upload/28/A141/A141_1.png', '/Upload/28/A141/A141_2.png;/Upload/28/A141/A141_3.png;/Upload/28/A141/A141_4.png;/Upload/28/A141/A141_5.png;/Upload/28/A141/A141_6.png;/Upload/28/A141/A141_7.png;/Upload/28/A141/A141_8.png;/Upload/28/A141/A141_9.png;/Upload/28/A141/A141_10.png;/Upload/28/A141/A141_11.png;/Upload/28/A141/A141_12.png;/Upload/28/A141/A141_13.png;/Upload/28/A141/A141_14.png;/Upload/28/A141/A141_15.png;/Upload/28/A141/A141_16.png;/Upload/28/A141/A141_17.png;/Upload/28/A141/A141_18.png;/Upload/28/A141/A141_19.png;/Upload/28/A141/A141_20.png;/Upload/28/A141/A141_21.png', '10.1-15cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654699626496', '1034448928805883904', '睡冬宝蚕宝双丝夏凉被', 'A128', 49.90, 499.00, 49.90, '/Upload/28/A142/A142_1.png', '/Upload/28/A142/A142_2.png;/Upload/28/A142/A142_3.png;/Upload/28/A142/A142_4.png;/Upload/28/A142/A142_5.png;/Upload/28/A142/A142_6.png;/Upload/28/A142/A142_7.png;/Upload/28/A142/A142_8.png;/Upload/28/A142/A142_9.png;/Upload/28/A142/A142_10.png;/Upload/28/A142/A142_11.png;/Upload/28/A142/A142_12.png;/Upload/28/A142/A142_13.png;/Upload/28/A142/A142_14.png;/Upload/28/A142/A142_15.png;/Upload/28/A142/A142_16.png;/Upload/28/A142/A142_17.png;/Upload/28/A142/A142_18.png;/Upload/28/A142/A142_19.png', '150*210CM', '产品说明', 0.10, '975247111765495808', '2018-09-25 19:30:01', 0.10, 0, 0, '0', ' ', 5, 1),
-	('1044505654699626497', '1034448928805883904', '睡冬宝水洗亲肤空调被', 'A129', 6.90, 69.00, 6.90, '/Upload/28/A143/A143_1.png', '/Upload/28/A143/A143_2.png;/Upload/28/A143/A143_3.png;/Upload/28/A143/A143_4.png;/Upload/28/A143/A143_5.png;/Upload/28/A143/A143_6.png;/Upload/28/A143/A143_7.png;/Upload/28/A143/A143_8.png;/Upload/28/A143/A143_9.png;/Upload/28/A143/A143_10.png;/Upload/28/A143/A143_11.png;/Upload/28/A143/A143_12.png;/Upload/28/A143/A143_13.png;/Upload/28/A143/A143_14.png;/Upload/28/A143/A143_15.png;/Upload/28/A143/A143_16.png;/Upload/28/A143/A143_17.png;/Upload/28/A143/A143_18.png;/Upload/28/A143/A143_19.png;/Upload/28/A143/A143_20.png;/Upload/28/A143/A143_21.png;/Upload/28/A143/A143_22.png;/Upload/28/A143/A143_23.png;/Upload/28/A143/A143_24.png;/Upload/28/A143/A143_25.png', '150*200', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654699626498', '1034449477529899008', '睡冬宝被子被罩床单纯棉四件套', 'A130', 13.80, 138.00, 13.80, '/Upload/28/A144/A144_1.png', '/Upload/28/A144/A144_2.png;/Upload/28/A144/A144_3.png;/Upload/28/A144/A144_4.png;/Upload/28/A144/A144_5.png;/Upload/28/A144/A144_6.png;/Upload/28/A144/A144_7.png;/Upload/28/A144/A144_8.png;/Upload/28/A144/A144_9.png;/Upload/28/A144/A144_10.png', '1.5m床（请配200*230cm被芯使用）', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 1, 1),
-	('1044505654703820800', '1034449477529899008', '睡冬宝被子被罩床单纯棉四件套', 'A131', 13.80, 138.00, 13.80, '/Upload/28/A145/A145_1.png', '/Upload/28/A145/A145_2.png;/Upload/28/A145/A145_3.png;/Upload/28/A145/A145_4.png;/Upload/28/A145/A145_5.png;/Upload/28/A145/A145_6.png;/Upload/28/A145/A145_7.png', '1.5m床（请配200*230cm被芯使用）', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654703820801', '1034449477529899008', '睡冬宝被子被罩床单纯棉四件套', 'A132', 13.80, 138.00, 13.80, '/Upload/28/A146/A146_1.png', '/Upload/28/A146/A146_2.png;/Upload/28/A146/A146_3.png;/Upload/28/A146/A146_4.png', '1.5m床（请配200*230cm被芯使用）', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654708015104', '1034449477529899008', '睡冬宝被子被罩床单纯棉四件套', 'A133', 13.80, 138.00, 13.80, '/Upload/28/A147/A147_1.png', '/Upload/28/A147/A147_2.png;/Upload/28/A147/A147_3.png;/Upload/28/A147/A147_4.png;/Upload/28/A147/A147_5.png;/Upload/28/A147/A147_6.png', '1.5m床（请配200*230cm被芯使用）', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654708015105', '1034449477529899008', '睡冬宝被子被罩床单纯棉四件套', 'A134', 13.80, 138.00, 13.80, '/Upload/28/A148/A148_1.png', '/Upload/28/A148/A148_2.png;/Upload/28/A148/A148_3.png;/Upload/28/A148/A148_4.png', '1.5m床（请配200*230cm被芯使用）', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654712209408', '1034449477529899008', '睡冬宝被子被罩床单纯棉四件套', 'A135', 13.80, 138.00, 13.80, '/Upload/28/A149/A149_1.png', '/Upload/28/A149/A149_2.png;/Upload/28/A149/A149_3.png;/Upload/28/A149/A149_4.png;/Upload/28/A149/A149_5.png;/Upload/28/A149/A149_6.png', '1.5m床（请配200*230cm被芯使用）', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654712209409', '1034449477529899008', '睡冬宝被子被罩床单纯棉四件套', 'A136', 13.80, 138.00, 13.80, '/Upload/28/A150/A150_1.png', '/Upload/28/A150/A150_2.png;/Upload/28/A150/A150_3.png;/Upload/28/A150/A150_4.png', '1.5m床（请配200*230cm被芯使用）', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654712209410', '1034449477529899008', '睡冬宝被子被罩床单纯棉四件套', 'A137', 13.80, 138.00, 13.80, '/Upload/28/A151/A151_1.png', '/Upload/28/A151/A151_2.png;/Upload/28/A151/A151_3.png;/Upload/28/A151/A151_4.png', '1.5m床（请配200*230cm被芯使用）', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654720598016', '1044486692070887424', '睡冬宝席梦思床垫', 'A138', 7.90, 79.00, 7.90, '/Upload/28/A152/A152_1.png', '/Upload/28/A152/A152_2.png;/Upload/28/A152/A152_3.png;/Upload/28/A152/A152_4.png;/Upload/28/A152/A152_5.png;/Upload/28/A152/A152_6.png;/Upload/28/A152/A152_7.png;/Upload/28/A152/A152_8.png;/Upload/28/A152/A152_9.png;/Upload/28/A152/A152_10.png;/Upload/28/A152/A152_11.png;/Upload/28/A152/A152_12.png;/Upload/28/A152/A152_13.png;/Upload/28/A152/A152_14.png', '1.2m', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654720598017', '1036548643571765248', '睡冬宝枕芯懿品乳胶枕头', 'A139', 17.60, 176.00, 17.60, '/Upload/28/A153/A153_1.png', '/Upload/28/A153/A153_2.png;/Upload/28/A153/A153_3.png;/Upload/28/A153/A153_4.png;/Upload/28/A153/A153_5.png;/Upload/28/A153/A153_6.png;/Upload/28/A153/A153_7.png;/Upload/28/A153/A153_8.png;/Upload/28/A153/A153_9.png;/Upload/28/A153/A153_10.png;/Upload/28/A153/A153_11.png;/Upload/28/A153/A153_12.png;/Upload/28/A153/A153_13.png;/Upload/28/A153/A153_14.png', '40*70', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654720598018', '1034448928805883904', '睡冬宝四季被春秋被子', 'A140', 17.00, 170.00, 17.00, '/Upload/28/A154/A154_1.png', '/Upload/28/A154/A154_2.png;/Upload/28/A154/A154_3.png;/Upload/28/A154/A154_4.png;/Upload/28/A154/A154_5.png;/Upload/28/A154/A154_6.png;/Upload/28/A154/A154_7.png;/Upload/28/A154/A154_8.png;/Upload/28/A154/A154_9.png;/Upload/28/A154/A154_10.png', '200*230', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654724792320', '1034449477529899008', '睡冬宝水洗棉四件套', 'A141', 15.90, 159.00, 15.90, '/Upload/28/A155/A155_1.png', '/Upload/28/A155/A155_2.png;/Upload/28/A155/A155_3.png;/Upload/28/A155/A155_4.png;/Upload/28/A155/A155_5.png;/Upload/28/A155/A155_6.png;/Upload/28/A155/A155_7.png;/Upload/28/A155/A155_8.png;/Upload/28/A155/A155_9.png;/Upload/28/A155/A155_10.png;/Upload/28/A155/A155_11.png;/Upload/28/A155/A155_12.png;/Upload/28/A155/A155_13.png;/Upload/28/A155/A155_14.png;/Upload/28/A155/A155_15.png', '1.5米床（请配150X200cm被芯使用）', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654724792321', '1034449477529899008', '睡冬宝水洗棉四件套', 'A142', 15.90, 159.00, 15.90, '/Upload/28/A156/A156_1.png', '/Upload/28/A156/A156_2.png;/Upload/28/A156/A156_3.png;/Upload/28/A156/A156_4.png;/Upload/28/A156/A156_5.png', '1.5米床（请配150X200cm被芯使用）', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654728986624', '1034449477529899008', '睡冬宝水洗棉四件套', 'A143', 15.90, 159.00, 15.90, '/Upload/28/A157/A157_1.png', '/Upload/28/A157/A157_2.png;/Upload/28/A157/A157_3.png;/Upload/28/A157/A157_4.png', '1.5米床（请配150X200cm被芯使用）', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654728986625', '1034449477529899008', '睡冬宝水洗棉四件套', 'A144', 15.90, 159.00, 15.90, '/Upload/28/A158/A158_1.png', '/Upload/28/A158/A158_2.png;/Upload/28/A158/A158_3.png;/Upload/28/A158/A158_4.png;/Upload/28/A158/A158_5.png', '1.5米床（请配150X200cm被芯使用）', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654733180928', '1034449477529899008', '睡冬宝水洗棉四件套', 'A145', 15.90, 159.00, 15.90, '/Upload/28/A159/A159_1.png', '/Upload/28/A159/A159_2.png;/Upload/28/A159/A159_3.png;/Upload/28/A159/A159_4.png;/Upload/28/A159/A159_5.png', '1.5米床（请配150X200cm被芯使用）', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654733180929', '1034449477529899008', '睡冬宝水洗棉四件套', 'A146', 15.90, 159.00, 15.90, '/Upload/28/A160/A160_1.png', '/Upload/28/A160/A160_2.png;/Upload/28/A160/A160_3.png;/Upload/28/A160/A160_4.png;/Upload/28/A160/A160_5.png', '1.5米床（请配150X200cm被芯使用）', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654733180930', '1034449477529899008', '睡冬宝水洗棉四件套', 'A147', 15.90, 159.00, 15.90, '/Upload/28/A161/A161_1.png', '/Upload/28/A161/A161_2.png;/Upload/28/A161/A161_3.png;/Upload/28/A161/A161_4.png;/Upload/28/A161/A161_5.png', '1.5米床（请配150X200cm被芯使用）', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654737375232', '1044483562247688192', '创意西餐盘', 'A148', 0.56, 5.60, 0.56, '/Upload/28/A162/A162_1.png', '/Upload/28/A162/A162_2.png;/Upload/28/A162/A162_3.png;/Upload/28/A162/A162_4.png;/Upload/28/A162/A162_5.png;/Upload/28/A162/A162_6.png;/Upload/28/A162/A162_7.png;/Upload/28/A162/A162_8.png;/Upload/28/A162/A162_9.png;/Upload/28/A162/A162_10.png;/Upload/28/A162/A162_11.png;/Upload/28/A162/A162_12.png;/Upload/28/A162/A162_13.png;/Upload/28/A162/A162_14.png;/Upload/28/A162/A162_15.png;/Upload/28/A162/A162_16.png;/Upload/28/A162/A162_17.png;/Upload/28/A162/A162_18.png', '20.3cm', '银边平盘 西餐盘牛排盘 酒店家用餐具水果盘饺子盘子', 0.10, '975247111765495808', '2019-02-19 14:23:29', 0.10, 0, 1, '0', ' ', 2, 1),
-	('1044505654737375233', '1044483562247688192', '创意大理石盘子', 'A149', 0.55, 5.50, 0.55, '/Upload/28/A163/A163_1.png', '/Upload/28/A163/A163_2.png;/Upload/28/A163/A163_3.png;/Upload/28/A163/A163_4.png;/Upload/28/A163/A163_5.png;/Upload/28/A163/A163_6.png;/Upload/28/A163/A163_7.png;/Upload/28/A163/A163_8.png', '20.5cm', '大理石纹盘子 北欧菜盘家用陶瓷餐盘牛排盘西餐盘餐具碟', 0.10, '975247111765495808', '2019-02-19 14:22:25', 0.10, 0, 1, '0', ' ', 3, 1),
-	('1044505654741569536', '1039868614750113792', '卡通波比小狗纸巾收纳盒', 'A150', 1.05, 10.50, 1.05, '/Upload/28/A164/A164_1.png', '/Upload/28/A164/A164_2.png;/Upload/28/A164/A164_3.png;/Upload/28/A164/A164_4.png;/Upload/28/A164/A164_5.png;/Upload/28/A164/A164_6.png;/Upload/28/A164/A164_7.png;/Upload/28/A164/A164_8.png;/Upload/28/A164/A164_9.png;/Upload/28/A164/A164_10.png;/Upload/28/A164/A164_11.png;/Upload/28/A164/A164_12.png', '13*16.5cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654741569537', '1039868787521884160', '小麦小熊浴室卫生间纸巾筒', 'A151', 1.00, 10.00, 1.00, '/Upload/28/A165/A165_1.png', '/Upload/28/A165/A165_2.png;/Upload/28/A165/A165_3.png;/Upload/28/A165/A165_4.png;/Upload/28/A165/A165_5.png;/Upload/28/A165/A165_6.png;/Upload/28/A165/A165_7.png;/Upload/28/A165/A165_8.png;/Upload/28/A165/A165_9.png', '15*16cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654745763840', '1044484331470458880', '多功能防滑无痕衣架', 'A152', 0.39, 3.85, 0.39, '/Upload/28/A166/A166_1.png', '/Upload/28/A166/A166_2.png;/Upload/28/A166/A166_3.png;/Upload/28/A166/A166_4.png;/Upload/28/A166/A166_5.png;/Upload/28/A166/A166_6.png;/Upload/28/A166/A166_7.png;/Upload/28/A166/A166_8.png;/Upload/28/A166/A166_9.png;/Upload/28/A166/A166_10.png;/Upload/28/A166/A166_11.png;/Upload/28/A166/A166_12.png;/Upload/28/A166/A166_13.png;/Upload/28/A166/A166_14.png', '295*50mm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654745763841', '1044486360280469504', '手推式懒人扫地机', 'A153', 2.30, 23.00, 2.30, '/Upload/28/A167/A167_1.png', '/Upload/28/A167/A167_2.png;/Upload/28/A167/A167_3.png;/Upload/28/A167/A167_4.png;/Upload/28/A167/A167_5.png;/Upload/28/A167/A167_6.png;/Upload/28/A167/A167_7.png;/Upload/28/A167/A167_8.png;/Upload/28/A167/A167_9.png;/Upload/28/A167/A167_10.png;/Upload/28/A167/A167_11.png;/Upload/28/A167/A167_12.png;/Upload/28/A167/A167_13.png;/Upload/28/A167/A167_14.png;/Upload/28/A167/A167_15.png;/Upload/28/A167/A167_16.png;/Upload/28/A167/A167_17.png;/Upload/28/A167/A167_18.png;/Upload/28/A167/A167_19.png;/Upload/28/A167/A167_20.png;/Upload/28/A167/A167_21.png;/Upload/28/A167/A167_22.png;/Upload/28/A167/A167_23.png;/Upload/28/A167/A167_24.png;/Upload/28/A167/A167_25.png', '1杆70cm2杆102cm杆135cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654745763842', '1044483683848949760', '洗脸束发带', 'A154', 0.36, 3.60, 0.36, '/Upload/28/A168/A168_1.png', '/Upload/28/A168/A168_2.png;/Upload/28/A168/A168_3.png;/Upload/28/A168/A168_4.png;/Upload/28/A168/A168_5.png;/Upload/28/A168/A168_6.png;/Upload/28/A168/A168_7.png;/Upload/28/A168/A168_8.png;/Upload/28/A168/A168_9.png;/Upload/28/A168/A168_10.png', '15cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654749958144', '1044484408209444864', '欧式怀旧复古挂钟', 'A155', 4.60, 46.00, 4.60, '/Upload/28/A169/A169_1.png', '/Upload/28/A169/A169_2.png;/Upload/28/A169/A169_3.png;/Upload/28/A169/A169_4.png;/Upload/28/A169/A169_5.png;/Upload/28/A169/A169_6.png;/Upload/28/A169/A169_7.png;/Upload/28/A169/A169_8.png;/Upload/28/A169/A169_9.png;/Upload/28/A169/A169_10.png', '31.0 cm * 5.0 cm * 31.0 cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654754152448', '1044484408209444864', '欧式罗马数字挂钟', 'A156', 3.67, 36.70, 3.67, '/Upload/28/A170/A170_1.png', '/Upload/28/A170/A170_2.png;/Upload/28/A170/A170_3.png;/Upload/28/A170/A170_4.png;/Upload/28/A170/A170_5.png;/Upload/28/A170/A170_6.png;/Upload/28/A170/A170_7.png', '40cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654754152449', '1044484706437042176', '纯棉毛巾', 'A157', 0.50, 5.00, 0.50, '/Upload/28/A171/A171_1.png', '/Upload/28/A171/A171_2.png;/Upload/28/A171/A171_3.png;/Upload/28/A171/A171_4.png;/Upload/28/A171/A171_5.png;/Upload/28/A171/A171_6.png;/Upload/28/A171/A171_7.png;/Upload/28/A171/A171_8.png;/Upload/28/A171/A171_9.png;/Upload/28/A171/A171_10.png;/Upload/28/A171/A171_11.png;/Upload/28/A171/A171_12.png;/Upload/28/A171/A171_13.png;/Upload/28/A171/A171_14.png', '默认', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654754152450', '1044484706437042176', '加厚浴巾', 'A158', 3.56, 35.60, 3.56, '/Upload/28/A172/A172_1.png', '/Upload/28/A172/A172_2.png;/Upload/28/A172/A172_3.png;/Upload/28/A172/A172_4.png;/Upload/28/A172/A172_5.png;/Upload/28/A172/A172_6.png;/Upload/28/A172/A172_7.png;/Upload/28/A172/A172_8.png;/Upload/28/A172/A172_9.png;/Upload/28/A172/A172_10.png;/Upload/28/A172/A172_11.png;/Upload/28/A172/A172_12.png;/Upload/28/A172/A172_13.png;/Upload/28/A172/A172_14.png;/Upload/28/A172/A172_15.png;/Upload/28/A172/A172_16.png', '140*80cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654758346752', '1044484706437042176', '无印素色纯棉浴巾', 'A159', 1.99, 19.89, 1.99, '/Upload/28/A173/A173_1.png', '/Upload/28/A173/A173_2.png;/Upload/28/A173/A173_3.png;/Upload/28/A173/A173_4.png;/Upload/28/A173/A173_5.png;/Upload/28/A173/A173_6.png;/Upload/28/A173/A173_7.png;/Upload/28/A173/A173_8.png;/Upload/28/A173/A173_9.png;/Upload/28/A173/A173_10.png;/Upload/28/A173/A173_11.png', '370g', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654762541056', '1044484706437042176', '竹炭纤维浴巾', 'A160', 3.20, 32.00, 3.20, '/Upload/28/A174/A174_1.png', '/Upload/28/A174/A174_2.png;/Upload/28/A174/A174_3.png;/Upload/28/A174/A174_4.png;/Upload/28/A174/A174_5.png;/Upload/28/A174/A174_6.png;/Upload/28/A174/A174_7.png;/Upload/28/A174/A174_8.png;/Upload/28/A174/A174_9.png;/Upload/28/A174/A174_10.png;/Upload/28/A174/A174_11.png', '75*150', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654762541057', '1044484778985918464', '3d印花地毯', 'A161', 1.13, 11.34, 1.13, '/Upload/28/A175/A175_1.png', '/Upload/28/A175/A175_2.png;/Upload/28/A175/A175_3.png;/Upload/28/A175/A175_4.png;/Upload/28/A175/A175_5.png;/Upload/28/A175/A175_6.png;/Upload/28/A175/A175_7.png;/Upload/28/A175/A175_8.png;/Upload/28/A175/A175_9.png;/Upload/28/A175/A175_10.png;/Upload/28/A175/A175_11.png;/Upload/28/A175/A175_12.png;/Upload/28/A175/A175_13.png;/Upload/28/A175/A175_14.png;/Upload/28/A175/A175_15.png', '40x60cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654762541058', '1044484778985918464', '入户脚垫', 'A162', 0.78, 7.80, 0.78, '/Upload/28/A176/A176_1.png', '/Upload/28/A176/A176_2.png;/Upload/28/A176/A176_3.png;/Upload/28/A176/A176_4.png;/Upload/28/A176/A176_5.png;/Upload/28/A176/A176_6.png;/Upload/28/A176/A176_7.png', '40*60cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654762541059', '1044484997332996096', '棉麻加厚纯色遮光窗', 'A163', 2.60, 26.00, 2.60, '/Upload/28/A177/A177_1.png', '/Upload/28/A177/A177_2.png;/Upload/28/A177/A177_3.png;/Upload/28/A177/A177_4.png;/Upload/28/A177/A177_5.png;/Upload/28/A177/A177_6.png;/Upload/28/A177/A177_7.png;/Upload/28/A177/A177_8.png;/Upload/28/A177/A177_9.png;/Upload/28/A177/A177_10.png;/Upload/28/A177/A177_11.png;/Upload/28/A177/A177_12.png;/Upload/28/A177/A177_13.png;/Upload/28/A177/A177_14.png;/Upload/28/A177/A177_15.png;/Upload/28/A177/A177_16.png;/Upload/28/A177/A177_17.png;/Upload/28/A177/A177_18.png;/Upload/28/A177/A177_19.png;/Upload/28/A177/A177_20.png;/Upload/28/A177/A177_21.png;/Upload/28/A177/A177_22.png;/Upload/28/A177/A177_15.png;/Upload/28/A177/A177_23.png;/Upload/28/A177/A177_24.png;/Upload/28/A177/A177_25.png;/Upload/28/A177/A177_26.png;/Upload/28/A177/A177_27.png', '3-59m', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654766735360', '1034422941099626496', '权利的游戏3D龙爪高脚杯', 'A164', 3.50, 35.00, 3.50, '/Upload/28/A178/A178_1.png', '/Upload/28/A178/A178_2.png;/Upload/28/A178/A178_3.png;/Upload/28/A178/A178_4.png;/Upload/28/A178/A178_5.png;/Upload/28/A178/A178_6.png', '21.5*10*10cm', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1),
-	('1044505654766735361', '1', '不锈钢炒锅', 'A165', 0.01, 0.10, 0.01, '/fl/20190308/914043839.jpg', '/fl/20190308/914043839.jpg', '32cm', '产品说明', 0.10, '975247111765495808', '2019-03-12 11:24:28', 0.10, 1, 1, '1097770391990046720', NULL, 11, 1),
-	('1044505654770929664', '1044486012039991296', '美的电饭煲锅', 'A166', 17.50, 175.00, 17.50, '/Upload/28/A180/A180_1.png', '/Upload/28/A180/A180_2.png;/Upload/28/A180/A180_3.png;/Upload/28/A180/A180_4.png;/Upload/28/A180/A180_5.png;/Upload/28/A180/A180_6.png;/Upload/28/A180/A180_7.png;/Upload/28/A180/A180_8.png;/Upload/28/A180/A180_9.png;/Upload/28/A180/A180_10.png;/Upload/28/A180/A180_11.png;/Upload/28/A180/A180_12.png;/Upload/28/A180/A180_13.png;/Upload/28/A180/A180_14.png', '默认', '产品说明', 0.10, '975247111765495808', '2018-09-25 16:35:28', 0.10, 0, 0, '0', ' ', 0, 1);
+	('1212699209497710592', '1034448928805883904', '1111', '111', 11.00, 11.00, 1.00, '/fl/20200102/272009380.png', '/fl/20200102/2029049608.png;/fl/20200102/61984890.png;/fl/20200102/272009380.png', '11', '111', 0.00, '975247111765495808', '2020-01-02 19:39:01', 1.00, 1, 1, '1097770391990046720', '111', 0, 1);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 
--- 导出  表 tbshop.product_rcd 结构
+-- Dumping structure for table tbshop.product_rcd
 DROP TABLE IF EXISTS `product_rcd`;
 CREATE TABLE IF NOT EXISTS `product_rcd` (
   `Id` varchar(50) DEFAULT NULL,
@@ -45429,7 +45268,7 @@ CREATE TABLE IF NOT EXISTS `product_rcd` (
   `ShopID` int(4) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 正在导出表  tbshop.product_rcd 的数据：~9 rows (大约)
+-- Dumping data for table tbshop.product_rcd: ~10 rows (大约)
 DELETE FROM `product_rcd`;
 /*!40000 ALTER TABLE `product_rcd` DISABLE KEYS */;
 INSERT INTO `product_rcd` (`Id`, `ProductID`, `UserID`, `CreateDate`, `Hit`, `UpdateTime`, `ShopID`) VALUES
@@ -45445,7 +45284,7 @@ INSERT INTO `product_rcd` (`Id`, `ProductID`, `UserID`, `CreateDate`, `Hit`, `Up
 	('1186315105047023616', '1044505654699626496', '1103642850672906240', '2019-10-22 00:15:36', 1, '2019-10-22 00:15:36', 0);
 /*!40000 ALTER TABLE `product_rcd` ENABLE KEYS */;
 
--- 导出  表 tbshop.product_size 结构
+-- Dumping structure for table tbshop.product_size
 DROP TABLE IF EXISTS `product_size`;
 CREATE TABLE IF NOT EXISTS `product_size` (
   `Id` varchar(50) NOT NULL DEFAULT '',
@@ -45462,7 +45301,7 @@ CREATE TABLE IF NOT EXISTS `product_size` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.product_size 的数据：422 rows
+-- Dumping data for table tbshop.product_size: 422 rows
 DELETE FROM `product_size`;
 /*!40000 ALTER TABLE `product_size` DISABLE KEYS */;
 INSERT INTO `product_size` (`Id`, `ProductCode`, `ProSize`, `Price`, `ImageUrl`, `ImageList`, `CreateID`, `CreateDate`, `BasePrice`, `BatchPrice`, `ShopID`) VALUES
@@ -45890,7 +45729,7 @@ INSERT INTO `product_size` (`Id`, `ProductCode`, `ProSize`, `Price`, `ImageUrl`,
 	('1044526077432696833', 'A166', '默认', 17.50, '/Upload/28/A180/A180_1.png', '/Upload/28/A180/A180_2.png;/Upload/28/A180/A180_3.png;/Upload/28/A180/A180_4.png;/Upload/28/A180/A180_5.png;/Upload/28/A180/A180_6.png;/Upload/28/A180/A180_7.png;/Upload/28/A180/A180_8.png;/Upload/28/A180/A180_9.png;/Upload/28/A180/A180_10.png;/Upload/28/A180/A180_11.png;/Upload/28/A180/A180_12.png;/Upload/28/A180/A180_13.png;/Upload/28/A180/A180_14.png', '975247111765495808', '2018-09-25 17:56:37', 175.00, 17.50, 0);
 /*!40000 ALTER TABLE `product_size` ENABLE KEYS */;
 
--- 导出  表 tbshop.pro_collection 结构
+-- Dumping structure for table tbshop.pro_collection
 DROP TABLE IF EXISTS `pro_collection`;
 CREATE TABLE IF NOT EXISTS `pro_collection` (
   `Id` varchar(50) DEFAULT NULL,
@@ -45900,7 +45739,7 @@ CREATE TABLE IF NOT EXISTS `pro_collection` (
   `ShopID` int(4) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 正在导出表  tbshop.pro_collection 的数据：~2 rows (大约)
+-- Dumping data for table tbshop.pro_collection: ~2 rows (大约)
 DELETE FROM `pro_collection`;
 /*!40000 ALTER TABLE `pro_collection` DISABLE KEYS */;
 INSERT INTO `pro_collection` (`Id`, `ProductID`, `UserID`, `CreateDate`, `ShopID`) VALUES
@@ -45908,7 +45747,7 @@ INSERT INTO `pro_collection` (`Id`, `ProductID`, `UserID`, `CreateDate`, `ShopID
 	('1106038924087791616', '1044505654636711938', '1103642850672906240', '2019-03-14 11:46:43', 0);
 /*!40000 ALTER TABLE `pro_collection` ENABLE KEYS */;
 
--- 导出  表 tbshop.pro_sort 结构
+-- Dumping structure for table tbshop.pro_sort
 DROP TABLE IF EXISTS `pro_sort`;
 CREATE TABLE IF NOT EXISTS `pro_sort` (
   `Id` varchar(50) NOT NULL,
@@ -45923,59 +45762,25 @@ CREATE TABLE IF NOT EXISTS `pro_sort` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.pro_sort 的数据：46 rows
+-- Dumping data for table tbshop.pro_sort: 12 rows
 DELETE FROM `pro_sort`;
 /*!40000 ALTER TABLE `pro_sort` DISABLE KEYS */;
 INSERT INTO `pro_sort` (`Id`, `Title`, `ImageUrl`, `Pid`, `SortCode`, `ProCount`, `Icon`, `Summary`, `ShopID`) VALUES
 	('1039869164170383360', '牙签盒', '/Upload/28/A046/A046_1.png', '1034123232480989184', 8, 0, NULL, '分类描述', 1),
-	('1039869108402917376', '烟缸', '/Upload/28/A044/A044_1.png', '1034123232480989184', 7, 0, NULL, '分类描述', 1),
-	('1039868962139148288', '花瓶', '/Upload/28/A039/A039_1.png', '1034123232480989184', 6, 0, NULL, '分类描述', 1),
-	('1039868899493023744', '果盘/托盘', '/Upload/28/A029/A029_1.png', '1034123232480989184', 5, 1, NULL, '分类描述', 1),
-	('1039868787521884160', '纸巾盒/筒', '/Upload/28/A028/A028_1.png', '1034123232480989184', 4, 0, NULL, '分类描述', 1),
-	('1039868614750113792', '收纳', '/Upload/28/A022/A022_1.png', '1034123232480989184', 3, 1, NULL, '分类描述', 1),
-	('1039868529085648896', '储物罐', '/Upload/28/A003/A003_01.png', '1034123232480989184', 2, 4, NULL, '分类描述', 1),
-	('1039825192374898688', '西欧', '/fl/20190222/1031105337.png', '0', 3, 0, 'iconjiadian', '分类描述', 1),
-	('1036548643571765248', '枕头', '/Upload/28/A140/A140_1.png', '1', 2, 0, NULL, '分类描述', 1),
-	('1034449477529899008', '床上四件套', '/Upload/28/A144/A144_1.png', '1', 3, 0, NULL, '分类描述', 1),
-	('1034448928805883904', '被子', '/Upload/28/A139/A139_1.png', '1', 1, 0, NULL, '分类描述', 1),
-	('1034422941099626496', '杯具', '/Upload/28/A002/A002_1.png', '1034123232480989184', 1, 16, NULL, '分类描述', 1),
-	('1034123232480989184', '北美', '/fl/20190222/2096586014.jpg', '0', 2, 0, 'iconjiaju', '分类描述', 1),
-	('1', '亚洲', '/fl/20190222/1703461537.jpg', '0', 1, 0, 'iconjiafangjiashi', '分类描述', 1),
+	('1039825192374898688', '水果', '/fl/20190222/1031105337.png', '0', 3, 0, 'iconjiadian', '分类描述', 1),
+	('1036548643571765248', '宝骏', '/fl/20191115/1859488581.jpg', '1', 2, 0, NULL, '分类描述', 1),
+	('1034449477529899008', '长安', '/fl/20191115/1979644088.jpg', '1', 3, 0, NULL, '分类描述', 1),
+	('1034448928805883904', '雪佛兰', '/fl/20191115/1891973523.jpg', '1', 1, 0, NULL, '分类描述', 1),
+	('1034123232480989184', '瓷器', '/fl/20190222/2096586014.jpg', '0', 2, 0, 'iconjiaju', '分类描述', 1),
+	('1', '汽车', '/fl/20190222/1703461537.jpg', '0', 1, 0, 'iconjiafangjiashi', '分类描述', 1),
 	('1039869418005467136', '灯具', '/Upload/28/A047/A047_1.png', '1039825192374898688', 1, 0, NULL, '分类描述', 1),
-	('1039869475119304704', '加湿器', '/Upload/29/A062/A062_1.png', '1039825192374898688', 2, 2, NULL, '分类描述', 1),
-	('1039869543704563712', '电热壶', '/Upload/28/A089/A089_1.png', '1039825192374898688', 3, 0, NULL, '分类描述', 1),
-	('1039869727788371968', '吸尘器', '/Upload/29/A064/A064_1.png', '1039825192374898688', 4, 0, NULL, '分类描述', 1),
-	('1039869881530585088', '榨汁机', '/Upload/28/A069/A069_1.png', '1039825192374898688', 5, 0, NULL, '分类描述', 1),
-	('1044483250208247808', '茶具', '/Upload/28/A045/A045_1.png', '1034123232480989184', 9, 0, NULL, '分类描述', 1),
-	('1044483361164365824', '鞋盒/架/柜', '/Upload/28/A061/A061_1.png', '1034123232480989184', 10, 0, NULL, '分类描述', 1),
-	('1044483562247688192', '餐具', '/Upload/28/A097/A097_1.png', '1034123232480989184', 11, 0, NULL, '分类描述', 1),
-	('1044483611702726656', '雨伞', '/Upload/28/A108/A108_1.png', '1034123232480989184', 12, 0, NULL, '分类描述', 1),
-	('1044483683848949760', '生活小物件', '/Upload/28/A009/A009_1.png', '1034123232480989184', 13, 0, NULL, '分类描述', 1),
-	('1044483747375878144', '体重秤', '/Upload/28/A073/A073_1.png', '1034123232480989184', 14, 0, NULL, '分类描述', 1),
-	('1044483836127350784', '厨具', '/Upload/28/A118/A118_1.png', '1034123232480989184', 15, 0, NULL, '分类描述', 1),
-	('1044483956013142016', '毛球修剪器', '/Upload/28/A085/A085_1.png', '1034123232480989184', 16, 0, NULL, '分类描述', 1),
-	('1044485227524788224', '净水器', '/Upload/28/A065/A065_1.png', '1034123232480989184', 24, 0, NULL, '分类描述', 1),
-	('1044484331470458880', '衣架', '/Upload/28/A130/A130_1.png', '1034123232480989184', 17, 0, NULL, '分类描述', 1),
-	('1044484408209444864', '钟表', '/Upload/28/A134/A134_1.png', '1034123232480989184', 18, 0, NULL, '分类描述', 1),
-	('1044484467877613568', '打火机', '/Upload/28/A136/A136_1.png', '1034123232480989184', 19, 0, NULL, '分类描述', 1),
-	('1044484533883375616', '拖把', '/Upload/28/A138/A138_1.png', '1034123232480989184', 20, 0, NULL, '分类描述', 1),
-	('1044484706437042176', '毛巾/浴巾', '/Upload/28/A171/A171_1.png', '1034123232480989184', 21, 0, NULL, '分类描述', 1),
-	('1044484778985918464', '地毯/脚垫', '/Upload/28/A175/A175_1.png', '1034123232480989184', 22, 0, NULL, '分类描述', 1),
-	('1044484997332996096', '窗帘', '/Upload/28/A177/A177_1.png', '1034123232480989184', 23, 0, NULL, '分类描述', 1),
-	('1044485798604443648', '风干机', '/fl/20190222/209904297.jpg', '1039825192374898688', 6, 0, NULL, '分类描述', 1),
-	('1044486012039991296', '餐用电器', '/Upload/28/A090/A090_1.png', '1039825192374898688', 7, 0, NULL, '分类描述', 1),
-	('1044486119070240768', '吹风筒', '/Upload/28/A127/A127_1.png', '1039825192374898688', 8, 0, NULL, '分类描述', 1),
-	('1044486167787081728', '理疗仪器', '/Upload/28/A128/A128_1.png', '1039825192374898688', 9, 0, NULL, '分类描述', 1),
-	('1044486232794599424', '冰箱', '/Upload/28/A133/A133_1.png', '1039825192374898688', 10, 0, NULL, '分类描述', 1),
-	('1044486360280469504', '扫地机', '/Upload/28/A167/A167_1.png', '1039825192374898688', 11, 0, NULL, '分类描述', 1),
-	('1044486692070887424', '床垫', '/Upload/28/A152/A152_1.png', '1', 4, 0, NULL, '分类描述', 1),
-	('1044552221720711168', '微波炉', '/Upload/28/A068/A068_1.png', '1039825192374898688', 12, 0, NULL, '分类描述', 1),
-	('1044552984312287232', '音响', '/Upload/28/A071/A071_1.png', '1039825192374898688', 13, 0, NULL, '分类描述', 1),
-	('1105301540010332160', '澳洲', '/fl/20190312/11182495.jpg', '0', 4, 0, 'iconweixin', '分类描述', 1),
-	('1105302282423111680', 'SK2护肤精华露', '/fl/20190312/832482778.jpg', '1', 5, 0, 'ad', '分类描述', 1);
+	('1044486692070887424', '比亚迪', '/fl/20191115/709100530.jpg', '1', 4, 0, NULL, '分类描述', 1),
+	('1105301540010332160', '旅游', '/fl/20190312/11182495.jpg', '0', 4, 0, 'iconweixin', '分类描述', 1),
+	('1105302282423111680', '别克', '/fl/20191115/2129308674.jpg', '1', 5, 0, 'ad', '分类描述', 1),
+	('1194922907642499072', '传祺', '/fl/20191115/536048231.jpg', '1', 5, 0, NULL, NULL, 1);
 /*!40000 ALTER TABLE `pro_sort` ENABLE KEYS */;
 
--- 导出  过程 tbshop.SetCart 结构
+-- Dumping structure for procedure tbshop.SetCart
 DROP PROCEDURE IF EXISTS `SetCart`;
 DELIMITER //
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SetCart`(
@@ -46014,7 +45819,7 @@ begin
 end//
 DELIMITER ;
 
--- 导出  表 tbshop.shop 结构
+-- Dumping structure for table tbshop.shop
 DROP TABLE IF EXISTS `shop`;
 CREATE TABLE IF NOT EXISTS `shop` (
   `ID` int(11) NOT NULL AUTO_INCREMENT,
@@ -46034,17 +45839,14 @@ CREATE TABLE IF NOT EXISTS `shop` (
   KEY `IDX_AUTOFIELD` (`ID`)
 ) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.shop 的数据：4 rows
+-- Dumping data for table tbshop.shop: 1 rows
 DELETE FROM `shop`;
 /*!40000 ALTER TABLE `shop` DISABLE KEYS */;
 INSERT INTO `shop` (`ID`, `ShopName`, `BrandID`, `ShopAddress`, `ShopTel`, `GPS_X`, `GPS_Y`, `Summary`, `ShopUrl`, `CreateDate`, `ProvinceID`, `CityID`, `PartID`) VALUES
-	(1, '友琪万汇店', 7, '深圳市龙岗区万汇大厦104号商铺友琪便利店', '4006052053', '114.254438', '22.717518', '友琪便利店创立于2006年12月，历经12年的发展，截至2018年5月在深圳、惠州、东莞、广州拥有920家门店', 'https://x4.1766179.com/youqi.png', '2019-03-24 15:43:45', 519, 799, 3611),
-	(2, '友琪（爵士店）', 7, '深圳市罗湖区嘉宾路20号爵士大厦1038-1039号商铺友琪便利店', '4006052053', '114.114890', '22.539900', '友琪便利店创立于2006年12月，历经12年的发展，截至2018年5月在深圳、惠州、东莞、广州拥有920家门店', 'https://x4.1766179.com/youqi.png', '2019-03-24 15:43:49', 519, 799, 3609),
-	(3, '友琪（吉祥店）', 7, '龙岗中心城风临国际一楼商铺A130-A131号 友琪便利店', '4006052053', '114.240673', '22.708368', '友琪便利店创立于2006年12月，历经12年的发展，截至2018年5月在深圳、惠州、东莞、广州拥有920家门店', 'https://x4.1766179.com/youqi.png', '2019-03-24 15:43:54', 501, 537, 0),
-	(4, '友琪（珠江店）', 7, '深圳市龙岗区珠江广场2层C区2A-3号友琪便利店', '4006052053', '114.250970', '22.725250', '友琪便利店创立于2006年12月，历经12年的发展，截至2018年5月在深圳、惠州、东莞、广州拥有920家门店', 'https://x4.1766179.com/youqi.png', '2019-03-24 15:43:57', 501, 537, 0);
+	(1, '物华天宝店', 7, '深圳市龙岗区万汇大厦', '4006052053', '114.254438', '22.717518', '物华天宝店', 'https://x4.1766179.com/youqi.png', '2019-11-15 17:29:35', 519, 799, 3611);
 /*!40000 ALTER TABLE `shop` ENABLE KEYS */;
 
--- 导出  表 tbshop.shoporder 结构
+-- Dumping structure for table tbshop.shoporder
 DROP TABLE IF EXISTS `shoporder`;
 CREATE TABLE IF NOT EXISTS `shoporder` (
   `Id` varchar(50) NOT NULL,
@@ -46062,7 +45864,7 @@ CREATE TABLE IF NOT EXISTS `shoporder` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.shoporder 的数据：23 rows
+-- Dumping data for table tbshop.shoporder: 23 rows
 DELETE FROM `shoporder`;
 /*!40000 ALTER TABLE `shoporder` DISABLE KEYS */;
 INSERT INTO `shoporder` (`Id`, `Total`, `ProTotal`, `Freight`, `ST`, `AuthID`, `CreateID`, `CreateDate`, `UpdateTime`, `AddressID`, `OrderCode`, `ShopID`) VALUES
@@ -46091,7 +45893,7 @@ INSERT INTO `shoporder` (`Id`, `Total`, `ProTotal`, `Freight`, `ST`, `AuthID`, `
 	('183eef03e948fe762d537077ec17c5b6', 49.90, 49.90, 0.00, 0, '', '1103642850672906240', '2019-10-22 00:15:53', '2019-10-22 00:15:53', '1104312342897889280', 'WH201910220001', 0);
 /*!40000 ALTER TABLE `shoporder` ENABLE KEYS */;
 
--- 导出  表 tbshop.shoporderitem 结构
+-- Dumping structure for table tbshop.shoporderitem
 DROP TABLE IF EXISTS `shoporderitem`;
 CREATE TABLE IF NOT EXISTS `shoporderitem` (
   `Id` varchar(50) NOT NULL,
@@ -46105,7 +45907,7 @@ CREATE TABLE IF NOT EXISTS `shoporderitem` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.shoporderitem 的数据：30 rows
+-- Dumping data for table tbshop.shoporderitem: 30 rows
 DELETE FROM `shoporderitem`;
 /*!40000 ALTER TABLE `shoporderitem` DISABLE KEYS */;
 INSERT INTO `shoporderitem` (`Id`, `OrderID`, `ProductID`, `ProSizeID`, `ItemNum`, `Price`, `CreateID`, `ShopID`) VALUES
@@ -46141,7 +45943,7 @@ INSERT INTO `shoporderitem` (`Id`, `OrderID`, `ProductID`, `ProSizeID`, `ItemNum
 	('183eef03e948fe762d537077ec17c5b6_0', '183eef03e948fe762d537077ec17c5b6', '1044505654699626496', '1044526077097152513', 1, 49.90, '1103642850672906240', 0);
 /*!40000 ALTER TABLE `shoporderitem` ENABLE KEYS */;
 
--- 导出  表 tbshop.sort 结构
+-- Dumping structure for table tbshop.sort
 DROP TABLE IF EXISTS `sort`;
 CREATE TABLE IF NOT EXISTS `sort` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
@@ -46151,7 +45953,7 @@ CREATE TABLE IF NOT EXISTS `sort` (
   KEY `IDX_AUTOFIELD` (`Id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.sort 的数据：17 rows
+-- Dumping data for table tbshop.sort: 17 rows
 DELETE FROM `sort`;
 /*!40000 ALTER TABLE `sort` DISABLE KEYS */;
 INSERT INTO `sort` (`Id`, `Title`, `Pid`) VALUES
@@ -46174,51 +45976,7 @@ INSERT INTO `sort` (`Id`, `Title`, `Pid`) VALUES
 	(17, '其他', 11);
 /*!40000 ALTER TABLE `sort` ENABLE KEYS */;
 
--- 导出  表 tbshop.stock 结构
-DROP TABLE IF EXISTS `stock`;
-CREATE TABLE IF NOT EXISTS `stock` (
-  `Id` varchar(50) NOT NULL,
-  `Type` varchar(2) DEFAULT NULL,
-  `StockCode` varchar(50) DEFAULT NULL,
-  `FromUserID` varchar(50) DEFAULT NULL,
-  `ToUserID` varchar(50) DEFAULT NULL,
-  `AuthUserID` varchar(50) DEFAULT NULL,
-  `CreateID` varchar(50) DEFAULT NULL,
-  `Total` decimal(18,2) DEFAULT NULL,
-  `ActionDate` datetime DEFAULT NULL,
-  `CreateDate` datetime DEFAULT NULL,
-  PRIMARY KEY (`Id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
-
--- 正在导出表  tbshop.stock 的数据：2 rows
-DELETE FROM `stock`;
-/*!40000 ALTER TABLE `stock` DISABLE KEYS */;
-INSERT INTO `stock` (`Id`, `Type`, `StockCode`, `FromUserID`, `ToUserID`, `AuthUserID`, `CreateID`, `Total`, `ActionDate`, `CreateDate`) VALUES
-	('1', 'I', 'I20180901', '975308390198808576', '975308390198808576', '975308390198808576', '975308390198808576', 1.00, '2018-08-29 23:55:21', '2018-08-29 23:55:21'),
-	('1035581509689544704', 'O', 'O20180901001', '975247111765495808', '975247111765495808', '975247111765495808', '975247111765495808', 213.00, '2018-09-01 00:00:00', '2018-09-01 01:34:06');
-/*!40000 ALTER TABLE `stock` ENABLE KEYS */;
-
--- 导出  表 tbshop.stock_info 结构
-DROP TABLE IF EXISTS `stock_info`;
-CREATE TABLE IF NOT EXISTS `stock_info` (
-  `Id` varchar(50) NOT NULL,
-  `StockCode` varchar(50) DEFAULT NULL,
-  `ProductCode` varchar(50) DEFAULT NULL,
-  `ProductName` varchar(50) DEFAULT NULL,
-  `ProSize` varchar(50) DEFAULT NULL,
-  `Quantity` int(11) DEFAULT 0,
-  `Price` decimal(18,2) DEFAULT NULL,
-  `SubTotal` decimal(18,2) DEFAULT NULL,
-  `Remark` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`Id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
-
--- 正在导出表  tbshop.stock_info 的数据：0 rows
-DELETE FROM `stock_info`;
-/*!40000 ALTER TABLE `stock_info` DISABLE KEYS */;
-/*!40000 ALTER TABLE `stock_info` ENABLE KEYS */;
-
--- 导出  过程 tbshop.SubmitOrder 结构
+-- Dumping structure for procedure tbshop.SubmitOrder
 DROP PROCEDURE IF EXISTS `SubmitOrder`;
 DELIMITER //
 CREATE DEFINER=`root`@`localhost` PROCEDURE `SubmitOrder`(in _createid varchar(50),in _addressid varchar(50),out _re varchar(50) )
@@ -46294,7 +46052,7 @@ end if;
 end//
 DELIMITER ;
 
--- 导出  表 tbshop.sys_log 结构
+-- Dumping structure for table tbshop.sys_log
 DROP TABLE IF EXISTS `sys_log`;
 CREATE TABLE IF NOT EXISTS `sys_log` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
@@ -46312,12 +46070,12 @@ CREATE TABLE IF NOT EXISTS `sys_log` (
   KEY `IDX_AUTOFIELD` (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.sys_log 的数据：0 rows
+-- Dumping data for table tbshop.sys_log: 0 rows
 DELETE FROM `sys_log`;
 /*!40000 ALTER TABLE `sys_log` DISABLE KEYS */;
 /*!40000 ALTER TABLE `sys_log` ENABLE KEYS */;
 
--- 导出  表 tbshop.sys_org 结构
+-- Dumping structure for table tbshop.sys_org
 DROP TABLE IF EXISTS `sys_org`;
 CREATE TABLE IF NOT EXISTS `sys_org` (
   `Id` varchar(50) NOT NULL,
@@ -46333,7 +46091,7 @@ CREATE TABLE IF NOT EXISTS `sys_org` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.sys_org 的数据：4 rows
+-- Dumping data for table tbshop.sys_org: 4 rows
 DELETE FROM `sys_org`;
 /*!40000 ALTER TABLE `sys_org` DISABLE KEYS */;
 INSERT INTO `sys_org` (`Id`, `Name`, `OrgType`, `ManagerId`, `ParentId`, `Description`, `CreationTime`, `IsDeleted`, `DeletionTime`, `DeleteUserId`) VALUES
@@ -46343,7 +46101,7 @@ INSERT INTO `sys_org` (`Id`, `Name`, `OrgType`, `ManagerId`, `ParentId`, `Descri
 	('975258520352067584', '产品部', 2, NULL, '975257850106482688', NULL, '2018-03-18 14:32:00', 0, NULL, NULL);
 /*!40000 ALTER TABLE `sys_org` ENABLE KEYS */;
 
--- 导出  表 tbshop.sys_orgpermission 结构
+-- Dumping structure for table tbshop.sys_orgpermission
 DROP TABLE IF EXISTS `sys_orgpermission`;
 CREATE TABLE IF NOT EXISTS `sys_orgpermission` (
   `Id` varchar(50) NOT NULL,
@@ -46352,12 +46110,12 @@ CREATE TABLE IF NOT EXISTS `sys_orgpermission` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.sys_orgpermission 的数据：0 rows
+-- Dumping data for table tbshop.sys_orgpermission: 0 rows
 DELETE FROM `sys_orgpermission`;
 /*!40000 ALTER TABLE `sys_orgpermission` DISABLE KEYS */;
 /*!40000 ALTER TABLE `sys_orgpermission` ENABLE KEYS */;
 
--- 导出  表 tbshop.sys_orgtype 结构
+-- Dumping structure for table tbshop.sys_orgtype
 DROP TABLE IF EXISTS `sys_orgtype`;
 CREATE TABLE IF NOT EXISTS `sys_orgtype` (
   `Id` int(11) NOT NULL DEFAULT 0,
@@ -46366,7 +46124,7 @@ CREATE TABLE IF NOT EXISTS `sys_orgtype` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.sys_orgtype 的数据：2 rows
+-- Dumping data for table tbshop.sys_orgtype: 2 rows
 DELETE FROM `sys_orgtype`;
 /*!40000 ALTER TABLE `sys_orgtype` DISABLE KEYS */;
 INSERT INTO `sys_orgtype` (`Id`, `Name`, `ParentId`) VALUES
@@ -46374,7 +46132,7 @@ INSERT INTO `sys_orgtype` (`Id`, `Name`, `ParentId`) VALUES
 	(2, '部门', 1);
 /*!40000 ALTER TABLE `sys_orgtype` ENABLE KEYS */;
 
--- 导出  表 tbshop.sys_permission 结构
+-- Dumping structure for table tbshop.sys_permission
 DROP TABLE IF EXISTS `sys_permission`;
 CREATE TABLE IF NOT EXISTS `sys_permission` (
   `Id` varchar(50) NOT NULL,
@@ -46389,7 +46147,7 @@ CREATE TABLE IF NOT EXISTS `sys_permission` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.sys_permission 的数据：96 rows
+-- Dumping data for table tbshop.sys_permission: 81 rows
 DELETE FROM `sys_permission`;
 /*!40000 ALTER TABLE `sys_permission` DISABLE KEYS */;
 INSERT INTO `sys_permission` (`Id`, `Name`, `Code`, `ParentId`, `Type`, `Url`, `Icon`, `Description`, `SortCode`) VALUES
@@ -46403,16 +46161,6 @@ INSERT INTO `sys_permission` (`Id`, `Name`, `Code`, `ParentId`, `Type`, `Url`, `
 	('1034455923088822272', '添加', 'wiki.product.add', '1034455518418178048', 3, NULL, NULL, NULL, NULL),
 	('1034456006098292736', '编辑', 'wiki.product.edit', '1034455518418178048', 3, NULL, NULL, NULL, NULL),
 	('1034456106396684288', '删除', 'wiki.product.delete', '1034455518418178048', 3, NULL, NULL, NULL, NULL),
-	('1035566758674698240', '入库管理', NULL, '975247111765495810', 4, NULL, NULL, NULL, NULL),
-	('1035567116968923136', '入库管理', 'wiki.stockin', '1035566758674698240', 1, '/Wiki/StockIn/Index', NULL, NULL, NULL),
-	('1035567648563400704', '添加', 'wiki.stockin.add', '1035566758674698240', 3, NULL, NULL, NULL, NULL),
-	('1035567947202039808', '编辑', 'wiki.stockin.update', '1035566758674698240', 3, NULL, NULL, NULL, NULL),
-	('1035568045730435072', '删除', 'wiki.stockin.delete', '1035566758674698240', 3, NULL, NULL, NULL, NULL),
-	('1035580414414163968', '出库管理', NULL, '975247111765495810', 4, NULL, NULL, NULL, NULL),
-	('1035580624590737408', '出库管理', 'wiki.stockout', '1035580414414163968', 1, '/Wiki/StockOut/Index', NULL, NULL, NULL),
-	('1035580875670163456', '添加', 'wiki.stockout.add', '1035580414414163968', 3, NULL, NULL, NULL, NULL),
-	('1035581008038203392', '编辑', 'wiki.stockout.update', '1035580414414163968', 3, NULL, NULL, NULL, NULL),
-	('1035581075985928192', '删除', 'wiki.stockout.delete', '1035580414414163968', 3, NULL, NULL, NULL, NULL),
 	('1038026982551588864', '内容管理', NULL, NULL, 4, NULL, 'fa fa-gears', NULL, 33),
 	('1038027214760841216', '新闻管理', NULL, '1038026982551588864', 4, NULL, NULL, NULL, NULL),
 	('1038027427835678720', '新闻管理', 'wiki.news', '1038027214760841216', 1, '/Wiki/News/Index', NULL, NULL, NULL),
@@ -46477,11 +46225,6 @@ INSERT INTO `sys_permission` (`Id`, `Name`, `Code`, `ParentId`, `Type`, `Url`, `
 	('1041640822308737024', '添加', 'wiki.permission.add', '1041640439175843840', 3, NULL, NULL, NULL, NULL),
 	('1041640954882297856', '编辑', 'wiki.permission.update', '1041640439175843840', 3, NULL, NULL, NULL, NULL),
 	('1041641030916640768', '删除', 'wiki.permission.delete', '1041640439175843840', 3, NULL, NULL, NULL, NULL),
-	('1044210847796301824', '订货管理', NULL, '975247111765495810', 4, NULL, NULL, NULL, NULL),
-	('1044210982756421632', '订货管理', 'wiki.shoporder', '1044210847796301824', 1, '/Wiki/ShopOrder/Index', NULL, NULL, NULL),
-	('1044211147852615680', '添加', 'wiki.shoporder.add', '1044210847796301824', 3, NULL, NULL, NULL, NULL),
-	('1044211210662318080', '编辑', 'wiki.shoporder.edit', '1044210847796301824', 3, NULL, NULL, NULL, NULL),
-	('1044211290286985216', '删除', 'wiki.shoporder.delete', '1044210847796301824', 3, NULL, NULL, NULL, NULL),
 	('1097748810647605248', '品牌管理', NULL, '975247111765495810', 4, NULL, NULL, NULL, NULL),
 	('1097749103904952320', '品牌管理', 'wiki.Brand', '1097748810647605248', 1, '/Wiki/Brand/Index', NULL, NULL, NULL),
 	('1097749475407040512', '添加品牌', 'wiki.Brand.add', '1097748810647605248', 3, NULL, NULL, NULL, NULL),
@@ -46491,7 +46234,7 @@ INSERT INTO `sys_permission` (`Id`, `Name`, `Code`, `ParentId`, `Type`, `Url`, `
 	('1106172613740335104', '意见反馈', 'wiki.comment', '1106172003649458176', 1, '/Wiki/News/Comment', NULL, NULL, NULL);
 /*!40000 ALTER TABLE `sys_permission` ENABLE KEYS */;
 
--- 导出  表 tbshop.sys_post 结构
+-- Dumping structure for table tbshop.sys_post
 DROP TABLE IF EXISTS `sys_post`;
 CREATE TABLE IF NOT EXISTS `sys_post` (
   `Id` varchar(50) NOT NULL,
@@ -46504,7 +46247,7 @@ CREATE TABLE IF NOT EXISTS `sys_post` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.sys_post 的数据：2 rows
+-- Dumping data for table tbshop.sys_post: 2 rows
 DELETE FROM `sys_post`;
 /*!40000 ALTER TABLE `sys_post` DISABLE KEYS */;
 INSERT INTO `sys_post` (`Id`, `Name`, `OrgId`, `Description`, `CreationTime`, `IsDeleted`, `DeletionTime`) VALUES
@@ -46512,7 +46255,7 @@ INSERT INTO `sys_post` (`Id`, `Name`, `OrgId`, `Description`, `CreationTime`, `I
 	('975258734123159552', '产品经理', '975258520352067584', NULL, '2018-03-18 14:32:00', 0, NULL);
 /*!40000 ALTER TABLE `sys_post` ENABLE KEYS */;
 
--- 导出  表 tbshop.sys_role 结构
+-- Dumping structure for table tbshop.sys_role
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE IF NOT EXISTS `sys_role` (
   `Id` varchar(50) NOT NULL,
@@ -46530,14 +46273,14 @@ CREATE TABLE IF NOT EXISTS `sys_role` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.sys_role 的数据：1 rows
+-- Dumping data for table tbshop.sys_role: 1 rows
 DELETE FROM `sys_role`;
 /*!40000 ALTER TABLE `sys_role` DISABLE KEYS */;
 INSERT INTO `sys_role` (`Id`, `Name`, `SortCode`, `IsEnabled`, `Description`, `CreationTime`, `CreateUserId`, `LastModifyTime`, `LastModifyUserId`, `IsDeleted`, `DeletionTime`, `DeleteUserId`) VALUES
 	('975256202294464512', '商品管理员', 1, 1, '0', '2018-03-18 14:22:00', '975247111765495808', '2018-03-18 14:22:00', '0', 0, NULL, NULL);
 /*!40000 ALTER TABLE `sys_role` ENABLE KEYS */;
 
--- 导出  表 tbshop.sys_rolepermission 结构
+-- Dumping structure for table tbshop.sys_rolepermission
 DROP TABLE IF EXISTS `sys_rolepermission`;
 CREATE TABLE IF NOT EXISTS `sys_rolepermission` (
   `Id` varchar(50) NOT NULL,
@@ -46546,7 +46289,7 @@ CREATE TABLE IF NOT EXISTS `sys_rolepermission` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.sys_rolepermission 的数据：9 rows
+-- Dumping data for table tbshop.sys_rolepermission: 9 rows
 DELETE FROM `sys_rolepermission`;
 /*!40000 ALTER TABLE `sys_rolepermission` DISABLE KEYS */;
 INSERT INTO `sys_rolepermission` (`Id`, `RoleId`, `PermissionId`) VALUES
@@ -46561,7 +46304,7 @@ INSERT INTO `sys_rolepermission` (`Id`, `RoleId`, `PermissionId`) VALUES
 	('975308019413946376', '975256202294464512', '975247111769690122');
 /*!40000 ALTER TABLE `sys_rolepermission` ENABLE KEYS */;
 
--- 导出  表 tbshop.sys_user 结构
+-- Dumping structure for table tbshop.sys_user
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE IF NOT EXISTS `sys_user` (
   `Id` varchar(50) NOT NULL,
@@ -46586,15 +46329,15 @@ CREATE TABLE IF NOT EXISTS `sys_user` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.sys_user 的数据：2 rows
+-- Dumping data for table tbshop.sys_user: 2 rows
 DELETE FROM `sys_user`;
 /*!40000 ALTER TABLE `sys_user` DISABLE KEYS */;
 INSERT INTO `sys_user` (`Id`, `AccountName`, `Name`, `HeadIcon`, `Gender`, `Birthday`, `MobilePhone`, `Email`, `WeChat`, `Description`, `CreationTime`, `CreateUserId`, `LastModifyTime`, `LastModifyUserId`, `State`, `OrgIds`, `PostIds`, `RoleIds`, `ShopID`) VALUES
 	('975247111765495808', 'admin', '超级管理员', NULL, 1, '2016-11-29 00:00:00', '1557985464', 'so_while@163.com', 'so9527', '系统内置账户', '2016-07-20 00:00:00', NULL, NULL, NULL, 1, NULL, NULL, NULL, 0),
-	('975308390198808576', '52chloe', '克洛伊', NULL, NULL, '2018-04-21 00:00:00', NULL, NULL, NULL, NULL, '2018-03-18 17:50:00', '975247111765495808', NULL, NULL, 1, '975258520352067584', '975258734123159552', '975256202294464512', 0);
+	('975308390198808576', '52chloe', '克洛伊', NULL, NULL, '2018-04-21 00:00:00', NULL, NULL, NULL, NULL, '2018-03-18 17:50:00', '975247111765495808', NULL, NULL, 1, '975258520352067584', '975258734123159552', '975256202294464512', 1);
 /*!40000 ALTER TABLE `sys_user` ENABLE KEYS */;
 
--- 导出  表 tbshop.sys_userlogon 结构
+-- Dumping structure for table tbshop.sys_userlogon
 DROP TABLE IF EXISTS `sys_userlogon`;
 CREATE TABLE IF NOT EXISTS `sys_userlogon` (
   `Id` varchar(50) NOT NULL,
@@ -46607,15 +46350,15 @@ CREATE TABLE IF NOT EXISTS `sys_userlogon` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.sys_userlogon 的数据：2 rows
+-- Dumping data for table tbshop.sys_userlogon: 2 rows
 DELETE FROM `sys_userlogon`;
 /*!40000 ALTER TABLE `sys_userlogon` DISABLE KEYS */;
 INSERT INTO `sys_userlogon` (`Id`, `UserId`, `UserPassword`, `UserSecretkey`, `PreviousVisitTime`, `LastVisitTime`, `LogOnCount`) VALUES
-	('975247111765495808', '975247111765495808', '20abf5e27230052492861da4b29c75a6', 'cddec707df59ecd1', '2019-03-24 15:18:07', '2019-03-24 17:01:52', 542),
+	('975247111765495808', '975247111765495808', '20abf5e27230052492861da4b29c75a6', 'cddec707df59ecd1', '2020-01-02 19:36:06', '2020-01-02 20:40:33', 553),
 	('975308390207197184', '975308390198808576', '20abf5e27230052492861da4b29c75a6', 'cddec707df59ecd1', '2018-04-29 10:45:40', '2018-08-22 23:15:52', 93);
 /*!40000 ALTER TABLE `sys_userlogon` ENABLE KEYS */;
 
--- 导出  表 tbshop.sys_userorg 结构
+-- Dumping structure for table tbshop.sys_userorg
 DROP TABLE IF EXISTS `sys_userorg`;
 CREATE TABLE IF NOT EXISTS `sys_userorg` (
   `Id` varchar(50) NOT NULL,
@@ -46625,14 +46368,14 @@ CREATE TABLE IF NOT EXISTS `sys_userorg` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.sys_userorg 的数据：1 rows
+-- Dumping data for table tbshop.sys_userorg: 1 rows
 DELETE FROM `sys_userorg`;
 /*!40000 ALTER TABLE `sys_userorg` DISABLE KEYS */;
 INSERT INTO `sys_userorg` (`Id`, `UserId`, `OrgId`, `DisablePermission`) VALUES
-	('1039815481197989888', '975308390198808576', '975258520352067584', 0);
+	('1212685487630848000', '975308390198808576', '975258520352067584', 0);
 /*!40000 ALTER TABLE `sys_userorg` ENABLE KEYS */;
 
--- 导出  表 tbshop.sys_userpermission 结构
+-- Dumping structure for table tbshop.sys_userpermission
 DROP TABLE IF EXISTS `sys_userpermission`;
 CREATE TABLE IF NOT EXISTS `sys_userpermission` (
   `Id` varchar(50) NOT NULL,
@@ -46641,12 +46384,12 @@ CREATE TABLE IF NOT EXISTS `sys_userpermission` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.sys_userpermission 的数据：0 rows
+-- Dumping data for table tbshop.sys_userpermission: 0 rows
 DELETE FROM `sys_userpermission`;
 /*!40000 ALTER TABLE `sys_userpermission` DISABLE KEYS */;
 /*!40000 ALTER TABLE `sys_userpermission` ENABLE KEYS */;
 
--- 导出  表 tbshop.sys_userpost 结构
+-- Dumping structure for table tbshop.sys_userpost
 DROP TABLE IF EXISTS `sys_userpost`;
 CREATE TABLE IF NOT EXISTS `sys_userpost` (
   `Id` varchar(50) NOT NULL,
@@ -46655,15 +46398,15 @@ CREATE TABLE IF NOT EXISTS `sys_userpost` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.sys_userpost 的数据：2 rows
+-- Dumping data for table tbshop.sys_userpost: 2 rows
 DELETE FROM `sys_userpost`;
 /*!40000 ALTER TABLE `sys_userpost` DISABLE KEYS */;
 INSERT INTO `sys_userpost` (`Id`, `UserId`, `PostId`) VALUES
-	('1039815481197989889', '975308390198808576', '975258734123159552'),
+	('1212685487630848001', '975308390198808576', '975258734123159552'),
 	('975259300899459072', '975259300828155904', '975258691823603712');
 /*!40000 ALTER TABLE `sys_userpost` ENABLE KEYS */;
 
--- 导出  表 tbshop.sys_userrole 结构
+-- Dumping structure for table tbshop.sys_userrole
 DROP TABLE IF EXISTS `sys_userrole`;
 CREATE TABLE IF NOT EXISTS `sys_userrole` (
   `Id` varchar(50) NOT NULL,
@@ -46672,14 +46415,14 @@ CREATE TABLE IF NOT EXISTS `sys_userrole` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.sys_userrole 的数据：1 rows
+-- Dumping data for table tbshop.sys_userrole: 1 rows
 DELETE FROM `sys_userrole`;
 /*!40000 ALTER TABLE `sys_userrole` DISABLE KEYS */;
 INSERT INTO `sys_userrole` (`Id`, `UserId`, `RoleId`) VALUES
-	('1039815481189601280', '975308390198808576', '975256202294464512');
+	('1212685487622459392', '975308390198808576', '975256202294464512');
 /*!40000 ALTER TABLE `sys_userrole` ENABLE KEYS */;
 
--- 导出  表 tbshop.users 结构
+-- Dumping structure for table tbshop.users
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `Id` varchar(50) NOT NULL,
@@ -46700,22 +46443,22 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.users 的数据：~9 rows (大约)
+-- Dumping data for table tbshop.users: ~9 rows (大约)
 DELETE FROM `users`;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` (`Id`, `Mobile`, `UserPass`, `UserSecretkey`, `UserName`, `Email`, `ST`, `Sex`, `RoleID`, `CreateDate`, `LastLoginDate`, `ShopID`, `FromID`, `OpenID`, `UserIcon`) VALUES
-	('1103642850672906240', '17796350288', 'ac915bf07e54e3e526a4cd81dd579591', '09079f6accf0125c', '帅不过三秒', '', 0, 0, 0, '2019-03-07 21:05:34', '2019-03-07 21:05:34', 0, NULL, 'oNUFK5MdLhP-k2WY3gi6v3Bt4NJQ', 'https://wx.qlogo.cn/mmopen/vi_32/4avqdaEzr9icEVOLQHEyKzmCMpGVBu9UqeJwicoloMWiaIClDib26YdURtrMlALJbuYhoVv5CKycyibTLZiazLiczibYyw/132'),
-	('1104991519959552000', '17796350288', '1bfd2c89ce5cb910a651556e0fa0cc8b', '3640105912053fe6', '物华天宝', '', 0, 0, 0, '2019-03-11 14:24:42', '2019-03-11 14:24:42', 0, NULL, 'oNUFK5Lrb8wJNujG1h2P02tJwxLs', 'https://wx.qlogo.cn/mmopen/vi_32/8LUNG62Vf9EQERDw6FicW3ZadictGfRqpJpvdqcdGYyRDvuaYY3CgDXVjbqJkP7lD0pFQiaKokQAfT1HQSjtftBvQ/132'),
+	('1103642850672906240', '17796350280', 'ac915bf07e54e3e526a4cd81dd579591', '09079f6accf0125c', '帅不过三秒', NULL, 0, 0, 0, '2019-03-07 21:05:34', '2019-03-07 21:05:34', 1, NULL, 'oNUFK5MdLhP-k2WY3gi6v3Bt4NJQ', 'https://wx.qlogo.cn/mmopen/vi_32/4avqdaEzr9icEVOLQHEyKzmCMpGVBu9UqeJwicoloMWiaIClDib26YdURtrMlALJbuYhoVv5CKycyibTLZiazLiczibYyw/132'),
+	('1104991519959552000', '17796350280', '1bfd2c89ce5cb910a651556e0fa0cc8b', '3640105912053fe6', '物华天宝', '', 0, 0, 0, '2019-03-11 14:24:42', '2019-03-11 14:24:42', 0, NULL, 'oNUFK5Lrb8wJNujG1h2P02tJwxLs', 'https://wx.qlogo.cn/mmopen/vi_32/8LUNG62Vf9EQERDw6FicW3ZadictGfRqpJpvdqcdGYyRDvuaYY3CgDXVjbqJkP7lD0pFQiaKokQAfT1HQSjtftBvQ/132'),
 	('1105302883177467904', '13326441137', 'f23e13ebb379760a2c256183a3330c0e', '1a11dec826455a0e', '无为', '', 0, 0, 0, '2019-03-12 11:01:57', '2019-03-12 11:01:57', 0, NULL, 'oNUFK5CIePBzEnCfto0d0FUeeqq4', 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKf0riaiaiaWcQIcia4nXzghl2Pp9AAzwny1cxbMFc4sE7DPYo7xrPY8ceOxjRzDiafIcnjkumdfEXgILg/132'),
 	('1105698811814219776', '13755146382', '5c2497bb1e40e6c5a3c6dcbbce191817', '5391650684eeb5f5', '平安文子', '', 0, 0, 0, '2019-03-13 13:15:14', '2019-03-13 13:15:14', 0, NULL, 'oNUFK5HOP63udt41hcGpa7D2Nc9I', 'https://wx.qlogo.cn/mmopen/vi_32/q55lBjewicib4kqd52uicGZu9Qv2FptEumM1ZZaj5lk4MszJSg9kKz4NdNffLKAF9jScA6Nw1vfc7xbAxs9uHodeA/132'),
 	('1106567884764745728', '18874706063', '27cecc17cc275bbb6201abd8f0adabb2', '097d3f52b0775853', '慧子', '', 0, 0, 0, '2019-03-15 22:48:37', '2019-03-15 22:48:37', 0, NULL, 'oNUFK5OEUVStRvX9_AUf_YEZjnaQ', 'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83ep1IGHJURnM6UjoDZ1yHv2ngDnUD34pibHxicwMQS4ZaQlspzYDlLtCUYXzibB7dOlOCY5hjY3bz4gzg/132'),
 	('1107548246756167680', '18562020297', '472721c013a6674f65e5fa8d89362e40', '75adcb50166a569d', '啊牛', '', 0, 0, 0, '2019-03-18 15:44:13', '2019-03-18 15:44:13', 0, NULL, 'oNUFK5NpugmVklN0bAE1HRlycWsc', 'https://wx.qlogo.cn/mmopen/vi_32/SMsxIumHkvOTvGjQjW0PFMwdGkBKWT7Jn8GnDLhoLue4bSjU4NEdY1S3cCHlt0NP21cC89BSmSMfyLw6TOicSFg/132'),
 	('1109046454246313984', '15013484823', 'e01cf1a3f98c1b5369c7ad5ea0dfef07', 'a5119a0dfd52a9f0', '郑振东', '', 0, 0, 0, '2019-03-22 18:57:34', '2019-03-22 18:57:34', 0, NULL, 'oNUFK5H17lhjDMUk6-w2cyTPYODY', 'https://wx.qlogo.cn/mmopen/vi_32/O23YMTu6ibbLJducmPMr93WsRWngE2hjc5oPiciazxhkl2h50ZcG6iaQX1EKz75dNPK6bcpMuE8L8O8CSFPX8TbibNg/132'),
-	('1111261279454105600', '17796350288', 'b6ebaa438d463ad57ed322ad750118db', 'a1ac9fd856937716', '帅不过三秒', '', 0, 0, 0, '2019-03-28 21:38:29', '2019-03-28 21:38:29', 0, NULL, 'o5YQB5XwEqk2Ouq3qI9OkA9dwIm4', 'https://wx.qlogo.cn/mmopen/vi_32/bBbibh5Fkk3StnssXswAulicIgfpFqZRxl2ic9iaWhicGxhvU4LoPjzQf8MtEaM4wZ7XdHFjeOPGozKtrGHv9MbzYHw/132'),
+	('1111261279454105600', '17796350280', 'b6ebaa438d463ad57ed322ad750118db', 'a1ac9fd856937716', '帅不过三秒', '', 0, 0, 0, '2019-03-28 21:38:29', '2019-03-28 21:38:29', 0, NULL, 'o5YQB5XwEqk2Ouq3qI9OkA9dwIm4', 'https://wx.qlogo.cn/mmopen/vi_32/bBbibh5Fkk3StnssXswAulicIgfpFqZRxl2ic9iaWhicGxhvU4LoPjzQf8MtEaM4wZ7XdHFjeOPGozKtrGHv9MbzYHw/132'),
 	('1112201494104510464', '13068710826', '1eee65e929ffc8581c7406e7c385b1d8', '6adf535bffd81342', '。', '', 0, 0, 0, '2019-03-31 11:54:34', '2019-03-31 11:54:34', 0, NULL, 'o5YQB5dAJO0xNfWMuSRGU6antYTI', 'https://wx.qlogo.cn/mmopen/vi_32/Pw1aRTZO43Tqfx1qshVsVLW59bbgAicLE1oLfQTxkSrcc6GXWZhM6VOy6OjaicOSRibpCsGcmKp1g4j9Zk9hxxDMw/132');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
--- 导出  表 tbshop.users_address 结构
+-- Dumping structure for table tbshop.users_address
 DROP TABLE IF EXISTS `users_address`;
 CREATE TABLE IF NOT EXISTS `users_address` (
   `Id` varchar(50) DEFAULT NULL,
@@ -46728,18 +46471,18 @@ CREATE TABLE IF NOT EXISTS `users_address` (
   `GPS_Y` decimal(10,6) DEFAULT 0.000000
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 正在导出表  tbshop.users_address 的数据：~5 rows (大约)
+-- Dumping data for table tbshop.users_address: ~5 rows (大约)
 DELETE FROM `users_address`;
 /*!40000 ALTER TABLE `users_address` DISABLE KEYS */;
 INSERT INTO `users_address` (`Id`, `UserName`, `Mobile`, `Address`, `IsDefault`, `CreateID`, `GPS_X`, `GPS_Y`) VALUES
 	('1104312342897889280', 'Tom2', '17796350281', '龙河路', 1, '1103642850672906240', 0.000000, 0.000000),
 	('1104359696883650560', 'Tom Geo', '13278860080', '福田区上梅林', 0, '1103642850672906240', 0.000000, 0.000000),
-	('1104999364104949760', 'Tom', '17796350288', '龙城广场', 1, '1104991519959552000', 0.000000, 0.000000),
+	('1104999364104949760', 'Tom', '17796350280', '龙城广场', 1, '1104991519959552000', 0.000000, 0.000000),
 	('1104999499404808192', 'Sam', '13278860080', '布吉广场', 1, '1104991519959552000', 0.000000, 0.000000),
 	('1105303676504903680', '喇叭', '13326441137', '深圳市1龙岗区建新路', 1, '1105302883177467904', 0.000000, 0.000000);
 /*!40000 ALTER TABLE `users_address` ENABLE KEYS */;
 
--- 导出  表 tbshop.users_log 结构
+-- Dumping structure for table tbshop.users_log
 DROP TABLE IF EXISTS `users_log`;
 CREATE TABLE IF NOT EXISTS `users_log` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
@@ -46757,12 +46500,12 @@ CREATE TABLE IF NOT EXISTS `users_log` (
   KEY `IDX_AUTOFIELD` (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.users_log 的数据：0 rows
+-- Dumping data for table tbshop.users_log: 0 rows
 DELETE FROM `users_log`;
 /*!40000 ALTER TABLE `users_log` DISABLE KEYS */;
 /*!40000 ALTER TABLE `users_log` ENABLE KEYS */;
 
--- 导出  表 tbshop.users_permission 结构
+-- Dumping structure for table tbshop.users_permission
 DROP TABLE IF EXISTS `users_permission`;
 CREATE TABLE IF NOT EXISTS `users_permission` (
   `Id` varchar(50) NOT NULL,
@@ -46777,7 +46520,7 @@ CREATE TABLE IF NOT EXISTS `users_permission` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.users_permission 的数据：2 rows
+-- Dumping data for table tbshop.users_permission: 2 rows
 DELETE FROM `users_permission`;
 /*!40000 ALTER TABLE `users_permission` DISABLE KEYS */;
 INSERT INTO `users_permission` (`Id`, `Name`, `Code`, `ParentId`, `Type`, `Url`, `Icon`, `Description`, `SortCode`) VALUES
@@ -46785,7 +46528,7 @@ INSERT INTO `users_permission` (`Id`, `Name`, `Code`, `ParentId`, `Type`, `Url`,
 	('1041642117836967936', '订货管理', 'user.order', '1041641636561555456', 1, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `users_permission` ENABLE KEYS */;
 
--- 导出  表 tbshop.users_role 结构
+-- Dumping structure for table tbshop.users_role
 DROP TABLE IF EXISTS `users_role`;
 CREATE TABLE IF NOT EXISTS `users_role` (
   `ID` int(4) NOT NULL AUTO_INCREMENT,
@@ -46794,7 +46537,7 @@ CREATE TABLE IF NOT EXISTS `users_role` (
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.users_role 的数据：~2 rows (大约)
+-- Dumping data for table tbshop.users_role: ~2 rows (大约)
 DELETE FROM `users_role`;
 /*!40000 ALTER TABLE `users_role` DISABLE KEYS */;
 INSERT INTO `users_role` (`ID`, `RoleName`, `ST`) VALUES
@@ -46802,7 +46545,7 @@ INSERT INTO `users_role` (`ID`, `RoleName`, `ST`) VALUES
 	(2, '营业员', 1);
 /*!40000 ALTER TABLE `users_role` ENABLE KEYS */;
 
--- 导出  表 tbshop.users_rolepermission 结构
+-- Dumping structure for table tbshop.users_rolepermission
 DROP TABLE IF EXISTS `users_rolepermission`;
 CREATE TABLE IF NOT EXISTS `users_rolepermission` (
   `Id` varchar(50) NOT NULL,
@@ -46811,12 +46554,12 @@ CREATE TABLE IF NOT EXISTS `users_rolepermission` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.users_rolepermission 的数据：0 rows
+-- Dumping data for table tbshop.users_rolepermission: 0 rows
 DELETE FROM `users_rolepermission`;
 /*!40000 ALTER TABLE `users_rolepermission` DISABLE KEYS */;
 /*!40000 ALTER TABLE `users_rolepermission` ENABLE KEYS */;
 
--- 导出  表 tbshop.users_security 结构
+-- Dumping structure for table tbshop.users_security
 DROP TABLE IF EXISTS `users_security`;
 CREATE TABLE IF NOT EXISTS `users_security` (
   `Id` varchar(50) DEFAULT NULL,
@@ -46826,7 +46569,7 @@ CREATE TABLE IF NOT EXISTS `users_security` (
   `CreateDate` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 正在导出表  tbshop.users_security 的数据：~5 rows (大约)
+-- Dumping data for table tbshop.users_security: ~5 rows (大约)
 DELETE FROM `users_security`;
 /*!40000 ALTER TABLE `users_security` DISABLE KEYS */;
 INSERT INTO `users_security` (`Id`, `UserID`, `GPS_X`, `GPS_Y`, `CreateDate`) VALUES
@@ -46837,7 +46580,7 @@ INSERT INTO `users_security` (`Id`, `UserID`, `GPS_X`, `GPS_Y`, `CreateDate`) VA
 	('1106181960134430720', '1103642850672906240', 114.872316, 30.453906, '2019-03-14 21:15:05');
 /*!40000 ALTER TABLE `users_security` ENABLE KEYS */;
 
--- 导出  表 tbshop.wikidocument 结构
+-- Dumping structure for table tbshop.wikidocument
 DROP TABLE IF EXISTS `wikidocument`;
 CREATE TABLE IF NOT EXISTS `wikidocument` (
   `Id` varchar(100) NOT NULL,
@@ -46853,7 +46596,7 @@ CREATE TABLE IF NOT EXISTS `wikidocument` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.wikidocument 的数据：69 rows
+-- Dumping data for table tbshop.wikidocument: 69 rows
 DELETE FROM `wikidocument`;
 /*!40000 ALTER TABLE `wikidocument` DISABLE KEYS */;
 INSERT INTO `wikidocument` (`Id`, `Title`, `Summary`, `Tag`, `HtmlContent`, `MarkdownCode`, `CreationTime`, `UpdationTime`, `IsDeleted`, `DeletionTime`) VALUES
@@ -46928,7 +46671,7 @@ INSERT INTO `wikidocument` (`Id`, `Title`, `Summary`, `Tag`, `HtmlContent`, `Mar
 	('3325873886481874944', 'Chloe-性能评测', '性能测评', 'Chloe-性能评测', '<h1 id="h1-u6027u80FDu8BC4u6D4B"><a name="性能评测" class="reference-link"></a><span class="header-link octicon octicon-link"></span>性能评测</h1><p>测评对象：EntityFramework6.1、Dapper 和 Chloe.ORM。<br><strong>1.映射能力</strong><br>一次查50万条数据，总共测试5轮，测试结果数据如下：</p>\r\n<table>\r\n<thead>\r\n<tr>\r\n<th></th>\r\n<th>Chloe.IQuery(ms)</th>\r\n<th>Chloe.SqlQuery(ms)</th>\r\n<th>Dapper.Query(ms)</th>\r\n<th>EF.IQueryable(ms)</th>\r\n<th>EF.SqlQuery(ms)</th>\r\n</tr>\r\n</thead>\r\n<tbody>\r\n<tr>\r\n<td>第1轮</td>\r\n<td>6976</td>\r\n<td>7170</td>\r\n<td>7948</td>\r\n<td>7704</td>\r\n<td>7744</td>\r\n</tr>\r\n<tr>\r\n<td>第2轮</td>\r\n<td>7357</td>\r\n<td>6853</td>\r\n<td>8410</td>\r\n<td>8328</td>\r\n<td>7783</td>\r\n</tr>\r\n<tr>\r\n<td>第3轮</td>\r\n<td>7610</td>\r\n<td>7833</td>\r\n<td>8107</td>\r\n<td>9795</td>\r\n<td>8706</td>\r\n</tr>\r\n<tr>\r\n<td>第4轮</td>\r\n<td>7296</td>\r\n<td>6957</td>\r\n<td>7760</td>\r\n<td>8643</td>\r\n<td>7873</td>\r\n</tr>\r\n<tr>\r\n<td>第5轮</td>\r\n<td>9636</td>\r\n<td>6705</td>\r\n<td>8805</td>\r\n<td>8946</td>\r\n<td>8544</td>\r\n</tr>\r\n<tr>\r\n<td><strong>平均</strong></td>\r\n<td><strong>7775</strong></td>\r\n<td><strong>7103</strong></td>\r\n<td><strong>8206</strong></td>\r\n<td><strong>8683</strong></td>\r\n<td><strong>8130</strong></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p><strong>2.查询能力</strong><br>一次查询只查一条数据，循环执行20000次查询。</p>\r\n<table>\r\n<thead>\r\n<tr>\r\n<th></th>\r\n<th>Chloe.IQuery(ms)</th>\r\n<th>Chloe.SqlQuery(ms)</th>\r\n<th>Dapper.Query(ms)</th>\r\n<th>EF.IQueryable(ms)</th>\r\n<th>EF.SqlQuery(ms)</th>\r\n</tr>\r\n</thead>\r\n<tbody>\r\n<tr>\r\n<td>第1轮</td>\r\n<td>15281</td>\r\n<td>11858</td>\r\n<td>11981</td>\r\n<td>31394</td>\r\n<td>19309</td>\r\n</tr>\r\n<tr>\r\n<td>第2轮</td>\r\n<td>15194</td>\r\n<td>12177</td>\r\n<td>12314</td>\r\n<td>31464</td>\r\n<td>18161</td>\r\n</tr>\r\n<tr>\r\n<td>第3轮</td>\r\n<td>15967</td>\r\n<td>12348</td>\r\n<td>12366</td>\r\n<td>31082</td>\r\n<td>18030</td>\r\n</tr>\r\n<tr>\r\n<td>第4轮</td>\r\n<td>15371</td>\r\n<td>11793</td>\r\n<td>12479</td>\r\n<td>32314</td>\r\n<td>18356</td>\r\n</tr>\r\n<tr>\r\n<td>第5轮</td>\r\n<td>15350</td>\r\n<td>11921</td>\r\n<td>11937</td>\r\n<td>35023</td>\r\n<td>18356</td>\r\n</tr>\r\n<tr>\r\n<td><strong>平均</strong></td>\r\n<td><strong>15411</strong></td>\r\n<td><strong>12019</strong></td>\r\n<td><strong>12215</strong></td>\r\n<td><strong>32255</strong></td>\r\n<td><strong>18442</strong></td>\r\n</tr>\r\n</tbody>\r\n</table>\r\n<p>以上测试，EF 均使用了 AsNoTracking。测试效果在不同机子可能会有略微差别，以上数据仅供参考。<br>数据来源：<a href="http://www.cnblogs.com/so9527/p/5674498.html" title="http://www.cnblogs.com/so9527/p/5674498.html">http://www.cnblogs.com/so9527/p/5674498.html</a></p>', '# 性能评测\r\n测评对象：EntityFramework6.1、Dapper 和 Chloe.ORM。\r\n**1.映射能力**\r\n一次查50万条数据，总共测试5轮，测试结果数据如下：\r\n\r\n|   | Chloe.IQuery(ms)  | Chloe.SqlQuery(ms)  | Dapper.Query(ms)  | EF.IQueryable(ms)  | EF.SqlQuery(ms)  |\r\n| ------------ | ------------ | ------------ | ------------ | ------------ | ------------ |\r\n| 第1轮  | 6976 | 7170  | 7948  | 7704  | 7744  |\r\n| 第2轮  | 7357  | 6853  | 8410  | 8328  | 7783  |\r\n| 第3轮  | 7610  | 7833  | 8107  | 9795  | 8706 |\r\n| 第4轮  | 7296  | 6957  | 7760  | 8643  | 7873  |\r\n| 第5轮  | 9636  | 6705  | 8805  | 8946  | 8544  |\r\n| **平均**  | **7775**  | **7103**  | **8206**  | **8683**  | **8130**  |\r\n\r\n**2.查询能力**\r\n一次查询只查一条数据，循环执行20000次查询。\r\n\r\n|   | Chloe.IQuery(ms)  | Chloe.SqlQuery(ms)  | Dapper.Query(ms)  | EF.IQueryable(ms)  | EF.SqlQuery(ms)  |\r\n| ------------ | ------------ | ------------ | ------------ | ------------ | ------------ |\r\n| 第1轮  | 15281 | 11858  | 11981  | 31394  | 19309  |\r\n| 第2轮  | 15194  | 12177  | 12314  | 31464  | 18161  |\r\n| 第3轮  | 15967  | 12348  | 12366  | 31082  | 18030 |\r\n| 第4轮  | 15371  | 11793  | 12479  | 32314  | 18356  |\r\n| 第5轮  | 15350  | 11921  | 11937  | 35023  | 18356  |\r\n| **平均**  | **15411**  | **12019**  | **12215**  | **32255**  | **18442**  |\r\n\r\n以上测试，EF 均使用了 AsNoTracking。测试效果在不同机子可能会有略微差别，以上数据仅供参考。\r\n数据来源：[http://www.cnblogs.com/so9527/p/5674498.html](http://www.cnblogs.com/so9527/p/5674498.html "http://www.cnblogs.com/so9527/p/5674498.html")', '2016-12-04 15:55:27', '2016-12-04 16:09:45', 0, NULL);
 /*!40000 ALTER TABLE `wikidocument` ENABLE KEYS */;
 
--- 导出  表 tbshop.wikimenuitem 结构
+-- Dumping structure for table tbshop.wikimenuitem
 DROP TABLE IF EXISTS `wikimenuitem`;
 CREATE TABLE IF NOT EXISTS `wikimenuitem` (
   `Id` varchar(50) NOT NULL,
@@ -46941,7 +46684,7 @@ CREATE TABLE IF NOT EXISTS `wikimenuitem` (
   PRIMARY KEY (`Id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  tbshop.wikimenuitem 的数据：74 rows
+-- Dumping data for table tbshop.wikimenuitem: 74 rows
 DELETE FROM `wikimenuitem`;
 /*!40000 ALTER TABLE `wikimenuitem` DISABLE KEYS */;
 INSERT INTO `wikimenuitem` (`Id`, `ParentId`, `Name`, `DocumentId`, `SortCode`, `IsEnabled`, `CreationTime`) VALUES
