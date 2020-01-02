@@ -31,6 +31,9 @@ namespace Ace.Application.Wiki
         public int SortCode { get; set; }
 
         public int ProCount { get; set; }
+
+
+        public int ShopID { get; set; }
     }
 
 

@@ -15,59 +15,40 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-      if(options.id)
+  onLoad: function (options) 
+  {
+      var shopid=1;
+      if(options.id!="")
       {
-        app.globalData.ShopID =options.id;
-        wx.setStorageSync("ShopID", options.id);
-
-        shop.getShop(options.id).then(res => {          
-          //wx.setStorageSync('shop', res);
-          app.globalData.shopInfo=res;
-          setTimeout(function () {
-            wx.reLaunch({ url: '/pages/index/index' });
-          }, 500);
-        }).catch((err) => 
-        {
-          wx.hideLoading();
-          wx.showModal({
-            title: '提示', content: '请选择离您最近的便利店',
-            success: function (res) {
-              wx.reLaunch({ url: '/pages/shoplist/index' });
-            }
-          });
-        });
-
-        
+        shopid=options.id;        
       }
       else
       {
-        var shopid=wx.getStorageSync('ShopID');
-        if (shopid=="")
+        var sid=wx.getStorageSync('ShopID');
+        if(sid!="")
         {
-            wx.reLaunch({url: '/pages/shoplist/index'});
-        }
-        else
-        {
-            app.globalData.ShopID = shopid;
-
-          shop.getShop(shopid).then(res => {
-            //wx.setStorageSync('shop', res);
-            app.globalData.shopInfo = res;
-            setTimeout(function () {
-              wx.reLaunch({ url: '/pages/index/index' });
-            }, 500);
-          }).catch((err) => {
-            wx.hideLoading();
-            wx.showModal({
-              title: '提示', content: '请选择离您最近的便利店',
-              success: function (res) {
-                wx.reLaunch({ url: '/pages/shoplist/index' });
-              }
-            });
-          }); 
+          shopid=sid;
         }
       }
+
+      wx.setStorageSync("ShopID",shopid);
+
+      shop.getShop(shopid).then(res => 
+        {          
+        wx.setStorageSync('shop', res);
+        setTimeout(function () {
+          wx.reLaunch({ url: '/pages/index/index' });
+        }, 500);
+      }).catch((err) => 
+      {
+        wx.hideLoading();
+        wx.showModal({
+          title: '提示', content: '选择您想访问的商家',
+          success: function (res) {
+            wx.reLaunch({ url: '/pages/shoplist/index' });
+          }
+        });
+      });
        
       
   },

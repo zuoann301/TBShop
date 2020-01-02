@@ -89,6 +89,8 @@ namespace Ace.Application.Wiki
         public string BrandID { get; set; }
 
         public int Hit { get; set; }
+
+        public int ShopID { get; set; }
     }
 
 

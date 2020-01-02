@@ -64,7 +64,7 @@
 
 
             if (me.editModel()) {
-                $ace.post("/Wiki/Users/Update", model, function (result) {
+                $ace.post("/Wiki/Users/Edit", model, function (result) {
                     $ace.msg(result.Msg);
                     me.close();
                     vm.dataTable.reload();

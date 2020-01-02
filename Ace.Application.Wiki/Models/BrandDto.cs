@@ -18,7 +18,7 @@ namespace Ace.Application.Wiki
         public int IsTop { get; set; }
 
 
-
+        public int ShopID { get; set; }
     }
 
 

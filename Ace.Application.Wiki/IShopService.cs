@@ -43,6 +43,8 @@ namespace Ace.Application.Wiki
 
         public List<SimpleShop> GetCacheList()
         {
+
+            /*
             List<SimpleShop> list = new List<SimpleShop>();
             
             MemoryCacheHelper mc = new MemoryCacheHelper();
@@ -56,7 +58,8 @@ namespace Ace.Application.Wiki
                 list = this.DbContext.Query<Shop>().Select(a => new SimpleShop() { ShopID = a.ID, ShopUrl = a.ShopUrl }).ToList(); 
                 mc.Set(Ace.Globals.CacheShop, list, System.TimeSpan.FromMinutes(30), true);//缓存30分钟 自动延长
             }
-
+            */
+            List<SimpleShop> list = this.DbContext.Query<Shop>().Select(a => new SimpleShop() { ShopID = a.ID, ShopUrl = a.ShopUrl }).ToList();
             return list;
         }
 

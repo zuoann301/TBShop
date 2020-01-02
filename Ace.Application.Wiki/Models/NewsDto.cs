@@ -50,6 +50,8 @@ namespace Ace.Application.Wiki
 
         public int IsValid { get; set; }
 
+        public int ShopID { get; set; }
+
     }
 
 

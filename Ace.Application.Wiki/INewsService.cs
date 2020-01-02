@@ -28,7 +28,7 @@ namespace Ace.Application.Wiki
 
         bool BatchInsert(List<News> list);
 
-        PagedData<News> GetPageData(Pagination page, int SortID, int IsValid=-1, string keyword="");
+        PagedData<News> GetPageData(Pagination page, int SortID, int IsValid=-1, string keyword="", int ShopID = 0);
 
         PagedData<News> GetCommentPageData(Pagination page, int SortID, int IsValid = -1, string keyword = "");
 
@@ -106,7 +106,7 @@ namespace Ace.Application.Wiki
         }
 
 
-        public PagedData<News> GetPageData(Pagination page, int SortID, int IsValid = -1, string keyword="")
+        public PagedData<News> GetPageData(Pagination page, int SortID, int IsValid = -1, string keyword="", int ShopID=0)
         {
             var q = this.DbContext.Query<News>();
 
@@ -124,6 +124,11 @@ namespace Ace.Application.Wiki
             if (IsValid > -1)
             {
                 q = q.Where(a => a.IsValid == IsValid);
+            }
+
+            if(ShopID>0)
+            {
+                q = q.Where(a => a.ShopID == ShopID);
             }
 
             q = q.OrderByDesc(a => a.CreateDate);

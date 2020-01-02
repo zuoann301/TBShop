@@ -40,6 +40,10 @@ namespace Chloe.Admin.Areas.Adm.Controllers
 
             List<SysRole> roles = this.CreateService<IRoleService>().GetList();
             this.ViewBag.Roles = roles.Select(a => new Select2Item() { id = a.Id, text = a.Name });
+
+            List<Ace.Entity.Wiki.SimpleShop2> shops = this.CreateService<Ace.Application.Wiki.IShopService>().GetCacheList2();
+            this.ViewBag.Shops = shops;
+
             return View();
         }
 
@@ -55,7 +59,9 @@ namespace Chloe.Admin.Areas.Adm.Controllers
         public ActionResult Add(AddUserInput input)
         {
             input.CreatorId = this.CurrentSession.UserId;
+            
             this.Service.Add(input);
+
             return this.AddSuccessMsg();
         }
 

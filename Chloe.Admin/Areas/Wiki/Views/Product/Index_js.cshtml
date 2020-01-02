@@ -1,7 +1,6 @@
 ﻿<script>
     var _sorts = @this.RawSerialize(this.ViewBag.SortList);
-    var _brands = @this.RawSerialize(this.ViewBag.BrandList);
-    var _shops =@this.RawSerialize(this.ViewBag.ShopList); 
+    var _brands = @this.RawSerialize(this.ViewBag.BrandList); 
     var _sorts2 = new Array();
     var _file_domain = "@ViewBag.FileDomain";
     var uploader;
@@ -110,7 +109,11 @@
                 var bindModel = $ko.toJS(model);
                 me.model(bindModel);
                 editor.html('');
-                editor.insertHtml(bindModel.Contents);
+                if (bindModel.Contents != null)
+                {
+                    editor.insertHtml(bindModel.Contents);
+                }
+                
                 //console.log(bindModel);
                 $("#ImageList").val(bindModel.ImageList);
                 $("#ImageUrl").val(bindModel.ImageUrl);
@@ -140,6 +143,7 @@
             }
             else
             {
+                editor.html('');
                 $("#ImageList").val("");
                 $("#ImageUrl").val("");
                 $("#thelist").empty();  

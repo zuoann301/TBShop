@@ -29,6 +29,7 @@ namespace Ace.Application.Wiki
         /// </summary>
         public string LinkUrl { get; set; }
 
+        public int ShopID { get; set; }
         
 
     }

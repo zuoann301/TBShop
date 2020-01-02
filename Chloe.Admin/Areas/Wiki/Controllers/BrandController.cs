@@ -28,9 +28,19 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
             return View();
         }
 
-        public ActionResult GetModels(Pagination pagination,int IsTop, string keyword)
+        public ActionResult Models(Pagination pagination,int IsTop, string keyword)
         {
-            PagedData<Brand> pagedData = this.Service.GetPageData(pagination, IsTop,keyword);
+            int ShopID = 0;
+            if (this.CurrentSession.IsAdmin)
+            {
+
+            }
+            else
+            {
+                ShopID = this.CurrentSession.ShopID;
+            }
+
+            PagedData<Brand> pagedData = this.Service.GetPageData(pagination, IsTop,keyword, ShopID);
             return this.SuccessData(pagedData);
         }
 
@@ -43,60 +53,24 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
             return this.SuccessMsg("删除成功");
         }
 
-        [HttpGet]
-        public ActionResult Add()
-        {  
-            return View();
-        }
-
-
-        [HttpGet]
-        public ActionResult Edit(string Id="")
-        {
-
-            if (string.IsNullOrEmpty(Id))
-            {
-                return Redirect("Index");
-            }
-            else
-            {
-                Brand modle = this.Service.GetModel(Id);
-                if (modle == null)
-                {
-                    //RedirectToAction("Brand", "Index");
-                    Response.Redirect("/Wiki/Brand/Index");
-                }
-                
-
-                ISortService SortService = this.CreateService<ISortService>();
-                List<Sort> ListSort = SortService.GetList((int)EnumSort.Brand, "");
-                ViewBag.ListSort = ListSort;
-
-                ViewBag.BrandModle = modle;
-            }
-
-
-            return View();
-
-        }
-
-
+       
         [Permission("wiki.Brand.edit")]
         [HttpPost]
         public ActionResult Edit(UpdateBrandInput modle)
         {            
-            this.Service.Update(modle);             
-            return  RedirectToAction("Index");
+            this.Service.Update(modle);
+            return this.SuccessMsg("编辑成功");
         }
 
         [Permission("wiki.Brand.add")]
         [HttpPost]
         public ActionResult Add(AddBrandInput modle)
         {
+            modle.ShopID = this.CurrentSession.ShopID;
             
             this.Service.Add(modle);
-                          
-            return RedirectToAction("Index");
+
+            return this.SuccessMsg("添加成功");
         }
 
     }

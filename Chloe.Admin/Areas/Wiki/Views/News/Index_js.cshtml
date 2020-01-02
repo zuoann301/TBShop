@@ -1,28 +1,131 @@
 ﻿<script>
-     var _sorts = @this.RawSerialize(this.ViewBag.ListSort);
+    var _sorts = @this.RawSerialize(this.ViewBag.ListSort);
+    
+    var _file_domain = "@ViewBag.FileDomain";
+    var uploader;
+
+    
+ 
+
+
+
+
     var _vm;
     $(function () {
         var vm = new PageViewModel();
         _vm = vm;
         ko.applyBindings(vm);
         vm.init();
-    });
 
-    function PageViewModel() {
+    });
+ 
+
+    function PageViewModel()
+    {
         var me = this;
         ViewModel.call(me);
         vmExtend.call(me);
 
-        me.url = "/Wiki/News/GetModels";
+        me.url = "/Wiki/News/Models";
         me.deleteUrl = "/Wiki/News/Delete";
 
-        me.add = function () {
-            window.location.href ="/Wiki/News/Add";
-        }
-        me.edit = function () {
-            window.location.href="/Wiki/News/Edit" + "?Id=" + me.dataTable.selectedModel().Id();
-        }
+        
+        me.dialog = new FormDialog(me);
+         
     }
     function vmExtend() {
         var me = this;
-    }</script>
+    }
+
+
+    function FormDialog(vm) {
+        var me = this;
+        Dialog.call(me);
+
+        me.onOpen = function () {
+
+            if (!uploader) {
+                uploader = WebUploader.create({
+                    auto: true,
+                    swf: '/Content/webuploader/Uploader.swf',
+                    server: '/Wiki/Product/FileSave',
+                    pick: '#picker',
+                    resize: false
+                });
+
+                uploader.on('uploadSuccess', function (file, response) {
+                     
+                    if (response.st == "1")
+                    { 
+                        $("#ImageUrl").val(response.msg);
+                        $("#thelist").append("<img class='img_thum' src='" + _file_domain + response.msg + "' />");
+                         
+                    } else {
+                        $ace.alert(response.msg);
+                    }
+
+
+                });
+            }
+
+            var model = me.editModel();
+            if (model) {
+                var bindModel = $ko.toJS(model);
+                me.model(bindModel);
+                editor.html('');
+                if (bindModel.Contents != null)
+                {
+                    editor.insertHtml(bindModel.Contents);
+                } 
+
+                $("#ImageUrl").val(bindModel.ImageUrl);
+
+                $("#thelist").empty();
+                if (bindModel.ImageUrl != "")
+                {
+                    var s1 = $("#ImageUrl").val();
+                    $("#thelist").append("<img class='img_thum img_red' src='" + _file_domain + s1 + "' />");
+                }
+            }
+            else
+            {
+                editor.html(''); 
+                $("#ImageUrl").val("");
+                $("#thelist").empty();  
+                me.model({ IsEnabled: true });
+            }
+        }
+
+        me.onSave = function () {
+            if (!$('#form1').formValid()) {
+                return false;
+            }
+
+            var model = me.model();
+
+            if (me.editModel()) {
+                model.ImageUrl = $("#ImageUrl").val(); 
+                model.Contents = editor.html();
+                $ace.post("/Wiki/News/Edit", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.dataTable.reload();
+                    //setTimeout(function () { window.location.reload(); }, 1000);
+                }
+                );
+            }
+            else {
+                model.ImageUrl = $("#ImageUrl").val(); 
+                model.Contents = editor.html();
+                $ace.post("/Wiki/News/Add", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.loadData();
+                    //setTimeout(function () { window.location.reload(); }, 1000);
+                }
+                );
+            }
+        }
+    }
+
+</script>

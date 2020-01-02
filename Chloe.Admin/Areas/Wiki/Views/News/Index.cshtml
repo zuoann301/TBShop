@@ -1,20 +1,64 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
+<link href="~/Content/css/framework-theme.css" rel="stylesheet" />
+<link href="~/Content/select2/select2.min.css" rel="stylesheet" />
+<script src="~/Content/select2/select2.min.js"></script>
+<script charset="utf-8" src="/Content/kindeditor/kindeditor-all-min.js"></script>
+<script charset="utf-8" src="/Content/kindeditor/lang/zh-CN.js"></script>
+<script type="text/javascript">
+    var editor;
+    KindEditor.ready(function (K) {
+        editor = K.create('#Contents', {
+            uploadJson: '/KindEditor/SaveFiles',
+            fileManagerJson: '/KindEditor/FileManager',
+            allowFileManager: true
+        });
+    });
+</script>
+@this.RefStyle("~/Content/webuploader/webuploader.css")
+@this.RefScript("~/Content/webuploader/webuploader.js")
 @Html.Partial("Index_js")
-<div style="max-width:100%;">
+<style type="text/css">
+        /*
+    .img_thum {max-width:100px;}*/
+</style>
+<style type="text/css">
+    #picker {
+        display: inline-block;
+        line-height: 10px;
+        vertical-align: middle;
+        margin: 0 12px 0 0;
+    }
+
+    .img_thum {
+        width: 100px;
+        margin-right: 5px;
+    }
+
+    .img_red {
+        border: 1px solid #ff6a00;
+    }
+
+    #thelist {
+        overflow-y: hidden;
+        overflow-x: scroll;
+    }
+</style>
+<div style="width:100%;">
     <div class="topPanel">
         <div class="toolbar">
             <a class="a-btn-refresh" onclick="$ace.reload()"></a>
             <button class="a-btn-edit" data-bind="click:edit,disable:!dataTable.selectedModel()">修改</button>
-            <button class="a-btn-add" onclick="window.location.href='/Wiki/News/Add'">添加</button>
+            <button class="a-btn-add" data-bind="click:add">添加</button>
+             
             <button class="a-btn-delete" data-bind="click:del,disable:!dataTable.selectedModel()">删除</button>
         </div>
         <div class="search">
-            <table class="form-table" style="width:500px;">
-                <tr>
+            <table class="form-table" style="width:auto;">
+                <tr>                    
                     <td style="width:100px;">
-                        <select class="a-control" data-bind="options:_sorts,optionsText:'Title',optionsValue:'Id',optionsCaption:'--选择分类--',value:searchModel().SortID">
+                        <select class="a-control" id="SortID" name="SortID" data-bind="options:_sorts,optionsText:'Title',optionsValue:'Id',optionsCaption:'--选择分类--',value:searchModel().SortID">
                             <option value="0">--选择分类--</option>
                         </select>
                     </td>
@@ -32,21 +76,22 @@
         <table class="table table-hover" data-bind="with:dataTable">
             <thead>
                 <tr>
-                    <th style="width:30px;"></th>
+                    <th style="width:20px;">编号</th>
                     <th>标题</th>
-                    <th>分类</th> 
+                    <th>分类</th>                   
+
                     <th>状态</th>
-                    <th>创建时间</th>
+                    <th>发布时间</th>
                 </tr>
             </thead>
             <tbody data-bind="foreach:models">
                 <tr data-bind="click:$parent.selectRow">
-                    <td data-bind="text:$parent.getOrdinal($index())"></td>
-                    <td>
-                        <a data-bind="text:Title,attr:{href:'@Url.Content("~/Wiki/News/Detail?Id=")' + Id()}"></a>
-                    </td>
-                    <td data-bind="text:$ace.findName(_sorts,SortID(),'Id','Title')"></td> 
-                    <td><span data-bind="text:IsValid()?'显示':'隐藏',attr:{class:IsValid()?'a-span-success-s':'a-span-danger-s'}"></span></td>
+                    <td data-bind="text:Id"></td>
+                    <td data-bind="text:Title"></td>
+                    <td data-bind="text:$ace.findName(_sorts,SortID(),'Id','Title')"></td>
+
+
+                    <td><span data-bind="text:IsValid()?'已发布':'待审核',attr:{class:IsValid()?'a-span-success-s':'a-span-danger-s'}"></span></td>
                     <td data-bind="dateString:CreateDate"></td>
                 </tr>
             </tbody>
@@ -54,3 +99,91 @@
         </table>
     </div>
 </div>
+
+<dialogbox data-bind="with:dialog" style="width:80%;">
+    <form id="form1">
+        <!------------------------------------------------------------------------------------->
+        <div class="content-tabs">
+            <nav class="page-tabs menuTabs">
+                <div class="page-tabs-content" style="margin-left: 0px;">
+                    <a href="javascript:;" class="menuTab active">基本信息</a>
+                    <a href="javascript:;" class="menuTab">详细内容</a>
+                </div>
+            </nav>
+        </div>
+        <!------------------------------------------------------------------------------------->
+        <div class="pro_tab">
+            <table class="form-table">
+                <tbody>
+                    <tr>
+                        <td class="form-title">标题</td>
+                        <td class="form-value">
+                            <input name="Title" id="Title" type="text" class="a-control required" placeholder="" data-bind="value:model().Title" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="form-title">链接</td>
+                        <td class="form-value">
+                            <input name="LinkUrl" id="LinkUrl" type="text" class="a-control required" placeholder="" data-bind="value:model().LinkUrl" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form-title">选择分类</td>
+                        <td class="form-value">
+                            <select name="SortID" id="SortID" type="text" class="a-control required" data-bind="options:_sorts,optionsText:'Title',optionsValue:'Id',optionsCaption:'--选择分类--',value:model().SortID"></select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form-title">简介</td>
+                        <td class="form-value">
+                            <input name="Summary" id="Summary" type="text" class="a-control required" placeholder="请输入简介" data-bind="value:model().Summary" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="form-title">图片</td>
+                        <td class="form-value">
+                            <div id="uploader" class="wu-example" style="z-index:99999;">
+                                <div class="btns">
+                                    <div id="picker">选择文件</div>
+                                </div>
+                                <div id="thelist" class="uploader-list"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input name="ImageUrl" id="ImageUrl" type="text" class="a-control required" data-bind="value:model().ImageUrl" /></td>
+                    </tr>
+                     
+                    <tr>
+                        <td class="form-title">状态</td>
+                        <td class="form-value">
+                            <input id="IsValid1" class="a-radio" name="IsValidType" type="radio" value="1" data-bind="typedChecked:model().IsValid,dataType:'int'"><label for="IsValid1">已发布</label>
+                            <input id="IsValid0" class="a-radio" name="IsValidType" type="radio" value="0" data-bind="typedChecked:model().IsValid,dataType:'int'"><label for="IsValid0">待审核</label>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pro_tab" style="display:none;">
+            <textarea id="Contents" name="Contents" style="width:100%;height:300px;" data-bind="value:model().Contents">
+            </textarea>
+        </div>
+    </form>
+</dialogbox>
+
+<script type="text/javascript">
+    jQuery(function () {
+        jQuery(".menuTab").click(function () {
+            var i = jQuery(this).index();
+
+            jQuery(".menuTab").removeClass("active");
+            jQuery(this).addClass("active");
+
+            jQuery(".pro_tab").hide();
+            jQuery(".pro_tab").eq(i).show();
+        });
+    });
+    
+</script>

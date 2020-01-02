@@ -28,7 +28,7 @@ namespace Ace.Application.Wiki
 
         string GetBrandID(string Name = "");
 
-        PagedData<Brand> GetPageData(Pagination page, int IsTop, string keyword);
+        PagedData<Brand> GetPageData(Pagination page, int IsTop, string keyword, int ShopID = 0);
     }
 
     public class BrandService : AppServiceBase<Brand>, IBrandService
@@ -96,13 +96,17 @@ namespace Ace.Application.Wiki
         }
 
 
-        public PagedData<Brand> GetPageData(Pagination page,int IsTop = 0, string keyword="")
+        public PagedData<Brand> GetPageData(Pagination page,int IsTop = 0, string keyword="",int ShopID=0)
         {
             var q = this.DbContext.Query<Brand>();
             q = q.WhereIfNotNullOrEmpty(keyword, a => a.Title.Contains(keyword) );
             if(IsTop > 0)
             {
                 q = q.Where(a => a.IsTop == IsTop);
+            }
+            if(ShopID>0)
+            {
+                q = q.Where(a => a.ShopID == ShopID);
             }
             PagedData<Brand> pagedData = q.TakePageData(page);
             return pagedData;

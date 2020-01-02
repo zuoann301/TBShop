@@ -36,8 +36,18 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetModels(Pagination pagination,int ShopID,int RoleID, string keyword)
+        public ActionResult GetModels(Pagination pagination,int RoleID, string keyword)
         {
+            int ShopID = 0;
+            if (this.CurrentSession.IsAdmin)
+            {
+
+            }
+            else
+            {
+                ShopID = this.CurrentSession.ShopID;
+            }
+
             PagedData<Users> pagedData = this.Service.GetPageData(pagination, ShopID, RoleID, keyword);
             return this.SuccessData(pagedData);
         }
@@ -59,33 +69,15 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
             return View();
         }
 
-
-        [HttpGet]
-        public ActionResult Edit(string Id="")
-        {
-            if (string.IsNullOrEmpty(Id))
-            {
-                return Redirect("Index");
-            }
-            else
-            {
-                Users modle = this.Service.GetModel(Id);
-                if (modle == null)
-                {
-                    return RedirectToAction( "Index");                     
-                }                 
-                ViewBag.UsersModle = modle;
-            }
-            return View();
-        }
+ 
 
 
         [Permission("wiki.users.edit")]
         [HttpPost]
         public ActionResult Edit(UpdateUsersInput modle)
         {            
-            this.Service.Update(modle);             
-            return  RedirectToAction("Index");
+            this.Service.Update(modle);
+            return this.SuccessMsg("编辑成功");
         }
 
         [Permission("wiki.users.add")]
@@ -94,8 +86,8 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
         {
             modle.CreateDate = DateTime.Now;
             modle.LastLoginDate = DateTime.Now;
-            this.Service.Add(modle);                          
-            return RedirectToAction("Index");
+            this.Service.Add(modle);
+            return this.SuccessMsg("添加成功");
         }
 
 

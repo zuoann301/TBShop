@@ -64,6 +64,7 @@ namespace Chloe.Admin.Controllers
             session.Name = user.Name;
             session.LoginIP = ip;
             session.IsAdmin = user.AccountName.ToLower() == AppConsts.AdminUserName;
+            session.ShopID = user.ShopID;
 
             this.CurrentSession = session;
 

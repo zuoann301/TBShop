@@ -41,9 +41,19 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
             return View();
         }
 
-        public ActionResult GetModels(Pagination pagination, int SortID, string keyword)
+        public ActionResult Models(Pagination pagination, int SortID, string keyword)
         {
-            PagedData<News> pagedData = this.Service.GetPageData(pagination, SortID,-1,keyword);
+            int ShopID = 0;
+            if (this.CurrentSession.IsAdmin)
+            {
+
+            }
+            else
+            {
+                ShopID = this.CurrentSession.ShopID;
+            }
+
+            PagedData<News> pagedData = this.Service.GetPageData(pagination, SortID,-1,keyword, ShopID);
             return this.SuccessData(pagedData);
         }
 
@@ -61,66 +71,8 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
             return this.SuccessMsg("删除成功");
         }
 
-        [HttpGet]
-        public ActionResult Add()
-        {
-
-            ISortService SortService = this.CreateService<ISortService>();
-            List<Sort> ListSort = SortService.GetList((int)EnumSort.News, "");
-            ViewBag.ListSort = ListSort;
-
-            return View();
-        }
-
-        public ActionResult Detail(string Id = "")
-        {
-            if (string.IsNullOrEmpty(Id))
-            {
-                return Redirect("Index");
-            }
-            else
-            {
-                News modle = this.Service.GetModel(Id);
-                if (modle == null)
-                {
-                    Response.Redirect("/Wiki/News/Index");
-                }
-                ISortService SortService = this.CreateService<ISortService>();
-                List<Sort> ListSort = SortService.GetList((int)EnumSort.News, "");
-                ViewBag.ListSort = ListSort;
-                ViewBag.NewsModle = modle;
-            }
-
-
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult Edit(string Id="")
-        {
-
-            if (string.IsNullOrEmpty(Id))
-            {
-                return Redirect("Index");
-            }
-            else
-            {
-                News modle = this.Service.GetModel(Id);
-                if (modle == null)
-                {
-                    //RedirectToAction("News", "Index");
-                    Response.Redirect("/Wiki/News/Index");
-                }
-                
-
-                ISortService SortService = this.CreateService<ISortService>();
-                List<Sort> ListSort = SortService.GetList((int)EnumSort.News, "");
-                ViewBag.ListSort = ListSort;
-
-                ViewBag.NewsModle = modle;
-            }
-            return View();
-        }
+       
+          
 
         [HttpGet]
         public ActionResult Edit2(string Id = "")
@@ -156,8 +108,8 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
             modle.CreateDate = DateTime.Now;
             modle.CreateID = this.CurrentSession.UserId;
             this.Service.Update(modle);
-             
-            return RedirectToAction("Index");
+
+            return this.SuccessMsg("编辑成功");
         }
 
         [HttpPost]
@@ -175,9 +127,10 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
         {
             modle.CreateDate = DateTime.Now;
             modle.CreateID = this.CurrentSession.UserId;
+            modle.ShopID = this.CurrentSession.ShopID;
             this.Service.Add(modle);
-                          
-            return RedirectToAction("Index");
+
+            return this.SuccessMsg("添加成功");
         }
 
     }

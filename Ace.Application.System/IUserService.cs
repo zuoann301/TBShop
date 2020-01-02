@@ -124,6 +124,7 @@ namespace Ace.Application.System
             user.Email = email;
             user.Description = input.Description;
             user.State = AccountState.Normal;
+            user.ShopID = input.ShopID;
 
             string userSecretkey = UserHelper.GenUserSecretkey();
             string encryptedPassword = PasswordHelper.Encrypt(input.Password, userSecretkey);
@@ -259,6 +260,7 @@ namespace Ace.Application.System
             user.WeChat = input.WeChat;
             user.Email = email;
             user.Description = input.Description;
+            user.ShopID = input.ShopID;
 
             List<string> roleIds = input.GetRoles();
             List<SysUserRole> userRoles = this.DbContext.Query<SysUserRole>().Where(a => a.UserId == input.Id).ToList();

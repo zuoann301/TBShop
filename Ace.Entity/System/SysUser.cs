@@ -43,6 +43,8 @@ namespace Ace.Entity.System
         public DateTime? LastModifyTime { get; set; }
         public string LastModifyUserId { get; set; }
 
+        public int ShopID { get; set; }
+
         public AccountState State { get; set; } = AccountState.Normal;
 
         /// <summary>

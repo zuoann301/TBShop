@@ -61,4 +61,14 @@
     <ProjectReference Include="..\Senparc.Weixin.MP.CoreSample.CommonService\Senparc.Weixin.MP.CoreSample.CommonService.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Content Update="Areas\Wiki\Views\News\Index.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\Wiki\Views\News\Index_js.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

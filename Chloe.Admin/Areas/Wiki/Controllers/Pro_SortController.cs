@@ -32,7 +32,16 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
         [HttpGet]
         public ActionResult Models(string Pid="0", string keyword="")
         {
-            List<Pro_Sort> data = this.Service.GetList(Pid, keyword);
+            int ShopID = 0;
+            if(this.CurrentSession.IsAdmin)
+            {
+                 
+            }
+            else
+            {
+                ShopID = this.CurrentSession.ShopID;
+            }
+            List<Pro_Sort> data = this.Service.GetList(Pid, keyword, ShopID);
             return this.SuccessData(data);
         }
 
@@ -44,6 +53,7 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
             {
                 input.Pid = "0";
             }
+            input.ShopID = this.CurrentSession.ShopID;
             this.Service.Add(input);
             return this.AddSuccessMsg();
         }

@@ -19,6 +19,7 @@ namespace Chloe.Admin.Common
         //public DateTime LoginTime { get; set; }
         public bool IsAdmin { get; set; }
 
+        public int ShopID { get; set; }
 
         public List<Claim> ToClaims()
         {
@@ -31,6 +32,7 @@ namespace Chloe.Admin.Common
             //claims.Add(new Claim("RoleIds", this.RoleIds ?? ""));
             claims.Add(new Claim("LoginIP", this.LoginIP ?? ""));
             claims.Add(new Claim("IsAdmin", this.IsAdmin.ToString()));
+            claims.Add(new Claim("ShopID", this.ShopID.ToString()));
 
             return claims;
         }
@@ -49,7 +51,8 @@ namespace Chloe.Admin.Common
                     //RoleId = claims.Claims.FirstOrDefault(x => x.Type == "RoleId")?.Value ?? "",
                     //LoginIP = claims.Claims.FirstOrDefault(x => x.Type == "LoginIP")?.Value ?? "",
                     //LoginTime = DateTimeHelper.Parse(long.Parse(claims.Claims.FirstOrDefault(x => x.Type == "LoginTime")?.Value ?? "0")),
-                    IsAdmin = bool.Parse(claims.Claims.FirstOrDefault(x => x.Type == "IsAdmin")?.Value ?? "false")
+                    IsAdmin = bool.Parse(claims.Claims.FirstOrDefault(x => x.Type == "IsAdmin")?.Value ?? "false"),
+                    ShopID = Convert.ToInt32(claims.Claims.FirstOrDefault(x => x.Type == "ShopID")?.Value ?? "0")
                 };
                 return session;
             }

@@ -28,13 +28,23 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
             this.hostingEnv = hostingEnv;
         }
 
-        public ActionResult Index(string Pid="")
+        public ActionResult Index(string Pid="0")
         {
             //List<SysOrg> orgs = this.CreateService<IOrgService>().GetList();
             //this.ViewBag.Orgs = orgs;
 
+            int ShopID = 0;
+            if (this.CurrentSession.IsAdmin)
+            {
+
+            }
+            else
+            {
+                ShopID = this.CurrentSession.ShopID;
+            }
+
             IPro_SortService SortService = this.CreateService<IPro_SortService>();
-            List<Pro_Sort> ListDistrict = SortService.GetAllList();
+            List<Pro_Sort> ListDistrict = SortService.GetList("", "", ShopID);
             ViewBag.SortList = ListDistrict;
             ViewBag.Pid = Pid;
 
@@ -42,9 +52,7 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
             List<Brand> ListBrand = brandService.GetList(0, "");
             ViewBag.BrandList = ListBrand;
 
-            IShopService shopService = this.CreateService<IShopService>();
-            List<SimpleShop2> ShopList= shopService.GetCacheList2();
-            ViewBag.ShopList = ShopList;
+             
 
             string FileDomain = Globals.Configuration["AppSettings:FileDomain"].ToString();
             ViewBag.FileDomain = FileDomain;
@@ -63,8 +71,18 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
 
 
         [HttpGet]
-        public ActionResult Models(Pagination pagination, string SortID="", string keyword="", int ShopID = -1)
+        public ActionResult Models(Pagination pagination, string SortID="", string keyword="")
         {
+            int ShopID = 0;
+            if (this.CurrentSession.IsAdmin)
+            {
+
+            }
+            else
+            {
+                ShopID = this.CurrentSession.ShopID;
+            }
+
             PagedData<Product> pagedData = this.Service.GetPageData(pagination, SortID, keyword, ShopID);
             return this.SuccessData(pagedData);
         }
@@ -85,7 +103,8 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
                 input.ProSortID = "0";
             }
             input.CreateID=CurrentSession.UserId;
-            input.CreateDate = DateTime.Now; 
+            input.CreateDate = DateTime.Now;
+            input.ShopID = CurrentSession.ShopID;
             this.Service.Add(input);
             return this.AddSuccessMsg();
         }

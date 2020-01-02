@@ -8,7 +8,7 @@
 <script src="~/Content/select2/select2.min.js"></script>
 @this.Partial("Index_js")
 
-<div style="max-width:1000px;">
+<div style="width:100%;">
     <div class="topPanel">
         <div class="toolbar">
             <a class="a-btn-refresh" onclick="$ace.reload()"></a>
@@ -112,7 +112,6 @@
                     </select>
                 </td>
             </tr>
-
             <tr>
                 <td class="form-title">微信</td>
                 <td class="form-value">
@@ -141,8 +140,12 @@
                     <select id="Roles" name="Roles" multiple="multiple" data-bind=""></select>
                 </td>
             </tr>
-
-
+            <tr>
+                <td class="form-title">商家</td>
+                <td class="form-value" colspan="3">
+                    <select class="a-control" name="ShopID" data-bind="options:_shops,optionsText:'ShopName',optionsValue:'ShopID',optionsCaption:'--选择--',value:model().ShopID"></select>
+                </td>
+            </tr>
             <tr>
                 <td class="form-title" valign="top" style="padding-top: 5px;">
                     备注

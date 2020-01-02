@@ -31,9 +31,19 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
             return View();
         }
 
-        public ActionResult GetModels(Pagination pagination,int SortID, string keyword)
+        public ActionResult Models(Pagination pagination,int SortID, string keyword)
         {
-            PagedData<Link> pagedData = this.Service.GetPageData(pagination, SortID,keyword);
+            int ShopID = 0;
+            if (this.CurrentSession.IsAdmin)
+            {
+
+            }
+            else
+            {
+                ShopID = this.CurrentSession.ShopID;
+            }
+
+            PagedData<Link> pagedData = this.Service.GetPageData(pagination, SortID,keyword, ShopID);
             return this.SuccessData(pagedData);
         }
 
@@ -45,56 +55,16 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
             this.Service.Delete(id);
             return this.SuccessMsg("删除成功");
         }
-
-        [HttpGet]
-        public ActionResult Add()
-        {
-
-            ISortService SortService = this.CreateService<ISortService>();
-            List<Sort> ListSort = SortService.GetList((int)EnumSort.Link, "");
-            ViewBag.ListSort = ListSort;
-
-            return View();
-        }
-
-
-        [HttpGet]
-        public ActionResult Edit(string Id="")
-        {
-
-            if (string.IsNullOrEmpty(Id))
-            {
-                return Redirect("Index");
-            }
-            else
-            {
-                Link modle = this.Service.GetModel(Id);
-                if (modle == null)
-                {
-                    //RedirectToAction("Link", "Index");
-                    Response.Redirect("/Wiki/Link/Index");
-                }
-                
-
-                ISortService SortService = this.CreateService<ISortService>();
-                List<Sort> ListSort = SortService.GetList((int)EnumSort.Link, "");
-                ViewBag.ListSort = ListSort;
-
-                ViewBag.LinkModle = modle;
-            }
-
-
-            return View();
-
-        }
+         
+ 
 
 
         [Permission("wiki.Link.edit")]
         [HttpPost]
         public ActionResult Edit(UpdateLinkInput modle)
         {            
-            this.Service.Update(modle);             
-            return  RedirectToAction("Index");
+            this.Service.Update(modle);
+            return this.SuccessMsg("编辑成功");
         }
 
         [Permission("wiki.Link.add")]
@@ -103,8 +73,8 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
         {
             
             this.Service.Add(modle);
-                          
-            return RedirectToAction("Index");
+            modle.ShopID = this.CurrentSession.ShopID;
+            return this.SuccessMsg("添加成功");
         }
 
     }

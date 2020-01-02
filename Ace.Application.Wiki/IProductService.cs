@@ -208,7 +208,7 @@ namespace Ace.Application.Wiki
         }
 
 
-        public PagedData<Product> GetPageData(Pagination page,string ProSortID, string keyword, int ShopID = -1)
+        public PagedData<Product> GetPageData(Pagination page,string ProSortID, string keyword, int ShopID =0)
         {
             var q = this.DbContext.Query<Product>();
 
@@ -216,7 +216,7 @@ namespace Ace.Application.Wiki
 
             q = q.WhereIfNotNullOrEmpty(ProSortID, a => a.ProSortID== ProSortID);
 
-            if(ShopID>-1)
+            if(ShopID>0)
             {
                 q = q.Where(a => a.ShopID == ShopID);
             }

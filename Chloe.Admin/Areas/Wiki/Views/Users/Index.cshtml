@@ -8,7 +8,7 @@
 .img_thum{width:100px;margin-right:5px;}
 .img_red{border:1px solid #ff6a00;}
 </style>
-<div style="max-width:1000px;">
+<div style="width:100%;">
     <div class="topPanel">
         <div class="toolbar">
             <a class="a-btn-refresh" onclick="$ace.reload()"></a>
@@ -18,7 +18,7 @@
             <button class="a-btn-edit" data-bind="click:openRevisePasswordDialog,disable:!dataTable.selectedModel()">重置密码</button>
         </div>
         <div class="search">
-            <table class="form-table" style="width:400px;">
+            <table class="form-table" style="width:auto;">
                 <tr>
                     <td>
                         <input type="text" class="a-control" placeholder="请输入要查询关键字" style="width: 200px;" data-bind="value:searchModel().keyword">

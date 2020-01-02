@@ -12,7 +12,7 @@ namespace Ace.Application.Wiki
 {
     public interface IPro_SortService : IAppService
     {
-        List<Pro_Sort> GetList(string Pid = "", string keyword = "");
+        List<Pro_Sort> GetList(string Pid = "", string keyword = "", int ShopID = 0);
         void Add(AddPro_SortInput input);
         void Update(UpdatePro_SortInput input);
         void Delete(string id);
@@ -28,7 +28,7 @@ namespace Ace.Application.Wiki
         {
         }
 
-        public List<Pro_Sort> GetList(string Pid="", string keyword = "")
+        public List<Pro_Sort> GetList(string Pid="", string keyword = "",int ShopID=0)
         {
             //var q = this.Query.Where(a=>a.Pid==Pid);   
             
@@ -39,6 +39,11 @@ namespace Ace.Application.Wiki
             if (keyword.IsNotNullOrEmpty())
             {
                 q = q.Where(a => a.Title.Contains(keyword));
+            }
+
+            if(ShopID>0)
+            {
+                q = q.Where(a => a.ShopID == ShopID);
             }
 
             var ret = q.OrderBy(a => a.SortCode).ToList();

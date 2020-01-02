@@ -26,7 +26,7 @@ namespace Ace.Application.Wiki
 
         Link GetModel(string Id);
 
-        PagedData<Link> GetPageData(Pagination page, int SortID, string keyword);
+        PagedData<Link> GetPageData(Pagination page, int SortID, string keyword, int ShopID = 0);
     }
 
     public class LinkService : AppServiceBase<Link>, ILinkService
@@ -96,7 +96,7 @@ namespace Ace.Application.Wiki
         }
 
 
-        public PagedData<Link> GetPageData(Pagination page,int SortID=0, string keyword="")
+        public PagedData<Link> GetPageData(Pagination page,int SortID=0, string keyword="",int ShopID=0)
         {
             var q = this.DbContext.Query<Link>();
 
@@ -105,9 +105,12 @@ namespace Ace.Application.Wiki
             {
                 q = q.Where(a => a.SortID == SortID);
             }
-            
+            if (ShopID > 0)
+            {
+                q = q.Where(a => a.ShopID == ShopID);
+            }
 
-           
+
 
             PagedData<Link> pagedData = q.TakePageData(page);
             

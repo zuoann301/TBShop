@@ -17,6 +17,8 @@ namespace Ace.Application.System
         public string Email { get; set; }
         public string Description { get; set; }
 
+        public int ShopID { get; set; }
+
         public string Roles { get; set; }
         public string Orgs { get; set; }
         public string Posts { get; set; }

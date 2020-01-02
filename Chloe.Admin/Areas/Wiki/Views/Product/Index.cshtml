@@ -57,13 +57,8 @@
             <button class="a-btn-delete" data-bind="click:del,disable:!dataTable.selectedModel()">删除</button>
         </div>
         <div class="search">
-            <table class="form-table" style="width:600px;">
-                <tr>
-                    <td style="width:100px;">
-                        <select class="a-control" id="ShopID" name="ShopID" data-bind="options:_shops,optionsText:'ShopName',optionsValue:'ShopID',optionsCaption:'--选择分类--',value:searchModel().ShopID">
-                            <option value="0">--选择商家--</option>
-                        </select>
-                    </td>
+            <table class="form-table" style="width:auto;">
+                <tr>                    
                     <td style="width:100px;">
                         <select class="a-control" id="SortID" name="SortID" data-bind="options:_sorts2,optionsText:'Title',optionsValue:'Id',optionsCaption:'--选择分类--',value:searchModel().SortID">
                             <option value="0">--选择分类--</option>
@@ -100,9 +95,7 @@
                 <tr data-bind="click:$parent.selectRow">
                     <td data-bind="text:$parent.getOrdinal($index())"></td>
                     <td data-bind="text:ProductName"></td>
-                    <td>
-                        <a data-bind="text:ProductCode,attr:{href:'@Url.Content("~/Wiki/Product/Size?ProductCode=")' + ProductCode()}"></a>
-                    </td>
+                    <td data-bind="text:ProductCode"></td>
                     <td data-bind="text:$ace.findName(_sorts,ProSortID(),'Id','Title')"></td>
                     <td data-bind="text:ProSize"></td>
                     <td data-bind="text:BasePrice"></td>
@@ -148,9 +141,9 @@
                         <td class="form-value">
                             <select name="ProSortID" id="ProSortID" type="text" class="a-control required" data-bind="options:_sorts2,optionsText:'Title',optionsValue:'Id',optionsCaption:'--选择分类--',value:model().ProSortID"></select>
                         </td>
-                        <td class="form-title">商家</td>
+                        <td class="form-title"> </td>
                         <td class="form-value">
-                            <select class="a-control" name="ShopID" data-bind="options:_shops,optionsText:'ShopName',optionsValue:'ShopID',optionsCaption:'--选择--',value:model().ShopID"></select>
+                             
                         </td>
                     </tr>
                     
