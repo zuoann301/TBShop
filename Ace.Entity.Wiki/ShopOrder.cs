@@ -22,10 +22,7 @@ namespace Ace.Entity.Wiki
         /// 状态
         /// </summary>
         public int ST { get; set; }
-        /// <summary>
-        /// 审核
-        /// </summary>
-        public string AuthID { get; set; }
+         
         public string CreateID { get; set; } 
 
         public DateTime CreateDate { get; set; }
@@ -37,39 +34,18 @@ namespace Ace.Entity.Wiki
     }
 
      
-    public class ShopOrderInfo
+    public class ShopOrderInfo: ShopOrder
     {
-        public string Id { get; set; }
+        //a.Id,a.OrderCode,a.Total,a.ProTotal,a.Freight,a.ST,a.CreateID,a.CreateDate,a.UpdateTime,a.AddressID,a.ShopID,b.UserName,b.Mobile,c.ShopName
 
-        public string OrderCode { get; set; }
+        public string UserName { get; set; }
 
-        public decimal Total { get; set; }
+        public string Mobile { get; set; }
 
-        public string CreateName { get; set; }
-
-        //public string ShopName { get; set; }
-
-        public DateTime CreateDate { get; set; }
-
-        public DateTime UpdateTime { get; set; }
-
-        /// <summary>
-        /// 审核
-        /// </summary>
-        public string AuthName { get; set; }
-
-        /// <summary>
-        /// 状态
-        /// </summary>
-        public int ST { get; set; }
-
-        public string ST_Name { get; set; }
-
-        //public int ShopID { get; set; }
-        public string CreateID { get; set; }
+        public string ShopName { get; set; }
     }
 
-     
+
     public class ShopOrderInfo2
     {
         public string Id { get; set; }

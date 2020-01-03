@@ -1,7 +1,7 @@
 ﻿<script>
 
     var _shops = @this.RawSerialize(this.ViewBag.ListShop); 
-    var _sts = [{ "ID": 0, "Title": "待审核" }, { "ID": 1, "Title": "通过初审" }, { "ID": 2, "Title": "财务审核" }, { "ID": 3,"Title":"仓库审核"}]; 
+    var _sts = [{ "ID": 0, "Title": "待付款" }, { "ID": 1, "Title": "已支付" }, { "ID": 2, "Title": "已发货" }, { "ID": 3, "Title": "已收货" }, { "ID": 4, "Title": "订单结束" }, { "ID":5, "Title": "取消订单" }]; 
 
     var _vm;
     $(function () {

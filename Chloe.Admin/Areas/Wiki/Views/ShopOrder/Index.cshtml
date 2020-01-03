@@ -8,7 +8,7 @@
 .img_thum{width:100px;margin-right:5px;}
 .img_red{border:1px solid #ff6a00;}
 </style>
-<div style="max-width:1000px;">
+<div style="width:100%;">
     <div class="topPanel">
         <div class="toolbar">
             <a class="a-btn-refresh" onclick="$ace.reload()"></a>
@@ -37,23 +37,25 @@
                 <tr>
                     <th style="width:20px;"></th>
                     <th>编号</th>
-                    <th>订货金额</th>
-                    <th>订货人</th>
-                    <th>审核</th>
-                    <th>店铺名称</th>
+                    <th>订单金额</th>
+                    <th>商品金额</th>
+                    <th>运费</th>
+                    <th>客户信息</th>
+                    <th>商家名称</th>
                     <th>状态</th>
-                    <th>提交时间</th>
+                    <th>下单时间</th>
                 </tr>
             </thead>
             <tbody data-bind="foreach:models">
                 <tr data-bind="click:$parent.selectRow">
                     <td data-bind="text:$parent.getOrdinal($index())"></td>
                     <td>
-                        <a data-bind="text:Id,attr:{href:'@Url.Content("~/Wiki/ShopOrder/Item?Id=")' + Id()}"></a>
+                        <a data-bind="text:OrderCode,attr:{href:'@Url.Content("~/Wiki/ShopOrder/Item?Id=")' + Id()}"></a>
                     </td>
                     <td data-bind="text:Total"></td>
-                    <td data-bind="text:CreateName"></td>
-                    <td data-bind="text:AuthName"></td>
+                    <td data-bind="text:ProTotal"></td>
+                    <td data-bind="text:Freight"></td>
+                    <td> <span data-bind="text:UserName"></span> <span data-bind="text:Mobile"></span></td>
                     <td data-bind="text:ShopName"></td>
                     <td data-bind="text:$ace.findName(_sts,ST(),'ID','Title')"></td>
                     <td data-bind="dateString:CreateDate"></td>
@@ -68,34 +70,40 @@
     <form id="form1">
         <table class="form-table">
             <tr>
-                <td class="form-title">订货金额</td>
+                <td class="form-title">订单金额</td>
                 <td class="form-value">
                     <input name="Total" id="Total" disabled type="text" class="a-control required" placeholder="" data-bind="value:model().Total" />
                 </td>
             </tr>
             <tr>
-                <td class="form-title">订货人</td>
+                <td class="form-title">客户姓名</td>
                 <td class="form-value">
-                    <input name="CreateID" id="CreateID" disabled type="text" class="a-control required" placeholder="" data-bind="value:model().CreateID" />
+                    <input disabled type="text" class="a-control required" placeholder="" data-bind="value:model().UserName" />
                 </td>
             </tr>
             <tr>
-                <td class="form-title">审核人</td>
+                <td class="form-title">客户手机</td>
                 <td class="form-value">
-                    <input name="AuthID" disabled id="AuthID" type="text" class="a-control required" data-bind="value:model().AuthID" />
+                    <input disabled type="text" class="a-control required" placeholder="" data-bind="value:model().Mobile" />
                 </td>
             </tr>
-             
+            <tr>
+                <td class="form-title">状态</td>
+                <td class="form-value">
+                    <select class="a-control" disabled data-bind="options:_sts,optionsText:'Title',optionsValue:'ID',optionsCaption:'--选择--',value:model().ST"></select>
+                </td>
+            </tr>
+
             <tr>
                 <td class="form-title">店铺名称</td>
-                <td class="form-value"> 
-                    <select class="a-control" disabled name="ShopID" id="ShopID"   data-bind="options:_shops,optionsText:'ShopName',optionsValue:'ShopID',optionsCaption:'--选择店铺--',value:model().ShopID">
+                <td class="form-value">
+                    <select class="a-control" disabled name="ShopID" id="ShopID" data-bind="options:_shops,optionsText:'ShopName',optionsValue:'ShopID',optionsCaption:'--选择店铺--',value:model().ShopID">
                         <option value="0">--选择分类--</option>
                     </select>
                 </td>
             </tr>
-             
-              
+
+
         </table>
     </form>
 </dialogbox>

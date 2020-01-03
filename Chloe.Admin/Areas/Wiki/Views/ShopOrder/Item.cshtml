@@ -36,22 +36,41 @@
             <thead>
                 <tr>
                     <th style="width:20px;"></th>
-                    <th>编号</th>
-                    <th>产品名称</th><th>规格</th><th>数量</th><th>批发价</th><th>更新时间</th>
+
+                    <th>产品名称</th>
+                    <th>规格</th>
+                    <th>数量</th>
+                    <th>价格</th>
                 </tr>
             </thead>
             <tbody data-bind="foreach:models">
                 <tr data-bind="click:$parent.selectRow">
                     <td data-bind="text:$parent.getOrdinal($index())"></td>
-                    <td data-bind="text:Id"></td>
-                    <td data-bind="text:ProductID"></td>
-                    <td data-bind="text:ProSizeID"></td>
+
+                    <td data-bind="text:ProductName"></td>
+                    <td data-bind="text:ProSize"></td>
                     <td data-bind="text:ItemNum"></td>
-                    <td data-bind="text:BatchPrice"></td>
-                    <td data-bind="text:UpdateTime"></td>
+                    <td data-bind="text:Price"></td>
                 </tr>
             </tbody>
-            @this.Partial("_tfoot")
+            <tbody>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th>总计：</th>
+                    <th></th>
+                </tr>
+            </tbody>
+            <tbody>
+                <tr>
+                    <th></th>
+                    <th>收货人：</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </tbody>
         </table>
     </div>
 </div>

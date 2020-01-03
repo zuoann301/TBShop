@@ -36,9 +36,19 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetModels(Pagination pagination,int ShopID,string CreateID)
+        public ActionResult GetModels(Pagination pagination,string CreateID="",int ST=-1)
         {
-            PagedData<ShopOrderInfo> pagedData = this.Service.GetPageOrderList(pagination, CreateID);
+            int ShopID = 0;
+            if (this.CurrentSession.IsAdmin)
+            {
+
+            }
+            else
+            {
+                ShopID = this.CurrentSession.ShopID;
+            }
+
+            PagedData<ShopOrderInfo> pagedData = this.Service.GetPageOrderList(pagination, ShopID, CreateID, ST);
             return this.SuccessData(pagedData);
         }
 

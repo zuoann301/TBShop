@@ -26,8 +26,12 @@ namespace Ace.Application.Wiki
 
         PagedData<ShopOrderInfo2> GetPageData(Pagination page,   string CreateID);
 
-        List<ShopOrderInfo> GetOrderList( string CreateID);
-        PagedData<ShopOrderInfo> GetPageOrderList(Pagination page, string CreateID); 
+
+        List<ShopOrderItemInfo> GetOrderItemList(string OrderID);
+
+
+
+        PagedData<ShopOrderInfo> GetPageOrderList(Pagination page, int ShopID = 0, string CreateID = "", int ST = -1);
 
         string SubmitOrder(  string CreateID, string AddressID,int ShopID);
         string GetST_Name(int ST);
@@ -82,7 +86,6 @@ namespace Ace.Application.Wiki
             {
                 ShopOrderInfo2 m = new ShopOrderInfo2();
                 m.AddressID = item.AddressID;
-                m.AuthID = item.AuthID;
                 m.CreateDate = item.CreateDate;
                 m.CreateID = item.CreateID;
                 m.Freight = item.Freight;
@@ -126,86 +129,58 @@ namespace Ace.Application.Wiki
             return db_set;
         }
 
-        public List<ShopOrderInfo> GetOrderList( string CreateID)
+        
+
+
+ 
+
+
+        public PagedData<ShopOrderInfo> GetPageOrderList(Pagination page, int ShopID = 0, string CreateID="",int ST=-1)
         {
+            string strFileds = " a.Id,a.OrderCode,a.Total,a.ProTotal,a.Freight,a.ST,a.CreateID,a.CreateDate,a.UpdateTime,a.AddressID,a.ShopID,b.UserName,b.Mobile,c.ShopName ";
 
-            //var db_conn = this.DbContext.Query<ShopOrder>()
-            //             .LeftJoin<Users>((order, users) => order.CreateID == users.Id)
-            //             .LeftJoin<Users>((order, users, users2) => order.AuthID == users2.Id)
-            //             .LeftJoin<Shop>((order, users, users2, shop) => order.ShopID == shop.ID);
-
-            //List<ShopOrderInfo> db_set = db_conn.Select<ShopOrderInfo>((order, users, users2, shop) => new ShopOrderInfo
-            //{
-            //    Id = order.Id,
-            //    Total = order.Total,
-            //    CreateName = users.UserName,
-            //    ShopName = shop.ShopName,
-            //    CreateDate = order.CreateDate,
-            //    AuthName = users2.UserName,
-            //    UpdateTime = order.UpdateTime,
-            //    ST = order.ST
-            //}).Where(a => a.ShopID == ShopID && a.CreateID == CreateID).ToList();
-
-            string sql = "select a.Id,a.Total,a.CreateID,a.ShopID,a.CreateDate,a.UpdateTime,a.ST,b.ShopName,u1.UserName as CreateName,u2.UserName as AuthName ";
-            sql += " from  ShopOrder a  ";
-            sql += " left join Shop b on a.ShopID=b.ID ";
-            sql += " left join Users u1 on a.CreateID=u1.Id ";
-            sql += " left join Users u2 on a.AuthID= u2.Id ";
-            sql += " where a.CreateID=?CreateID";
-
-            DbParam[] dbParams = new DbParam[] 
+            string strWhere = " a.ST>-1 ";//b.GPS_X>0
+            if (ShopID > 0)
             {
-                new DbParam("?CreateID",CreateID)
-            };
-
-            List<ShopOrderInfo> db_set=this.DbContext.SqlQuery<ShopOrderInfo>(sql, dbParams).ToList();
-
-            return db_set;
-        }
-
-
-
-        public PagedData<ShopOrderInfo> GetPageOrderList(Pagination page,   string CreateID)
-        {
-            var q = this.DbContext.Query<ShopOrder>();
-             
-            q = q.WhereIfNotNullOrEmpty(CreateID, a => a.CreateID == CreateID).OrderByDesc(a=>a.CreateDate);
-            PagedData<ShopOrder> pagedData = q.TakePageData(page);
-
-            List<string> createIds= pagedData.Models.Select(a => a.CreateID).Distinct().ToList();
-            List<string> authIds = pagedData.Models.Select(a => a.AuthID).Distinct().ToList();
-
-            List<string> ids = new List<string>();
-            ids.AddRange(createIds);
-            ids.AddRange(authIds);
-            ids = ids.Distinct().ToList();
-
-            //List<int> shopIds = pagedData.Models.Select(a => a.ShopID).Distinct().ToList();
-
-            //List<SimpleShop2> shops = this.DbContext.Query<Shop>().Select(a => new SimpleShop2() { ShopID = a.ID, ShopName = a.ShopName }).Where(a => a.ShopID.In(shopIds)).ToList();
-            List<UsersInfo2> users = this.DbContext.Query<Users>().Select(a => new UsersInfo2() { Id = a.Id, UserName = a.UserName }).Where(a => a.Id.In(ids)).ToList();
-
-            List<ShopOrderInfo> _list = new List<ShopOrderInfo>();
-            ShopOrderInfo _newOrder;
-            foreach (ShopOrder order in pagedData.Models)
-            {
-                _newOrder = new ShopOrderInfo();
-                _newOrder.AuthName = !string.IsNullOrEmpty(order.AuthID)?  users.Where(a => a.Id == order.AuthID).FirstOrDefault().UserName:"";
-                _newOrder.CreateName = !string.IsNullOrEmpty(order.CreateID) ? users.Where(a => a.Id == order.CreateID).FirstOrDefault().UserName:"";
-                _newOrder.CreateDate = order.CreateDate;
-                _newOrder.CreateID = order.CreateID;
-                _newOrder.Id = order.Id;
-                //_newOrder.ShopID = order.ShopID;
-                //_newOrder.ShopName = shops.Where(a => a.ShopID == order.ShopID).FirstOrDefault().ShopName;
-                _newOrder.ST = order.ST;
-                _newOrder.ST_Name = GetST_Name(order.ST);
-                _newOrder.Total = order.Total;
-                _newOrder.UpdateTime = order.UpdateTime;
-                _list.Add(_newOrder);
+                strWhere += " and a.ShopID=" + ShopID;
             }
-            PagedData<ShopOrderInfo> pagedDataInfo = new PagedData<ShopOrderInfo>(_list, pagedData.TotalCount, page.Page, page.PageSize);
-            return pagedDataInfo;
+
+            if (!string.IsNullOrEmpty(CreateID))
+            {
+                strWhere += " and  a.CreateID='" + CreateID + "'";
+            }
+            if(ST>-1)
+            {
+                strWhere += " and a.ST=" + ST;
+            }
+
+
+            DbParam _totalcount = new DbParam("?_totalcount", null, typeof(int)) { Direction = ParamDirection.Output };
+            DbParam _pagecount = new DbParam("?_pagecount", null, typeof(int)) { Direction = ParamDirection.Output };
+
+            DbParam[] dbs = new DbParam[] {
+                new DbParam("?_fields", strFileds),
+                new DbParam("?_tables", "  shoporder a LEFT JOIN users b ON a.CreateID=b.Id LEFT JOIN shop c ON a.ShopID=c.ID "),
+                new DbParam("?_where",strWhere),
+                new DbParam("?_orderby", "a.CreateDate desc"),
+                new DbParam("?_pageindex", page.Page),
+                new DbParam("?_pageSize", page.PageSize),
+                _totalcount,
+                _pagecount
+        };
+
+            List<ShopOrderInfo> list = this.DbContext.SqlQuery<ShopOrderInfo>("sp_viewPage", System.Data.CommandType.StoredProcedure, dbs).ToList();
+
+            PagedData<ShopOrderInfo> pagedData = new PagedData<ShopOrderInfo>();
+            pagedData.CurrentPage = page.Page;
+            pagedData.Models = list;
+            pagedData.PageSize = page.PageSize;
+            pagedData.TotalCount = Convert.ToInt32(_totalcount.Value);
+            pagedData.TotalPage = Convert.ToInt32(_pagecount.Value);
+
+            return pagedData;
         }
+
 
         public string SubmitOrder(string CreateID,string AddressID,int ShopID)
         {  
@@ -228,7 +203,7 @@ namespace Ace.Application.Wiki
                     break;
 
                 case 1:
-                    s = "已付款，待发货";
+                    s = "已付款";
                     break;
 
                 case 2:
