@@ -100,9 +100,8 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
             pagedData.Models = list;
             pagedData.PageSize = pagination.PageSize;
             pagedData.TotalCount = list.Count;
-            
 
-
+             
             return this.SuccessData(pagedData);
         }
 
