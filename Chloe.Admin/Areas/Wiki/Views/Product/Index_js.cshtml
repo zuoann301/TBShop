@@ -88,11 +88,11 @@
                         arr[l] = response.msg;
 
                         $("#ImageUrl").val(response.msg);
-                        $("#thelist").append("<img class='img_thum' src='" + _file_domain + response.msg + "' />");
+                        $("#thelist").append("<img class='img_thum' src='"  + response.msg + "' />");
                         $("#ImageList").val(arr.join(";"));
 
                         $(".img_thum").click(function () {
-                            $("#ImageUrl").val($(this).attr("src").replace(_file_domain, ""));
+                            //$("#ImageUrl").val($(this).attr("src").replace(_file_domain, ""));
                             $(".img_thum").removeClass("img_red");
                             $(this).addClass("img_red");
                         });
@@ -127,17 +127,17 @@
                     $(arr).each(function (i, item) {
                         if (item != "") {
                             if (s1 == item) {
-                                $("#thelist").append("<img class='img_thum img_red' src='" + _file_domain + item + "' />");
+                                $("#thelist").append("<img class='img_thum img_red' src='" + item + "' />");
                             }
                             else {
-                                $("#thelist").append("<img class='img_thum' src='" + _file_domain + item + "' />");
+                                $("#thelist").append("<img class='img_thum' src='"  + item + "' />");
                             }
                         }
                     });
                     $(".img_thum").click(function () {
                         $(".img_thum").removeClass("img_red");
                         $(this).addClass("img_red");
-                        $("#ImageUrl").val($(this).attr("src").replace(_file_domain, ""));
+                        $("#ImageUrl").val($(this).attr("src"));
                     });
                 }
             }

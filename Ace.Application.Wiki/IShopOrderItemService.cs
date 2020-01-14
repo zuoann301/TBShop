@@ -81,9 +81,9 @@ namespace Ace.Application.Wiki
 
         public List<ShopOrderItemInfo> GetOrderItemList( string OrderID)
         { 
-            string sql = " select a.Id,a.OrderID,a.ProductID,a.ProSizeID,a.ItemNum,a.Price,b.ProductName,c.ProSize,c.ImageUrl from ShopOrderItem a ";
+            string sql = " select a.Id,a.OrderID,a.ProductID,a.ProSizeID,a.ItemNum,a.Price,b.ProductName,b.ProSize,b.ImageUrl from ShopOrderItem a ";
             sql += " left join Product b on a.ProductID=b.Id  ";
-            sql += "  left join Product_Size c on a.ProSizeID=c.Id ";
+            //sql += "  left join Product_Size c on a.ProSizeID=c.Id ";
            
             sql += " where a.OrderID=?OrderID";
 

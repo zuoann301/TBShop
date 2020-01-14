@@ -213,7 +213,7 @@ Page({
     var token=wx.getStorageSync('wx');
     var openid=token.openid;
     var userid=this.data.userInfo.Id;
-    var shopid=app.globalData.ShopID;
+    var shopid=wx.getStorageSync('ShopID');
     var pd = { UserID: userid,AddressID: this.data.addressId,ShopID:shopid};
     util.request(api.OrderSubmit, pd).then(res => {
       if (res.Status === 100) 

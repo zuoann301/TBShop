@@ -54,7 +54,7 @@
       <scroll-view scroll-x="true" class="list">
         <view class="item" wx:for="{{topics}}" wx:for-index="index" wx:for-item="item" wx:key="unique">
           <navigator url="../topicDetail/topicDetail?id={{item.Id}}">
-            <image class="img" src="{{FileHost+item.ImageUrl}}" background-size="cover"></image>
+            <image class="img" src="{{item.ImageUrl}}" background-size="cover"></image>
             <view class="np">
               <text class="name">{{item.Title}}</text>
             </view>
@@ -76,7 +76,7 @@
     <view class="b">
       <view class="item" wx:for="{{newGoods}}" wx:for-index="index" wx:for-item="item" wx:key="unique">
         <navigator url="../goods/goods?id={{item.Id}}">
-          <image class="img" mode="aspectFit" src="{{FileHost+item.ImageUrl}}" background-size="cover"></image>
+          <image class="img" mode="aspectFit" src="{{item.ImageUrl}}" background-size="cover"></image>
           <text class="name">{{item.ProductName}}</text>
           <text class="price">￥{{item.Price}}</text>
         </navigator>
@@ -95,7 +95,7 @@
     <view class="b">
       <view class="item" wx:for="{{hotGoods}}" wx:for-index="index" wx:for-item="item" wx:key="unique">
         <navigator url="/pages/goods/goods?id={{item.Id}}">
-          <image class="img" mode="aspectFit" src="{{FileHost+item.ImageUrl}}" background-size="cover"></image>
+          <image class="img" mode="aspectFit" src="{{item.ImageUrl}}" background-size="cover"></image>
           <view class="right">
             <view class="text">
               <text class="name">{{item.ProductName}}</text>

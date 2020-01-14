@@ -27,9 +27,9 @@
             <view class="status">{{orderInfo.STName}}</view>
         </view>
         <view class="goods">
-            <view class="item" wx:for="{{orderInfo.OrderItem}}" wx:key="{{item.Id}}">
+            <view class="item" wx:for="{{orderInfo.OrderItem}}" wx:key="unique">
                 <view class="img">
-                    <image src="{{FileHost+item.ImageUrl}}"></image>
+                    <image src="{{item.ImageUrl}}"></image>
                 </view>
                 <view class="info">
                     <view class="t">

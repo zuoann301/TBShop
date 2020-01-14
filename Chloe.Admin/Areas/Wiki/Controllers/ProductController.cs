@@ -199,8 +199,9 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
                     {
                         Directory.CreateDirectory(dirPath);
                     }
-                    
-                    urlPath= dicPath+"/"+ newFileName;
+
+                    string FileDomain = Globals.Configuration["AppSettings:FileDomain"].ToString();
+                    urlPath = FileDomain+ dicPath +"/"+ newFileName;
 
                     string fileName = $@"{dirPath}//{newFileName}";
                     using (var stream = new FileStream(fileName, FileMode.Create))

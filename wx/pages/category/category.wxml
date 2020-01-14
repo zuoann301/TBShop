@@ -15,7 +15,7 @@
         </view>
         <view class="b">
             <navigator class="item {{(iindex) % 2 == 0 ? 'item-b' : ''}}"   url="/pages/goods/goods?id={{iitem.Id}}" wx:for="{{goodsList}}" wx:for-item="iitem" wx:for-index="iindex" wx:key="unique" >
-                <image mode="aspectFit" class="img" src="{{FileHost + iitem.ImageUrl}}" background-size="cover"></image>
+                <image mode="aspectFit" class="img" src="{{iitem.ImageUrl}}" background-size="cover"></image>
                 <text class="name">{{iitem.ProductName}}</text>
                 <text class="price">￥{{iitem.Price}}</text>
             </navigator>
