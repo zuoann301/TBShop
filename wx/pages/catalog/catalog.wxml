@@ -16,7 +16,7 @@
         </navigator>
         <view class="hd">
             <text class="line"></text>
-            <text class="txt">{{currentCategory.Title}}分类</text>
+            <text class="txt">{{currentCategory.Title}}</text>
             <text class="line"></text>
         </view>
         <view class="bd">

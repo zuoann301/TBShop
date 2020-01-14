@@ -7,7 +7,7 @@ var app = getApp();
 Page({
   data: {
     checkedGoodsList: [],
-    checkedAddress: {},
+    checkedAddress:null,
     checkedCoupon: [],
     couponList: [],
     goodsTotalPrice: 0.00, //商品总价

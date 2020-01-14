@@ -4,22 +4,14 @@ const api = require('../config/api.js');
 function getShop(shopid) {
   return new Promise(function (resolve, reject) 
   {
-    var shop=wx.getStorageSync('shop');
-    if(shop!="")
-    {
-      resolve(shop);
-    }
-    else
-    {
-      util.request(api.ShopInfo, { ShopID: shopid }, 'GET').then((res) => {
-        if (res.Status == 100) {
-          resolve(res.Data);
-        }
-        else {
-          reject(res);
-        }
-      });
-    }
+    util.request(api.ShopInfo, { ShopID: shopid }, 'GET').then((res) => {
+      if (res.Status == 100) {
+        resolve(res.Data);
+      }
+      else {
+        reject(res);
+      }
+    });
     
   });
 }

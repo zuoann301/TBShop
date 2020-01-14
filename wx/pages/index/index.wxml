@@ -11,7 +11,7 @@
   
 <view class="a-section a-topic" wx:if="{{channel.length > 0}}">
   <view class="m-menu">
-    <navigator  class="item" url="{{item.url}}" wx:for="{{channel}}" wx:key="unique">
+    <navigator  class="item" url="/pages/catalog/catalog?id={{item.Id}}" wx:for="{{channel}}" wx:key="unique" open-type="switchTab">
      <icon class="iconfont {{item.Icon}}"></icon>
       <text>{{item.Title}}</text>
     </navigator>

@@ -17,38 +17,49 @@ Page({
    */
   onLoad: function (options) 
   {
-      var shopid=1;
-      if(options.id!="")
+      if(options.id)
       {
-        shopid=options.id;        
+        wx.setStorageSync('ShopID', options.id);
+
+        shop.getShop(options.id).then(res => 
+          {      
+            console.log(res);    
+          wx.setStorageSync('shop', res);
+          setTimeout(function () {
+            wx.reLaunch({ url: '/pages/index/index' });
+          }, 500);
+        }).catch((err) => 
+        {
+          wx.hideLoading();
+          wx.showModal({content: '选择您想访问的商家',success: function (res) {wx.reLaunch({ url: '/pages/shoplist/index' });}});
+        });
+
       }
       else
       {
         var sid=wx.getStorageSync('ShopID');
-        if(sid!="")
+        if(sid=="")
         {
-          shopid=sid;
+           sid=1;
         }
+        wx.setStorageSync('ShopID', sid);
+        shop.getShop(sid).then(res => 
+          {
+            console.log(res);
+          wx.setStorageSync('shop', res);
+          setTimeout(function () {
+            wx.reLaunch({ url: '/pages/index/index' });
+          }, 500);
+        }).catch((err) => 
+        {
+          wx.hideLoading();
+          wx.showModal({content: '选择您想访问的商家',success: function (res) {wx.reLaunch({ url: '/pages/shoplist/index' });}});
+        });
       }
 
-      wx.setStorageSync("ShopID",shopid);
+       
 
-      shop.getShop(shopid).then(res => 
-        {          
-        wx.setStorageSync('shop', res);
-        setTimeout(function () {
-          wx.reLaunch({ url: '/pages/index/index' });
-        }, 500);
-      }).catch((err) => 
-      {
-        wx.hideLoading();
-        wx.showModal({
-          title: '提示', content: '选择您想访问的商家',
-          success: function (res) {
-            wx.reLaunch({ url: '/pages/shoplist/index' });
-          }
-        });
-      });
+      
        
       
   },

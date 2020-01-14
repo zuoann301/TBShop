@@ -124,7 +124,7 @@ App({
             },
             success: function (res) {
               wx.setStorageSync('wx', res.data.Data);
-              //wx.setStorageSync('IsDebug', res.data.Data.P2PData);
+              wx.setStorageSync('IsDebug', res.data.Data.P2PData);
                
             },
             fail: function (res) {

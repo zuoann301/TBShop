@@ -30,6 +30,11 @@ using Senparc.CO2NET.Utilities;
 using Chloe.Admin.Models;
 using Senparc.Weixin.WxOpen.AdvancedAPIs.Sns;
 using Senparc.Weixin.MP.AdvancedAPIs.TemplateMessage;
+using System.Net.Http;
+using System.Security.Authentication;
+using System.Net.Http.Headers;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Chloe.Admin.Controllers
 {
@@ -39,6 +44,8 @@ namespace Chloe.Admin.Controllers
         {
             return View();
         }
+
+
 
 
         /// <summary>
@@ -55,9 +62,106 @@ namespace Chloe.Admin.Controllers
             string secret = Globals.Configuration["AppSettings:WxOpenAppSecret"].ToString();
 
             var data = Senparc.Weixin.WxOpen.AdvancedAPIs.Sns.SnsApi.JsCode2Json(appid, secret, jscode);
-            //string IsDebug = Globals.Configuration["AppSettings:IsDebug"].ToString();
-            //data.P2PData = IsDebug;
+            string IsDebug = Globals.Configuration["AppSettings:IsDebug"].ToString();
+            data.P2PData = IsDebug;
             return this.SuccessData(data);
+        }
+
+
+
+        public ActionResult GetPhoneNumber(string jscode, string encryptedData, string IV)
+        {
+            string WxOpenAppId = Globals.Configuration["AppSettings:WxOpenAppId"].ToString();
+            string WxOpenAppSecret = Globals.Configuration["AppSettings:WxOpenAppSecret"].ToString();
+            string TenPayV3_MchId = Globals.Configuration["AppSettings:TenPayV3_MchId"].ToString();
+            string TenPayV3_Key = Globals.Configuration["AppSettings:TenPayV3_Key"].ToString();
+            string TenpayNotify = Globals.Configuration["AppSettings:TenpayNotify"].ToString() + "API/PayNotifyUrl";
+
+
+            string _posdata = "appid=" + WxOpenAppId + "&secret=" + WxOpenAppSecret + "&js_code=" + jscode + "&grant_type=authorization_code";
+            string _url = "https://api.weixin.qq.com/sns/jscode2session";//获取openid
+            string _data = HttpPost(_url, _posdata);
+            if (_data.Contains("\"openid\""))
+            {
+
+                //string _ip = Request.ServerVariables.Get("Remote_Addr").ToString().Trim();
+                dynamic _modal = Newtonsoft.Json.Linq.JToken.Parse(_data) as dynamic;
+                string _openid = _modal.openid;
+                string _session_key = _modal.session_key;
+                if (!String.IsNullOrEmpty(encryptedData) && !string.IsNullOrEmpty(IV))
+                {
+                    byte[] encryData = Convert.FromBase64String(encryptedData);  // strToToHexByte(text);
+                    RijndaelManaged rijndaelCipher = new RijndaelManaged();
+                    rijndaelCipher.Key = Convert.FromBase64String(_session_key); // Encoding.UTF8.GetBytes(AesKey);
+                    rijndaelCipher.IV = Convert.FromBase64String(IV);// Encoding.UTF8.GetBytes(AesIV);
+                    rijndaelCipher.Mode = CipherMode.CBC;
+                    rijndaelCipher.Padding = PaddingMode.PKCS7;
+                    ICryptoTransform transform = rijndaelCipher.CreateDecryptor();
+                    byte[] plainText = transform.TransformFinalBlock(encryData, 0, encryData.Length);
+                    string result = Encoding.Default.GetString(plainText);
+                    //动态解析result 成对象
+                    dynamic model = Newtonsoft.Json.Linq.JToken.Parse(result) as dynamic;
+                    //return model.phoneNumber;
+                    //mobile = model.phoneNumber;
+                    var obj = new { mobile = model.phoneNumber, openid = _openid };
+                    return this.SuccessData(obj);
+                }
+            }
+
+
+            return this.FailedMsg();
+
+
+        }
+
+        public ActionResult WeChatLogin(string OpenID, string Mobile, string UserName, string UserIcon, string FromID = "", int ShopID = 1)
+        {
+            if (!string.IsNullOrEmpty(OpenID))
+            {
+                AddUsersInput addUsersInput = new AddUsersInput();
+                addUsersInput.CreateDate = DateTime.Now;
+                addUsersInput.Email = "";
+                addUsersInput.FromID = FromID;
+                addUsersInput.LastLoginDate = DateTime.Now;
+                addUsersInput.Mobile = Mobile;
+                addUsersInput.RoleID = 0;
+                addUsersInput.Sex = 0;
+                addUsersInput.ST = 0;
+                addUsersInput.UserName = UserName;
+                addUsersInput.UserPass = "";
+                addUsersInput.UserSecretkey = "";
+                addUsersInput.OpenID = OpenID;
+                addUsersInput.UserIcon = UserIcon;
+                addUsersInput.ShopID = ShopID;
+                Users users = this.CreateService<IUsersService>().Add(addUsersInput);
+                return this.SuccessData(users);
+            }
+            else
+            {
+                return this.FailedMsg("");
+            }
+
+        }
+
+        public string HttpPost(string uri, string jsontxt)
+        {
+            var handler = new HttpClientHandler();
+
+            //X509Certificate2 certificate = GetMyX509Certificate(certName);
+
+            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+            handler.SslProtocols = SslProtocols.Tls12;
+            //handler.ClientCertificates.Add(certificate);
+            var retData = string.Empty;
+            using (var httpClient = new HttpClient())
+            {
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
+                var content = new StringContent(jsontxt);
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/xml");
+                var response = httpClient.PostAsync(uri, content).Result;
+                retData = response.Content.ReadAsStringAsync().Result;
+            }
+            return retData;
         }
 
         /// <summary>
@@ -647,7 +751,15 @@ namespace Chloe.Admin.Controllers
         public ActionResult AddressDefault(string UserID)
         {
             Users_Address modle = this.CreateService<IUsers_AddressService>().GetDefaultAddress(UserID);
-            return this.SuccessData(modle);
+            if(modle!=null)
+            {
+                return this.SuccessData(modle);
+            }
+            else
+            {
+                return this.FailedMsg();
+            }
+            
         }
 
         [HttpPost]

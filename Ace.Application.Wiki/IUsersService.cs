@@ -20,7 +20,7 @@ namespace Ace.Application.Wiki
     public interface IUsersService : IAppService
     {
         List<Users> GetList(int ShopID = 0, int RoleID = 0, string keyword = "");
-        void Add(AddUsersInput input);
+        Users Add(AddUsersInput input);
         void Update(UpdateUsersInput input);
         void Delete(string id );
 
@@ -103,7 +103,7 @@ namespace Ace.Application.Wiki
                 input.Email = input.Email.Trim();
         }
 
-        public void Add(AddUsersInput input)
+        public Users Add(AddUsersInput input)
         {
             //this.InsertFromDto(input);
             this.Trim(input);
@@ -168,7 +168,7 @@ namespace Ace.Application.Wiki
             user.ShopID = input.ShopID;
             user.UserIcon = input.UserIcon;
             user.Id= IdHelper.CreateStringSnowflakeId();
-            this.DbContext.Insert(user);
+            return this.DbContext.Insert(user);
         }
         public void Update(UpdateUsersInput input)
         {

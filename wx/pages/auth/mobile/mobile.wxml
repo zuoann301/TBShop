@@ -7,8 +7,7 @@
 
 <view>
   <view>
-    <view class="login-title">关联手机号</view>
-    <!-- <form bindsubmit="bindLoginMobilecode">-->
+    <view class="login-title">关联手机号</view> 
      
       <form bindsubmit="bindGetPassCode">
         <view class="login">
@@ -23,16 +22,21 @@
       </form>
     <view class="third-line">
       <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" >提交</button>
-      <!--disabled="{{disableSubmitMobileCode}}"-->
+      
     </view>
 
     <view class="line">
     </view>
     <view class="login-title2">已绑定手机号码</view>
     <view class="third-line">
-      <button bindtap='quickLogin'>
-      <icon class="iconfont iconweixin"></icon>
-      微信帐号登录</button>
+   <!---<button open-type="getUserInfo" bindtap='getUserInfo2'><icon class="iconfont iconweixin"></icon>微信安全登录</button>-->
+    
+    <button wx:if="{{extInfo.mobile==''}}"  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" ><icon class="iconfont iconweixin"></icon>微信安全登录</button>
+          
+    <block wx:else>
+      <button wx:if="{{userInfo==null}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo2" ><icon class="iconfont iconweixin"></icon>微信安全登录</button>
+    </block>
+    
     </view>
     
   </view>
