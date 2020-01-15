@@ -1,7 +1,7 @@
 <view class="container">
     <scroll-view class="topic-list" scroll-y="true" scroll-top="{{scrollTop}}">
         <navigator class="item" wx:for="{{topicList}}" wx:key="unique" url="../topicDetail/topicDetail?id={{item.Id}}">
-            <image class="img" src="{{FileHost+item.ImageUrl}}"></image>
+            <image class="img" src="{{item.ImageUrl}}"></image>
             <view class="info">
                 <text class="title">{{item.Title}}</text>
                 <text class="desc">{{item.Summary}}</text>

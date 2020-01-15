@@ -27,6 +27,11 @@
   <ItemGroup>
     <None Include="Areas\Wiki\Views\Pro_Sort\Index.cshtml" />
     <None Include="Areas\Wiki\Views\Pro_Sort\Index_js.cshtml" />
+    <None Include="wwwroot\Content\dropzone\.DS_Store" />
+    <None Include="wwwroot\Content\dropzone\css\stylus\basic.styl" />
+    <None Include="wwwroot\Content\dropzone\css\stylus\dropzone.styl" />
+    <None Include="wwwroot\Content\dropzone\dropzone-amd-module.min.js" />
+    <None Include="wwwroot\Content\dropzone\dropzone.min.js" />
   </ItemGroup>
 
 
@@ -67,6 +72,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Update="Areas\Wiki\Views\News\Index_js.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\Wiki\Views\Shop\Index.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\Wiki\Views\Shop\Index_js.cshtml">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>

@@ -41,7 +41,8 @@
     "pages/ucenter/seclist/index",
     "pages/ucenter/secinfo/index",
     "pages/ucenter/help/index",
-    "pages/auth/shop/index"
+    "pages/auth/shop/index",
+    "pages/ucenter/xcode/index"
   ],
   "window": {
     "backgroundTextStyle": "dark",

@@ -27,7 +27,7 @@ namespace Ace.Application.Wiki
 
         Shop GetModel(int Id);
 
-        PagedData<Shop> GetPageData(Pagination page, int Brand, string keyword);
+        PagedData<Shop> GetPageData(Pagination page, int BrandID, string keyword);
 
         List<SimpleShop> GetCacheList();
 
@@ -140,7 +140,10 @@ namespace Ace.Application.Wiki
 
             q = q.WhereIfNotNullOrEmpty(keyword, a => a.ShopName.Contains(keyword) );
 
-            q = q.WhereIfNotNullOrEmpty(keyword, a => a.BrandID == BrandID);
+            if(BrandID>0)
+            {
+                q = q.Where(a => a.BrandID == BrandID);
+            }
 
            
 

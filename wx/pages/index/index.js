@@ -78,7 +78,7 @@ Page({
         that.setData({ banner: res.Data});
       }
     });
-    util.request(api.IndexUrlChannel,{Pid:'0'},"GET").then(function (res) {
+    util.request(api.ProSortList,{Pid:'0'},"GET").then(function (res) {
       if (res.Status === 100) 
       {
         that.setData({ channel: res.Data });

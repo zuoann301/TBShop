@@ -1,0 +1,88 @@
+page{
+  height: 100%;
+  width: 100%;
+  background: #f4f4f4;
+}
+
+.search2{
+height:120rpx;
+width:100%;
+line-height:120rpx;
+border-bottom:1rpx solid #f4f4f4;
+  display: flex;
+align-items:center;
+justify-content: center;
+padding-top:10rpx;
+padding-bottom:10rpx;
+background: #ffffff;
+}
+.search2 button{
+width:45%;
+margin:5rpx;
+padding:0;
+height:70rpx;
+line-height:70rpx;
+float:left;
+border:1rpx solid #bebebe;
+font-size:30rpx;
+text-align:center;
+
+}
+.search2 text{
+height:80rpx;
+width:50%;
+line-height:80rpx;
+padding-left:30rpx;
+}
+ 
+
+.lable2{width:35%;float:left;line-height:100rpx;text-align:right;}
+.dts{
+width:65%;
+float:left;
+line-height:100rpx;
+}
+.dts input{
+width:30%;
+border:1rpx solid #dedede;
+float:left;  
+text-align:center;
+}
+.m_l_5{margin-left:5%;}
+.dts text{
+width:60rpx;
+float:left;
+height:50rpx;
+line-height:50rpx;
+text-align:center;
+}
+
+.wx-switch-input{
+width:82rpx !important;
+height:40rpx !important;
+margin:0 !important;
+padding: 0 !important;
+}
+/*白色样式（false的样式）*/
+.wx-switch-input::before{
+width:80rpx !important;
+height:36rpx !important;
+}
+/*绿色样式（true的样式）*/
+.wx-switch-input::after{
+width:38rpx !important;
+height:36rpx !important;
+}
+
+.box{
+width:100%;
+height:610rpx;
+padding-top: 15rpx;
+background-color:#FFFFFF;
+margin-top:10rpx;
+text-align: center;
+}
+.box image{
+  margin: 0 auto;
+  display: inline-block;
+}

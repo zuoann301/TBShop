@@ -70,25 +70,43 @@ namespace Ace.Application.Wiki
 
 
 
+        
+
         public PagedData<Product_rcdInfo> GetPageList(Pagination page, string UserID)
         {
-            var q = this.DbContext.Query<Product_rcd>()
-                .LeftJoin<Product>((col, product) => col.ProductID == product.Id);
+            string strFileds = " a.*,b.ProductName,b.ImageUrl,b.Price,c.ShopName ";
 
-            IQuery<Product_rcdInfo> db_set = q.Select<Product_rcdInfo>((col, product) => new Product_rcdInfo
+            string strWhere = " 1=1 ";//b.GPS_X>0
+            
+
+            if (!string.IsNullOrEmpty(UserID))
             {
-                Id = col.Id,
-                ProductID = col.ProductID,
-                ProductName = product.ProductName,
-                Summary=product.Summary,
-                Hit=col.Hit,
-                Price=product.Price,
-                ImageUrl = product.ImageUrl,
-                CreateDate = col.CreateDate,
-                UpdateTime=col.UpdateTime,
-                UserID = col.UserID
-            }).Where(a => a.UserID == UserID);
-            PagedData<Product_rcdInfo> pagedData = db_set.TakePageData(page);
+                strWhere += " and  a.UserID='" + UserID + "'";
+            }
+             
+            DbParam _totalcount = new DbParam("?_totalcount", null, typeof(int)) { Direction = ParamDirection.Output };
+            DbParam _pagecount = new DbParam("?_pagecount", null, typeof(int)) { Direction = ParamDirection.Output };
+
+            DbParam[] dbs = new DbParam[] {
+                new DbParam("?_fields", strFileds),
+                new DbParam("?_tables", "  product_rcd a left join product b on a.ProductID=b.Id left join shop c on a.ShopID=c.ID "),
+                new DbParam("?_where",strWhere),
+                new DbParam("?_orderby", "a.UpdateTime desc"),
+                new DbParam("?_pageindex", page.Page),
+                new DbParam("?_pageSize", page.PageSize),
+                _totalcount,
+                _pagecount
+        };
+
+            List<Product_rcdInfo> list = this.DbContext.SqlQuery<Product_rcdInfo>("sp_viewPage", System.Data.CommandType.StoredProcedure, dbs).ToList();
+
+            PagedData<Product_rcdInfo> pagedData = new PagedData<Product_rcdInfo>();
+            pagedData.CurrentPage = page.Page;
+            pagedData.Models = list;
+            pagedData.PageSize = page.PageSize;
+            pagedData.TotalCount = Convert.ToInt32(_totalcount.Value);
+            pagedData.TotalPage = Convert.ToInt32(_pagecount.Value);
+
             return pagedData;
         }
 

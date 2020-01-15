@@ -19,10 +19,10 @@
         <text class="txt">优惠券</text>
       </navigator>
     </view>
-    <view class="item hide">
-      <navigator url="url" class="a">
+    <view class="item ">
+      <navigator url="/pages/ucenter/xcode/index" class="a">
         <text class="icon gift"></text>
-        <text class="txt">礼品卡</text>
+        <text class="txt">分享码</text>
       </navigator>
     </view>
     <view class="item ">
@@ -34,7 +34,7 @@
     <view class="item">
       <navigator url="/pages/ucenter/footprint/footprint" class="a">
         <text class="icon security"></text>
-        <text class="txt">我的足迹</text>
+        <text class="txt">浏览记录</text>
       </navigator>
     </view>
     <view class="item hide">
@@ -75,7 +75,7 @@
         <text class="txt">意见反馈</text>
       </navigator>
     </view>
-    <view class="item">
+    <view class="item hide">
       <navigator wx:if="{{!userInfo.OpenID}}" url="/pages/auth/mobile/mobile" class="a">
         <text class="icon phone"></text>
         <text class="txt">绑定手机</text>

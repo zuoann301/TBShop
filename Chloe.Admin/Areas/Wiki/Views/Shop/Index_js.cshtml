@@ -1,23 +1,97 @@
 ﻿<script>
-     var _sorts = @this.RawSerialize(this.ViewBag.ListSort);
+    var _sorts = @this.RawSerialize(this.ViewBag.ListSort);
+    
+    var _file_domain = "@ViewBag.FileDomain";
+     
+
+     
+
+
+
     var _vm;
     $(function () {
         var vm = new PageViewModel();
         _vm = vm;
         ko.applyBindings(vm);
         vm.init();
-    });
 
-    function PageViewModel() {
+    });
+ 
+
+    function PageViewModel()
+    {
         var me = this;
         ViewModel.call(me);
         vmExtend.call(me);
 
-        me.url = "/Wiki/Shop/GetModels";
+        me.url = "/Wiki/Shop/Models";
         me.deleteUrl = "/Wiki/Shop/Delete";
 
+        
+        me.dialog = new FormDialog(me);
          
     }
     function vmExtend() {
         var me = this;
-    }</script>
+    }
+
+
+    function FormDialog(vm) {
+        var me = this;
+        Dialog.call(me);
+
+        me.onOpen = function () {
+
+             
+
+            var model = me.editModel();
+            if (model)
+            {
+                var bindModel = $ko.toJS(model);
+                me.model(bindModel);
+                  
+                $("#thelist").empty();
+                if (bindModel.ShopUrl != "")
+                { 
+                    $("#thelist").append("<img class='img_thum' src='" + bindModel.ShopUrl + "' />");
+                }
+            }
+            else
+            {
+                $("#ShopUrl").val("");
+                $("#thelist").empty();  
+                me.model({ IsEnabled: true });
+            }
+        }
+
+        me.onSave = function () {
+            if (!$('#form1').formValid()) {
+                return false;
+            }
+
+            var model = me.model();
+
+            if (me.editModel()) {
+                model.ShopUrl = $("#ShopUrl").val(); 
+                $ace.post("/Wiki/Shop/Edit", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.dataTable.reload();
+                    //setTimeout(function () { window.location.reload(); }, 1000);
+                }
+                );
+            }
+            else {
+                model.ShopUrl = $("#ShopUrl").val(); 
+                $ace.post("/Wiki/Shop/Add", model, function (result) {
+                    $ace.msg(result.Msg);
+                    me.close();
+                    vm.loadData();
+                    //setTimeout(function () { window.location.reload(); }, 1000);
+                }
+                );
+            }
+        }
+    }
+
+</script>

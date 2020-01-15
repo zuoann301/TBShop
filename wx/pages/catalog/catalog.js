@@ -12,11 +12,17 @@ Page({
     goodsCount: 0,
     scrollHeight: 0,
     cur_id:'',
-    FileHost: ''
+    FileHost: '',
+    shopid:0
   },
   onLoad: function (options) 
   {
     //shop.setPageTitle();
+    var shopid=wx.getStorageSync('ShopID');
+    if(shopid!='')
+    {
+       this.setData({shopid:shopid});
+    }
     this.setData({ FileHost: api.FileHost });
     this.getCatalog();
     
@@ -24,10 +30,9 @@ Page({
   getCatalog: function () {
     //CatalogList
     let that = this;
-    wx.showLoading({
-      title: '加载中...',
-    });
-    util.request(api.CatalogList,{Pid:'0'}).then(function (res) {
+    wx.showLoading({title: '加载中...'});
+    var shopid=that.data.shopid;
+    util.request(api.CateList,{Pid:'0',ShopID:shopid}).then(function (res) {
         that.setData({navList: res.Data});
         if(that.data.cur_id=='')
         {
@@ -44,7 +49,7 @@ Page({
   },
   getCurrentCategory: function (id) {
     let that = this;
-    util.request(api.CatalogCurrent, { id: id },'GET')
+    util.request(api.CateInfo, { id: id },'GET')
       .then(function (res) 
       {
         if (res.Data.ImageUrl!='')

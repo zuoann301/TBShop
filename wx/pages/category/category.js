@@ -19,13 +19,21 @@ Page({
     nomoreText: '全部加载完成',
     nomore: false,
     totalPages: 1,
-    FileHost:''
+    FileHost:'',
+    shopid:0
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
     //shop.setPageTitle();
     var that = this;
     that.setData({FileHost:api.FileHost});
+
+    var shopid=wx.getStorageSync('ShopID');
+    if(shopid!='')
+    {
+      that.setData({shopid:shopid});
+    }
+
     if (options.id) 
     {
       that.setData({id: options.id});
@@ -48,16 +56,15 @@ Page({
   },
   getCurCateInfo:function(){
     var that = this;
-    util.request(api.CatalogCurrent, { id: that.data.id },'GET')
-      .then(function (res) 
+    util.request(api.CateInfo, { id: that.data.id },'GET').then(function (res) 
       {
         that.setData({currentCategory: res.Data});
       });
   },
   getCategoryList: function () {
     let that = this;
-    util.request(api.IndexUrlChannel, { Pid: this.data.pid },'GET')
-      .then(function (res) 
+    var shopid=that.data.shopid;
+    util.request(api.CateList, { Pid: this.data.pid,ShopID:shopid },'GET').then(function (res) 
       {
         if (res.Status == 100) {
           that.setData({navList: res.Data});
@@ -111,8 +118,8 @@ Page({
       })
       return;
     }
-    var shopid = app.globalData.ShopID;
-    var pd = {ShopID:0, ProSortID: that.data.id, Page: that.data.page, PageSize: that.data.size, OrderType:0};
+    var shopid = that.data.shopid;
+    var pd = {ShopID:shopid, ProSortID: that.data.id, Page: that.data.page, PageSize: that.data.size, OrderType:0};
     util.request(api.ProductPageList,pd,'GET')
       .then(function (res) {
         that.setData({

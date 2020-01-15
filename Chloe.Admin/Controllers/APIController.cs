@@ -35,6 +35,7 @@ using System.Security.Authentication;
 using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
+using Senparc.Weixin.WxOpen.AdvancedAPIs.WxApp;
 
 namespace Chloe.Admin.Controllers
 {
@@ -45,6 +46,26 @@ namespace Chloe.Admin.Controllers
             return View();
         }
 
+
+
+        public ActionResult QRCode(int ShopID)
+        {
+            string url = "/QRCode/" + ShopID + ".jpg";
+            string file_path = Globals.AppRootPath + "\\wwwroot\\QRCode\\";
+            if (!Directory.Exists(file_path))
+            {
+                Directory.CreateDirectory(file_path);
+            }
+            file_path += ShopID + ".jpg";
+            if (!System.IO.File.Exists(file_path))
+            {
+                string appid = Globals.Configuration["AppSettings:WxOpenAppId"];
+                string wxUrl = "pages/start/index?id=" + ShopID;
+                WxAppApi.GetWxaCode(appid, file_path, wxUrl);
+            }
+
+            return this.SuccessData(url);
+        }
 
 
 
@@ -272,9 +293,9 @@ namespace Chloe.Admin.Controllers
             return this.SuccessMsg();
         }
 
-        public ActionResult CateList(string Pid)
+        public ActionResult CateList(string Pid,int ShopID=0)
         {
-            List<Pro_Sort> pro_Sorts = this.CreateService<IPro_SortService>().GetList( Pid, "");
+            List<Pro_Sort> pro_Sorts = this.CreateService<IPro_SortService>().GetList( Pid, "", ShopID);
             return this.SuccessData(pro_Sorts);
         }
 

@@ -3,16 +3,16 @@
     长按删除
   </view>
   <view class="footprint">
-    <view class="day-item" wx:for="{{footprintList}}" wx:key="{{index}}">
-      <view class="day-hd">{{item.UpdateTime}}
+    <view class="day-item" wx:for="{{footprintList}}" wx:key="unique">
+      <view class="day-hd">{{item.ShopName}}
       <text>浏览次数：{{item.Hit}}</text>
       </view>
       <view class="day-list">
         <view class="item" data-footprint="{{item}}" bindtouchstart="touchStart" bindtouchend="touchEnd" bindtap="deleteItem"   wx:key="{{item.Id}}" data-id="{{item.Id}}">
-          <image class="img" src="{{FileHost+item.ImageUrl}}"></image>
+          <image class="img" src="{{item.ImageUrl}}"></image>
           <view class="info">
             <view class="name">{{item.ProductName}}</view>
-            <view class="subtitle">{{item.Summary}}</view>
+            <view class="subtitle">{{item.UpdateTime}}</view>
             <view class="price">￥{{item.Price}}</view>
           </view>
         </view>

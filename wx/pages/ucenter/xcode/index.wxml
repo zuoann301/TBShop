@@ -1,0 +1,10 @@
+<view class="container">
+ 
+ <view class="search2">
+    商家程序码
+  </view>
+  <view class="box">
+    <image src='{{ImageUrl}}' mode='aspectFit' bindtouchstart='timestart' bindtouchend='timeend' bindtap='saveImg' ></image>
+  </view>
+
+</view>
