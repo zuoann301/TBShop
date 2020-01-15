@@ -44,7 +44,7 @@
                 <tr data-bind="click:$parent.selectRow">
                     <td data-bind="text:$parent.getOrdinal($index())"></td>
                     <td>
-                        <a data-bind="text:Title,attr:{href:'@Url.Content("~/Wiki/News/Detail?Id=")' + Id()}"></a>
+                        <a data-bind="text:Title"></a>
                     </td>
                     <td data-bind="text:$ace.findName(_sorts,SortID(),'Id','Title')"></td>
                     <td data-bind="text:Summary"></td>

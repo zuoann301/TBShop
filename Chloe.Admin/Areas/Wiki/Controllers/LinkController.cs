@@ -19,7 +19,7 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
 {
 
     [Area(AreaNames.Wiki)]
-    [Permission("wiki.Link")]
+    [Permission("wiki.link")]
     public class LinkController : WebController<ILinkService>
     {
         public IActionResult Index()
@@ -48,7 +48,7 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
         }
 
 
-        [Permission("wiki.Link.delete")]
+        [Permission("wiki.link.delete")]
         [HttpPost]
         public ActionResult Delete(string id)
         { 
@@ -59,7 +59,7 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
  
 
 
-        [Permission("wiki.Link.edit")]
+        [Permission("wiki.link.edit")]
         [HttpPost]
         public ActionResult Edit(UpdateLinkInput modle)
         {            
@@ -67,7 +67,7 @@ namespace Chloe.Admin.Areas.Wiki.Controllers
             return this.SuccessMsg("编辑成功");
         }
 
-        [Permission("wiki.Link.add")]
+        [Permission("wiki.link.add")]
         [HttpPost]
         public ActionResult Add(AddLinkInput modle)
         {
