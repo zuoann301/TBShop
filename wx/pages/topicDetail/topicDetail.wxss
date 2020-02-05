@@ -4,11 +4,17 @@
     width: 100%;
     height: auto;
     font-size: 0;
+    background-color:#fff;
 }
 
 .content image{
     display: inline-block;
     width: 100%;
+}
+.content view{
+    width:96%;
+    margin-left:2%;
+    padding-right:2%;
 }
 
 .comments{

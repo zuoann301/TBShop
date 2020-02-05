@@ -47,7 +47,7 @@
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "物化天宝商城",
+    "navigationBarTitleText": "天宝商城",
     "navigationBarTextStyle": "black",
     "enablePullDownRefresh": true
   },
