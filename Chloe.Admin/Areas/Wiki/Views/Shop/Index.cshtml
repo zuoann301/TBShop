@@ -8,7 +8,7 @@
 
 @Html.Partial("Index_js")
 <style type="text/css">
-        /*
+    /*
     .img_thum {max-width:100px;}*/
 </style>
 <style type="text/css">
@@ -54,12 +54,13 @@
             <a class="a-btn-refresh" onclick="$ace.reload()"></a>
             <button class="a-btn-edit" data-bind="click:edit,disable:!dataTable.selectedModel()">修改</button>
             <button class="a-btn-add" data-bind="click:add">添加</button>
-             
+
             <button class="a-btn-delete" data-bind="click:del,disable:!dataTable.selectedModel()">删除</button>
+            <button class="a-btn-edit" data-bind="click:openRevisePasswordDialog,disable:!dataTable.selectedModel()">商家程序码</button>
         </div>
         <div class="search">
             <table class="form-table" style="width:auto;">
-                <tr>                    
+                <tr>
                     <td style="width:100px;">
                         <select class="a-control" id="BrandID" name="BrandID" data-bind="options:_sorts,optionsText:'Title',optionsValue:'Id',optionsCaption:'--选择--',value:searchModel().BrandID">
                             <option value="0">--选择--</option>
@@ -87,7 +88,7 @@
                     <th>电话</th>
                     <th>创建时间</th>
                     <th>经度纬度</th>
- 
+
                 </tr>
             </thead>
             <tbody data-bind="foreach:models">
@@ -112,90 +113,103 @@
 
 <dialogbox data-bind="with:dialog" style="width:80%;">
     <form id="form1">
-          
-            <table class="form-table">
-                <tbody>
-                    <tr>
-                        <td class="form-title">商家名称</td>
-                        <td class="form-value">
-                            <input name="ShopName" id="ShopName" type="text" class="a-control required" placeholder="请输入商家名称" data-bind="value:model().ShopName" />
-                        </td>
-                        <td class="form-title">商家分类</td>
-                        <td class="form-value">
-                            <select name="BrandID" id="BrandID" type="text" class="a-control required" data-bind="options:_sorts,optionsText:'Title',optionsValue:'Id',optionsCaption:'--选择分类--',value:model().BrandID"></select>
-                        </td>
-                    </tr>
 
-                    <tr>
-                        <td class="form-title">商家地址</td>
-                        <td class="form-value">
-                            <input name="ShopAddress" id="ShopAddress" type="text" class="a-control required" placeholder="请输入商家地址" data-bind="value:model().ShopAddress" />
-                        </td>
-                        <td class="form-title">商家电话</td>
-                        <td class="form-value">
-                            <input name="ShopTel" id="ShopTel" type="text" class="a-control required" placeholder="请输入商家电话" data-bind="value:model().ShopTel" />
-                        </td>
-                    </tr>
+        <table class="form-table">
+            <tbody>
+                <tr>
+                    <td class="form-title">商家名称</td>
+                    <td class="form-value">
+                        <input name="ShopName" id="ShopName" type="text" class="a-control required" placeholder="请输入商家名称" data-bind="value:model().ShopName" />
+                    </td>
+                    <td class="form-title">商家分类</td>
+                    <td class="form-value">
+                        <select name="BrandID" id="BrandID" type="text" class="a-control required" data-bind="options:_sorts,optionsText:'Title',optionsValue:'Id',optionsCaption:'--选择分类--',value:model().BrandID"></select>
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td class="form-title">商家经度</td>
-                        <td class="form-value">
-                            <input name="GPS_X" id="GPS_X" type="text" class="a-control required" placeholder="请输入商家经度" data-bind="value:model().GPS_X" />
-                        </td>
-                        <td class="form-title">商家纬度</td>
-                        <td class="form-value">
-                            <input name="GPS_Y" id="GPS_Y" type="text" class="a-control required" placeholder="请输入商家纬度" data-bind="value:model().GPS_Y" />
-                        </td>
-                    </tr> 
-                </tbody>
-            </table>
-            <table class="form-table">
-                <tbody>
+                <tr>
+                    <td class="form-title">商家地址</td>
+                    <td class="form-value">
+                        <input name="ShopAddress" id="ShopAddress" type="text" class="a-control required" placeholder="请输入商家地址" data-bind="value:model().ShopAddress" />
+                    </td>
+                    <td class="form-title">商家电话</td>
+                    <td class="form-value">
+                        <input name="ShopTel" id="ShopTel" type="text" class="a-control required" placeholder="请输入商家电话" data-bind="value:model().ShopTel" />
+                    </td>
+                </tr>
 
-                    <tr>
-                        <td class="form-title">商家简介</td>
-                        <td class="form-value">
-                            <input name="Summary" id="Summary" type="text" class="a-control required" placeholder="请输入简介" data-bind="value:model().Summary" />
-                        </td>
-                    </tr>
+                <tr>
+                    <td class="form-title">商家经度</td>
+                    <td class="form-value">
+                        <input name="GPS_X" id="GPS_X" type="text" class="a-control required" placeholder="请输入商家经度" data-bind="value:model().GPS_X" />
+                    </td>
+                    <td class="form-title">商家纬度</td>
+                    <td class="form-value">
+                        <input name="GPS_Y" id="GPS_Y" type="text" class="a-control required" placeholder="请输入商家纬度" data-bind="value:model().GPS_Y" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="form-table">
+            <tbody>
 
-                    <tr>
-                        <td class="form-title">图片</td>
-                        <td class="form-value">
-                            <div class="input-group">
-                                <input name="ShopUrl" id="ShopUrl" type="text" class="a-control" data-bind="value:model().ShopUrl">
-                                <span class="input-group-btn">
-                                    <button type="button" id="btn_banner" class="a-btn"><i class="fa fa-upload"></i></button>
-                                </span>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr style="display:none;">
-                        <td class="form-title"></td>
-                        <td class="form-value">
-                            <div id="thelist" class="uploader-list"></div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        
+                <tr>
+                    <td class="form-title">商家简介</td>
+                    <td class="form-value">
+                        <input name="Summary" id="Summary" type="text" class="a-control required" placeholder="请输入简介" data-bind="value:model().Summary" />
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="form-title">图片</td>
+                    <td class="form-value">
+                        <div class="input-group">
+                            <input name="ShopUrl" id="ShopUrl" type="text" class="a-control" data-bind="value:model().ShopUrl">
+                            <span class="input-group-btn">
+                                <button type="button" id="btn_banner" class="a-btn"><i class="fa fa-upload"></i></button>
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                <tr style="display:none;">
+                    <td class="form-title"></td>
+                    <td class="form-value">
+                        <div id="thelist" class="uploader-list"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </form>
+</dialogbox>
+
+
+<dialogbox data-bind="with:revisePasswordDialog" style="width:500px">
+    <form id="RevisePasswordForm">
+        <table class="form">
+            <tr>
+                
+                <td class="form-value">
+                    <img src="" id="shopcode"  />
+                </td>
+            </tr>
+        </table>
     </form>
 </dialogbox>
 
 <script type="text/javascript">
     jQuery(function () {
-       
+
 
         $("#btn_banner").dropzone({
             url: "/file/FileSave",
             previewsContainer: "#thelist",
-            success: function (file, data)
-            {
+            success: function (file, data) {
                 var json = $.parseJSON(data);
                 $("#ShopUrl").val(json.Url);
             }
         });
 
     });
-    
+
 </script>

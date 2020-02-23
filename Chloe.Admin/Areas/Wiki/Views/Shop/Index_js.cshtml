@@ -29,6 +29,11 @@
 
         
         me.dialog = new FormDialog(me);
+
+        me.revisePasswordDialog = new RevisePasswordDialog();
+        me.openRevisePasswordDialog = function () {
+            me.revisePasswordDialog.open(me.dataTable.selectedModel());
+        }
          
     }
     function vmExtend() {
@@ -94,4 +99,40 @@
         }
     }
 
+
+    function RevisePasswordDialog()
+    {
+        var me = this;
+        Dialog.call(me);
+        me.title("商家程序码");
+
+        me.onOpen = function ()
+        {
+            var model = me.editModel();
+            if (!model)
+            {
+                throw new Error();
+            }
+
+            var bindModel = $ko.toJS(model);
+            console.log(bindModel);
+            var shopid = bindModel.ID;
+            $ace.get("/API/QRCode", { ShopID: shopid}, function (result)
+            {
+                console.log(result);
+                $("#shopcode").attr("src", result.Data);
+            });
+
+            //var m = {};
+            //m.Id = bindModel.Id;
+            //m.Mobile = bindModel.Mobile;
+            //m.UserName = bindModel.UserName;
+
+            //me.model(m);
+        }
+        me.onSave = function ()
+        {
+            me.close();
+        }
+    }
 </script>
