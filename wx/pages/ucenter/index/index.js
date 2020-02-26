@@ -64,21 +64,15 @@ Page({
          
       let token = wx.getStorageSync('wx');
       // 页面显示
-      if (token) 
-      {
-        app.globalData.token = token;
-      }
       var userInfo = wx.getStorageSync('userInfo');
       if (userInfo) 
       {
         that.setData({ userInfo: userInfo});
-        app.globalData.userInfo=userInfo;
+        app.globalData.userInfo = res.Data;
       }
       else 
       {
-        that.setData({ userInfo: app.globalData.userInfo })
         var openid="";
-        console.log(token);
         if(token!="")
         {
           openid = token.openid;
@@ -88,7 +82,8 @@ Page({
               wx.showModal({
                 title: '提示',
                 content:'检测到您已经注册,是否自动登录',
-                success(res1) {
+                success(res1) 
+                {
                   if (res1.confirm) 
                   {
                     wx.setStorageSync('userInfo', res.Data);
@@ -97,7 +92,7 @@ Page({
                   }
                   else if (res1.cancel) 
                   {
-                    //wx.navigateTo({ url: '/pages/index/index' });
+                    wx.switchTab({ url: '/pages/index/index' });
                   }
                 }
               })
@@ -105,13 +100,13 @@ Page({
             }
             else
             {
-
+              wx.navigateTo({ url: '/pages/auth/mobile/mobile' });
             }
           });
         }
         else
         {
-
+          wx.reLaunch({ url: '/pages/start/index' });           
         }
         
 
@@ -195,9 +190,9 @@ Page({
                 if (res.confirm) 
                 {
                   app.globalData.userInfo={};
-                    wx.removeStorageSync('wx');
+                    //wx.removeStorageSync('wx');
                     wx.removeStorageSync('userInfo');
-                    wx.clearStorage();
+                    //wx.clearStorage();
                     wx.reLaunch({url: '/pages/index/index'});
                 }
             }

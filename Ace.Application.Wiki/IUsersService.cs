@@ -159,7 +159,6 @@ namespace Ace.Application.Wiki
             user.Mobile = input.Mobile;
             user.RoleID = 0;
             user.Sex = 0;
-            user.ShopID = 0;
             user.ST = 0;
             user.UserName = input.UserName;
             user.UserPass = encryptedPassword;

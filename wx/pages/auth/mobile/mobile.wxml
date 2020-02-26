@@ -7,8 +7,8 @@
 
 <view>
   <view>
-    <view class="login-title">关联手机号</view> 
-     
+  <view style="display:none;">
+      <view class="login-title">关联手机号</view> 
       <form bindsubmit="bindGetPassCode">
         <view class="login">
           <view class="first-line">
@@ -20,21 +20,20 @@
           </view>
         </view>
       </form>
-    <view class="third-line">
-      <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" >提交</button>
-      
-    </view>
-
+      <view class="third-line">
+        <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" >提交</button>
+      </view>
+ </view>
     <view class="line">
     </view>
-    <view class="login-title2">已绑定手机号码</view>
+    <!--<view class="login-title2">已绑定手机号码</view>-->
     <view class="third-line">
    <!---<button open-type="getUserInfo" bindtap='getUserInfo2'><icon class="iconfont iconweixin"></icon>微信安全登录</button>-->
     
-    <button wx:if="{{extInfo.mobile==''}}"  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" ><icon class="iconfont iconweixin"></icon>微信安全登录</button>
+    <button wx:if="{{extInfo.mobile==''}}"  open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" ><icon class="iconfont iconweixin"></icon>微信登录</button>
           
     <block wx:else>
-      <button wx:if="{{userInfo==null}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo2" ><icon class="iconfont iconweixin"></icon>微信安全登录</button>
+      <button wx:if="{{userInfo==null}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo2" ><icon class="iconfont iconweixin"></icon>微信登录</button>
     </block>
     
     </view>
