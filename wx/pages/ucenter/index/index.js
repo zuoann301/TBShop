@@ -68,7 +68,6 @@ Page({
       if (userInfo) 
       {
         that.setData({ userInfo: userInfo});
-        app.globalData.userInfo = res.Data;
       }
       else 
       {
