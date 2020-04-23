@@ -16,16 +16,11 @@ QQ群：577406104
 
 
 多商户小程序商城
-![image](https://github.com/zuoann301/TBShop/blob/master/qrcode.png)
 
 
 
 便利店外卖小程序
 
-![首页](https://images.gitee.com/uploads/images/2020/0415/152208_b95c3b5a_50619.jpeg "1.jpg")
 
-![选购](https://images.gitee.com/uploads/images/2020/0415/152229_6d39d3fc_50619.jpeg "2.jpg")
-
-![个人中心](https://images.gitee.com/uploads/images/2020/0415/152244_809e7273_50619.jpeg "3.jpg")
 
 
