@@ -1,5 +1,5 @@
 //const root = '/platform/api/';
-const API_URL = 'https://x2.jinjiayin.cn';
+const API_URL = 'https://x3.1788179.cn';
 
 module.exports = {
   FileHost: API_URL,
